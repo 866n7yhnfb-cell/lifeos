@@ -2,26 +2,27 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#080808">
-
-  <meta
-    name="description"
-    content="LifeOS — твоя личная система для задач, целей, привычек и прогресса."
-  >
-
-  <title>LifeOS — Build Your Life</title>
+  <meta name="description" content="LifeOS v0.3 — твоя личная система жизни.">
+  <title>LifeOS v0.3</title>
 
   <style>
-
-    /* =========================
-       RESET
-    ========================= */
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --surface2: #171717;
+      --surface3: #1d1d1d;
+      --border: #292929;
+      --text: #f5f5f5;
+      --muted: #888;
+      --red: #ff302b;
+      --red2: #ff514c;
+      --green: #43d17b;
+      --yellow: #ffc857;
+      --blue: #4da3ff;
+      --shadow: rgba(0,0,0,.35);
+    }
 
     * {
       box-sizing: border-box;
@@ -37,28 +38,45 @@
       min-height: 100vh;
       background:
         radial-gradient(
-          circle at 50% -20%,
-          rgba(255, 48, 43, 0.16),
-          transparent 35%
+          circle at 50% -15%,
+          rgba(255,48,43,.17),
+          transparent 34%
         ),
-        #080808;
-
-      color: #f5f5f5;
-
+        var(--bg);
+      color: var(--text);
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         Roboto,
-        Helvetica,
         Arial,
         sans-serif;
-
       -webkit-font-smoothing: antialiased;
+      padding-bottom: 90px;
+    }
+
+    body.light {
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --surface2: #f0f0f0;
+      --surface3: #e8e8e8;
+      --border: #dddddd;
+      --text: #111111;
+      --muted: #777777;
+      --shadow: rgba(0,0,0,.08);
+
+      background:
+        radial-gradient(
+          circle at 50% -15%,
+          rgba(255,48,43,.10),
+          transparent 35%
+        ),
+        var(--bg);
     }
 
     button,
-    input {
+    input,
+    select {
       font: inherit;
     }
 
@@ -66,39 +84,14 @@
       cursor: pointer;
     }
 
-    /* =========================
-       VARIABLES
-    ========================= */
-
-    :root {
-      --red: #ff302b;
-      --red-light: #ff514d;
-
-      --background: #080808;
-      --surface: #111111;
-      --surface-2: #161616;
-
-      --border: #272727;
-
-      --text: #f5f5f5;
-      --muted: #858585;
-
-      --green: #49d17d;
-      --yellow: #ffc857;
-    }
-
-    /* =========================
-       APP
-    ========================= */
-
-    .app {
-      min-height: 100vh;
-      padding-bottom: 90px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .container {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
+      width: min(1120px, calc(100% - 30px));
+      margin: auto;
     }
 
     /* =========================
@@ -106,89 +99,75 @@
     ========================= */
 
     header {
-      height: 76px;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,8,.86);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
 
+    body.light header {
+      background: rgba(245,245,245,.88);
+    }
+
+    .header-inner {
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      border-bottom: 1px solid var(--border);
-
-      position: sticky;
-      top: 0;
-
-      z-index: 100;
-
-      background: rgba(8, 8, 8, 0.88);
-
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
     }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
-
+      font-weight: 850;
       font-size: 21px;
-      font-weight: 800;
-
-      letter-spacing: -0.5px;
+      letter-spacing: -.7px;
     }
 
     .logo-icon {
       width: 36px;
       height: 36px;
-
+      border-radius: 11px;
+      background: var(--red);
       display: grid;
       place-items: center;
-
-      border-radius: 11px;
-
-      background: var(--red);
-
       color: white;
-
       font-weight: 900;
-
-      box-shadow:
-        0 0 25px rgba(255, 48, 43, 0.25);
+      box-shadow: 0 0 30px rgba(255,48,43,.25);
     }
 
-    .header-level {
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .level-text {
-      text-align: right;
-    }
-
-    .level-text small {
-      display: block;
+    .mini-level {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 1px;
+      font-size: 11px;
     }
 
-    .level-text strong {
-      font-size: 14px;
+    .mini-level strong {
+      color: var(--text);
     }
 
-    .level-circle {
-      width: 40px;
-      height: 40px;
-
+    .avatar-small {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--red);
       display: grid;
       place-items: center;
-
-      border-radius: 50%;
-
-      border: 2px solid var(--red);
-
-      font-size: 12px;
       font-weight: 800;
+      color: white;
     }
 
     /* =========================
@@ -196,168 +175,103 @@
     ========================= */
 
     .hero {
-      padding: 55px 0 35px;
+      padding: 45px 0 28px;
     }
 
     .hello {
       color: var(--muted);
       font-size: 14px;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
     }
 
-    .hero h1 {
-      font-size: clamp(36px, 7vw, 58px);
-
-      line-height: 1;
-
-      letter-spacing: -2.5px;
-
-      margin-bottom: 15px;
+    .hero-title {
+      font-size: clamp(38px, 7vw, 64px);
+      line-height: .96;
+      letter-spacing: -3px;
+      margin-bottom: 14px;
     }
 
-    .hero h1 span {
+    .hero-title span {
       color: var(--red);
     }
 
-    .hero-description {
+    .hero-sub {
       color: var(--muted);
-
-      max-width: 600px;
-
+      max-width: 650px;
       line-height: 1.6;
-
       font-size: 15px;
     }
 
     /* =========================
-       XP CARD
+       XP
     ========================= */
 
     .xp-card {
-      margin-top: 30px;
-
-      padding: 22px;
-
+      margin-top: 25px;
+      padding: 20px;
       border: 1px solid var(--border);
-
+      background: linear-gradient(135deg,var(--surface2),var(--surface));
       border-radius: 20px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #171717,
-          #0d0d0d
-        );
-
-      position: relative;
-
-      overflow: hidden;
-    }
-
-    .xp-card::after {
-      content: "";
-
-      position: absolute;
-
-      width: 180px;
-      height: 180px;
-
-      right: -80px;
-      top: -80px;
-
-      background: var(--red);
-
-      filter: blur(90px);
-
-      opacity: 0.12;
+      box-shadow: 0 20px 60px var(--shadow);
     }
 
     .xp-top {
       display: flex;
-
-      align-items: center;
-
       justify-content: space-between;
-
+      align-items: flex-start;
       margin-bottom: 15px;
     }
 
-    .xp-label {
+    .eyebrow {
       color: var(--muted);
-
       font-size: 10px;
-
       letter-spacing: 1.5px;
+      margin-bottom: 4px;
     }
 
     .xp-number {
-      font-size: 28px;
-
-      font-weight: 800;
-
-      margin-top: 3px;
+      font-size: 27px;
+      font-weight: 850;
     }
 
-    .xp-level {
+    .level {
       color: var(--red);
-
       font-size: 13px;
-
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .progress {
-      height: 7px;
-
-      background: #272727;
-
-      border-radius: 20px;
-
+      height: 8px;
+      border-radius: 30px;
+      background: var(--surface3);
       overflow: hidden;
     }
 
     .progress-bar {
       height: 100%;
-
       width: 0%;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--red),
-          var(--red-light)
-        );
-
-      border-radius: 20px;
-
-      transition: width 0.4s ease;
+      border-radius: 30px;
+      background: linear-gradient(90deg,var(--red),var(--red2));
+      transition: width .35s ease;
     }
 
     .xp-bottom {
       display: flex;
-
       justify-content: space-between;
-
-      margin-top: 9px;
-
       color: var(--muted);
-
       font-size: 11px;
+      margin-top: 8px;
     }
 
     /* =========================
-       NAVIGATION
+       DESKTOP NAV
     ========================= */
 
     .tabs {
       display: flex;
-
       gap: 7px;
-
       overflow-x: auto;
-
-      padding: 8px 0 18px;
-
+      padding: 8px 0 22px;
       scrollbar-width: none;
     }
 
@@ -367,28 +281,22 @@
 
     .tab {
       flex: 0 0 auto;
-
       border: 1px solid var(--border);
-
       background: var(--surface);
-
       color: var(--muted);
-
       padding: 10px 15px;
+      border-radius: 11px;
+      transition: .2s;
+    }
 
-      border-radius: 12px;
-
-      font-size: 13px;
-
-      transition: 0.2s;
+    .tab:hover {
+      color: var(--text);
     }
 
     .tab.active {
-      color: white;
-
       background: var(--red);
-
       border-color: var(--red);
+      color: white;
     }
 
     /* =========================
@@ -397,427 +305,685 @@
 
     .section {
       display: none;
-
-      animation: fade 0.25s ease;
+      animation: appear .22s ease;
     }
 
     .section.active {
       display: block;
     }
 
-    @keyframes fade {
+    @keyframes appear {
       from {
         opacity: 0;
         transform: translateY(5px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .section-title {
-      font-size: 27px;
-
-      letter-spacing: -1px;
-
-      margin-bottom: 6px;
+    .section-head {
+      margin-bottom: 20px;
     }
 
-    .section-subtitle {
+    .section-title {
+      font-size: 28px;
+      letter-spacing: -1px;
+      margin-bottom: 5px;
+    }
+
+    .section-sub {
       color: var(--muted);
-
       font-size: 13px;
+      line-height: 1.5;
+    }
 
-      margin-bottom: 22px;
+    /* =========================
+       QUICK ACTIONS
+    ========================= */
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .quick {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 15px;
+      padding: 16px;
+      color: var(--text);
+      text-align: left;
+      transition: .2s;
+    }
+
+    .quick:hover {
+      transform: translateY(-2px);
+      border-color: #555;
+    }
+
+    .quick-icon {
+      font-size: 23px;
+      margin-bottom: 9px;
+    }
+
+    .quick strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .quick small {
+      color: var(--muted);
+      display: block;
+      margin-top: 3px;
+      font-size: 11px;
     }
 
     /* =========================
        TASKS
     ========================= */
 
-    .add-task {
+    .add-row {
       display: flex;
-
-      gap: 9px;
-
-      margin-bottom: 15px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    .add-task input {
-      min-width: 0;
-
-      flex: 1;
-
-      padding: 14px;
-
-      border-radius: 12px;
-
+    .input,
+    .select {
+      width: 100%;
       border: 1px solid var(--border);
-
       background: var(--surface);
-
-      color: white;
-
+      color: var(--text);
+      border-radius: 12px;
+      padding: 13px 14px;
       outline: none;
     }
 
-    .add-task input:focus {
-      border-color: #5a2220;
+    .input:focus,
+    .select:focus {
+      border-color: var(--red);
     }
 
-    .add-task button {
+    .add-row .input {
+      flex: 1;
+    }
+
+    .add-button {
       width: 48px;
-
+      flex: 0 0 48px;
       border: 0;
-
       border-radius: 12px;
-
       background: var(--red);
-
       color: white;
-
       font-size: 22px;
+    }
+
+    .task-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .filter.active {
+      color: white;
+      border-color: var(--red);
+      background: var(--red);
     }
 
     .tasks {
       display: flex;
-
       flex-direction: column;
-
       gap: 9px;
     }
 
     .task {
       display: flex;
-
       align-items: center;
-
-      gap: 13px;
-
-      padding: 15px;
-
+      gap: 11px;
+      padding: 14px;
       background: var(--surface);
-
       border: 1px solid var(--border);
-
       border-radius: 15px;
-
-      transition: 0.2s;
     }
 
-    .task:hover {
-      border-color: #3b3b3b;
-    }
-
-    .check {
+    .task-check {
       width: 25px;
       height: 25px;
-
       flex: 0 0 25px;
-
+      border: 1px solid #555;
+      background: transparent;
+      color: transparent;
+      border-radius: 8px;
       display: grid;
       place-items: center;
-
-      border-radius: 8px;
-
-      border: 1px solid #555;
-
-      background: transparent;
-
-      color: transparent;
-
-      transition: 0.2s;
     }
 
-    .task.done .check {
+    .task.done .task-check {
       background: var(--red);
-
       border-color: var(--red);
-
       color: white;
     }
 
-    .task-title {
+    .task-main {
+      min-width: 0;
       flex: 1;
+    }
 
+    .task-title {
       font-size: 14px;
-
-      line-height: 1.4;
+      line-height: 1.35;
+      word-break: break-word;
     }
 
     .task.done .task-title {
-      color: #666;
-
       text-decoration: line-through;
+      color: #666;
+    }
+
+    .task-meta {
+      display: flex;
+      gap: 6px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 7px;
+      border-radius: 7px;
+      font-size: 9px;
+      background: var(--surface3);
+      color: var(--muted);
+    }
+
+    .pill.high {
+      color: #ff6964;
+      background: rgba(255,48,43,.10);
+    }
+
+    .pill.medium {
+      color: var(--yellow);
+      background: rgba(255,200,87,.10);
+    }
+
+    .pill.low {
+      color: #aaa;
     }
 
     .task-xp {
       color: var(--red);
-
-      font-size: 11px;
-
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 800;
     }
 
     .delete {
       border: 0;
-
       background: transparent;
-
       color: #555;
-
-      font-size: 18px;
+      font-size: 19px;
+      padding: 3px;
     }
 
     .delete:hover {
-      color: #ff5a55;
-    }
-
-    /* =========================
-       CARDS
-    ========================= */
-
-    .cards {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 12px;
-    }
-
-    .card {
-      padding: 20px;
-
-      background: var(--surface);
-
-      border: 1px solid var(--border);
-
-      border-radius: 17px;
-    }
-
-    .card-icon {
-      font-size: 25px;
-
-      margin-bottom: 18px;
-    }
-
-    .card h3 {
-      font-size: 17px;
-
-      margin-bottom: 7px;
-    }
-
-    .card p {
-      color: var(--muted);
-
-      font-size: 12px;
-
-      line-height: 1.5;
-    }
-
-    /* =========================
-       HABITS
-    ========================= */
-
-    .habit {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      padding: 17px;
-
-      margin-bottom: 9px;
-
-      border-radius: 15px;
-
-      background: var(--surface);
-
-      border: 1px solid var(--border);
-    }
-
-    .habit-left {
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-    }
-
-    .habit-icon {
-      width: 38px;
-      height: 38px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 11px;
-
-      background: #211010;
-
       color: var(--red);
-    }
-
-    .habit-name {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .habit-streak {
-      color: var(--muted);
-
-      font-size: 11px;
-
-      margin-top: 3px;
-    }
-
-    .habit-button {
-      border: 1px solid #3a3a3a;
-
-      background: #181818;
-
-      color: white;
-
-      padding: 8px 11px;
-
-      border-radius: 9px;
-
-      font-size: 11px;
-    }
-
-    .habit-button.done {
-      background: var(--red);
-
-      border-color: var(--red);
     }
 
     /* =========================
        GOALS
     ========================= */
 
+    .goal-form {
+      display: grid;
+      grid-template-columns: 1fr 110px 50px;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .goal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .goal {
-      background: var(--surface);
-
+      padding: 19px;
       border: 1px solid var(--border);
-
+      background: var(--surface);
       border-radius: 17px;
-
-      padding: 20px;
-
-      margin-bottom: 10px;
     }
 
     .goal-top {
       display: flex;
-
       justify-content: space-between;
-
-      gap: 15px;
+      gap: 12px;
     }
 
-    .goal h3 {
-      font-size: 16px;
-
-      margin-bottom: 5px;
-    }
-
-    .goal p {
-      color: var(--muted);
-
-      font-size: 12px;
+    .goal-title {
+      font-size: 15px;
+      font-weight: 700;
     }
 
     .goal-percent {
       color: var(--red);
-
       font-weight: 800;
+      font-size: 13px;
+    }
 
-      font-size: 14px;
+    .goal-description {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
     }
 
     .goal-progress {
-      height: 6px;
-
-      margin-top: 18px;
-
-      background: #292929;
-
+      height: 7px;
+      background: var(--surface3);
       border-radius: 20px;
-
       overflow: hidden;
+      margin: 15px 0 12px;
     }
 
     .goal-progress div {
       height: 100%;
-
       background: var(--red);
-
       border-radius: 20px;
+      transition: width .3s;
+    }
+
+    .goal-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .goal-controls button {
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      border-radius: 9px;
+      padding: 7px 10px;
+      font-size: 11px;
+    }
+
+    /* =========================
+       HABITS
+    ========================= */
+
+    .habit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .habit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .habit-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .habit-icon {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255,48,43,.10);
+    }
+
+    .habit-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .habit-streak {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .habit-button {
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 10px;
+      flex: 0 0 auto;
+    }
+
+    .habit-button.done {
+      background: var(--green);
+      border-color: var(--green);
+      color: #07150c;
+      font-weight: 800;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 17px;
+    }
+
+    .stat-icon {
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .stat-number {
+      font-size: 25px;
+      font-weight: 850;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .chart-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 18px;
+    }
+
+    .chart-title {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .chart {
+      height: 150px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar-wrap {
+      height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 38px;
+      min-height: 5px;
+      background: var(--red);
+      border-radius: 7px 7px 0 0;
+    }
+
+    .bar-day {
+      color: var(--muted);
+      font-size: 9px;
+      margin-bottom: 7px;
     }
 
     /* =========================
        PROFILE
     ========================= */
 
-    .profile {
+    .profile-card {
+      padding: 28px;
       text-align: center;
-
-      padding: 30px;
-
       background: var(--surface);
-
       border: 1px solid var(--border);
-
       border-radius: 20px;
     }
 
     .profile-avatar {
-      width: 80px;
-      height: 80px;
-
-      margin: 0 auto 15px;
-
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-
-      border-radius: 50%;
-
       background: var(--red);
-
+      color: white;
       font-size: 30px;
-
       font-weight: 900;
-
-      box-shadow:
-        0 0 40px rgba(255, 48, 43, 0.2);
+      box-shadow: 0 0 40px rgba(255,48,43,.2);
     }
 
-    .profile h2 {
-      margin-bottom: 5px;
+    .profile-card h2 {
+      margin-bottom: 4px;
     }
 
-    .profile p {
+    .profile-card p {
       color: var(--muted);
+      font-size: 12px;
+    }
 
-      font-size: 13px;
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 9px;
+      margin-top: 22px;
+      text-align: left;
+    }
+
+    .achievement {
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      padding: 14px;
+      border-radius: 13px;
+    }
+
+    .achievement.locked {
+      opacity: .4;
+      filter: grayscale(1);
+    }
+
+    .achievement-icon {
+      font-size: 23px;
+      margin-bottom: 9px;
+    }
+
+    .achievement strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .achievement small {
+      color: var(--muted);
+      display: block;
+      font-size: 9px;
+      margin-top: 3px;
     }
 
     /* =========================
-       EMPTY
+       SETTINGS
     ========================= */
 
-    .empty {
-      text-align: center;
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-      color: #666;
+    .setting {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 15px;
+    }
 
-      padding: 35px 10px;
-
+    .setting-left strong {
+      display: block;
       font-size: 13px;
+    }
+
+    .setting-left small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .setting button {
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 11px;
+      font-size: 10px;
+    }
+
+    .danger {
+      color: #ff5d58 !important;
+      border-color: #51201e !important;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(430px,100%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.5);
+    }
+
+    .modal-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .modal-buttons button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .modal-buttons .primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 85px;
+      transform: translate(-50%,20px);
+      z-index: 500;
+      opacity: 0;
+      pointer-events: none;
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 11px 15px;
+      border-radius: 12px;
+      font-size: 12px;
+      transition: .25s;
+      box-shadow: 0 15px 40px var(--shadow);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%,0);
     }
 
     /* =========================
@@ -825,141 +991,114 @@
     ========================= */
 
     .bottom-nav {
-      position: fixed;
-
-      bottom: 0;
-
-      left: 0;
-
-      right: 0;
-
-      height: 72px;
-
-      z-index: 100;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      background: rgba(10, 10, 10, 0.94);
-
-      border-top: 1px solid var(--border);
-
-      backdrop-filter: blur(20px);
-
-      -webkit-backdrop-filter: blur(20px);
+      display: none;
     }
 
-    .bottom-inner {
-      width: min(600px, 100%);
+    @media (max-width: 760px) {
 
-      display: flex;
-
-      justify-content: space-around;
-    }
-
-    .bottom-button {
-      border: 0;
-
-      background: transparent;
-
-      color: #666;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      gap: 4px;
-
-      font-size: 10px;
-    }
-
-    .bottom-button span {
-      font-size: 21px;
-    }
-
-    .bottom-button.active {
-      color: var(--red);
-    }
-
-    /* =========================
-       DESKTOP
-    ========================= */
-
-    @media (min-width: 800px) {
-
-      .app {
-        padding-bottom: 30px;
-      }
-
-      .bottom-nav {
-        display: none;
+      body {
+        padding-bottom: 90px;
       }
 
       .tabs {
-        display: flex;
+        display: none;
       }
 
+      .quick-actions {
+        grid-template-columns: repeat(3,1fr);
+      }
+
+      .quick {
+        padding: 12px;
+      }
+
+      .quick-icon {
+        font-size: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .achievement-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .goal-form {
+        grid-template-columns: 1fr 85px 48px;
+      }
+
+      .bottom-nav {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 72px;
+        z-index: 200;
+        background: rgba(10,10,10,.94);
+        border-top: 1px solid var(--border);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      body.light .bottom-nav {
+        background: rgba(245,245,245,.94);
+      }
+
+      .bottom-inner {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .bottom-button {
+        border: 0;
+        background: transparent;
+        color: #666;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        font-size: 9px;
+      }
+
+      .bottom-button span {
+        font-size: 20px;
+      }
+
+      .bottom-button.active {
+        color: var(--red);
+      }
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
+    @media (max-width: 480px) {
 
       .container {
-        width: min(100% - 24px, 1100px);
-      }
-
-      header {
-        height: 68px;
+        width: calc(100% - 24px);
       }
 
       .hero {
-        padding-top: 40px;
+        padding-top: 34px;
       }
 
-      .hero h1 {
+      .hero-title {
         font-size: 40px;
-
         letter-spacing: -2px;
       }
 
-      .hero-description {
-        font-size: 14px;
+      .task-options {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .cards {
-        grid-template-columns: 1fr;
+      .goal-form {
+        grid-template-columns: 1fr 65px 46px;
       }
 
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .tabs {
-        display: none;
-      }
-
-      .section-title {
-        font-size: 25px;
-      }
-
-      .xp-card {
-        padding: 18px;
-      }
-
-      .task {
-        padding: 13px;
-      }
-
-      .bottom-nav {
-        padding-bottom: env(safe-area-inset-bottom);
+      .goal-controls {
+        flex-wrap: wrap;
       }
     }
 
@@ -968,48 +1107,27 @@
 
 <body>
 
-<div class="app">
-
-  <!-- ================= HEADER ================= -->
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header>
 
-    <div class="container"
-         style="
-           width:100%;
-           display:flex;
-           align-items:center;
-           justify-content:space-between;
-         ">
+    <div class="container header-inner">
 
       <div class="logo">
-
-        <div class="logo-icon">
-          L
-        </div>
-
+        <div class="logo-icon">L</div>
         LifeOS
-
       </div>
 
-      <div class="header-level">
+      <div class="header-right">
 
-        <div class="level-text">
-
-          <small>LEVEL</small>
-
-          <strong id="headerLevel">
-            1
-          </strong>
-
+        <div class="mini-level">
+          LEVEL <strong id="headerLevel">1</strong>
         </div>
 
-        <div class="level-circle">
-
-          <span id="levelCircle">
-            1
-          </span>
-
+        <div class="avatar-small" id="headerAvatar">
+          L
         </div>
 
       </div>
@@ -1019,31 +1137,28 @@
   </header>
 
 
-  <div class="container">
+  <main class="container">
 
-    <!-- ================= HERO ================= -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <section class="hero">
 
       <div class="hello">
-        Добро пожаловать 👋
+        Добро пожаловать, <span id="helloName">LifeOS User</span> 👋
       </div>
 
-      <h1>
+      <h1 class="hero-title">
         Твоя жизнь.<br>
         Твоя <span>система.</span>
       </h1>
 
-      <p class="hero-description">
-
-        LifeOS помогает организовать задачи,
-        привычки и цели в одном месте.
-        Каждый день — маленький шаг вперёд.
-
+      <p class="hero-sub">
+        Планируй день, развивай привычки, достигай целей
+        и превращай маленькие действия в большой прогресс.
       </p>
 
-
-      <!-- XP -->
 
       <div class="xp-card">
 
@@ -1051,28 +1166,18 @@
 
           <div>
 
-            <div class="xp-label">
+            <div class="eyebrow">
               ТВОЙ ПРОГРЕСС
             </div>
 
             <div class="xp-number">
-
-              <span id="xpNumber">
-                0
-              </span>
-
-              XP
-
+              <span id="totalXP">0</span> XP
             </div>
 
           </div>
 
-          <div>
-
-            <div class="xp-level">
-              LEVEL <span id="xpLevel">1</span>
-            </div>
-
+          <div class="level">
+            LEVEL <span id="currentLevel">1</span>
           </div>
 
         </div>
@@ -1082,7 +1187,7 @@
 
           <div
             class="progress-bar"
-            id="progressBar">
+            id="xpBar">
           </div>
 
         </div>
@@ -1091,14 +1196,11 @@
         <div class="xp-bottom">
 
           <span>
-            <span id="currentXp">
-              0
-            </span>
-            / 100 XP
+            <span id="levelXP">0</span> / 100 XP
           </span>
 
           <span>
-            Следующий уровень
+            До следующего уровня
           </span>
 
         </div>
@@ -1108,379 +1210,639 @@
     </section>
 
 
-    <!-- ================= TABS ================= -->
+    <!-- =========================
+         DESKTOP TABS
+    ========================= -->
 
     <div class="tabs">
 
-      <button
-        class="tab active"
-        data-section="today">
-        Сегодня
+      <button class="tab active" data-page="home">
+        🏠 Главная
       </button>
 
-      <button
-        class="tab"
-        data-section="goals">
-        Цели
+      <button class="tab" data-page="tasks">
+        ✅ Задачи
       </button>
 
-      <button
-        class="tab"
-        data-section="habits">
-        Привычки
+      <button class="tab" data-page="goals">
+        🎯 Цели
       </button>
 
-      <button
-        class="tab"
-        data-section="profile">
-        Профиль
+      <button class="tab" data-page="habits">
+        🔥 Привычки
+      </button>
+
+      <button class="tab" data-page="stats">
+        📊 Статистика
+      </button>
+
+      <button class="tab" data-page="profile">
+        👤 Профиль
+      </button>
+
+      <button class="tab" data-page="settings">
+        ⚙️ Настройки
       </button>
 
     </div>
 
 
-    <!-- ================= TODAY ================= -->
+    <!-- =========================
+         HOME
+    ========================= -->
 
-    <section
-      id="today"
-      class="section active">
+    <section class="section active" id="home">
 
-      <h2 class="section-title">
-        Сегодня
-      </h2>
+      <div class="section-head">
 
-      <p class="section-subtitle">
-        Сделай сегодняшний день немного лучше.
-      </p>
+        <h2 class="section-title">
+          Сегодня
+        </h2>
+
+        <p class="section-sub">
+          Маленькие действия создают большую жизнь.
+        </p>
+
+      </div>
 
 
-      <div class="add-task">
+      <div class="quick-actions">
+
+        <button class="quick" onclick="openPage('tasks')">
+
+          <div class="quick-icon">
+            ➕
+          </div>
+
+          <strong>
+            Новая задача
+          </strong>
+
+          <small>
+            Получить XP
+          </small>
+
+        </button>
+
+
+        <button class="quick" onclick="openPage('goals')">
+
+          <div class="quick-icon">
+            🎯
+          </div>
+
+          <strong>
+            Новая цель
+          </strong>
+
+          <small>
+            Двигаться вперёд
+          </small>
+
+        </button>
+
+
+        <button class="quick" onclick="openPage('habits')">
+
+          <div class="quick-icon">
+            🔥
+          </div>
+
+          <strong>
+            Привычки
+          </strong>
+
+          <small>
+            Поддержать streak
+          </small>
+
+        </button>
+
+      </div>
+
+
+      <div class="cards">
+
+        <div class="card stat">
+
+          <div class="stat-icon">
+            ✅
+          </div>
+
+          <div class="stat-number" id="homeDone">
+            0
+          </div>
+
+          <div class="stat-label">
+            задач выполнено
+          </div>
+
+        </div>
+
+
+        <div class="card stat">
+
+          <div class="stat-icon">
+            🔥
+          </div>
+
+          <div class="stat-number" id="homeStreak">
+            0
+          </div>
+
+          <div class="stat-label">
+            дней streak
+          </div>
+
+        </div>
+
+
+        <div class="card stat">
+
+          <div class="stat-icon">
+            🎯
+          </div>
+
+          <div class="stat-number" id="homeGoals">
+            0
+          </div>
+
+          <div class="stat-label">
+            активных целей
+          </div>
+
+        </div>
+
+
+        <div class="card stat">
+
+          <div class="stat-icon">
+            ⭐
+          </div>
+
+          <div class="stat-number" id="homeXP">
+            0
+          </div>
+
+          <div class="stat-label">
+            всего XP
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TASKS
+    ========================= -->
+
+    <section class="section" id="tasks">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Задачи
+        </h2>
+
+        <p class="section-sub">
+          Выполняй задачи и получай XP.
+        </p>
+
+      </div>
+
+
+      <div class="add-row">
 
         <input
+          class="input"
           id="taskInput"
-          type="text"
-          placeholder="Добавить задачу..."
-          maxlength="80"
+          placeholder="Что нужно сделать?"
+          maxlength="100"
         >
 
-        <button id="addTaskButton">
+        <button
+          class="add-button"
+          onclick="addTask()">
           +
         </button>
 
       </div>
 
 
-      <div
-        id="tasks"
-        class="tasks">
-      </div>
+      <div class="task-options">
 
-    </section>
+        <select class="select" id="prioritySelect">
 
+          <option value="medium">
+            🟡 Средний приоритет
+          </option>
 
-    <!-- ================= GOALS ================= -->
+          <option value="high">
+            🔴 Высокий приоритет
+          </option>
 
-    <section
-      id="goals"
-      class="section">
+          <option value="low">
+            ⚪ Низкий приоритет
+          </option>
 
-      <h2 class="section-title">
-        Твои цели
-      </h2>
-
-      <p class="section-subtitle">
-        Большие изменения начинаются с маленьких действий.
-      </p>
+        </select>
 
 
-      <div class="goal">
+        <select class="select" id="categorySelect">
 
-        <div class="goal-top">
+          <option value="Life">
+            🌱 Life
+          </option>
 
-          <div>
+          <option value="Work">
+            💼 Work
+          </option>
 
-            <h3>
-              📚 Развитие
-            </h3>
+          <option value="Health">
+            💪 Health
+          </option>
 
-            <p>
-              Учиться каждый день
-            </p>
+          <option value="Study">
+            📚 Study
+          </option>
 
-          </div>
-
-          <div class="goal-percent">
-            65%
-          </div>
-
-        </div>
-
-        <div class="goal-progress">
-
-          <div style="width:65%"></div>
-
-        </div>
+        </select>
 
       </div>
 
 
-      <div class="goal">
-
-        <div class="goal-top">
-
-          <div>
-
-            <h3>
-              💪 Здоровье
-            </h3>
-
-            <p>
-              Больше движения
-            </p>
-
-          </div>
-
-          <div class="goal-percent">
-            42%
-          </div>
-
-        </div>
-
-        <div class="goal-progress">
-
-          <div style="width:42%"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="goal">
-
-        <div class="goal-top">
-
-          <div>
-
-            <h3>
-              🚀 Проект
-            </h3>
-
-            <p>
-              Создать LifeOS
-            </p>
-
-          </div>
-
-          <div class="goal-percent">
-            25%
-          </div>
-
-        </div>
-
-        <div class="goal-progress">
-
-          <div style="width:25%"></div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= HABITS ================= -->
-
-    <section
-      id="habits"
-      class="section">
-
-      <h2 class="section-title">
-        Привычки
-      </h2>
-
-      <p class="section-subtitle">
-        Поддерживай свой streak каждый день.
-      </p>
-
-
-      <div class="habit">
-
-        <div class="habit-left">
-
-          <div class="habit-icon">
-            💧
-          </div>
-
-          <div>
-
-            <div class="habit-name">
-              Пить воду
-            </div>
-
-            <div class="habit-streak">
-              🔥 5 дней подряд
-            </div>
-
-          </div>
-
-        </div>
+      <div class="filters">
 
         <button
-          class="habit-button"
-          onclick="completeHabit(this)">
-          Выполнить
+          class="filter active"
+          data-filter="all">
+          Все
+        </button>
+
+        <button
+          class="filter"
+          data-filter="active">
+          Активные
+        </button>
+
+        <button
+          class="filter"
+          data-filter="done">
+          Выполненные
         </button>
 
       </div>
 
 
-      <div class="habit">
+      <div id="taskList" class="tasks"></div>
 
-        <div class="habit-left">
+    </section>
 
-          <div class="habit-icon">
-            📖
-          </div>
 
-          <div>
+    <!-- =========================
+         GOALS
+    ========================= -->
 
-            <div class="habit-name">
-              Читать
-            </div>
+    <section class="section" id="goals">
 
-            <div class="habit-streak">
-              🔥 3 дня подряд
-            </div>
+      <div class="section-head">
 
-          </div>
+        <h2 class="section-title">
+          Цели
+        </h2>
 
-        </div>
+        <p class="section-sub">
+          Выбери направление и двигайся к нему каждый день.
+        </p>
+
+      </div>
+
+
+      <div class="goal-form">
+
+        <input
+          class="input"
+          id="goalInput"
+          placeholder="Например: Выучить английский"
+          maxlength="60"
+        >
+
+        <input
+          class="input"
+          id="goalPercent"
+          type="number"
+          min="0"
+          max="100"
+          value="0"
+        >
 
         <button
-          class="habit-button"
-          onclick="completeHabit(this)">
-          Выполнить
+          class="add-button"
+          onclick="addGoal()">
+          +
         </button>
 
       </div>
 
 
-      <div class="habit">
+      <div id="goalList" class="goal-list"></div>
 
-        <div class="habit-left">
+    </section>
 
-          <div class="habit-icon">
-            🏃
+
+    <!-- =========================
+         HABITS
+    ========================= -->
+
+    <section class="section" id="habits">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Привычки
+        </h2>
+
+        <p class="section-sub">
+          Поддерживай streak и получай дополнительный XP.
+        </p>
+
+      </div>
+
+
+      <div class="habit-list" id="habitList"></div>
+
+    </section>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <section class="section" id="stats">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Статистика
+        </h2>
+
+        <p class="section-sub">
+          Посмотри, сколько ты уже сделал.
+        </p>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            ⭐
           </div>
 
-          <div>
+          <div
+            class="stat-number"
+            id="statXP">
+            0
+          </div>
 
-            <div class="habit-name">
-              Двигаться
-            </div>
-
-            <div class="habit-streak">
-              🔥 7 дней подряд
-            </div>
-
+          <div class="stat-label">
+            XP
           </div>
 
         </div>
 
-        <button
-          class="habit-button"
-          onclick="completeHabit(this)">
-          Выполнить
-        </button>
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            ✅
+          </div>
+
+          <div
+            class="stat-number"
+            id="statTasks">
+            0
+          </div>
+
+          <div class="stat-label">
+            задач
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🔥
+          </div>
+
+          <div
+            class="stat-number"
+            id="statStreak">
+            0
+          </div>
+
+          <div class="stat-label">
+            streak
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🎯
+          </div>
+
+          <div
+            class="stat-number"
+            id="statGoals">
+            0
+          </div>
+
+          <div class="stat-label">
+            целей
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="chart-card">
+
+        <div class="chart-title">
+          Активность за неделю
+        </div>
+
+        <div
+          class="chart"
+          id="chart">
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- ================= PROFILE ================= -->
+    <!-- =========================
+         PROFILE
+    ========================= -->
 
-    <section
-      id="profile"
-      class="section">
+    <section class="section" id="profile">
 
-      <h2 class="section-title">
-        Профиль
-      </h2>
+      <div class="section-head">
 
-      <p class="section-subtitle">
-        Твоя статистика LifeOS.
-      </p>
+        <h2 class="section-title">
+          Профиль
+        </h2>
+
+        <p class="section-sub">
+          Твой прогресс и достижения.
+        </p>
+
+      </div>
 
 
-      <div class="profile">
+      <div class="profile-card">
 
-        <div class="profile-avatar">
+        <div
+          class="profile-avatar"
+          id="profileAvatar">
           L
         </div>
 
-        <h2>
+        <h2 id="profileName">
           LifeOS User
         </h2>
 
         <p>
-          Создатель своей системы
+          Level <span id="profileLevel">1</span>
+          ·
+          <span id="profileXP">0</span> XP
         </p>
 
 
         <div
-          class="cards"
-          style="margin-top:25px">
+          class="achievement-grid"
+          id="achievementList">
+        </div>
 
-          <div class="card">
+      </div>
 
-            <div class="card-icon">
-              ⭐
-            </div>
+    </section>
 
-            <h3 id="profileXp">
-              0 XP
-            </h3>
 
-            <p>
-              Всего заработано
-            </p>
+    <!-- =========================
+         SETTINGS
+    ========================= -->
+
+    <section class="section" id="settings">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Настройки
+        </h2>
+
+        <p class="section-sub">
+          Настрой LifeOS под себя.
+        </p>
+
+      </div>
+
+
+      <div class="settings-list">
+
+        <div class="setting">
+
+          <div class="setting-left">
+
+            <strong>
+              👤 Имя пользователя
+            </strong>
+
+            <small>
+              Как LifeOS будет обращаться к тебе
+            </small>
+
+          </div>
+
+          <button onclick="openNameModal()">
+            Изменить
+          </button>
+
+        </div>
+
+
+        <div class="setting">
+
+          <div class="setting-left">
+
+            <strong>
+              🌙 Тема
+            </strong>
+
+            <small id="themeLabel">
+              Тёмная тема
+            </small>
 
           </div>
 
+          <button onclick="toggleTheme()">
+            Переключить
+          </button>
 
-          <div class="card">
+        </div>
 
-            <div class="card-icon">
-              ✓
-            </div>
 
-            <h3 id="profileTasks">
-              0
-            </h3>
+        <div class="setting">
 
-            <p>
-              Выполнено задач
-            </p>
+          <div class="setting-left">
+
+            <strong>
+              💾 Данные
+            </strong>
+
+            <small>
+              Все данные хранятся в этом браузере
+            </small>
+
+          </div>
+
+          <button
+            class="danger"
+            onclick="resetData()">
+            Сбросить
+          </button>
+
+        </div>
+
+
+        <div class="setting">
+
+          <div class="setting-left">
+
+            <strong>
+              ℹ️ LifeOS
+            </strong>
+
+            <small>
+              Версия 0.3
+            </small>
 
           </div>
 
-
-          <div class="card">
-
-            <div class="card-icon">
-              🔥
-            </div>
-
-            <h3>
-              7
-            </h3>
-
-            <p>
-              Лучший streak
-            </p>
-
-          </div>
+          <button onclick="showAbout()">
+            Подробнее
+          </button>
 
         </div>
 
@@ -1488,10 +1850,12 @@
 
     </section>
 
-  </div>
+  </main>
 
 
-  <!-- ================= BOTTOM NAV ================= -->
+  <!-- =========================
+       MOBILE NAV
+  ========================= -->
 
   <nav class="bottom-nav">
 
@@ -1499,21 +1863,29 @@
 
       <button
         class="bottom-button active"
-        data-section="today">
+        data-page="home">
 
-        <span>⌂</span>
-
-        Сегодня
+        <span>🏠</span>
+        Домой
 
       </button>
 
 
       <button
         class="bottom-button"
-        data-section="goals">
+        data-page="tasks">
+
+        <span>✅</span>
+        Задачи
+
+      </button>
+
+
+      <button
+        class="bottom-button"
+        data-page="goals">
 
         <span>🎯</span>
-
         Цели
 
       </button>
@@ -1521,10 +1893,9 @@
 
       <button
         class="bottom-button"
-        data-section="habits">
+        data-page="habits">
 
         <span>🔥</span>
-
         Привычки
 
       </button>
@@ -1532,10 +1903,9 @@
 
       <button
         class="bottom-button"
-        data-section="profile">
+        data-page="profile">
 
-        <span>◉</span>
-
+        <span>👤</span>
         Профиль
 
       </button>
@@ -1544,472 +1914,1580 @@
 
   </nav>
 
-</div>
 
+  <!-- =========================
+       NAME MODAL
+  ========================= -->
 
-<script>
+  <div
+    class="modal"
+    id="nameModal">
 
-  /* =========================
-     DATA
-  ========================= */
+    <div class="modal-box">
 
-  let tasks = JSON.parse(
-    localStorage.getItem("lifeos_tasks")
-  ) || [
+      <h2>
+        Твоё имя
+      </h2>
 
-    {
-      id: 1,
-      title: "Сделать что-нибудь полезное",
-      xp: 30,
-      done: false
-    },
+      <p>
+        Введи имя, которое LifeOS будет использовать
+        на главном экране.
+      </p>
 
-    {
-      id: 2,
-      title: "20 минут обучения",
-      xp: 40,
-      done: false
-    },
+      <input
+        class="input"
+        id="nameInput"
+        placeholder="Например: Алекс"
+        maxlength="30"
+      >
 
-    {
-      id: 3,
-      title: "Прогуляться",
-      xp: 25,
-      done: false
-    }
+      <div class="modal-buttons">
 
-  ];
-
-
-  /* =========================
-     SAVE
-  ========================= */
-
-  function save() {
-
-    localStorage.setItem(
-      "lifeos_tasks",
-      JSON.stringify(tasks)
-    );
-
-  }
-
-
-  /* =========================
-     XP
-  ========================= */
-
-  function getXP() {
-
-    return tasks
-      .filter(task => task.done)
-      .reduce(
-        (sum, task) => sum + task.xp,
-        0
-      );
-
-  }
-
-
-  function updateXP() {
-
-    const xp = getXP();
-
-    const level =
-      Math.floor(xp / 100) + 1;
-
-    const current =
-      xp % 100;
-
-    document.getElementById(
-      "xpNumber"
-    ).textContent = xp;
-
-    document.getElementById(
-      "currentXp"
-    ).textContent = current;
-
-    document.getElementById(
-      "xpLevel"
-    ).textContent = level;
-
-    document.getElementById(
-      "headerLevel"
-    ).textContent = level;
-
-    document.getElementById(
-      "levelCircle"
-    ).textContent = level;
-
-    document.getElementById(
-      "progressBar"
-    ).style.width =
-      current + "%";
-
-    document.getElementById(
-      "profileXp"
-    ).textContent =
-      xp + " XP";
-
-    document.getElementById(
-      "profileTasks"
-    ).textContent =
-      tasks.filter(
-        task => task.done
-      ).length;
-
-  }
-
-
-  /* =========================
-     RENDER TASKS
-  ========================= */
-
-  function renderTasks() {
-
-    const container =
-      document.getElementById(
-        "tasks"
-      );
-
-    container.innerHTML = "";
-
-    if (tasks.length === 0) {
-
-      container.innerHTML = `
-        <div class="empty">
-          Пока нет задач.<br>
-          Добавь первую задачу выше.
-        </div>
-      `;
-
-      updateXP();
-
-      return;
-    }
-
-
-    tasks.forEach(task => {
-
-      const element =
-        document.createElement(
-          "div"
-        );
-
-      element.className =
-        "task " +
-        (task.done ? "done" : "");
-
-
-      element.innerHTML = `
-
-        <button
-          class="check"
-          onclick="toggleTask(${task.id})">
-
-          ${task.done ? "✓" : ""}
-
+        <button onclick="closeNameModal()">
+          Отмена
         </button>
 
-        <div class="task-title">
-          ${escapeHTML(task.title)}
-        </div>
-
-        <div class="task-xp">
-          +${task.xp}
-        </div>
-
         <button
-          class="delete"
-          onclick="deleteTask(${task.id})">
-
-          ×
-
+          class="primary"
+          onclick="saveName()">
+          Сохранить
         </button>
 
-      `;
+      </div>
+
+    </div>
+
+  </div>
 
 
-      container.appendChild(
-        element
-      );
+  <!-- =========================
+       TOAST
+  ========================= -->
 
-    });
-
-
-    updateXP();
-
-  }
+  <div
+    class="toast"
+    id="toast">
+  </div>
 
 
-  /* =========================
-     ESCAPE
-  ========================= */
+  <script>
 
-  function escapeHTML(text) {
+    /* =====================================================
+       LIFEOS v0.3
+       DATA
+    ===================================================== */
 
-    const div =
-      document.createElement(
-        "div"
-      );
+    const defaultData = {
 
-    div.textContent = text;
+      name: "LifeOS User",
 
-    return div.innerHTML;
+      theme: "dark",
 
-  }
+      tasks: [
+
+        {
+          id: 1,
+          title: "Сделать что-нибудь полезное",
+          priority: "medium",
+          category: "Life",
+          xp: 30,
+          done: false
+        },
+
+        {
+          id: 2,
+          title: "20 минут обучения",
+          priority: "high",
+          category: "Study",
+          xp: 40,
+          done: false
+        },
+
+        {
+          id: 3,
+          title: "Прогуляться",
+          priority: "low",
+          category: "Health",
+          xp: 25,
+          done: false
+        }
+
+      ],
+
+      goals: [
+
+        {
+          id: 1,
+          title: "Выучить английский",
+          percent: 65
+        },
+
+        {
+          id: 2,
+          title: "Улучшить здоровье",
+          percent: 42
+        },
+
+        {
+          id: 3,
+          title: "Создать LifeOS",
+          percent: 25
+        }
+
+      ],
+
+      habits: [
+
+        {
+          id: 1,
+          icon: "💧",
+          name: "Пить воду",
+          streak: 5,
+          done: false
+        },
+
+        {
+          id: 2,
+          icon: "📚",
+          name: "Читать",
+          streak: 3,
+          done: false
+        },
+
+        {
+          id: 3,
+          icon: "🏃",
+          name: "Двигаться",
+          streak: 7,
+          done: false
+        },
+
+        {
+          id: 4,
+          icon: "😴",
+          name: "Хорошо спать",
+          streak: 2,
+          done: false
+        }
+
+      ],
+
+      activity: [2,4,3,6,4,7,5]
+
+    };
 
 
-  /* =========================
-     TOGGLE TASK
-  ========================= */
+    let data = loadData();
 
-  function toggleTask(id) {
+    let taskFilter = "all";
 
-    tasks =
-      tasks.map(task => {
 
-        if (task.id === id) {
+    /* =====================================================
+       STORAGE
+    ===================================================== */
+
+    function loadData() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            "lifeos_v03"
+          );
+
+        if (saved) {
 
           return {
-            ...task,
-            done: !task.done
+            ...defaultData,
+            ...JSON.parse(saved)
           };
 
         }
 
-        return task;
+      } catch (error) {
 
-      });
-
-
-    save();
-
-    renderTasks();
-
-  }
-
-
-  /* =========================
-     DELETE
-  ========================= */
-
-  function deleteTask(id) {
-
-    tasks =
-      tasks.filter(
-        task => task.id !== id
-      );
-
-    save();
-
-    renderTasks();
-
-  }
-
-
-  /* =========================
-     ADD TASK
-  ========================= */
-
-  function addTask() {
-
-    const input =
-      document.getElementById(
-        "taskInput"
-      );
-
-    const title =
-      input.value.trim();
-
-
-    if (!title) {
-
-      input.focus();
-
-      return;
-
-    }
-
-
-    tasks.push({
-
-      id: Date.now(),
-
-      title: title,
-
-      xp: 25,
-
-      done: false
-
-    });
-
-
-    input.value = "";
-
-    save();
-
-    renderTasks();
-
-  }
-
-
-  document
-    .getElementById(
-      "addTaskButton"
-    )
-    .addEventListener(
-      "click",
-      addTask
-    );
-
-
-  document
-    .getElementById(
-      "taskInput"
-    )
-    .addEventListener(
-      "keydown",
-      function(event) {
-
-        if (
-          event.key === "Enter"
-        ) {
-
-          addTask();
-
-        }
+        console.log(error);
 
       }
-    );
 
-
-  /* =========================
-     HABITS
-  ========================= */
-
-  function completeHabit(button) {
-
-    if (
-      button.classList.contains(
-        "done"
-      )
-    ) {
-
-      return;
+      return JSON.parse(
+        JSON.stringify(defaultData)
+      );
 
     }
 
 
-    button.classList.add(
-      "done"
-    );
+    function saveData() {
 
-    button.textContent =
-      "✓ Выполнено";
+      localStorage.setItem(
+        "lifeos_v03",
+        JSON.stringify(data)
+      );
 
-  }
+    }
 
 
-  /* =========================
-     NAVIGATION
-  ========================= */
+    /* =====================================================
+       XP
+    ===================================================== */
 
-  function openSection(section) {
+    function getXP() {
 
-    document
-      .querySelectorAll(
-        ".section"
-      )
-      .forEach(element => {
+      const taskXP =
+        data.tasks
+          .filter(task => task.done)
+          .reduce(
+            (sum, task) => sum + task.xp,
+            0
+          );
 
-        element.classList.remove(
+      const habitXP =
+        data.habits
+          .filter(habit => habit.done)
+          .length * 20;
+
+      return taskXP + habitXP;
+
+    }
+
+
+    function getLevel() {
+
+      return Math.floor(
+        getXP() / 100
+      ) + 1;
+
+    }
+
+
+    function updateXP() {
+
+      const xp = getXP();
+
+      const level = getLevel();
+
+      const current =
+        xp % 100;
+
+      document.getElementById(
+        "totalXP"
+      ).textContent = xp;
+
+      document.getElementById(
+        "currentLevel"
+      ).textContent = level;
+
+      document.getElementById(
+        "headerLevel"
+      ).textContent = level;
+
+      document.getElementById(
+        "levelXP"
+      ).textContent = current;
+
+      document.getElementById(
+        "xpBar"
+      ).style.width =
+        current + "%";
+
+      document.getElementById(
+        "homeXP"
+      ).textContent = xp;
+
+      document.getElementById(
+        "statXP"
+      ).textContent = xp;
+
+      document.getElementById(
+        "profileLevel"
+      ).textContent = level;
+
+      document.getElementById(
+        "profileXP"
+      ).textContent = xp;
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    function openPage(page) {
+
+      document
+        .querySelectorAll(".section")
+        .forEach(section => {
+
+          section.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      const target =
+        document.getElementById(page);
+
+
+      if (target) {
+
+        target.classList.add(
           "active"
         );
 
+      }
+
+
+      document
+        .querySelectorAll(
+          ".tab, .bottom-button"
+        )
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.page === page
+          );
+
+        });
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
       });
-
-
-    const target =
-      document.getElementById(
-        section
-      );
-
-
-    if (target) {
-
-      target.classList.add(
-        "active"
-      );
 
     }
 
 
     document
       .querySelectorAll(
-        ".tab"
+        ".tab, .bottom-button"
       )
       .forEach(button => {
 
-        button.classList.toggle(
-          "active",
-          button.dataset.section ===
-          section
+        button.addEventListener(
+          "click",
+          () => {
+
+            openPage(
+              button.dataset.page
+            );
+
+          }
         );
 
       });
+
+
+    /* =====================================================
+       TASKS
+    ===================================================== */
+
+    function addTask() {
+
+      const input =
+        document.getElementById(
+          "taskInput"
+        );
+
+      const title =
+        input.value.trim();
+
+
+      if (!title) {
+
+        showToast(
+          "Напиши название задачи"
+        );
+
+        input.focus();
+
+        return;
+
+      }
+
+
+      const priority =
+        document.getElementById(
+          "prioritySelect"
+        ).value;
+
+
+      const category =
+        document.getElementById(
+          "categorySelect"
+        ).value;
+
+
+      const xpMap = {
+
+        high: 50,
+
+        medium: 30,
+
+        low: 20
+
+      };
+
+
+      data.tasks.unshift({
+
+        id: Date.now(),
+
+        title,
+
+        priority,
+
+        category,
+
+        xp: xpMap[priority],
+
+        done: false
+
+      });
+
+
+      input.value = "";
+
+      saveData();
+
+      renderTasks();
+
+      updateAll();
+
+      showToast(
+        "Задача добавлена ✨"
+      );
+
+    }
+
+
+    function toggleTask(id) {
+
+      const task =
+        data.tasks.find(
+          task => task.id === id
+        );
+
+
+      if (!task) return;
+
+
+      task.done =
+        !task.done;
+
+
+      saveData();
+
+      renderTasks();
+
+      updateAll();
+
+
+      if (task.done) {
+
+        showToast(
+          "+" + task.xp + " XP 🎉"
+        );
+
+      }
+
+    }
+
+
+    function deleteTask(id) {
+
+      data.tasks =
+        data.tasks.filter(
+          task => task.id !== id
+        );
+
+
+      saveData();
+
+      renderTasks();
+
+      updateAll();
+
+      showToast(
+        "Задача удалена"
+      );
+
+    }
+
+
+    function renderTasks() {
+
+      const container =
+        document.getElementById(
+          "taskList"
+        );
+
+
+      let tasks =
+        [...data.tasks];
+
+
+      if (taskFilter === "active") {
+
+        tasks =
+          tasks.filter(
+            task => !task.done
+          );
+
+      }
+
+
+      if (taskFilter === "done") {
+
+        tasks =
+          tasks.filter(
+            task => task.done
+          );
+
+      }
+
+
+      if (!tasks.length) {
+
+        container.innerHTML = `
+
+          <div class="card"
+               style="text-align:center;color:var(--muted)">
+
+            Нет задач в этом разделе.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        tasks.map(task => `
+
+          <div
+            class="task ${task.done ? "done" : ""}">
+
+            <button
+              class="task-check"
+              onclick="toggleTask(${task.id})">
+
+              ${task.done ? "✓" : ""}
+
+            </button>
+
+
+            <div class="task-main">
+
+              <div class="task-title">
+
+                ${escapeHTML(task.title)}
+
+              </div>
+
+
+              <div class="task-meta">
+
+                <span
+                  class="pill ${task.priority}">
+
+                  ${
+                    task.priority === "high"
+                      ? "🔴 Высокий"
+                      : task.priority === "medium"
+                        ? "🟡 Средний"
+                        : "⚪ Низкий"
+                  }
+
+                </span>
+
+
+                <span class="pill">
+
+                  ${escapeHTML(task.category)}
+
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="task-xp">
+              +${task.xp}
+            </div>
+
+
+            <button
+              class="delete"
+              onclick="deleteTask(${task.id})">
+
+              ×
+
+            </button>
+
+          </div>
+
+        `).join("");
+
+    }
 
 
     document
-      .querySelectorAll(
-        ".bottom-button"
-      )
+      .querySelectorAll(".filter")
       .forEach(button => {
 
-        button.classList.toggle(
-          "active",
-          button.dataset.section ===
-          section
+        button.addEventListener(
+          "click",
+          () => {
+
+            document
+              .querySelectorAll(
+                ".filter"
+              )
+              .forEach(b =>
+                b.classList.remove(
+                  "active"
+                )
+              );
+
+
+            button.classList.add(
+              "active"
+            );
+
+
+            taskFilter =
+              button.dataset.filter;
+
+
+            renderTasks();
+
+          }
         );
 
       });
 
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    /* =====================================================
+       GOALS
+    ===================================================== */
 
-  }
+    function addGoal() {
+
+      const input =
+        document.getElementById(
+          "goalInput"
+        );
+
+      const percentInput =
+        document.getElementById(
+          "goalPercent"
+        );
 
 
-  document
-    .querySelectorAll(
-      ".tab, .bottom-button"
-    )
-    .forEach(button => {
+      const title =
+        input.value.trim();
 
-      button.addEventListener(
-        "click",
-        function() {
 
-          openSection(
-            this.dataset.section
-          );
+      if (!title) {
+
+        showToast(
+          "Напиши название цели"
+        );
+
+        input.focus();
+
+        return;
+
+      }
+
+
+      let percent =
+        Number(
+          percentInput.value
+        );
+
+
+      percent =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            percent
+          )
+        );
+
+
+      data.goals.unshift({
+
+        id: Date.now(),
+
+        title,
+
+        percent
+
+      });
+
+
+      input.value = "";
+
+      percentInput.value = 0;
+
+      saveData();
+
+      renderGoals();
+
+      updateAll();
+
+      showToast(
+        "Цель создана 🎯"
+      );
+
+    }
+
+
+    function changeGoal(id, amount) {
+
+      const goal =
+        data.goals.find(
+          goal => goal.id === id
+        );
+
+
+      if (!goal) return;
+
+
+      goal.percent =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            goal.percent + amount
+          )
+        );
+
+
+      saveData();
+
+      renderGoals();
+
+      updateAll();
+
+    }
+
+
+    function deleteGoal(id) {
+
+      data.goals =
+        data.goals.filter(
+          goal => goal.id !== id
+        );
+
+
+      saveData();
+
+      renderGoals();
+
+      updateAll();
+
+      showToast(
+        "Цель удалена"
+      );
+
+    }
+
+
+    function renderGoals() {
+
+      const container =
+        document.getElementById(
+          "goalList"
+        );
+
+
+      if (!data.goals.length) {
+
+        container.innerHTML = `
+
+          <div class="card"
+               style="text-align:center;color:var(--muted)">
+
+            Пока нет целей.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        data.goals.map(goal => `
+
+          <div class="goal">
+
+            <div class="goal-top">
+
+              <div>
+
+                <div class="goal-title">
+
+                  🎯
+                  ${escapeHTML(goal.title)}
+
+                </div>
+
+                <div class="goal-description">
+
+                  Текущий прогресс
+
+                </div>
+
+              </div>
+
+
+              <div class="goal-percent">
+
+                ${goal.percent}%
+
+              </div>
+
+            </div>
+
+
+            <div class="goal-progress">
+
+              <div
+                style="width:${goal.percent}%">
+              </div>
+
+            </div>
+
+
+            <div class="goal-controls">
+
+              <div>
+
+                <button
+                  onclick="changeGoal(${goal.id}, -10)">
+                  −10%
+                </button>
+
+                <button
+                  onclick="changeGoal(${goal.id}, 10)">
+                  +10%
+                </button>
+
+              </div>
+
+
+              <button
+                onclick="deleteGoal(${goal.id})">
+
+                Удалить
+
+              </button>
+
+            </div>
+
+          </div>
+
+        `).join("");
+
+    }
+
+
+    /* =====================================================
+       HABITS
+    ===================================================== */
+
+    function completeHabit(id) {
+
+      const habit =
+        data.habits.find(
+          habit => habit.id === id
+        );
+
+
+      if (!habit || habit.done) {
+
+        return;
+
+      }
+
+
+      habit.done = true;
+
+      habit.streak += 1;
+
+      saveData();
+
+      renderHabits();
+
+      updateAll();
+
+      showToast(
+        "+20 XP 🔥"
+      );
+
+    }
+
+
+    function renderHabits() {
+
+      const container =
+        document.getElementById(
+          "habitList"
+        );
+
+
+      container.innerHTML =
+        data.habits.map(habit => `
+
+          <div class="habit">
+
+            <div class="habit-left">
+
+              <div class="habit-icon">
+
+                ${habit.icon}
+
+              </div>
+
+
+              <div>
+
+                <div class="habit-name">
+
+                  ${escapeHTML(habit.name)}
+
+                </div>
+
+
+                <div class="habit-streak">
+
+                  🔥
+                  ${habit.streak}
+                  дней подряд
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="habit-button
+                ${habit.done ? "done" : ""}"
+              onclick="completeHabit(${habit.id})">
+
+              ${
+                habit.done
+                  ? "✓ Выполнено"
+                  : "Выполнить"
+              }
+
+            </button>
+
+          </div>
+
+        `).join("");
+
+    }
+
+
+    /* =====================================================
+       STATS
+    ===================================================== */
+
+    function renderStats() {
+
+      const completed =
+        data.tasks.filter(
+          task => task.done
+        ).length;
+
+
+      const streak =
+        data.habits.length
+          ? Math.max(
+              ...data.habits.map(
+                habit => habit.streak
+              )
+            )
+          : 0;
+
+
+      document.getElementById(
+        "statTasks"
+      ).textContent = completed;
+
+
+      document.getElementById(
+        "statStreak"
+      ).textContent = streak;
+
+
+      document.getElementById(
+        "statGoals"
+      ).textContent =
+        data.goals.length;
+
+
+      document.getElementById(
+        "homeDone"
+      ).textContent = completed;
+
+
+      document.getElementById(
+        "homeStreak"
+      ).textContent = streak;
+
+
+      document.getElementById(
+        "homeGoals"
+      ).textContent =
+        data.goals.length;
+
+
+      renderChart();
+
+    }
+
+
+    function renderChart() {
+
+      const chart =
+        document.getElementById(
+          "chart"
+        );
+
+
+      chart.innerHTML =
+        data.activity.map(
+          (value,index) => `
+
+            <div class="bar-wrap">
+
+              <div
+                class="bar"
+                style="
+                  height:${Math.max(
+                    8,
+                    value * 15
+                  )}px
+                ">
+              </div>
+
+              <div class="bar-day">
+
+                ${
+                  [
+                    "Пн",
+                    "Вт",
+                    "Ср",
+                    "Чт",
+                    "Пт",
+                    "Сб",
+                    "Вс"
+                  ][index]
+                }
+
+              </div>
+
+            </div>
+
+          `
+        ).join("");
+
+    }
+
+
+    /* =====================================================
+       PROFILE / ACHIEVEMENTS
+    ===================================================== */
+
+    function renderProfile() {
+
+      const xp = getXP();
+
+      const completed =
+        data.tasks.filter(
+          task => task.done
+        ).length;
+
+
+      const achievements = [
+
+        {
+          icon: "⭐",
+          title: "Первые 100 XP",
+          desc: "Заработай 100 XP",
+          unlocked: xp >= 100
+        },
+
+        {
+          icon: "✓",
+          title: "Первая задача",
+          desc: "Выполни задачу",
+          unlocked: completed >= 1
+        },
+
+        {
+          icon: "🔥",
+          title: "7 дней",
+          desc: "Streak 7 дней",
+          unlocked:
+            Math.max(
+              ...data.habits.map(
+                h => h.streak
+              )
+            ) >= 7
+        },
+
+        {
+          icon: "🎯",
+          title: "Первая цель",
+          desc: "Создай цель",
+          unlocked: data.goals.length >= 1
+        },
+
+        {
+          icon: "⚡",
+          title: "10 задач",
+          desc: "Выполни 10 задач",
+          unlocked: completed >= 10
+        },
+
+        {
+          icon: "🏆",
+          title: "Level 5",
+          desc: "Достигни уровня 5",
+          unlocked: getLevel() >= 5
+        }
+
+      ];
+
+
+      document.getElementById(
+        "achievementList"
+      ).innerHTML =
+        achievements.map(
+          achievement => `
+
+            <div
+              class="achievement
+                ${
+                  achievement.unlocked
+                    ? ""
+                    : "locked"
+                }">
+
+              <div class="achievement-icon">
+
+                ${achievement.icon}
+
+              </div>
+
+              <strong>
+
+                ${achievement.title}
+
+              </strong>
+
+              <small>
+
+                ${achievement.desc}
+
+              </small>
+
+            </div>
+
+          `
+        ).join("");
+
+
+      document.getElementById(
+        "profileName"
+      ).textContent =
+        data.name;
+
+
+      document.getElementById(
+        "helloName"
+      ).textContent =
+        data.name;
+
+
+      const first =
+        data.name
+          .trim()
+          .charAt(0)
+          .toUpperCase() || "L";
+
+
+      document.getElementById(
+        "profileAvatar"
+      ).textContent =
+        first;
+
+
+      document.getElementById(
+        "headerAvatar"
+      ).textContent =
+        first;
+
+    }
+
+
+    /* =====================================================
+       SETTINGS
+    ===================================================== */
+
+    function openNameModal() {
+
+      document
+        .getElementById(
+          "nameModal"
+        )
+        .classList.add(
+          "open"
+        );
+
+
+      document.getElementById(
+        "nameInput"
+      ).value =
+        data.name;
+
+
+      setTimeout(
+        () => {
+
+          document
+            .getElementById(
+              "nameInput"
+            )
+            .focus();
+
+        },
+        100
+      );
+
+    }
+
+
+    function closeNameModal() {
+
+      document
+        .getElementById(
+          "nameModal"
+        )
+        .classList.remove(
+          "open"
+        );
+
+    }
+
+
+    function saveName() {
+
+      const input =
+        document.getElementById(
+          "nameInput"
+        );
+
+
+      const name =
+        input.value.trim();
+
+
+      if (!name) {
+
+        showToast(
+          "Введи имя"
+        );
+
+        return;
+
+      }
+
+
+      data.name = name;
+
+      saveData();
+
+      renderProfile();
+
+      closeNameModal();
+
+      showToast(
+        "Имя сохранено ✨"
+      );
+
+    }
+
+
+    function toggleTheme() {
+
+      data.theme =
+        data.theme === "dark"
+          ? "light"
+          : "dark";
+
+
+      applyTheme();
+
+      saveData();
+
+    }
+
+
+    function applyTheme() {
+
+      document.body.classList.toggle(
+        "light",
+        data.theme === "light"
+      );
+
+
+      document.getElementById(
+        "themeLabel"
+      ).textContent =
+        data.theme === "light"
+          ? "Светлая тема"
+          : "Тёмная тема";
+
+    }
+
+
+    function resetData() {
+
+      const confirmReset =
+        confirm(
+          "Сбросить все данные LifeOS?"
+        );
+
+
+      if (!confirmReset) {
+
+        return;
+
+      }
+
+
+      localStorage.removeItem(
+        "lifeos_v03"
+      );
+
+
+      data =
+        JSON.parse(
+          JSON.stringify(
+            defaultData
+          )
+        );
+
+
+      applyTheme();
+
+      renderAll();
+
+      showToast(
+        "Данные сброшены"
+      );
+
+    }
+
+
+    function showAbout() {
+
+      alert(
+        "LifeOS v0.3\n\n" +
+        "Твоя личная система для задач, " +
+        "целей, привычек и прогресса.\n\n" +
+        "Все данные сохраняются " +
+        "локально в браузере."
+      );
+
+    }
+
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function escapeHTML(text) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.textContent = text;
+
+      return div.innerHTML;
+
+    }
+
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        window.toastTimer
+      );
+
+
+      window.toastTimer =
+        setTimeout(
+          () => {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          2200
+        );
+
+    }
+
+
+    /* =====================================================
+       UPDATE
+    ===================================================== */
+
+    function updateAll() {
+
+      updateXP();
+
+      renderStats();
+
+      renderProfile();
+
+    }
+
+
+    function renderAll() {
+
+      renderTasks();
+
+      renderGoals();
+
+      renderHabits();
+
+      renderStats();
+
+      renderProfile();
+
+      updateXP();
+
+      applyTheme();
+
+    }
+
+
+    /* =====================================================
+       ENTER KEY
+    ===================================================== */
+
+    document
+      .getElementById(
+        "taskInput"
+      )
+      .addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            addTask();
+
+          }
 
         }
       );
 
-    });
+
+    document
+      .getElementById(
+        "goalInput"
+      )
+      .addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            addGoal();
+
+          }
+
+        }
+      );
 
 
-  /* =========================
-     START
-  ========================= */
+    /* =====================================================
+       CLOSE MODAL
+    ===================================================== */
 
-  renderTasks();
+    document
+      .getElementById(
+        "nameModal"
+      )
+      .addEventListener(
+        "click",
+        event => {
 
-</script>
+          if (
+            event.target.id ===
+            "nameModal"
+          ) {
+
+            closeNameModal();
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       START APP
+    ===================================================== */
+
+    renderAll();
+
+  </script>
 
 </body>
 </html>
