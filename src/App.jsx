@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const DEFAULT_TASKS = [
+const initialTasks = [
   {
     id: 1,
     title: "Сделать что-нибудь полезное",
@@ -19,831 +19,676 @@ const DEFAULT_TASKS = [
     xp: 25,
     completed: false,
   },
+  {
+    id: 4,
+    title: "Навести порядок",
+    xp: 20,
+    completed: false,
+  },
 ];
 
-const DEFAULT_QUESTS = [
+const quests = [
   {
-    id: 1,
-    icon: "🌱",
-    title: "Доброе дело",
-    description:
-      "Сделай сегодня что-нибудь хорошее для другого человека.",
-    xp: 100,
+    icon: "⚡",
+    title: "Энергия",
+    text: "Сделай сегодня что-нибудь для себя",
   },
   {
-    id: 2,
-    icon: "🚶",
-    title: "Исследователь",
-    description:
-      "Выйди на прогулку и открой новое место.",
-    xp: 50,
-  },
-  {
-    id: 3,
-    icon: "📚",
+    icon: "🧠",
     title: "Развитие",
-    description:
-      "Узнай сегодня что-нибудь новое.",
-    xp: 75,
+    text: "Узнай что-нибудь новое",
+  },
+  {
+    icon: "🎯",
+    title: "Фокус",
+    text: "Заверши одну важную задачу",
   },
 ];
 
-const DEFAULT_GOALS = [
-  {
-    id: 1,
-    icon: "📚",
-    title: "Выучить английский",
-    description:
-      "Продолжай заниматься каждый день.",
-    progress: 64,
-  },
-  {
-    id: 2,
-    icon: "💰",
-    title: "Накопить €2 000",
-    description:
-      "Большие цели начинаются с маленьких шагов.",
-    progress: 35,
-  },
-  {
-    id: 3,
-    icon: "🏃",
-    title: "Стать активнее",
-    description:
-      "Больше движения каждый день.",
-    progress: 48,
-  },
-];
-
-function loadData(key, fallback) {
-  try {
-    const saved = localStorage.getItem(key);
-
-    if (saved) {
-      return JSON.parse(saved);
+export default function App() {
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const saved = localStorage.getItem("lifeos_tasks");
+      return saved ? JSON.parse(saved) : initialTasks;
+    } catch {
+      return initialTasks;
     }
-  } catch (error) {
-    console.log("Не удалось загрузить данные:", error);
-  }
+  });
 
-  return fallback;
-}
-
-function App() {
-  const [activeTab, setActiveTab] = useState("home");
-
-  const [xp, setXp] = useState(() =>
-    loadData("lifeos_xp", 120)
-  );
-
-  const [tasks, setTasks] = useState(() =>
-    loadData(
-      "lifeos_tasks",
-      DEFAULT_TASKS
-    )
-  );
-
-  const [quests, setQuests] = useState(() =>
-    loadData(
-      "lifeos_quests",
-      DEFAULT_QUESTS
-    )
-  );
-
-  const [goals] = useState(() =>
-    loadData(
-      "lifeos_goals",
-      DEFAULT_GOALS
-    )
-  );
-
-  const [streak] = useState(() =>
-    loadData("lifeos_streak", 7)
-  );
+  const [showQuests, setShowQuests] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem(
-      "lifeos_xp",
-      JSON.stringify(xp)
-    );
-  }, [xp]);
-
-  useEffect(() => {
-    localStorage.setItem(
-      "lifeos_tasks",
-      JSON.stringify(tasks)
-    );
+    localStorage.setItem("lifeos_tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "lifeos_quests",
-      JSON.stringify(quests)
-    );
-  }, [quests]);
+  const completed = tasks.filter((task) => task.completed).length;
+  const totalXP = tasks
+    .filter((task) => task.completed)
+    .reduce((sum, task) => sum + task.xp, 0);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "lifeos_goals",
-      JSON.stringify(goals)
-    );
-  }, [goals]);
+  const maxXP = tasks.reduce((sum, task) => sum + task.xp, 0);
+  const progress = maxXP ? Math.round((totalXP / maxXP) * 100) : 0;
 
-  const completedTasks = tasks.filter(
-    (task) => task.completed
-  ).length;
-
-  const level = Math.floor(xp / 200) + 1;
-
-  const levelXp = xp % 200;
-
-  const progress = Math.min(
-    (levelXp / 200) * 100,
-    100
-  );
+  const level = Math.floor(totalXP / 100) + 1;
+  const currentLevelXP = totalXP % 100;
 
   function toggleTask(id) {
-    setTasks((currentTasks) =>
-      currentTasks.map((task) => {
-        if (task.id !== id) {
-          return task;
-        }
-
-        if (!task.completed) {
-          setXp((currentXp) =>
-            currentXp + task.xp
-          );
-        } else {
-          setXp((currentXp) =>
-            Math.max(
-              0,
-              currentXp - task.xp
-            )
-          );
-        }
-
-        return {
-          ...task,
-          completed: !task.completed,
-        };
-      })
-    );
-  }
-
-  function addTask() {
-    const title = window.prompt(
-      "Название новой задачи:"
-    );
-
-    if (!title || !title.trim()) {
-      return;
-    }
-
-    const newTask = {
-      id: Date.now(),
-      title: title.trim(),
-      xp: 30,
-      completed: false,
-    };
-
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      newTask,
-    ]);
-  }
-
-  function completeQuest(id) {
-    const quest = quests.find(
-      (item) => item.id === id
-    );
-
-    if (!quest) {
-      return;
-    }
-
-    setXp(
-      (currentXp) =>
-        currentXp + quest.xp
-    );
-
-    setQuests((currentQuests) =>
-      currentQuests.filter(
-        (item) => item.id !== id
+    setTasks((current) =>
+      current.map((task) =>
+        task.id === id
+          ? { ...task, completed: !task.completed }
+          : task
       )
     );
   }
 
-  function resetProgress() {
-    const confirmed = window.confirm(
-      "Сбросить весь прогресс LifeOS?"
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    setXp(120);
-    setTasks(DEFAULT_TASKS);
-    setQuests(DEFAULT_QUESTS);
+  function resetDay() {
+    setTasks(initialTasks);
   }
 
   return (
-    <div className="app">
+    <div style={styles.page}>
+      <div style={styles.backgroundGlow} />
 
-      <header className="header">
-        <div>
-
-          <div className="brand">
-            <div className="brand-icon">
-              L
+      <main style={styles.container}>
+        {/* HEADER */}
+        <header style={styles.header}>
+          <div>
+            <div style={styles.logo}>
+              <span style={styles.logoMark}>L</span>
+              <span>LifeOS</span>
             </div>
 
-            <span>
-              LifeOS
+            <p style={styles.subtitle}>
+              Твой день. Твои правила.
+            </p>
+          </div>
+
+          <div style={styles.levelBadge}>
+            <span>LVL</span>
+            <strong>{level}</strong>
+          </div>
+        </header>
+
+        {/* HERO */}
+        <section style={styles.hero}>
+          <div>
+            <p style={styles.smallLabel}>СЕГОДНЯ</p>
+
+            <h1 style={styles.title}>
+              Стань лучше
+              <br />
+              <span>на 1%.</span>
+            </h1>
+
+            <p style={styles.heroText}>
+              Маленькие действия каждый день
+              превращаются в большие изменения.
+            </p>
+          </div>
+
+          <div style={styles.progressCircle}>
+            <div style={styles.progressInner}>
+              <strong>{progress}%</strong>
+              <span>готово</span>
+            </div>
+          </div>
+        </section>
+
+        {/* XP CARD */}
+        <section style={styles.xpCard}>
+          <div style={styles.xpTop}>
+            <div>
+              <span style={styles.cardLabel}>ТВОЙ ПРОГРЕСС</span>
+              <div style={styles.xpNumber}>
+                {totalXP} <small>XP</small>
+              </div>
+            </div>
+
+            <div style={styles.xpLevel}>
+              <span>Уровень</span>
+              <strong>{level}</strong>
+            </div>
+          </div>
+
+          <div style={styles.bar}>
+            <div
+              style={{
+                ...styles.barFill,
+                width: `${currentLevelXP}%`,
+              }}
+            />
+          </div>
+
+          <div style={styles.xpBottom}>
+            <span>{currentLevelXP}/100 XP</span>
+            <span>до следующего уровня</span>
+          </div>
+        </section>
+
+        {/* TASKS */}
+        <section>
+          <div style={styles.sectionHeader}>
+            <div>
+              <p style={styles.smallLabel}>MISSION</p>
+              <h2 style={styles.sectionTitle}>Задачи дня</h2>
+            </div>
+
+            <span style={styles.counter}>
+              {completed}/{tasks.length}
             </span>
           </div>
 
-          <p className="greeting">
-            Добрый вечер 👋
-          </p>
+          <div style={styles.tasks}>
+            {tasks.map((task) => (
+              <button
+                key={task.id}
+                onClick={() => toggleTask(task.id)}
+                style={{
+                  ...styles.task,
+                  ...(task.completed ? styles.taskDone : {}),
+                }}
+              >
+                <div
+                  style={{
+                    ...styles.checkbox,
+                    ...(task.completed
+                      ? styles.checkboxDone
+                      : {}),
+                  }}
+                >
+                  {task.completed ? "✓" : ""}
+                </div>
 
-          <h1>
-            Сделаем сегодняшний
-            <br />
-            день лучше.
-          </h1>
+                <div style={styles.taskContent}>
+                  <span
+                    style={{
+                      ...styles.taskTitle,
+                      ...(task.completed
+                        ? styles.taskTitleDone
+                        : {}),
+                    }}
+                  >
+                    {task.title}
+                  </span>
 
-        </div>
+                  <span style={styles.taskXP}>
+                    +{task.xp} XP
+                  </span>
+                </div>
 
-        <div className="profile">
-          B
-        </div>
-      </header>
+                <span style={styles.arrow}>›</span>
+              </button>
+            ))}
+          </div>
+        </section>
 
-      <section className="level-card">
-
-        <div className="level-row">
+        {/* QUEST BUTTON */}
+        <button
+          onClick={() => setShowQuests(!showQuests)}
+          style={styles.questButton}
+        >
+          <span style={styles.questIcon}>✦</span>
 
           <div>
-            <span className="label">
-              ТЕКУЩИЙ УРОВЕНЬ
-            </span>
-
-            <strong>
-              LEVEL {level}
-            </strong>
+            <strong>Ежедневные квесты</strong>
+            <span>Открой задания на сегодня</span>
           </div>
 
-          <span className="xp">
-            ⭐ {xp} XP
+          <span style={styles.arrow}>
+            {showQuests ? "⌃" : "›"}
           </span>
+        </button>
 
-        </div>
+        {/* QUESTS */}
+        {showQuests && (
+          <section style={styles.questList}>
+            {quests.map((quest) => (
+              <div key={quest.title} style={styles.questCard}>
+                <div style={styles.questEmoji}>
+                  {quest.icon}
+                </div>
 
-        <div className="progress">
-          <div
-            style={{
-              width: `${progress}%`,
-            }}
-          />
-        </div>
-
-        <div className="progress-text">
-          <span>
-            {levelXp} / 200 XP
-          </span>
-
-          <span>
-            До следующего уровня
-          </span>
-        </div>
-
-      </section>
-
-      {activeTab === "home" && (
-        <main>
-
-          <section className="stats">
-
-            <div className="stat">
-              <span>🔥</span>
-
-              <strong>
-                {streak}
-              </strong>
-
-              <small>
-                дней подряд
-              </small>
-            </div>
-
-            <div className="stat">
-              <span>✅</span>
-
-              <strong>
-                {completedTasks}
-              </strong>
-
-              <small>
-                задач выполнено
-              </small>
-            </div>
-
-            <div className="stat">
-              <span>🏆</span>
-
-              <strong>
-                4
-              </strong>
-
-              <small>
-                достижения
-              </small>
-            </div>
-
-          </section>
-
-          <section className="section">
-
-            <div className="section-header">
-
-              <div>
-                <span className="section-label">
-                  ПЛАН
-                </span>
-
-                <h2>
-                  Сегодня
-                </h2>
+                <div>
+                  <strong>{quest.title}</strong>
+                  <p>{quest.text}</p>
+                </div>
               </div>
-
-              <button
-                className="add-button"
-                onClick={addTask}
-              >
-                + Добавить
-              </button>
-
-            </div>
-
-            <div className="tasks">
-
-              {tasks.map((task) => (
-                <Task
-                  key={task.id}
-                  task={task}
-                  onToggle={() =>
-                    toggleTask(task.id)
-                  }
-                />
-              ))}
-
-            </div>
-
-          </section>
-
-          <section className="section">
-
-            <div className="section-header">
-
-              <div>
-                <span className="section-label">
-                  LIFEQUEST
-                </span>
-
-                <h2>
-                  Квест дня
-                </h2>
-              </div>
-
-            </div>
-
-            {quests.length > 0 ? (
-              <Quest
-                quest={quests[0]}
-                onComplete={() =>
-                  completeQuest(
-                    quests[0].id
-                  )
-                }
-              />
-            ) : (
-              <div className="empty-card">
-
-                <span className="empty-icon">
-                  🎉
-                </span>
-
-                <strong>
-                  Все квесты выполнены!
-                </strong>
-
-                <span>
-                  Отличная работа.
-                </span>
-
-              </div>
-            )}
-
-          </section>
-
-        </main>
-      )}
-
-      {activeTab === "tasks" && (
-        <main>
-
-          <section className="page-title">
-
-            <span className="section-label">
-              LIFEOS
-            </span>
-
-            <h2>
-              Мои задачи
-            </h2>
-
-            <button
-              className="primary-button"
-              onClick={addTask}
-            >
-              + Новая задача
-            </button>
-
-          </section>
-
-          <div className="tasks">
-
-            {tasks.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                onToggle={() =>
-                  toggleTask(task.id)
-                }
-              />
             ))}
+          </section>
+        )}
 
+        {/* RESET */}
+        <button onClick={resetDay} style={styles.resetButton}>
+          Сбросить день
+        </button>
+
+        {/* FOOTER */}
+        <footer style={styles.footer}>
+          <div style={styles.footerLogo}>L</div>
+
+          <div>
+            <strong>LifeOS</strong>
+            <p>Build your better life.</p>
           </div>
 
-        </main>
-      )}
-
-      {activeTab === "goals" && (
-        <main>
-
-          <section className="page-title">
-
-            <span className="section-label">
-              PROGRESS
-            </span>
-
-            <h2>
-              Мои цели
-            </h2>
-
-          </section>
-
-          {goals.map((goal) => (
-            <Goal
-              key={goal.id}
-              {...goal}
-            />
-          ))}
-
-        </main>
-      )}
-
-      {activeTab === "quests" && (
-        <main>
-
-          <section className="page-title">
-
-            <span className="section-label">
-              LIFEQUEST
-            </span>
-
-            <h2>
-              Квесты
-            </h2>
-
-            <p>
-              Маленькие действия каждый день
-              создают большие изменения.
-            </p>
-
-          </section>
-
-          <div className="quest-list">
-
-            {quests.length === 0 ? (
-              <div className="empty-card">
-
-                <span className="empty-icon">
-                  🏆
-                </span>
-
-                <strong>
-                  Все квесты выполнены
-                </strong>
-
-                <span>
-                  Новые квесты появятся позже.
-                </span>
-
-              </div>
-            ) : (
-              quests.map((quest) => (
-                <Quest
-                  key={quest.id}
-                  quest={quest}
-                  onComplete={() =>
-                    completeQuest(
-                      quest.id
-                    )
-                  }
-                />
-              ))
-            )}
-
-          </div>
-
-        </main>
-      )}
-
-      {activeTab === "ai" && (
-        <main>
-
-          <section className="page-title">
-
-            <span className="section-label">
-              LIFEOS AI
-            </span>
-
-            <h2>
-              Твой помощник
-            </h2>
-
-          </section>
-
-          <div className="ai-card">
-
-            <div className="ai-icon">
-              🤖
-            </div>
-
-            <h3>
-              AI скоро будет здесь
-            </h3>
-
-            <p>
-              В следующих версиях AI сможет
-              помогать тебе планировать день,
-              создавать задачи, ставить цели,
-              анализировать прогресс и
-              предлагать полезные действия.
-            </p>
-
-          </div>
-
-          <button
-            className="reset-button"
-            onClick={resetProgress}
-          >
-            Сбросить прогресс
-          </button>
-
-        </main>
-      )}
-
-      <nav className="bottom-nav">
-
-        <NavButton
-          icon="⌂"
-          label="Главная"
-          active={
-            activeTab === "home"
-          }
-          onClick={() =>
-            setActiveTab("home")
-          }
-        />
-
-        <NavButton
-          icon="✓"
-          label="Задачи"
-          active={
-            activeTab === "tasks"
-          }
-          onClick={() =>
-            setActiveTab("tasks")
-          }
-        />
-
-        <NavButton
-          icon="🎯"
-          label="Цели"
-          active={
-            activeTab === "goals"
-          }
-          onClick={() =>
-            setActiveTab("goals")
-          }
-        />
-
-        <NavButton
-          icon="✦"
-          label="Квесты"
-          active={
-            activeTab === "quests"
-          }
-          onClick={() =>
-            setActiveTab("quests")
-          }
-        />
-
-        <NavButton
-          icon="🤖"
-          label="AI"
-          active={
-            activeTab === "ai"
-          }
-          onClick={() =>
-            setActiveTab("ai")
-          }
-        />
-
-      </nav>
-
+          <span style={styles.version}>v1.0</span>
+        </footer>
+      </main>
     </div>
   );
 }
 
-function Task({
-  task,
-  onToggle,
-}) {
-  return (
-    <div
-      className={`task ${
-        task.completed
-          ? "completed"
-          : ""
-      }`}
-    >
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background:
+      "radial-gradient(circle at 50% -10%, #321015 0%, #0b0b0d 38%, #050506 100%)",
+    color: "#ffffff",
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif",
+    overflowX: "hidden",
+  },
 
-      <button
-        className="checkbox"
-        onClick={onToggle}
-        aria-label="Выполнить задачу"
-      >
-        {task.completed
-          ? "✓"
-          : ""}
-      </button>
+  backgroundGlow: {
+    position: "fixed",
+    top: "-180px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "400px",
+    height: "400px",
+    background: "rgba(255, 35, 55, 0.10)",
+    filter: "blur(100px)",
+    borderRadius: "50%",
+    pointerEvents: "none",
+  },
 
-      <div className="task-info">
+  container: {
+    width: "100%",
+    maxWidth: "680px",
+    margin: "0 auto",
+    padding: "28px 20px 50px",
+    boxSizing: "border-box",
+    position: "relative",
+  },
 
-        <strong>
-          {task.title}
-        </strong>
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "45px",
+  },
 
-        <small>
-          Сегодня
-        </small>
+  logo: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    fontSize: "25px",
+    fontWeight: "800",
+    letterSpacing: "-1px",
+  },
 
-      </div>
+  logoMark: {
+    width: "38px",
+    height: "38px",
+    borderRadius: "12px",
+    background:
+      "linear-gradient(135deg, #ff3045, #a90019)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "900",
+    boxShadow: "0 8px 30px rgba(255, 30, 55, .25)",
+  },
 
-      <span className="task-xp">
-        +{task.xp} XP
-      </span>
+  subtitle: {
+    margin: "7px 0 0 48px",
+    color: "#77777e",
+    fontSize: "13px",
+  },
 
-    </div>
-  );
-}
+  levelBadge: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "54px",
+    height: "54px",
+    border: "1px solid #29292e",
+    background: "#111114",
+    borderRadius: "16px",
+  },
 
-function Quest({
-  quest,
-  onComplete,
-}) {
-  return (
-    <div className="quest-card">
+  levelBadge: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "54px",
+    height: "54px",
+    border: "1px solid #29292e",
+    background: "#111114",
+    borderRadius: "16px",
+  },
 
-      <div className="quest-icon">
-        {quest.icon}
-      </div>
+  hero: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "20px",
+    marginBottom: "28px",
+  },
 
-      <div className="quest-content">
+  smallLabel: {
+    color: "#ff4052",
+    fontSize: "11px",
+    fontWeight: "800",
+    letterSpacing: "2px",
+    margin: "0 0 9px",
+  },
 
-        <span className="quest-label">
-          ЕЖЕДНЕВНЫЙ КВЕСТ
-        </span>
+  title: {
+    fontSize: "42px",
+    lineHeight: "0.98",
+    letterSpacing: "-2px",
+    margin: "0",
+    fontWeight: "850",
+  },
 
-        <h3>
-          {quest.title}
-        </h3>
+  title span: {
+    color: "#ff3045",
+  },
 
-        <p>
-          {quest.description}
-        </p>
+  heroText: {
+    color: "#77777e",
+    lineHeight: "1.5",
+    fontSize: "14px",
+    maxWidth: "330px",
+    marginTop: "18px",
+  },
 
-        <div className="quest-footer">
+  progressCircle: {
+    flexShrink: 0,
+    width: "108px",
+    height: "108px",
+    borderRadius: "50%",
+    background:
+      "conic-gradient(#ff3045 0deg, #ff3045 180deg, #25252a 180deg, #25252a 360deg)",
+    padding: "5px",
+    boxSizing: "border-box",
+  },
 
-          <span>
-            ⭐ +{quest.xp} XP
-          </span>
+  progressInner: {
+    width: "100%",
+    height: "100%",
+    borderRadius: "50%",
+    background: "#0b0b0d",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
-          <button
-            onClick={onComplete}
-          >
-            Выполнить
-          </button>
+  xpCard: {
+    background:
+      "linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025))",
+    border: "1px solid #29292e",
+    borderRadius: "22px",
+    padding: "22px",
+    marginBottom: "38px",
+    boxShadow: "0 20px 60px rgba(0,0,0,.25)",
+  },
 
-        </div>
+  xpTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 
-      </div>
+  cardLabel: {
+    color: "#77777e",
+    fontSize: "10px",
+    letterSpacing: "1.5px",
+    fontWeight: "700",
+  },
 
-    </div>
-  );
-}
+  xpNumber: {
+    fontSize: "34px",
+    fontWeight: "850",
+    marginTop: "5px",
+  },
 
-function Goal({
-  icon,
-  title,
-  description,
-  progress,
-}) {
-  return (
-    <div className="goal-card">
+  xpNumberSmall: {
+    fontSize: "13px",
+    color: "#ff3045",
+  },
 
-      <div className="goal-icon">
-        {icon}
-      </div>
+  xpLevel: {
+    textAlign: "right",
+    color: "#77777e",
+    fontSize: "11px",
+  },
 
-      <div className="goal-content">
+  xpLevelStrong: {
+    display: "block",
+    color: "#fff",
+    fontSize: "25px",
+    marginTop: "2px",
+  },
 
-        <h3>
-          {title}
-        </h3>
+  bar: {
+    height: "7px",
+    background: "#25252a",
+    borderRadius: "20px",
+    overflow: "hidden",
+    marginTop: "20px",
+  },
 
-        <p>
-          {description}
-        </p>
+  barFill: {
+    height: "100%",
+    background:
+      "linear-gradient(90deg, #ff3045, #ff6675)",
+    borderRadius: "20px",
+    transition: "width .4s ease",
+  },
 
-        <div className="goal-progress">
+  xpBottom: {
+    display: "flex",
+    justifyContent: "space-between",
+    color: "#66666d",
+    fontSize: "11px",
+    marginTop: "9px",
+  },
 
-          <div
-            style={{
-              width: `${progress}%`,
-            }}
-          />
+  sectionHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "end",
+    marginBottom: "15px",
+  },
 
-        </div>
+  sectionTitle: {
+    margin: 0,
+    fontSize: "25px",
+    letterSpacing: "-.7px",
+  },
 
-        <div className="goal-footer">
+  counter: {
+    background: "#17171b",
+    border: "1px solid #29292e",
+    color: "#aaaab0",
+    padding: "8px 12px",
+    borderRadius: "12px",
+    fontSize: "12px",
+  },
 
-          <span>
-            {progress}%
-          </span>
+  tasks: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "9px",
+  },
 
-          <span>
-            Прогресс
-          </span>
+  task: {
+    width: "100%",
+    border: "1px solid #25252a",
+    background: "#101013",
+    color: "#fff",
+    borderRadius: "17px",
+    padding: "15px",
+    display: "flex",
+    alignItems: "center",
+    gap: "13px",
+    textAlign: "left",
+    cursor: "pointer",
+  },
 
-        </div>
+  taskDone: {
+    background: "#160d0f",
+    borderColor: "#4a2026",
+  },
 
-      </div>
+  checkbox: {
+    width: "27px",
+    height: "27px",
+    borderRadius: "9px",
+    border: "1px solid #414148",
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "900",
+  },
 
-    </div>
-  );
-}
+  checkboxDone: {
+    background: "#ff3045",
+    borderColor: "#ff3045",
+  },
 
-function NavButton({
-  icon,
-  label,
-  active,
-  onClick,
-}) {
-  return (
-    <button
-      className={`nav-button ${
-        active
-          ? "active"
-          : ""
-      }`}
-      onClick={onClick}
-    >
+  taskContent: {
+    flex: 1,
+    minWidth: 0,
+  },
 
-      <span>
-        {icon}
-      </span>
+  taskTitle: {
+    display: "block",
+    fontSize: "14px",
+    fontWeight: "650",
+  },
 
-      <small>
-        {label}
-      </small>
+  taskTitleDone: {
+    color: "#77777e",
+    textDecoration: "line-through",
+  },
 
-    </button>
-  );
-}
+  taskXP: {
+    display: "block",
+    color: "#ff4052",
+    fontSize: "11px",
+    marginTop: "5px",
+    fontWeight: "700",
+  },
 
-export default App;
+  arrow: {
+    color: "#55555c",
+    fontSize: "24px",
+  },
+
+  questButton: {
+    width: "100%",
+    marginTop: "25px",
+    padding: "17px",
+    borderRadius: "18px",
+    border: "1px solid #452027",
+    background:
+      "linear-gradient(135deg, rgba(255,48,69,.14), rgba(255,48,69,.04))",
+    color: "#fff",
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+    textAlign: "left",
+    cursor: "pointer",
+  },
+
+  questIcon: {
+    width: "36px",
+    height: "36px",
+    borderRadius: "11px",
+    background: "#ff3045",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "18px",
+  },
+
+  questCard: {
+    display: "flex",
+    gap: "13px",
+    alignItems: "center",
+    padding: "16px",
+    background: "#111114",
+    border: "1px solid #25252a",
+    borderRadius: "16px",
+    marginTop: "8px",
+  },
+
+  questEmoji: {
+    fontSize: "23px",
+  },
+
+  questCardP: {
+    margin: "5px 0 0",
+    color: "#77777e",
+    fontSize: "12px",
+  },
+
+  resetButton: {
+    marginTop: "25px",
+    width: "100%",
+    padding: "13px",
+    border: "none",
+    background: "transparent",
+    color: "#55555c",
+    fontSize: "12px",
+    cursor: "pointer",
+  },
+
+  footer: {
+    borderTop: "1px solid #202025",
+    marginTop: "35px",
+    paddingTop: "25px",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    color: "#77777e",
+  },
+
+  footerLogo: {
+    width: "34px",
+    height: "34px",
+    borderRadius: "10px",
+    background: "#ff3045",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
+    fontWeight: "900",
+  },
+
+  footerLogo: {
+    width: "34px",
+    height: "34px",
+    borderRadius: "10px",
+    background: "#ff3045",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
+    fontWeight: "900",
+  },
+
+  version: {
+    marginLeft: "auto",
+    fontSize: "11px",
+    color: "#44444a",
+  },
+};
