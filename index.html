@@ -3,75 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#ff3b30">
 <meta name="description" content="LifeOS — твоя личная система управления жизнью">
 <link rel="manifest" href="manifest.json">
-<title>LifeOS v0.9.7</title>
+<title>LifeOS v0.9.8</title>
 
 <style>
 :root{
-  --bg:#09090a;
-  --surface:#111113;
-  --surface2:#18181b;
-  --surface3:#202023;
-  --line:#29292d;
+  --bg:#070809;
+  --surface:#101214;
+  --surface2:#15181b;
+  --surface3:#1b1f23;
+  --line:#272c31;
   --text:#f7f7f8;
-  --muted:#8b8b92;
-  --red:#ff3b30;
-  --red2:#ff6259;
-  --green:#30d158;
-  --blue:#0a84ff;
-  --yellow:#ffd60a;
-  --purple:#bf5af2;
+  --muted:#858b93;
+  --accent:#ff3b30;
+  --accent2:#ff6259;
+  --green:#35d27b;
+  --yellow:#ffbd2e;
+  --blue:#4d9cff;
+  --purple:#9b7cff;
   --shadow:0 20px 60px rgba(0,0,0,.28);
   --radius:24px;
-  --nav:rgba(12,12,14,.9);
+  --nav:rgba(8,9,10,.92);
 }
 
 body.light{
-  --bg:#f5f5f7;
-  --surface:#fff;
-  --surface2:#f0f0f3;
-  --surface3:#e7e7eb;
-  --line:#d9d9de;
-  --text:#111114;
-  --muted:#73737c;
-  --nav:rgba(250,250,252,.92);
+  --bg:#f4f5f7;
+  --surface:#ffffff;
+  --surface2:#f0f1f3;
+  --surface3:#e7e9ec;
+  --line:#d9dce1;
+  --text:#101216;
+  --muted:#747982;
+  --nav:rgba(255,255,255,.92);
   --shadow:0 18px 50px rgba(0,0,0,.08);
 }
 
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
   min-height:100vh;
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-  "SF Pro Text",Inter,Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Arial,sans-serif;
   transition:background .25s,color .25s;
 }
 
-button,input,select{font:inherit}
-button{border:0;cursor:pointer;color:inherit}
-svg{display:block}
+button,input,select{
+  font:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
 
 .app{
   min-height:100vh;
   padding-bottom:105px;
 }
 
+svg{
+  display:block;
+}
+
+/* HEADER */
+
 .header{
   position:sticky;
   top:0;
-  z-index:80;
+  z-index:50;
   height:76px;
+  padding:0 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:0 20px;
   background:var(--nav);
   backdrop-filter:blur(24px);
   border-bottom:1px solid var(--line);
@@ -84,32 +99,35 @@ svg{display:block}
 }
 
 .logo{
-  width:44px;
-  height:44px;
-  border-radius:14px;
+  width:45px;
+  height:45px;
+  border-radius:15px;
   display:grid;
   place-items:center;
-  background:var(--red);
-  color:#fff;
-  box-shadow:0 8px 28px rgba(255,59,48,.25);
+  background:var(--accent);
+  color:white;
+  box-shadow:0 10px 30px rgba(255,59,48,.22);
 }
 
-.logo svg{width:26px;height:26px}
+.logo svg{
+  width:26px;
+  height:26px;
+}
 
 .brand-name{
-  font-size:24px;
-  font-weight:900;
+  font-size:23px;
+  font-weight:950;
   letter-spacing:-1px;
 }
 
 .header-right{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:9px;
 }
 
 .level-pill{
-  padding:8px 12px;
+  padding:9px 12px;
   border-radius:12px;
   background:var(--surface2);
   border:1px solid var(--line);
@@ -118,30 +136,22 @@ svg{display:block}
   font-weight:900;
 }
 
-.icon-btn{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:var(--surface2);
-  border:1px solid var(--line);
-}
-
-.icon-btn svg{width:20px;height:20px}
+/* MAIN */
 
 main{
-  width:min(940px,100%);
+  width:min(980px,100%);
   margin:auto;
-  padding:25px 18px 30px;
+  padding:25px 20px 35px;
 }
 
 .screen{
   display:none;
-  animation:screenIn .24s ease;
+  animation:screenIn .25s ease;
 }
 
-.screen.active{display:block}
+.screen.active{
+  display:block;
+}
 
 @keyframes screenIn{
   from{opacity:0;transform:translateY(7px)}
@@ -152,24 +162,26 @@ main{
   color:var(--muted);
   font-size:12px;
   font-weight:900;
+  letter-spacing:.14em;
   text-transform:uppercase;
-  letter-spacing:2px;
-  margin-bottom:10px;
+  margin-bottom:9px;
 }
 
 h1{
-  margin:0;
   font-size:48px;
-  line-height:1;
+  line-height:.98;
   letter-spacing:-2.7px;
+  margin:0;
 }
 
-h1 span{color:var(--red)}
+h1 span{
+  color:var(--accent);
+}
 
 h2{
-  margin:28px 0 8px;
   font-size:31px;
   letter-spacing:-1.5px;
+  margin:28px 0 12px;
 }
 
 .subtitle{
@@ -177,6 +189,8 @@ h2{
   line-height:1.55;
   font-size:15px;
 }
+
+/* CARDS */
 
 .card{
   background:linear-gradient(145deg,var(--surface),var(--surface2));
@@ -187,18 +201,22 @@ h2{
   box-shadow:var(--shadow);
 }
 
-.card-label{
+.card.compact{
+  padding:17px;
+}
+
+.card-title{
   color:var(--muted);
   font-size:11px;
-  font-weight:900;
+  font-weight:950;
+  letter-spacing:.13em;
   text-transform:uppercase;
-  letter-spacing:2px;
 }
 
 .between{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:12px;
 }
 
@@ -208,61 +226,83 @@ h2{
   gap:10px;
 }
 
-.primary{
-  background:var(--red);
-  color:#fff;
-  padding:12px 17px;
-  border-radius:14px;
-  font-weight:900;
+/* DASHBOARD */
+
+.hero-dashboard{
+  margin-top:5px;
 }
 
-.secondary{
-  background:var(--surface3);
-  border:1px solid var(--line);
-  padding:11px 15px;
-  border-radius:14px;
+.greeting{
+  color:var(--muted);
   font-weight:800;
+  margin-bottom:10px;
 }
 
-.danger{
-  background:rgba(255,59,48,.1);
-  color:var(--red);
-  border:1px solid rgba(255,59,48,.22);
-  padding:9px 12px;
-  border-radius:11px;
-  font-weight:900;
+.time{
+  font-size:64px;
+  line-height:.95;
+  font-weight:950;
+  letter-spacing:-4px;
 }
 
-.xp-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin:10px 0 15px;
+.date-line{
+  margin-top:9px;
+  color:var(--muted);
+  font-weight:700;
+  text-transform:capitalize;
 }
 
-.xp{
-  font-size:43px;
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.35fr .9fr;
+  gap:14px;
+  margin-top:20px;
+}
+
+.xp-card{
+  min-height:210px;
+  position:relative;
+  overflow:hidden;
+}
+
+.xp-card:after{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  right:-80px;
+  top:-90px;
+  background:var(--accent);
+  opacity:.09;
+  border-radius:50%;
+}
+
+.xp-number{
+  font-size:45px;
   font-weight:950;
   letter-spacing:-2px;
+  margin-top:9px;
 }
 
 .xp-level{
-  color:var(--red);
-  font-weight:900;
+  color:var(--accent);
+  font-weight:950;
 }
 
 .progress{
   height:11px;
-  border-radius:20px;
   background:var(--surface3);
+  border-radius:20px;
   overflow:hidden;
+  margin-top:20px;
 }
 
-.progress > div{
+.progress-bar{
   height:100%;
   width:0;
-  background:linear-gradient(90deg,var(--red),var(--red2));
-  transition:width .4s ease;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:20px;
+  transition:width .45s ease;
 }
 
 .progress-info{
@@ -271,85 +311,206 @@ h2{
   color:var(--muted);
   font-size:12px;
   font-weight:800;
-  margin-top:8px;
+  margin-top:9px;
 }
+
+.day-card{
+  min-height:210px;
+}
+
+.day-ring{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:13px auto;
+  background:conic-gradient(var(--accent) var(--day-progress),var(--surface3) 0);
+  position:relative;
+}
+
+.day-ring:after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border-radius:50%;
+  background:var(--surface);
+}
+
+.day-ring-content{
+  position:relative;
+  z-index:1;
+  text-align:center;
+}
+
+.day-percent{
+  font-size:22px;
+  font-weight:950;
+}
+
+.day-small{
+  color:var(--muted);
+  font-size:9px;
+  font-weight:900;
+}
+
+/* QUICK */
 
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
+  margin-top:15px;
 }
 
 .quick{
-  min-height:115px;
-  padding:15px;
+  min-height:105px;
   text-align:left;
-  border:1px solid var(--line);
+  padding:15px;
+  color:var(--text);
   background:var(--surface);
+  border:1px solid var(--line);
   border-radius:19px;
-  transition:.18s;
+  transition:.2s;
 }
 
-.quick:active{transform:scale(.97)}
+.quick:hover{
+  border-color:#555;
+  transform:translateY(-2px);
+}
 
-.quick-icon{
+.quick:active{
+  transform:scale(.97);
+}
+
+.icon-box{
   width:38px;
   height:38px;
+  border-radius:12px;
   display:grid;
   place-items:center;
-  border-radius:12px;
-  background:var(--surface2);
+  background:var(--surface3);
   margin-bottom:12px;
 }
 
-.quick-icon svg{width:21px;height:21px}
+.icon-box svg{
+  width:19px;
+  height:19px;
+  stroke:currentColor;
+}
 
 .quick-title{
+  font-weight:900;
+  font-size:14px;
+}
+
+.quick-text{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+/* MINI PANELS */
+
+.mini-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.mini-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px;
+  border:1px solid var(--line);
+  background:var(--surface2);
+  border-radius:17px;
+}
+
+.mini-icon{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:var(--surface3);
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+
+.mini-icon svg{
+  width:19px;
+  height:19px;
+}
+
+.mini-main{
+  flex:1;
+  min-width:0;
+}
+
+.mini-name{
   font-size:14px;
   font-weight:900;
 }
 
-.quick-text{
-  margin-top:4px;
+.mini-meta{
   color:var(--muted);
   font-size:11px;
+  margin-top:3px;
 }
 
-.feature-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
+/* BUTTONS */
 
-.feature{
-  padding:18px;
-  border-radius:20px;
-  background:var(--surface);
-  border:1px solid var(--line);
-}
-
-.feature-icon{
-  width:43px;
-  height:43px;
-  display:grid;
-  place-items:center;
+.primary{
+  color:white;
+  background:var(--accent);
+  padding:12px 16px;
   border-radius:14px;
-  background:var(--surface2);
-  margin-bottom:12px;
-}
-
-.feature-icon svg{width:23px;height:23px}
-
-.feature-title{
   font-weight:900;
-  font-size:16px;
+  box-shadow:0 8px 24px rgba(255,59,48,.17);
 }
 
-.feature-text{
+.secondary{
+  color:var(--text);
+  background:var(--surface3);
+  border:1px solid var(--line);
+  padding:11px 15px;
+  border-radius:13px;
+  font-weight:850;
+}
+
+.ghost{
   color:var(--muted);
-  font-size:12px;
-  line-height:1.45;
-  margin-top:5px;
+  background:transparent;
+  padding:9px;
+  border-radius:11px;
+}
+
+.danger{
+  color:#ff6862;
+  background:rgba(255,59,48,.09);
+  border:1px solid rgba(255,59,48,.18);
+  padding:9px 12px;
+  border-radius:11px;
+  font-weight:850;
+}
+
+.full{
+  width:100%;
+}
+
+/* SECTION HEADER */
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.section-head h2{
+  margin:0;
 }
 
 /* TASKS */
@@ -362,30 +523,36 @@ h2{
   border-bottom:1px solid var(--line);
 }
 
-.task:last-child{border-bottom:0}
+.task:last-child{
+  border-bottom:0;
+}
 
 .check{
-  width:28px;
-  height:28px;
-  flex:none;
+  width:29px;
+  height:29px;
+  border-radius:9px;
+  border:2px solid #555;
+  background:transparent;
+  color:white;
   display:grid;
   place-items:center;
-  border-radius:9px;
-  background:transparent;
-  border:2px solid var(--muted);
+  flex-shrink:0;
 }
 
 .check.done{
   background:var(--green);
   border-color:var(--green);
-  color:#000;
+  color:#07110b;
 }
 
-.task-main{flex:1;min-width:0}
+.task-main{
+  flex:1;
+  min-width:0;
+}
 
 .task-name{
-  font-weight:850;
   font-size:15px;
+  font-weight:900;
 }
 
 .task.done .task-name{
@@ -403,12 +570,12 @@ h2{
   font-size:10px;
   padding:5px 7px;
   border-radius:7px;
-  font-weight:900;
+  font-weight:950;
 }
 
-.high{background:rgba(255,59,48,.13);color:var(--red)}
-.medium{background:rgba(255,214,10,.13);color:#d4a900}
-.low{background:rgba(48,209,88,.13);color:var(--green)}
+.high{background:#381515;color:#ff7770}
+.medium{background:#3b3014;color:#ffc857}
+.low{background:#14331e;color:#67e48b}
 
 /* HABITS */
 
@@ -420,25 +587,27 @@ h2{
   border-bottom:1px solid var(--line);
 }
 
-.habit:last-child{border-bottom:0}
+.habit:last-child{
+  border-bottom:0;
+}
 
 .habit-icon{
   width:46px;
   height:46px;
-  display:grid;
-  place-items:center;
   border-radius:14px;
   background:var(--surface3);
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
 }
 
-.habit-icon svg{width:22px;height:22px}
-
-.habit-main{flex:1}
-
-.habit-name{font-weight:900}
+.habit-icon svg{
+  width:21px;
+  height:21px;
+}
 
 .streak{
-  color:#ff9500;
+  color:#ff9d24;
   font-size:11px;
   font-weight:900;
   margin-top:4px;
@@ -446,61 +615,249 @@ h2{
 
 /* ALARM */
 
+.alarm-hero{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:15px;
+  align-items:center;
+}
+
 .alarm-time{
-  font-size:62px;
+  font-size:48px;
   font-weight:950;
-  letter-spacing:-3px;
-  text-align:center;
-  margin:8px 0 5px;
+  letter-spacing:-2px;
 }
 
-.alarm-date{
-  text-align:center;
+.alarm-label{
   color:var(--muted);
-  font-size:13px;
+  margin-top:4px;
+  font-weight:700;
 }
 
-.alarm-row{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin:18px 0;
-}
-
-.time-input{
-  width:100%;
-  max-width:220px;
-  padding:13px;
-  border-radius:14px;
+.switch{
+  width:50px;
+  height:29px;
+  border-radius:20px;
+  padding:3px;
   background:var(--surface3);
   border:1px solid var(--line);
-  color:var(--text);
-  text-align:center;
-  font-size:22px;
+  transition:.2s;
+}
+
+.switch span{
+  width:21px;
+  height:21px;
+  display:block;
+  border-radius:50%;
+  background:#777;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--accent);
+  border-color:var(--accent);
+}
+
+.switch.on span{
+  transform:translateX(20px);
+  background:white;
+}
+
+.days{
+  display:flex;
+  gap:6px;
+  margin-top:15px;
+}
+
+.day-chip{
+  width:34px;
+  height:30px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  color:var(--muted);
+  background:var(--surface3);
+  font-size:10px;
   font-weight:900;
 }
 
-.alarm-status{
-  text-align:center;
+.day-chip.active{
+  background:var(--accent);
+  color:white;
+}
+
+/* MAP */
+
+.map{
+  height:420px;
+  border-radius:23px;
+  border:1px solid var(--line);
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(circle at 18% 25%,rgba(77,156,255,.12),transparent 25%),
+    radial-gradient(circle at 72% 62%,rgba(53,210,123,.09),transparent 30%),
+    linear-gradient(135deg,#0c1115,#111820 50%,#0a0e12);
+}
+
+body.light .map{
+  background:
+    radial-gradient(circle at 18% 25%,rgba(77,156,255,.15),transparent 25%),
+    linear-gradient(135deg,#dfe9ef,#eef3f5 50%,#dce6e9);
+}
+
+.map-grid{
+  position:absolute;
+  inset:0;
+  opacity:.16;
+  background-image:
+    linear-gradient(rgba(255,255,255,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 1px);
+  background-size:42px 42px;
+}
+
+.continent{
+  position:absolute;
+  background:rgba(76,105,90,.28);
+  filter:blur(.3px);
+  border:1px solid rgba(130,170,140,.16);
+}
+
+.continent.one{
+  width:210px;
+  height:115px;
+  left:13%;
+  top:21%;
+  border-radius:57% 43% 49% 51%;
+  transform:rotate(-9deg);
+}
+
+.continent.two{
+  width:180px;
+  height:130px;
+  left:48%;
+  top:25%;
+  border-radius:42% 58% 55% 45%;
+  transform:rotate(11deg);
+}
+
+.continent.three{
+  width:155px;
+  height:115px;
+  right:9%;
+  bottom:20%;
+  border-radius:52% 48% 40% 60%;
+  transform:rotate(-18deg);
+}
+
+.map-marker{
+  position:absolute;
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--accent);
+  color:white;
+  border:3px solid rgba(255,255,255,.9);
+  box-shadow:0 0 0 8px rgba(255,59,48,.12),0 10px 30px rgba(0,0,0,.35);
+  z-index:3;
+  transition:.2s;
+}
+
+.map-marker:hover{
+  transform:scale(1.12);
+}
+
+.map-marker svg{
+  width:19px;
+  height:19px;
+}
+
+.map-marker.done{
+  background:var(--green);
+  box-shadow:0 0 0 8px rgba(53,210,123,.12);
+}
+
+.marker-one{left:18%;top:30%}
+.marker-two{left:54%;top:42%}
+.marker-three{right:16%;top:26%}
+.marker-four{right:27%;bottom:20%}
+.marker-five{left:40%;bottom:16%}
+
+.map-top{
+  position:absolute;
+  z-index:5;
+  left:14px;
+  right:14px;
+  top:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.map-badge{
+  padding:9px 12px;
+  background:rgba(8,9,10,.78);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  font-size:11px;
+  font-weight:900;
+}
+
+body.light .map-badge{
+  background:rgba(255,255,255,.8);
+  color:#111;
+}
+
+.quest-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.quest{
+  border:1px solid var(--line);
+  border-radius:19px;
+  padding:16px;
+  background:var(--surface);
+}
+
+.quest.completed{
+  opacity:.65;
+}
+
+.quest-icon{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:var(--surface3);
+  margin-bottom:10px;
+}
+
+.quest-icon svg{
+  width:19px;
+  height:19px;
+}
+
+.quest-title{
+  font-weight:950;
+}
+
+.quest-desc{
   color:var(--muted);
   font-size:12px;
-  font-weight:800;
+  line-height:1.45;
+  margin:6px 0 12px;
 }
 
-/* TIMER */
-
-.timer{
-  font-size:68px;
-  text-align:center;
+.quest-reward{
+  color:var(--yellow);
+  font-size:12px;
   font-weight:950;
-  letter-spacing:-4px;
-  margin:15px 0;
-}
-
-.timer-actions{
-  display:flex;
-  justify-content:center;
-  gap:8px;
 }
 
 /* CALENDAR */
@@ -512,15 +869,15 @@ h2{
   margin-bottom:15px;
 }
 
-.month{
+.calendar-month{
+  font-weight:950;
   font-size:20px;
-  font-weight:900;
 }
 
 .calendar-grid{
   display:grid;
   grid-template-columns:repeat(7,1fr);
-  gap:5px;
+  gap:6px;
 }
 
 .day-name{
@@ -533,19 +890,18 @@ h2{
 
 .day{
   aspect-ratio:1;
-  background:var(--surface2);
+  border-radius:11px;
   border:1px solid var(--line);
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  font-size:12px;
+  background:var(--surface2);
+  color:var(--text);
   font-weight:850;
+  position:relative;
 }
 
 .day.today{
-  background:var(--red);
-  color:#fff;
-  border-color:var(--red);
+  background:var(--accent);
+  border-color:var(--accent);
+  color:white;
 }
 
 .day.selected{
@@ -553,147 +909,68 @@ h2{
   outline-offset:1px;
 }
 
-/* MAP */
-
-.map{
-  position:relative;
-  min-height:430px;
-  overflow:hidden;
-  border-radius:25px;
-  border:1px solid var(--line);
-  background:
-    radial-gradient(circle at 30% 35%,rgba(10,132,255,.16),transparent 25%),
-    radial-gradient(circle at 70% 60%,rgba(191,90,242,.12),transparent 30%),
-    #0c1015;
-}
-
-body.light .map{background:#dcecf5}
-
-.map-grid{
+.day.has-task:after{
+  content:"";
   position:absolute;
-  inset:0;
-  opacity:.22;
-  background-image:
-    linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
-  background-size:45px 45px;
-  transform:perspective(450px) rotateX(38deg) scale(1.2);
-}
-
-.continent{
-  position:absolute;
-  background:#172c26;
-  border:1px solid #284d40;
-  opacity:.9;
-  filter:blur(.2px);
-}
-
-.c1{
-  width:160px;height:100px;
-  left:12%;top:28%;
-  border-radius:55% 40% 50% 35%;
-  transform:rotate(-15deg);
-}
-
-.c2{
-  width:180px;height:115px;
-  left:48%;top:25%;
-  border-radius:40% 55% 35% 60%;
-  transform:rotate(12deg);
-}
-
-.c3{
-  width:120px;height:80px;
-  left:67%;top:57%;
-  border-radius:50% 35% 60% 45%;
-}
-
-.map-label{
-  position:absolute;
-  left:18px;
-  top:18px;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(12px);
-  padding:9px 12px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:12px;
-  color:#fff;
-  font-size:12px;
-  font-weight:900;
-}
-
-.pin{
-  position:absolute;
-  width:48px;
-  height:48px;
+  bottom:5px;
+  width:4px;
+  height:4px;
   border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:var(--red);
-  color:#fff;
-  border:4px solid rgba(255,255,255,.85);
-  box-shadow:0 7px 30px rgba(255,59,48,.4);
-  animation:pulse 2s infinite;
-}
-
-.pin svg{width:21px;height:21px}
-
-.pin.done{
   background:var(--green);
-  box-shadow:0 7px 30px rgba(48,209,88,.3);
-  animation:none;
-}
-
-.pin.p1{left:20%;top:34%}
-.pin.p2{left:57%;top:42%}
-.pin.p3{left:73%;top:62%}
-.pin.p4{left:40%;top:67%}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-}
-
-.quest-card{
-  margin-top:12px;
-  padding:16px;
-  border-radius:19px;
-  border:1px solid var(--line);
-  background:var(--surface);
-}
-
-.quest-reward{
-  color:var(--yellow);
-  font-size:12px;
-  font-weight:900;
 }
 
 /* STATS */
 
-.stats{
+.stats-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
 .stat{
-  padding:18px 8px;
+  padding:17px 10px;
   text-align:center;
-  border-radius:18px;
   background:var(--surface);
   border:1px solid var(--line);
+  border-radius:18px;
 }
 
 .stat-number{
-  font-size:25px;
+  font-size:24px;
   font-weight:950;
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:10px;
+  font-size:9px;
   font-weight:900;
-  margin-top:4px;
+  margin-top:5px;
+  letter-spacing:.06em;
+}
+
+/* PROFILE */
+
+.profile{
+  text-align:center;
+}
+
+.avatar{
+  width:82px;
+  height:82px;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border-radius:27px;
+  background:var(--accent);
+  color:white;
+  font-size:34px;
+  font-weight:950;
+}
+
+.profile-name{
+  font-size:25px;
+  font-weight:950;
+  margin-top:12px;
 }
 
 /* FORM */
@@ -707,20 +984,20 @@ body.light .map{background:#dcecf5}
 .input,.select{
   width:100%;
   padding:14px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--surface3);
   color:var(--text);
+  background:var(--surface2);
+  border:1px solid var(--line);
+  border-radius:14px;
   outline:none;
 }
 
 .input:focus,.select:focus{
-  border-color:var(--red);
+  border-color:var(--accent);
 }
 
 .form-actions{
   display:flex;
-  gap:8px;
+  gap:9px;
 }
 
 /* NAV */
@@ -731,10 +1008,10 @@ body.light .map{background:#dcecf5}
   left:0;
   right:0;
   bottom:0;
-  height:87px;
+  height:84px;
+  padding:7px 9px max(7px,env(safe-area-inset-bottom));
   display:grid;
   grid-template-columns:repeat(6,1fr);
-  padding:7px 7px max(7px,env(safe-area-inset-bottom));
   background:var(--nav);
   backdrop-filter:blur(25px);
   border-top:1px solid var(--line);
@@ -745,29 +1022,21 @@ body.light .map{background:#dcecf5}
   color:var(--muted);
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  gap:5px;
+  justify-content:center;
+  gap:4px;
   font-size:9px;
   font-weight:900;
 }
 
-.nav-icon{
-  width:29px;
-  height:29px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
+.nav-btn svg{
+  width:21px;
+  height:21px;
+  stroke:currentColor;
 }
-
-.nav-icon svg{width:19px;height:19px}
 
 .nav-btn.active{
-  color:var(--red);
-}
-
-.nav-btn.active .nav-icon{
-  background:rgba(255,59,48,.12);
+  color:var(--accent);
 }
 
 /* MODAL */
@@ -783,21 +1052,21 @@ body.light .map{background:#dcecf5}
   backdrop-filter:blur(10px);
 }
 
-.modal.show{display:flex}
+.modal.show{
+  display:flex;
+}
 
 .sheet{
-  width:min(700px,100%);
-  max-height:90vh;
-  overflow:auto;
+  width:min(720px,100%);
+  padding:24px 20px calc(24px + env(safe-area-inset-bottom));
   background:var(--surface);
   border:1px solid var(--line);
   border-bottom:0;
   border-radius:28px 28px 0 0;
-  padding:23px 20px calc(25px + env(safe-area-inset-bottom));
-  animation:sheet .25s ease;
+  animation:sheetIn .25s ease;
 }
 
-@keyframes sheet{
+@keyframes sheetIn{
   from{transform:translateY(100%)}
   to{transform:translateY(0)}
 }
@@ -811,18 +1080,18 @@ body.light .map{background:#dcecf5}
 
 .toast{
   position:fixed;
-  z-index:400;
+  z-index:300;
   left:50%;
-  bottom:102px;
+  bottom:100px;
   transform:translate(-50%,20px);
   opacity:0;
   pointer-events:none;
-  padding:12px 17px;
-  border-radius:14px;
   background:var(--text);
   color:var(--bg);
-  font-size:13px;
+  padding:12px 16px;
+  border-radius:13px;
   font-weight:900;
+  font-size:13px;
   transition:.25s;
   white-space:nowrap;
 }
@@ -832,113 +1101,77 @@ body.light .map{background:#dcecf5}
   transform:translate(-50%,0);
 }
 
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:28px 8px;
-}
+/* RESPONSIVE */
 
-@media(min-width:700px){
-  .bottom-nav{
-    left:50%;
-    right:auto;
-    width:680px;
-    transform:translateX(-50%);
-    border:1px solid var(--line);
-    border-radius:24px 24px 0 0;
+@media(max-width:700px){
+  .dashboard-grid{
+    grid-template-columns:1fr;
   }
 
-  h1{font-size:65px}
-}
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-@media(max-width:600px){
-  .quick-grid{grid-template-columns:repeat(2,1fr)}
-  .feature-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .quest-list{
+    grid-template-columns:1fr;
+  }
+
+  .map{
+    height:370px;
+  }
 }
 
 @media(max-width:390px){
-  main{padding-left:14px;padding-right:14px}
-  h1{font-size:42px}
-  .alarm-time{font-size:52px}
-  .timer{font-size:58px}
+  main{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  h1{
+    font-size:41px;
+  }
+
+  .time{
+    font-size:55px;
+  }
+
+  .bottom-nav{
+    grid-template-columns:repeat(6,1fr);
+  }
+
+  .nav-btn{
+    font-size:8px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- SVG ICONS -->
-<svg width="0" height="0" style="position:absolute">
-<symbol id="i-home" viewBox="0 0 24 24">
-<path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-</symbol>
-<symbol id="i-check" viewBox="0 0 24 24">
-<path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-</symbol>
-<symbol id="i-calendar" viewBox="0 0 24 24">
-<rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<path d="M7 3v4M17 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-</symbol>
-<symbol id="i-fire" viewBox="0 0 24 24">
-<path d="M12 21c4 0 7-2.7 7-6.7 0-3.2-2-5.4-4.3-7.8.1 2.2-.7 3.6-1.8 4.4.1-4.2-1.8-6.7-4.1-8.9C9 6.7 5 9.6 5 14.1 5 18.2 8 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-</symbol>
-<symbol id="i-user" viewBox="0 0 24 24">
-<circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<path d="M5 21c.7-4.1 3-6 7-6s6.3 1.9 7 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-</symbol>
-<symbol id="i-bell" viewBox="0 0 24 24">
-<path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 7H4c0-1 2-2 2-7Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<path d="M10 20h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-</symbol>
-<symbol id="i-map" viewBox="0 0 24 24">
-<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-<path d="M9 3v15M15 6v15" fill="none" stroke="currentColor" stroke-width="1.7"/>
-</symbol>
-<symbol id="i-clock" viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-</symbol>
-<symbol id="i-plus" viewBox="0 0 24 24">
-<path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</symbol>
-<symbol id="i-sun" viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-</symbol>
-<symbol id="i-location" viewBox="0 0 24 24">
-<path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<circle cx="12" cy="10" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
-</symbol>
-<symbol id="i-target" viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
-<path d="M12 2v3M12 19v3M2 12h3M19 12h3" fill="none" stroke="currentColor" stroke-width="1.8"/>
-</symbol>
-<symbol id="i-moon" viewBox="0 0 24 24">
-<path d="M20 15.5A8 8 0 0 1 8.5 4 8 8 0 1 0 20 15.5Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
-</symbol>
-<symbol id="i-play" viewBox="0 0 24 24">
-<path d="m8 5 11 7-11 7z" fill="currentColor"/>
-</symbol>
-<symbol id="i-pause" viewBox="0 0 24 24">
-<path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/>
-</symbol>
-</svg>
-
 <div class="app">
 
 <header class="header">
   <div class="brand">
     <div class="logo">
-      <svg><use href="#i-target"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M12 3v18M3 12h18"/>
+      </svg>
     </div>
     <div class="brand-name">LifeOS</div>
   </div>
 
   <div class="header-right">
     <div class="level-pill" id="headerLevel">LEVEL 1</div>
-    <button class="icon-btn" onclick="toggleTheme()" title="Тема">
-      <svg id="themeIcon"><use href="#i-moon"/></svg>
+
+    <button class="ghost" onclick="toggleTheme()" aria-label="Тема">
+      <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
     </button>
   </div>
 </header>
@@ -946,235 +1179,197 @@ body.light .map{background:#dcecf5}
 <main>
 
 <!-- HOME -->
+
 <section id="home" class="screen active">
 
-  <div class="eyebrow">LifeOS / Today</div>
+  <div class="hero-dashboard">
 
-  <h1>Твоя жизнь.<br>Твоя <span>система.</span></h1>
+    <div class="greeting" id="greeting">Добрый вечер, LifeOS User</div>
 
-  <p class="subtitle">
-    Планируй день, выполняй задачи, проходи квесты
-    и развивай свою систему жизни.
-  </p>
+    <div class="time" id="liveClock">00:00</div>
 
-  <div class="card">
-    <div class="card-label">Текущий прогресс</div>
+    <div class="date-line" id="liveDate"></div>
 
-    <div class="xp-head">
-      <div class="xp" id="xpNumber">0 XP</div>
-      <div class="xp-level" id="xpLevel">LEVEL 1</div>
-    </div>
-
-    <div class="progress">
-      <div id="xpBar"></div>
-    </div>
-
-    <div class="progress-info">
-      <span id="xpCurrent">0 / 100 XP</span>
-      <span>До следующего уровня</span>
-    </div>
   </div>
 
-  <h2>Сегодня</h2>
+  <div class="dashboard-grid">
+
+    <div class="card xp-card">
+
+      <div class="card-title">Твой прогресс</div>
+
+      <div class="between" style="margin-top:5px">
+        <div class="xp-number" id="xpNumber">0 XP</div>
+        <div class="xp-level" id="xpLevel">LEVEL 1</div>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="xpBar"></div>
+      </div>
+
+      <div class="progress-info">
+        <span id="xpCurrent">0 / 100 XP</span>
+        <span id="xpNext">До следующего уровня</span>
+      </div>
+
+    </div>
+
+    <div class="card day-card">
+
+      <div class="card-title">Сегодня</div>
+
+      <div class="day-ring" id="dayRing" style="--day-progress:0%">
+        <div class="day-ring-content">
+          <div class="day-percent" id="dayPercent">0%</div>
+          <div class="day-small">ГОТОВО</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;color:var(--muted);font-size:11px;font-weight:800">
+        <span id="todayCompleted">0</span> из <span id="todayTotal">0</span> задач
+      </div>
+
+    </div>
+
+  </div>
+
+  <h2>Быстрые действия</h2>
 
   <div class="quick-grid">
 
     <button class="quick" onclick="openTaskModal()">
-      <div class="quick-icon"><svg><use href="#i-plus"/></svg></div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </div>
       <div class="quick-title">Задача</div>
-      <div class="quick-text">Добавить действие</div>
+      <div class="quick-text">Получить XP</div>
     </button>
 
-    <button class="quick" onclick="showScreen('alarm')">
-      <div class="quick-icon"><svg><use href="#i-bell"/></svg></div>
+    <button class="quick" onclick="openAlarmModal()">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+          <path d="M10 21h4"/>
+        </svg>
+      </div>
       <div class="quick-title">Будильник</div>
-      <div class="quick-text">Напомнить вовремя</div>
-    </button>
-
-    <button class="quick" onclick="showScreen('timer')">
-      <div class="quick-icon"><svg><use href="#i-clock"/></svg></div>
-      <div class="quick-title">Таймер</div>
-      <div class="quick-text">Фокус</div>
+      <div class="quick-text">Напоминание</div>
     </button>
 
     <button class="quick" onclick="showScreen('map')">
-      <div class="quick-icon"><svg><use href="#i-map"/></svg></div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="10" r="3"/>
+          <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
       <div class="quick-title">Карта</div>
-      <div class="quick-text">Квесты мира</div>
+      <div class="quick-text">Найти квест</div>
+    </button>
+
+    <button class="quick" onclick="showScreen('habits')">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-2 1-4 3-6"/>
+          <path d="M12 10c1 2 2 3 2 5a2 2 0 1 1-4 0c0-1 .5-2 2-5Z"/>
+        </svg>
+      </div>
+      <div class="quick-title">Привычки</div>
+      <div class="quick-text">Streak</div>
     </button>
 
   </div>
 
   <div class="card">
-    <div class="between">
+
+    <div class="section-head">
       <div>
-        <div class="card-label">Система</div>
+        <div class="card-title">Ближайшее</div>
         <div style="font-size:22px;font-weight:950;margin-top:6px">
-          Твой день под контролем
+          Твои планы
         </div>
       </div>
 
-      <div class="quick-icon">
-        <svg><use href="#i-target"/></svg>
-      </div>
+      <button class="secondary" onclick="showScreen('alarm')">Все</button>
     </div>
 
-    <div class="feature-grid" style="margin-top:15px">
+    <div class="mini-list" id="dashboardUpcoming"></div>
 
-      <div class="feature" onclick="showScreen('tasks')">
-        <div class="feature-icon"><svg><use href="#i-check"/></svg></div>
-        <div class="feature-title" id="homeTaskCount">0</div>
-        <div class="feature-text">задач сегодня</div>
+  </div>
+
+  <div class="card">
+
+    <div class="section-head">
+      <div>
+        <div class="card-title">Мир LifeOS</div>
+        <div style="font-size:22px;font-weight:950;margin-top:6px">
+          Новые квесты
+        </div>
       </div>
 
-      <div class="feature" onclick="showScreen('habits')">
-        <div class="feature-icon"><svg><use href="#i-fire"/></svg></div>
-        <div class="feature-title" id="homeHabitCount">0</div>
-        <div class="feature-text">привычек</div>
-      </div>
-
+      <button class="secondary" onclick="showScreen('map')">Карта</button>
     </div>
+
+    <div class="mini-list" id="dashboardQuests"></div>
+
   </div>
 
 </section>
 
 
 <!-- TASKS -->
+
 <section id="tasks" class="screen">
 
   <div class="eyebrow">LifeOS / Actions</div>
 
-  <div class="between">
-    <h2 style="margin-top:0">Задачи</h2>
-    <button class="primary" onclick="openTaskModal()">
-      <svg style="width:18px;display:inline-block;vertical-align:middle"><use href="#i-plus"/></svg>
-    </button>
+  <div class="section-head">
+    <h2>Задачи</h2>
+    <button class="primary" onclick="openTaskModal()">＋ Новая</button>
   </div>
 
   <div class="card">
+
     <div class="between">
       <div>
-        <div class="card-label">Сегодня</div>
-        <div style="font-size:25px;font-weight:950;margin-top:5px" id="taskCount">0 задач</div>
+        <div class="card-title">Сегодня</div>
+        <div style="font-size:24px;font-weight:950;margin-top:5px" id="taskCount">
+          0 задач
+        </div>
       </div>
-      <svg style="width:30px;height:30px;color:var(--green)"><use href="#i-check"/></svg>
     </div>
 
     <div id="taskList"></div>
-  </div>
 
-</section>
-
-
-<!-- HABITS -->
-<section id="habits" class="screen">
-
-  <div class="eyebrow">LifeOS / Habits</div>
-
-  <div class="between">
-    <h2 style="margin-top:0">Привычки</h2>
-    <button class="primary" onclick="openHabitModal()">
-      <svg style="width:18px"><use href="#i-plus"/></svg>
-    </button>
-  </div>
-
-  <p class="subtitle">
-    Формируй стабильные действия и увеличивай свой streak.
-  </p>
-
-  <div class="card">
-    <div id="habitList"></div>
-  </div>
-
-</section>
-
-
-<!-- CALENDAR -->
-<section id="calendar" class="screen">
-
-  <div class="eyebrow">LifeOS / Planning</div>
-  <h2 style="margin-top:0">Календарь</h2>
-
-  <div class="card">
-
-    <div class="calendar-head">
-      <button class="secondary" onclick="changeMonth(-1)">‹</button>
-      <div class="month" id="calendarMonth"></div>
-      <button class="secondary" onclick="changeMonth(1)">›</button>
-    </div>
-
-    <div class="calendar-grid" id="calendarGrid"></div>
-
-  </div>
-
-  <div class="card">
-    <div class="card-label">Выбранный день</div>
-    <div id="selectedDate" style="font-size:22px;font-weight:900;margin-top:7px"></div>
-    <div id="calendarTasks" style="margin-top:10px"></div>
   </div>
 
 </section>
 
 
 <!-- ALARM -->
+
 <section id="alarm" class="screen">
 
-  <div class="eyebrow">LifeOS / Alarm</div>
-  <h2 style="margin-top:0">Будильник</h2>
+  <div class="eyebrow">LifeOS / Time</div>
 
-  <div class="card">
-
-    <div class="alarm-time" id="liveTime">00:00</div>
-    <div class="alarm-date" id="liveDate"></div>
-
-    <div class="alarm-row">
-      <input class="time-input" type="time" id="alarmInput">
-    </div>
-
-    <div class="row" style="justify-content:center">
-      <button class="primary" onclick="setAlarm()">Установить</button>
-      <button class="secondary" onclick="clearAlarm()">Сбросить</button>
-    </div>
-
-    <div class="alarm-status" id="alarmStatus" style="margin-top:15px">
-      Будильник не установлен
-    </div>
-
+  <div class="section-head">
+    <h2>Будильники</h2>
+    <button class="primary" onclick="openAlarmModal()">＋</button>
   </div>
 
-  <div class="card">
-    <div class="card-label">Важно</div>
+  <div id="alarmList"></div>
+
+  <div class="card compact">
+
+    <div class="card-title">Важно</div>
+
     <p class="subtitle" style="margin-bottom:0">
-      Для максимально надёжной работы уведомлений на телефоне
-      разреши уведомления браузеру и установи LifeOS на главный экран.
+      LifeOS может показывать уведомления через браузер.
+      Для настоящего фонового будильника на телефоне в будущем
+      потребуется нативная версия приложения.
     </p>
-  </div>
-
-</section>
-
-
-<!-- TIMER -->
-<section id="timer" class="screen">
-
-  <div class="eyebrow">LifeOS / Focus</div>
-  <h2 style="margin-top:0">Фокус</h2>
-
-  <div class="card">
-
-    <div class="timer" id="timerDisplay">25:00</div>
-
-    <div class="timer-actions">
-      <button class="primary" onclick="toggleTimer()" id="timerButton">
-        <svg style="width:18px"><use href="#i-play"/></svg>
-      </button>
-      <button class="secondary" onclick="resetTimer()">Сбросить</button>
-    </div>
-
-    <div class="row" style="justify-content:center;margin-top:14px">
-      <button class="secondary" onclick="setTimerPreset(5)">5 мин</button>
-      <button class="secondary" onclick="setTimerPreset(25)">25 мин</button>
-      <button class="secondary" onclick="setTimerPreset(50)">50 мин</button>
-    </div>
 
   </div>
 
@@ -1182,74 +1377,145 @@ body.light .map{background:#dcecf5}
 
 
 <!-- MAP -->
+
 <section id="map" class="screen">
 
   <div class="eyebrow">LifeOS / World</div>
 
-  <div class="between">
+  <div class="section-head">
     <div>
-      <h2 style="margin-top:0">Мир квестов</h2>
-      <div class="subtitle" style="margin:0">
-        Исследуй точки и выполняй задания.
+      <h2 style="margin-bottom:4px">Мир</h2>
+      <div style="color:var(--muted);font-size:12px">
+        Исследуй. Выполняй. Получай XP.
       </div>
     </div>
-    <svg style="width:32px;height:32px;color:var(--blue)"><use href="#i-map"/></svg>
+
+    <button class="secondary" onclick="locateUser()">
+      Моя позиция
+    </button>
   </div>
 
-  <div class="map" style="margin-top:16px">
+  <div class="map">
 
     <div class="map-grid"></div>
-    <div class="continent c1"></div>
-    <div class="continent c2"></div>
-    <div class="continent c3"></div>
 
-    <div class="map-label">LIFEOS WORLD</div>
+    <div class="continent one"></div>
+    <div class="continent two"></div>
+    <div class="continent three"></div>
 
-    <button class="pin p1" onclick="openQuest('water')">
-      <svg><use href="#i-location"/></svg>
+    <div class="map-top">
+      <div class="map-badge">WORLD • LIFEOS</div>
+      <div class="map-badge" id="mapQuestCount">5 квестов</div>
+    </div>
+
+    <button class="map-marker marker-one" onclick="selectQuest(0)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+        <path d="M12 2v20M2 12h20"/>
+      </svg>
     </button>
 
-    <button class="pin p2" onclick="openQuest('walk')">
-      <svg><use href="#i-location"/></svg>
+    <button class="map-marker marker-two" onclick="selectQuest(1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <circle cx="12" cy="12" r="8"/>
+        <path d="m12 8 2 4-2 2-2-2 2-4Z"/>
+      </svg>
     </button>
 
-    <button class="pin p3" onclick="openQuest('focus')">
-      <svg><use href="#i-location"/></svg>
+    <button class="map-marker marker-three" onclick="selectQuest(2)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-2 1-4 3-6"/>
+      </svg>
     </button>
 
-    <button class="pin p4" onclick="openQuest('training')">
-      <svg><use href="#i-location"/></svg>
+    <button class="map-marker marker-four" onclick="selectQuest(3)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M4 19 10 5l4 9 6-3"/>
+        <path d="M4 19h16"/>
+      </svg>
+    </button>
+
+    <button class="map-marker marker-five" onclick="selectQuest(4)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M12 3v18M3 12h18"/>
+        <circle cx="12" cy="12" r="7"/>
+      </svg>
     </button>
 
   </div>
 
-  <div id="questPanel"></div>
+  <h2>Квесты рядом</h2>
+
+  <div class="quest-list" id="questList"></div>
 
 </section>
 
 
-<!-- PROFILE -->
-<section id="profile" class="screen">
+<!-- CALENDAR -->
 
-  <div class="eyebrow">LifeOS / Profile</div>
+<section id="calendar" class="screen">
 
-  <div class="card" style="text-align:center">
+  <div class="eyebrow">LifeOS / Planning</div>
 
-    <div class="logo" style="margin:auto;width:78px;height:78px;border-radius:25px">
-      <svg style="width:40px;height:40px"><use href="#i-target"/></svg>
+  <h2>Календарь</h2>
+
+  <div class="card">
+
+    <div class="calendar-head">
+
+      <button class="secondary" onclick="changeMonth(-1)">‹</button>
+
+      <div class="calendar-month" id="calendarMonth"></div>
+
+      <button class="secondary" onclick="changeMonth(1)">›</button>
+
     </div>
 
-    <div style="font-size:28px;font-weight:950;margin-top:13px">
-      LifeOS User
-    </div>
-
-    <div style="color:var(--muted);margin-top:4px">
-      LEVEL <span id="profileLevel">1</span>
-    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
 
   </div>
 
-  <div class="stats">
+  <div class="card">
+
+    <div class="card-title">Выбранный день</div>
+
+    <div id="selectedDate" style="font-size:22px;font-weight:950;margin-top:7px"></div>
+
+    <div id="calendarTasks"></div>
+
+  </div>
+
+</section>
+
+
+<!-- HABITS -->
+
+<section id="habits" class="screen">
+
+  <div class="eyebrow">LifeOS / Habits</div>
+
+  <div class="section-head">
+    <h2>Привычки</h2>
+    <button class="primary" onclick="openHabitModal()">＋</button>
+  </div>
+
+  <div class="card">
+
+    <div id="habitList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section id="stats" class="screen">
+
+  <div class="eyebrow">LifeOS / Analytics</div>
+
+  <h2>Статистика</h2>
+
+  <div class="stats-grid">
 
     <div class="stat">
       <div class="stat-number" id="statXP">0</div>
@@ -1266,32 +1532,82 @@ body.light .map{background:#dcecf5}
       <div class="stat-label">КВЕСТОВ</div>
     </div>
 
+    <div class="stat">
+      <div class="stat-number" id="statHabits">0</div>
+      <div class="stat-label">ПРИВЫЧЕК</div>
+    </div>
+
   </div>
 
   <div class="card">
 
-    <div class="card-label">Настройки</div>
+    <div class="card-title">Активность</div>
 
-    <button class="secondary" style="width:100%;margin-top:15px"
-            onclick="requestNotifications()">
-      <svg style="width:18px;display:inline-block;vertical-align:middle">
-        <use href="#i-bell"/>
-      </svg>
-      Разрешить уведомления
-    </button>
+    <div id="activityBars" style="
+      height:180px;
+      display:flex;
+      align-items:end;
+      gap:9px;
+      margin-top:25px;
+    "></div>
 
-    <button class="secondary" style="width:100%;margin-top:9px"
-            onclick="toggleTheme()">
-      <svg style="width:18px;display:inline-block;vertical-align:middle">
-        <use href="#i-sun"/>
-      </svg>
-      Переключить тему
-    </button>
+  </div>
 
-    <button class="danger" style="width:100%;margin-top:9px"
-            onclick="resetData()">
-      Сбросить данные
-    </button>
+  <div class="card">
+
+    <div class="card-title">Уровень</div>
+
+    <div class="between" style="margin-top:10px">
+      <strong id="statsLevel">LEVEL 1</strong>
+      <span id="statsLevelXP" style="color:var(--muted)">0 / 100 XP</span>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="statsBar"></div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="screen">
+
+  <div class="eyebrow">LifeOS / Profile</div>
+
+  <div class="card profile">
+
+    <div class="avatar">L</div>
+
+    <div class="profile-name">LifeOS User</div>
+
+    <div style="color:var(--muted);margin-top:5px">
+      LEVEL <span id="profileLevel">1</span>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">Настройки</div>
+
+    <div style="margin-top:16px">
+
+      <button class="secondary full" onclick="toggleTheme()" style="margin-bottom:9px">
+        ◐ Переключить тему
+      </button>
+
+      <button class="secondary full" onclick="requestNotifications()" style="margin-bottom:9px">
+        🔔 Разрешить уведомления
+      </button>
+
+      <button class="danger full" onclick="resetData()">
+        Сбросить данные LifeOS
+      </button>
+
+    </div>
 
   </div>
 
@@ -1301,37 +1617,56 @@ body.light .map{background:#dcecf5}
 
 
 <!-- NAV -->
+
 <nav class="bottom-nav">
 
-<button class="nav-btn active" data-screen="home" onclick="showScreen('home')">
-  <div class="nav-icon"><svg><use href="#i-home"/></svg></div>
-  <div>Главная</div>
-</button>
+  <button class="nav-btn active" data-screen="home" onclick="showScreen('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9Z"/>
+      <path d="M9 21v-6h6v6"/>
+    </svg>
+    <span>Главная</span>
+  </button>
 
-<button class="nav-btn" data-screen="tasks" onclick="showScreen('tasks')">
-  <div class="nav-icon"><svg><use href="#i-check"/></svg></div>
-  <div>Задачи</div>
-</button>
+  <button class="nav-btn" data-screen="tasks" onclick="showScreen('tasks')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="4" y="3" width="16" height="18" rx="2"/>
+      <path d="m8 9 2 2 4-4M8 16h8"/>
+    </svg>
+    <span>Задачи</span>
+  </button>
 
-<button class="nav-btn" data-screen="calendar" onclick="showScreen('calendar')">
-  <div class="nav-icon"><svg><use href="#i-calendar"/></svg></div>
-  <div>Календарь</div>
-</button>
+  <button class="nav-btn" data-screen="alarm" onclick="showScreen('alarm')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+      <path d="M10 21h4"/>
+    </svg>
+    <span>Время</span>
+  </button>
 
-<button class="nav-btn" data-screen="map" onclick="showScreen('map')">
-  <div class="nav-icon"><svg><use href="#i-map"/></svg></div>
-  <div>Карта</div>
-</button>
+  <button class="nav-btn" data-screen="map" onclick="showScreen('map')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="10" r="3"/>
+      <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/>
+    </svg>
+    <span>Карта</span>
+  </button>
 
-<button class="nav-btn" data-screen="alarm" onclick="showScreen('alarm')">
-  <div class="nav-icon"><svg><use href="#i-bell"/></svg></div>
-  <div>Будильник</div>
-</button>
+  <button class="nav-btn" data-screen="habits" onclick="showScreen('habits')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-2 1-4 3-6"/>
+      <path d="M12 10c1 2 2 3 2 5a2 2 0 1 1-4 0c0-1 .5-2 2-5Z"/>
+    </svg>
+    <span>Привычки</span>
+  </button>
 
-<button class="nav-btn" data-screen="profile" onclick="showScreen('profile')">
-  <div class="nav-icon"><svg><use href="#i-user"/></svg></div>
-  <div>Профиль</div>
-</button>
+  <button class="nav-btn" data-screen="stats" onclick="showScreen('stats')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 19V5M4 19h17"/>
+      <path d="m7 15 4-4 3 2 5-7"/>
+    </svg>
+    <span>Статы</span>
+  </button>
 
 </nav>
 
@@ -1339,65 +1674,101 @@ body.light .map{background:#dcecf5}
 
 
 <!-- TASK MODAL -->
-<div class="modal" id="taskModal" onclick="closeOutside(event)">
 
-<div class="sheet">
+<div class="modal" id="taskModal" onclick="closeModalOutside(event)">
 
-<h3>Новая задача</h3>
+  <div class="sheet">
 
-<form class="form" onsubmit="addTask(event)">
+    <h3>Новая задача</h3>
 
-<input class="input" id="taskInput"
-placeholder="Например: Тренировка" maxlength="80" required>
+    <form class="form" onsubmit="addTask(event)">
 
-<select class="select" id="taskPriority">
-<option value="high">Высокий приоритет</option>
-<option value="medium" selected>Средний приоритет</option>
-<option value="low">Низкий приоритет</option>
-</select>
+      <input class="input" id="taskInput" placeholder="Например: Тренировка" maxlength="80" required>
 
-<select class="select" id="taskXP">
-<option value="10">+10 XP</option>
-<option value="20">+20 XP</option>
-<option value="30">+30 XP</option>
-<option value="50">+50 XP</option>
-</select>
+      <select class="select" id="taskPriority">
+        <option value="high">Высокий приоритет</option>
+        <option value="medium" selected>Средний приоритет</option>
+        <option value="low">Низкий приоритет</option>
+      </select>
 
-<div class="form-actions">
-<button type="button" class="secondary" onclick="closeModal('taskModal')">Отмена</button>
-<button class="primary" type="submit">Создать</button>
+      <select class="select" id="taskXP">
+        <option value="10">+10 XP</option>
+        <option value="20">+20 XP</option>
+        <option value="30">+30 XP</option>
+        <option value="50">+50 XP</option>
+      </select>
+
+      <div class="form-actions">
+        <button type="button" class="secondary" onclick="closeModal('taskModal')">Отмена</button>
+        <button class="primary" type="submit">Создать</button>
+      </div>
+
+    </form>
+
+  </div>
+
 </div>
 
-</form>
 
-</div>
+<!-- ALARM MODAL -->
+
+<div class="modal" id="alarmModal" onclick="closeModalOutside(event)">
+
+  <div class="sheet">
+
+    <h3>Новый будильник</h3>
+
+    <form class="form" onsubmit="addAlarm(event)">
+
+      <input class="input" id="alarmTime" type="time" required>
+
+      <input class="input" id="alarmLabel" placeholder="Название, например: Подъём" maxlength="50">
+
+      <div class="days">
+
+        <button type="button" class="day-chip active" data-day="1" onclick="toggleAlarmDay(this)">ПН</button>
+        <button type="button" class="day-chip active" data-day="2" onclick="toggleAlarmDay(this)">ВТ</button>
+        <button type="button" class="day-chip active" data-day="3" onclick="toggleAlarmDay(this)">СР</button>
+        <button type="button" class="day-chip active" data-day="4" onclick="toggleAlarmDay(this)">ЧТ</button>
+        <button type="button" class="day-chip active" data-day="5" onclick="toggleAlarmDay(this)">ПТ</button>
+        <button type="button" class="day-chip" data-day="6" onclick="toggleAlarmDay(this)">СБ</button>
+        <button type="button" class="day-chip" data-day="0" onclick="toggleAlarmDay(this)">ВС</button>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="secondary" onclick="closeModal('alarmModal')">Отмена</button>
+        <button class="primary" type="submit">Сохранить</button>
+      </div>
+
+    </form>
+
+  </div>
+
 </div>
 
 
 <!-- HABIT MODAL -->
-<div class="modal" id="habitModal" onclick="closeOutside(event)">
 
-<div class="sheet">
+<div class="modal" id="habitModal" onclick="closeModalOutside(event)">
 
-<h3>Новая привычка</h3>
+  <div class="sheet">
 
-<form class="form" onsubmit="addHabit(event)">
+    <h3>Новая привычка</h3>
 
-<input class="input" id="habitInput"
-placeholder="Например: Читать 20 минут" maxlength="80" required>
+    <form class="form" onsubmit="addHabit(event)">
 
-<input class="input" id="habitIcon"
-placeholder="Название иконки"
-value="FIRE" maxlength="10">
+      <input class="input" id="habitInput" placeholder="Например: Читать 20 минут" maxlength="80" required>
 
-<div class="form-actions">
-<button type="button" class="secondary" onclick="closeModal('habitModal')">Отмена</button>
-<button class="primary" type="submit">Создать</button>
-</div>
+      <div class="form-actions">
+        <button type="button" class="secondary" onclick="closeModal('habitModal')">Отмена</button>
+        <button class="primary" type="submit">Создать</button>
+      </div>
 
-</form>
+    </form>
 
-</div>
+  </div>
+
 </div>
 
 
@@ -1406,1009 +1777,1993 @@ value="FIRE" maxlength="10">
 
 <script>
 /* =========================================================
-   LIFEOS v0.9.7
+   LifeOS v0.9.8
+   Smart Dashboard
    ========================================================= */
 
-const KEY="lifeos_v097";
+const STORAGE_KEY = "lifeos_v098";
 
-const initial={
+const defaultData = {
   xp:0,
+  theme:"dark",
+
   tasks:[],
+
+  alarms:[],
+
+  quests:[
+    {
+      id:"quest-1",
+      title:"Первый шаг",
+      description:"Сделай 20 минут активной прогулки.",
+      reward:30,
+      distance:"0.8 км",
+      type:"walk",
+      completed:false
+    },
+    {
+      id:"quest-2",
+      title:"Фокус",
+      description:"Выполни одну важную задачу без отвлечений.",
+      reward:40,
+      distance:"1.4 км",
+      type:"focus",
+      completed:false
+    },
+    {
+      id:"quest-3",
+      title:"Энергия",
+      description:"Сделай тренировку или зарядку.",
+      reward:50,
+      distance:"2.1 км",
+      type:"fire",
+      completed:false
+    },
+    {
+      id:"quest-4",
+      title:"Исследователь",
+      description:"Посети новую точку и открой её.",
+      reward:70,
+      distance:"3.5 км",
+      type:"mountain",
+      completed:false
+    },
+    {
+      id:"quest-5",
+      title:"Новый день",
+      description:"Выполни любую полезную активность.",
+      reward:25,
+      distance:"4.2 км",
+      type:"target",
+      completed:false
+    }
+  ],
+
   habits:[
     {
-      id:id(),
+      id:"habit-water",
       name:"Пить воду",
-      icon:"WATER",
       streak:0,
       lastDone:null
     },
     {
-      id:id(),
+      id:"habit-sport",
       name:"Тренировка",
-      icon:"FIRE",
       streak:0,
       lastDone:null
     }
   ],
-  quests:[],
-  alarm:null,
-  theme:"dark"
+
+  settings:{
+    notifications:false
+  }
 };
 
-let data=load();
+let data = loadData();
 
-let calendarDate=new Date();
-let selectedDate=new Date();
+let calendarDate = new Date();
+let selectedDate = new Date();
 
-let timerSeconds=25*60;
-let timerRunning=false;
-let timerInterval=null;
+let toastTimer = null;
 
 
-/* STORAGE */
+/* =========================================================
+   STORAGE
+   ========================================================= */
 
-function id(){
-  if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();
-  return Date.now().toString(36)+Math.random().toString(36).slice(2);
-}
-
-function load(){
+function loadData(){
 
   try{
 
-    const raw=localStorage.getItem(KEY);
+    const saved = localStorage.getItem(STORAGE_KEY);
 
-    if(!raw)return initial;
+    if(!saved){
+      return structuredClone(defaultData);
+    }
 
-    const parsed=JSON.parse(raw);
+    const parsed = JSON.parse(saved);
 
     return {
-      ...initial,
+      ...structuredClone(defaultData),
       ...parsed,
-      tasks:parsed.tasks||[],
-      habits:parsed.habits||[],
-      quests:parsed.quests||[]
+      tasks:Array.isArray(parsed.tasks) ? parsed.tasks : [],
+      alarms:Array.isArray(parsed.alarms) ? parsed.alarms : [],
+      quests:Array.isArray(parsed.quests) ? parsed.quests : structuredClone(defaultData.quests),
+      habits:Array.isArray(parsed.habits) ? parsed.habits : structuredClone(defaultData.habits),
+      settings:{
+        ...defaultData.settings,
+        ...(parsed.settings || {})
+      }
     };
 
-  }catch(e){
-    return initial;
+  }catch(error){
+
+    console.error(error);
+
+    return structuredClone(defaultData);
+
   }
-}
 
-function save(){
-  localStorage.setItem(KEY,JSON.stringify(data));
 }
 
 
-/* XP */
+function saveData(){
 
-function level(){
-  return Math.floor(data.xp/100)+1;
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
 }
 
-function levelXP(){
-  return data.xp%100;
+
+/* =========================================================
+   XP
+   ========================================================= */
+
+function getLevel(){
+
+  return Math.floor(data.xp / 100) + 1;
+
 }
+
+
+function getLevelXP(){
+
+  return data.xp % 100;
+
+}
+
 
 function addXP(amount){
 
-  const old=level();
+  amount = Number(amount);
 
-  data.xp+=Number(amount);
+  const oldLevel = getLevel();
 
-  save();
+  data.xp += amount;
+
+  const newLevel = getLevel();
+
+  saveData();
+
   renderAll();
 
-  if(level()>old){
-    toast("Новый уровень — LEVEL "+level()+" 🎉");
+  if(newLevel > oldLevel){
+
+    showToast("Новый уровень! LEVEL " + newLevel);
+
   }else{
-    toast("+"+amount+" XP");
+
+    showToast("+" + amount + " XP");
+
   }
+
 }
 
 
-/* NAV */
+/* =========================================================
+   CLOCK
+   ========================================================= */
+
+function updateClock(){
+
+  const now = new Date();
+
+  document.getElementById("liveClock").textContent =
+    now.toLocaleTimeString("ru-RU",{
+      hour:"2-digit",
+      minute:"2-digit"
+    });
+
+  document.getElementById("liveDate").textContent =
+    now.toLocaleDateString("ru-RU",{
+      weekday:"long",
+      day:"numeric",
+      month:"long",
+      year:"numeric"
+    });
+
+  const hour = now.getHours();
+
+  let greeting = "Добрый вечер";
+
+  if(hour >= 5 && hour < 12){
+    greeting = "Доброе утро";
+  }else if(hour >= 12 && hour < 18){
+    greeting = "Добрый день";
+  }
+
+  document.getElementById("greeting").textContent =
+    greeting + ", LifeOS User";
+
+}
+
+
+setInterval(updateClock,1000);
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 function showScreen(id){
 
-  document.querySelectorAll(".screen").forEach(s=>{
-    s.classList.remove("active");
+  document.querySelectorAll(".screen")
+    .forEach(screen => screen.classList.remove("active"));
+
+  const target = document.getElementById(id);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        btn.dataset.screen === id
+      );
+    });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
-  const target=document.getElementById(id);
+  if(id === "calendar"){
+    renderCalendar();
+  }
 
-  if(target)target.classList.add("active");
+  if(id === "stats"){
+    renderStats();
+  }
 
-  document.querySelectorAll(".nav-btn").forEach(btn=>{
-    btn.classList.toggle("active",btn.dataset.screen===id);
-  });
-
-  if(id==="calendar")renderCalendar();
-  if(id==="tasks")renderTasks();
-  if(id==="habits")renderHabits();
-  if(id==="map")renderQuestPanel();
-
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 
-/* TASKS */
+/* =========================================================
+   TASKS
+   ========================================================= */
 
 function openTaskModal(){
-  document.getElementById("taskModal").classList.add("show");
-  setTimeout(()=>document.getElementById("taskInput").focus(),100);
+
+  document.getElementById("taskModal")
+    .classList.add("show");
+
+  setTimeout(()=>{
+    document.getElementById("taskInput").focus();
+  },100);
+
 }
 
-function addTask(e){
 
-  e.preventDefault();
+function addTask(event){
 
-  const name=document.getElementById("taskInput").value.trim();
+  event.preventDefault();
 
-  if(!name)return;
+  const name =
+    document.getElementById("taskInput")
+      .value.trim();
+
+  if(!name){
+    return;
+  }
 
   data.tasks.push({
-    id:id(),
+
+    id:crypto.randomUUID(),
+
     name,
-    priority:document.getElementById("taskPriority").value,
-    xp:Number(document.getElementById("taskXP").value),
+
+    priority:
+      document.getElementById("taskPriority").value,
+
+    xp:Number(
+      document.getElementById("taskXP").value
+    ),
+
     completed:false,
+
     createdAt:new Date().toISOString(),
+
     completedAt:null
+
   });
 
-  save();
+  saveData();
 
-  e.target.reset();
+  event.target.reset();
 
   closeModal("taskModal");
 
   renderAll();
 
-  toast("Задача создана");
+  showToast("Задача создана");
+
 }
 
-function toggleTask(taskId){
 
-  const task=data.tasks.find(t=>t.id===taskId);
+function toggleTask(id){
 
-  if(!task)return;
+  const task =
+    data.tasks.find(item => item.id === id);
+
+  if(!task){
+    return;
+  }
 
   if(task.completed){
 
-    task.completed=false;
-    task.completedAt=null;
-    data.xp=Math.max(0,data.xp-task.xp);
+    task.completed = false;
 
-    toast("Задача возвращена");
+    task.completedAt = null;
 
-  }else{
+    data.xp =
+      Math.max(0,data.xp - Number(task.xp));
 
-    task.completed=true;
-    task.completedAt=new Date().toISOString();
+    saveData();
 
-    addXP(task.xp);
+    renderAll();
+
+    showToast("Задача возвращена");
 
     return;
   }
 
-  save();
-  renderAll();
+  task.completed = true;
+
+  task.completedAt =
+    new Date().toISOString();
+
+  addXP(task.xp);
+
 }
 
-function deleteTask(taskId){
 
-  data.tasks=data.tasks.filter(t=>t.id!==taskId);
+function deleteTask(id){
 
-  save();
+  data.tasks =
+    data.tasks.filter(task => task.id !== id);
+
+  saveData();
+
   renderAll();
 
-  toast("Задача удалена");
+  showToast("Задача удалена");
+
 }
+
 
 function renderTasks(){
 
-  const list=document.getElementById("taskList");
-  const count=document.getElementById("taskCount");
+  const list =
+    document.getElementById("taskList");
 
-  if(!list)return;
-
-  const today=data.tasks.filter(t=>
-    t.createdAt&&same(new Date(t.createdAt),new Date())
-  );
-
-  count.textContent=today.length+(today.length===1?" задача":" задач");
-
-  if(!today.length){
-
-    list.innerHTML='<div class="empty">Сегодня пока нет задач.<br>Добавь первое действие.</div>';
-
+  if(!list){
     return;
   }
 
-  list.innerHTML=today.map(t=>{
+  const todayTasks =
+    data.tasks.filter(task =>
+      !task.createdAt ||
+      isSameDate(
+        new Date(task.createdAt),
+        new Date()
+      )
+    );
 
-    const priority=t.priority==="high"?"Высокий":
-                   t.priority==="medium"?"Средний":"Низкий";
+  const count =
+    document.getElementById("taskCount");
 
-    return `
-    <div class="task ${t.completed?"done":""}">
+  count.textContent =
+    todayTasks.length +
+    (todayTasks.length === 1 ? " задача" : " задач");
 
-      <button class="check ${t.completed?"done":""}"
-              onclick="toggleTask('${t.id}')">
-        ${t.completed?'<svg style="width:17px"><use href="#i-check"/></svg>':""}
-      </button>
+  if(!todayTasks.length){
 
-      <div class="task-main">
-        <div class="task-name">${esc(t.name)}</div>
-        <div class="task-meta">+${t.xp} XP</div>
+    list.innerHTML = `
+      <div style="text-align:center;padding:35px 10px;color:var(--muted)">
+        <div style="font-size:36px;margin-bottom:8px">✓</div>
+        <div style="font-weight:900">На сегодня задач нет</div>
+        <div style="font-size:12px;margin-top:5px">
+          Добавь первую задачу
+        </div>
       </div>
+    `;
 
-      <span class="priority ${t.priority}">${priority}</span>
+    return;
 
-      <button class="danger" onclick="deleteTask('${t.id}')">×</button>
+  }
 
-    </div>`;
+  list.innerHTML =
+    todayTasks.map(task => {
 
-  }).join("");
+      const priorityName =
+        task.priority === "high"
+          ? "Высокий"
+          : task.priority === "medium"
+            ? "Средний"
+            : "Низкий";
+
+      return `
+
+        <div class="task ${task.completed ? "done" : ""}">
+
+          <button
+            class="check ${task.completed ? "done" : ""}"
+            onclick="toggleTask('${task.id}')"
+          >
+            ${task.completed ? "✓" : ""}
+          </button>
+
+          <div class="task-main">
+
+            <div class="task-name">
+              ${escapeHTML(task.name)}
+            </div>
+
+            <div class="task-meta">
+              +${task.xp} XP
+            </div>
+
+          </div>
+
+          <span class="priority ${task.priority}">
+            ${priorityName}
+          </span>
+
+          <button
+            class="danger"
+            onclick="deleteTask('${task.id}')"
+          >
+            ×
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
 }
 
 
-/* HABITS */
+/* =========================================================
+   HABITS
+   ========================================================= */
 
 function openHabitModal(){
-  document.getElementById("habitModal").classList.add("show");
-  setTimeout(()=>document.getElementById("habitInput").focus(),100);
+
+  document.getElementById("habitModal")
+    .classList.add("show");
+
+  setTimeout(()=>{
+    document.getElementById("habitInput").focus();
+  },100);
+
 }
 
-function addHabit(e){
 
-  e.preventDefault();
+function addHabit(event){
 
-  const name=document.getElementById("habitInput").value.trim();
+  event.preventDefault();
 
-  if(!name)return;
+  const name =
+    document.getElementById("habitInput")
+      .value.trim();
+
+  if(!name){
+    return;
+  }
 
   data.habits.push({
-    id:id(),
+
+    id:crypto.randomUUID(),
+
     name,
-    icon:document.getElementById("habitIcon").value.trim()||"FIRE",
+
     streak:0,
+
     lastDone:null
+
   });
 
-  save();
+  saveData();
 
-  e.target.reset();
+  event.target.reset();
 
   closeModal("habitModal");
 
   renderAll();
 
-  toast("Привычка создана");
+  showToast("Привычка создана");
+
 }
 
-function completeHabit(habitId){
 
-  const habit=data.habits.find(h=>h.id===habitId);
+function completeHabit(id){
 
-  if(!habit)return;
+  const habit =
+    data.habits.find(item => item.id === id);
 
-  const today=keyDate(new Date());
-
-  if(habit.lastDone===today){
-
-    toast("Сегодня уже выполнено");
-
+  if(!habit){
     return;
   }
 
-  const yesterday=new Date();
-  yesterday.setDate(yesterday.getDate()-1);
+  const today = dateKey(new Date());
 
-  if(habit.lastDone===keyDate(yesterday)){
-    habit.streak++;
-  }else{
-    habit.streak=1;
+  if(habit.lastDone === today){
+
+    showToast("Сегодня уже выполнено");
+
+    return;
+
   }
 
-  habit.lastDone=today;
+  const yesterday = new Date();
 
-  save();
+  yesterday.setDate(
+    yesterday.getDate() - 1
+  );
+
+  if(
+    habit.lastDone === dateKey(yesterday)
+  ){
+
+    habit.streak += 1;
+
+  }else{
+
+    habit.streak = 1;
+
+  }
+
+  habit.lastDone = today;
+
+  saveData();
 
   addXP(10);
 
+}
+
+
+function deleteHabit(id){
+
+  data.habits =
+    data.habits.filter(
+      habit => habit.id !== id
+    );
+
+  saveData();
+
   renderAll();
 
-  toast("Streak: "+habit.streak+" дней");
+  showToast("Привычка удалена");
+
 }
 
-function deleteHabit(habitId){
-
-  data.habits=data.habits.filter(h=>h.id!==habitId);
-
-  save();
-  renderAll();
-
-  toast("Привычка удалена");
-}
-
-function habitIcon(type){
-
-  type=String(type).toUpperCase();
-
-  const map={
-    FIRE:"#i-fire",
-    WATER:"#i-location",
-    RUN:"#i-target",
-    TARGET:"#i-target"
-  };
-
-  return map[type]||"#i-fire";
-}
 
 function renderHabits(){
 
-  const list=document.getElementById("habitList");
+  const list =
+    document.getElementById("habitList");
 
-  if(!list)return;
+  if(!list){
+    return;
+  }
 
   if(!data.habits.length){
 
-    list.innerHTML='<div class="empty">Добавь первую привычку.</div>';
-
-    return;
-  }
-
-  const today=keyDate(new Date());
-
-  list.innerHTML=data.habits.map(h=>{
-
-    const done=h.lastDone===today;
-
-    return `
-    <div class="habit">
-
-      <div class="habit-icon">
-        <svg><use href="${habitIcon(h.icon)}"/></svg>
+    list.innerHTML = `
+      <div style="padding:30px;text-align:center;color:var(--muted)">
+        Пока нет привычек
       </div>
-
-      <div class="habit-main">
-        <div class="habit-name">${esc(h.name)}</div>
-        <div class="streak">🔥 ${h.streak} дней</div>
-      </div>
-
-      <button class="${done?"secondary":"primary"}"
-              onclick="completeHabit('${h.id}')">
-        ${done?"✓":"Выполнить"}
-      </button>
-
-      <button class="danger"
-              onclick="deleteHabit('${h.id}')">
-        ×
-      </button>
-
-    </div>`;
-
-  }).join("");
-}
-
-
-/* CALENDAR */
-
-function changeMonth(amount){
-
-  calendarDate.setMonth(calendarDate.getMonth()+amount);
-
-  renderCalendar();
-}
-
-function renderCalendar(){
-
-  const grid=document.getElementById("calendarGrid");
-  const title=document.getElementById("calendarMonth");
-
-  if(!grid)return;
-
-  const y=calendarDate.getFullYear();
-  const m=calendarDate.getMonth();
-
-  title.textContent=new Intl.DateTimeFormat("ru-RU",{
-    month:"long",
-    year:"numeric"
-  }).format(calendarDate);
-
-  const names=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
-
-  let html=names.map(n=>`<div class="day-name">${n}</div>`).join("");
-
-  let start=new Date(y,m,1).getDay();
-
-  start=start===0?6:start-1;
-
-  for(let i=0;i<start;i++)html+="<div></div>";
-
-  const days=new Date(y,m+1,0).getDate();
-
-  for(let d=1;d<=days;d++){
-
-    const date=new Date(y,m,d);
-
-    html+=`
-    <button class="day
-      ${same(date,new Date())?"today":""}
-      ${same(date,selectedDate)?"selected":""}"
-      onclick="selectDate(${y},${m},${d})">
-      ${d}
-    </button>`;
-
-  }
-
-  grid.innerHTML=html;
-
-  renderSelectedDate();
-}
-
-function selectDate(y,m,d){
-
-  selectedDate=new Date(y,m,d);
-
-  renderCalendar();
-}
-
-function renderSelectedDate(){
-
-  const title=document.getElementById("selectedDate");
-  const list=document.getElementById("calendarTasks");
-
-  if(!title)return;
-
-  title.textContent=new Intl.DateTimeFormat("ru-RU",{
-    weekday:"long",
-    day:"numeric",
-    month:"long"
-  }).format(selectedDate);
-
-  const tasks=data.tasks.filter(t=>
-    t.createdAt&&same(new Date(t.createdAt),selectedDate)
-  );
-
-  if(!tasks.length){
-
-    list.innerHTML='<div class="empty">Нет задач на этот день.</div>';
+    `;
 
     return;
-  }
-
-  list.innerHTML=tasks.map(t=>`
-    <div style="padding:11px 0;border-bottom:1px solid var(--line);font-weight:800">
-      ${t.completed?"✓":"○"} ${esc(t.name)}
-    </div>
-  `).join("");
-}
-
-
-/* ALARM */
-
-function setAlarm(){
-
-  const value=document.getElementById("alarmInput").value;
-
-  if(!value){
-
-    toast("Выбери время");
-
-    return;
-  }
-
-  data.alarm=value;
-
-  save();
-
-  updateAlarmStatus();
-
-  toast("Будильник установлен на "+value);
-}
-
-function clearAlarm(){
-
-  data.alarm=null;
-
-  save();
-
-  updateAlarmStatus();
-
-  toast("Будильник отключён");
-}
-
-function updateAlarmStatus(){
-
-  const el=document.getElementById("alarmStatus");
-
-  if(data.alarm){
-
-    el.textContent="Будильник установлен на "+data.alarm;
-
-    document.getElementById("alarmInput").value=data.alarm;
-
-  }else{
-
-    el.textContent="Будильник не установлен";
 
   }
+
+  const today = dateKey(new Date());
+
+  list.innerHTML =
+    data.habits.map(habit => {
+
+      const done =
+        habit.lastDone === today;
+
+      return `
+
+        <div class="habit">
+
+          <div class="habit-icon">
+
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-2 1-4 3-6"/>
+              <path d="M12 10c1 2 2 3 2 5a2 2 0 1 1-4 0c0-1 .5-2 2-5Z"/>
+            </svg>
+
+          </div>
+
+          <div style="flex:1">
+
+            <div style="font-weight:900">
+              ${escapeHTML(habit.name)}
+            </div>
+
+            <div class="streak">
+              ${habit.streak} дней подряд
+            </div>
+
+          </div>
+
+          <button
+            class="${done ? "secondary" : "primary"}"
+            onclick="completeHabit('${habit.id}')"
+          >
+            ${done ? "Готово" : "Выполнить"}
+          </button>
+
+          <button
+            class="danger"
+            onclick="deleteHabit('${habit.id}')"
+          >
+            ×
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
 }
 
-function checkAlarm(){
 
-  if(!data.alarm)return;
+/* =========================================================
+   ALARMS
+   ========================================================= */
 
-  const now=new Date();
+function openAlarmModal(){
 
-  const current=
-    String(now.getHours()).padStart(2,"0")+":"+
-    String(now.getMinutes()).padStart(2,"0");
+  document.getElementById("alarmModal")
+    .classList.add("show");
 
-  const marker=keyDate(now)+"_"+current;
+  const input =
+    document.getElementById("alarmTime");
 
-  if(current===data.alarm&&localStorage.getItem("lifeos_alarm_marker")!==marker){
+  if(!input.value){
 
-    localStorage.setItem("lifeos_alarm_marker",marker);
+    const now = new Date();
 
-    notify(
-      "LifeOS — время пришло",
-      "⏰ Сработал твой будильник"
+    now.setMinutes(
+      Math.ceil(now.getMinutes()/5)*5
     );
 
-    toast("⏰ Будильник!");
-  }
-}
-
-function updateClock(){
-
-  const now=new Date();
-
-  document.getElementById("liveTime").textContent=
-    String(now.getHours()).padStart(2,"0")+":"+
-    String(now.getMinutes()).padStart(2,"0");
-
-  document.getElementById("liveDate").textContent=
-    new Intl.DateTimeFormat("ru-RU",{
-      weekday:"long",
-      day:"numeric",
-      month:"long"
-    }).format(now);
-
-  checkAlarm();
-}
-
-setInterval(updateClock,1000);
-
-
-/* TIMER */
-
-function renderTimer(){
-
-  const min=Math.floor(timerSeconds/60);
-  const sec=timerSeconds%60;
-
-  document.getElementById("timerDisplay").textContent=
-    String(min).padStart(2,"0")+":"+
-    String(sec).padStart(2,"0");
-
-  document.getElementById("timerButton").innerHTML=
-    `<svg style="width:18px"><use href="${timerRunning?"#i-pause":"#i-play"}"/></svg>`;
-}
-
-function toggleTimer(){
-
-  if(timerRunning){
-
-    clearInterval(timerInterval);
-
-    timerRunning=false;
-
-  }else{
-
-    timerRunning=true;
-
-    timerInterval=setInterval(()=>{
-
-      timerSeconds--;
-
-      if(timerSeconds<=0){
-
-        timerSeconds=0;
-
-        clearInterval(timerInterval);
-
-        timerRunning=false;
-
-        notify(
-          "LifeOS",
-          "Фокус-сессия завершена 🎯"
-        );
-
-        toast("Фокус завершён 🎯");
-      }
-
-      renderTimer();
-
-    },1000);
+    input.value =
+      String(now.getHours()).padStart(2,"0")
+      + ":" +
+      String(now.getMinutes()).padStart(2,"0");
 
   }
 
-  renderTimer();
-}
-
-function resetTimer(){
-
-  clearInterval(timerInterval);
-
-  timerRunning=false;
-  timerSeconds=25*60;
-
-  renderTimer();
-}
-
-function setTimerPreset(minutes){
-
-  clearInterval(timerInterval);
-
-  timerRunning=false;
-  timerSeconds=minutes*60;
-
-  renderTimer();
 }
 
 
-/* QUESTS */
+function toggleAlarmDay(button){
 
-const QUESTS={
-  water:{
-    title:"Hydration Point",
-    text:"Выпей стакан воды.",
-    xp:15
-  },
-  walk:{
-    title:"Walk Mission",
-    text:"Пройдись минимум 15 минут.",
-    xp:25
-  },
-  focus:{
-    title:"Focus Zone",
-    text:"Сделай одну 25-минутную фокус-сессию.",
-    xp:35
-  },
-  training:{
-    title:"Training Arena",
-    text:"Выполни тренировку.",
-    xp:50
-  }
-};
+  button.classList.toggle("active");
 
-function openQuest(type){
-
-  const q=QUESTS[type];
-
-  if(!q)return;
-
-  const done=data.quests.includes(type);
-
-  const panel=document.getElementById("questPanel");
-
-  panel.innerHTML=`
-  <div class="quest-card">
-
-    <div class="between">
-
-      <div>
-        <div class="card-label">Quest</div>
-        <div style="font-size:20px;font-weight:950;margin-top:5px">
-          ${q.title}
-        </div>
-      </div>
-
-      <div class="quest-reward">+${q.xp} XP</div>
-
-    </div>
-
-    <p class="subtitle">${q.text}</p>
-
-    <button class="${done?"secondary":"primary"}"
-            ${done?"disabled":""}
-            onclick="completeQuest('${type}')">
-      ${done?"Квест выполнен":"Выполнить квест"}
-    </button>
-
-  </div>`;
 }
 
-function completeQuest(type){
 
-  if(data.quests.includes(type)){
+function addAlarm(event){
 
-    toast("Этот квест уже выполнен");
+  event.preventDefault();
+
+  const time =
+    document.getElementById("alarmTime").value;
+
+  const label =
+    document.getElementById("alarmLabel").value.trim()
+    || "Будильник";
+
+  const days =
+    [...document.querySelectorAll("#alarmModal .day-chip.active")]
+      .map(button => Number(button.dataset.day));
+
+  if(!days.length){
+
+    showToast("Выбери хотя бы один день");
 
     return;
+
   }
 
-  const q=QUESTS[type];
+  data.alarms.push({
 
-  data.quests.push(type);
+    id:crypto.randomUUID(),
 
-  save();
+    time,
 
-  addXP(q.xp);
+    label,
 
-  renderQuestPanel();
+    days,
 
-  toast("Квест выполнен 🎯");
-}
+    enabled:true,
 
-function renderQuestPanel(){
+    lastTriggered:null
 
-  const panel=document.getElementById("questPanel");
+  });
 
-  if(!panel)return;
+  saveData();
 
-  panel.innerHTML=`
-  <div class="card">
+  event.target.reset();
 
-    <div class="between">
-
-      <div>
-        <div class="card-label">Доступные миссии</div>
-        <div style="font-size:20px;font-weight:950;margin-top:5px">
-          Выбери точку на карте
-        </div>
-      </div>
-
-      <div class="quest-reward">
-        ${data.quests.length}/4
-      </div>
-
-    </div>
-
-    <p class="subtitle" style="margin-bottom:0">
-      Каждая точка — отдельный квест и награда XP.
-    </p>
-
-  </div>`;
-}
-
-
-/* PROFILE */
-
-function renderProfile(){
-
-  document.getElementById("profileLevel").textContent=level();
-
-  document.getElementById("statXP").textContent=data.xp;
-
-  document.getElementById("statTasks").textContent=
-    data.tasks.filter(t=>t.completed).length;
-
-  document.getElementById("statQuests").textContent=
-    data.quests.length;
-}
-
-
-/* XP UI */
-
-function renderXP(){
-
-  const l=level();
-  const x=levelXP();
-
-  document.getElementById("xpNumber").textContent=data.xp+" XP";
-  document.getElementById("xpLevel").textContent="LEVEL "+l;
-  document.getElementById("headerLevel").textContent="LEVEL "+l;
-  document.getElementById("xpCurrent").textContent=x+" / 100 XP";
-  document.getElementById("xpBar").style.width=x+"%";
-
-  document.getElementById("homeTaskCount").textContent=
-    data.tasks.filter(t=>t.createdAt&&same(new Date(t.createdAt),new Date())).length;
-
-  document.getElementById("homeHabitCount").textContent=
-    data.habits.length;
-}
-
-
-/* THEME */
-
-function applyTheme(){
-
-  document.body.classList.toggle("light",data.theme==="light");
-
-  document.getElementById("themeIcon").innerHTML=
-    `<use href="${data.theme==="light"?"#i-moon":"#i-sun"}"/>`;
-}
-
-function toggleTheme(){
-
-  data.theme=data.theme==="light"?"dark":"light";
-
-  save();
-
-  applyTheme();
-
-  toast(data.theme==="light"?"Светлая тема":"Тёмная тема");
-}
-
-
-/* NOTIFICATIONS */
-
-async function requestNotifications(){
-
-  if(!("Notification" in window)){
-
-    toast("Браузер не поддерживает уведомления");
-
-    return;
-  }
-
-  try{
-
-    const permission=await Notification.requestPermission();
-
-    if(permission==="granted"){
-
-      notify(
-        "LifeOS",
-        "Уведомления успешно включены 🔔"
+  document
+    .querySelectorAll("#alarmModal .day-chip")
+    .forEach((button,index)=>{
+      button.classList.toggle(
+        "active",
+        index < 5
       );
+    });
 
-      toast("Уведомления включены");
-
-    }else{
-
-      toast("Уведомления не разрешены");
-
-    }
-
-  }catch(e){
-
-    toast("Не удалось включить уведомления");
-
-  }
-}
-
-function notify(title,body){
-
-  if("Notification" in window&&Notification.permission==="granted"){
-
-    try{
-      new Notification(title,{body});
-    }catch(e){}
-
-  }
-}
-
-
-/* MODALS */
-
-function closeModal(id){
-
-  const el=document.getElementById(id);
-
-  if(el)el.classList.remove("show");
-}
-
-function closeOutside(e){
-
-  if(e.target===e.currentTarget){
-
-    e.currentTarget.classList.remove("show");
-
-  }
-}
-
-
-/* RESET */
-
-function resetData(){
-
-  if(!confirm("Удалить все задачи, XP, привычки и квесты?"))return;
-
-  localStorage.removeItem(KEY);
-
-  data=load();
+  closeModal("alarmModal");
 
   renderAll();
 
-  updateAlarmStatus();
+  showToast("Будильник сохранён");
 
-  applyTheme();
-
-  toast("Данные сброшены");
 }
 
 
-/* HELPERS */
+function toggleAlarm(id){
 
-function keyDate(date){
+  const alarm =
+    data.alarms.find(item => item.id === id);
 
-  return date.getFullYear()+"-"+
-    String(date.getMonth()+1).padStart(2,"0")+"-"+
-    String(date.getDate()).padStart(2,"0");
-}
+  if(!alarm){
+    return;
+  }
 
-function same(a,b){
-  return keyDate(a)===keyDate(b);
-}
+  alarm.enabled =
+    !alarm.enabled;
 
-function esc(v){
+  saveData();
 
-  return String(v)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
+  renderAll();
 
-let toastTimer;
+  showToast(
+    alarm.enabled
+      ? "Будильник включён"
+      : "Будильник выключен"
+  );
 
-function toast(message){
-
-  const el=document.getElementById("toast");
-
-  el.textContent=message;
-  el.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer=setTimeout(()=>{
-    el.classList.remove("show");
-  },2200);
 }
 
 
-/* RENDER */
+function deleteAlarm(id){
 
-function renderAll(){
+  data.alarms =
+    data.alarms.filter(
+      alarm => alarm.id !== id
+    );
 
-  renderXP();
-  renderTasks();
-  renderHabits();
-  renderCalendar();
-  renderProfile();
-  renderQuestPanel();
-  renderTimer();
-  updateAlarmStatus();
+  saveData();
+
+  renderAll();
+
+  showToast("Будильник удалён");
+
 }
 
 
-/* PWA */
+function renderAlarms(){
 
-if("serviceWorker" in navigator){
+  const list =
+    document.getElementById("alarmList");
 
-  window.addEventListener("load",()=>{
+  if(!list){
+    return;
+  }
 
-    navigator.serviceWorker.register("./sw.js")
-      .then(()=>{
-        console.log("LifeOS v0.9.7 Service Worker ready");
-      })
-      .catch(err=>{
-        console.log("Service Worker:",err);
-      });
+  if(!data.alarms.length){
+
+    list.innerHTML = `
+      <div class="card" style="text-align:center">
+        <div style="font-size:32px;margin-bottom:10px">◷</div>
+        <div style="font-weight:900">
+          Будильников пока нет
+        </div>
+        <div style="color:var(--muted);font-size:12px;margin-top:5px">
+          Создай первый будильник
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+  list.innerHTML =
+    data.alarms
+      .sort((a,b)=>a.time.localeCompare(b.time))
+      .map(alarm => `
+
+        <div class="card">
+
+          <div class="alarm-hero">
+
+            <div>
+
+              <div class="alarm-time">
+                ${escapeHTML(alarm.time)}
+              </div>
+
+              <div class="alarm-label">
+                ${escapeHTML(alarm.label)}
+              </div>
+
+            </div>
+
+            <button
+              class="switch ${alarm.enabled ? "on" : ""}"
+              onclick="toggleAlarm('${alarm.id}')"
+            >
+              <span></span>
+            </button>
+
+          </div>
+
+          <div class="days">
+
+            ${renderAlarmDays(alarm.days)}
+
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;margin-top:13px">
+
+            <button
+              class="danger"
+              onclick="deleteAlarm('${alarm.id}')"
+            >
+              Удалить
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+}
+
+
+function renderAlarmDays(days){
+
+  const labels = [
+    ["ПН",1],
+    ["ВТ",2],
+    ["СР",3],
+    ["ЧТ",4],
+    ["ПТ",5],
+    ["СБ",6],
+    ["ВС",0]
+  ];
+
+  return labels.map(item => `
+
+    <div class="day-chip ${days.includes(item[1]) ? "active" : ""}">
+      ${item[0]}
+    </div>
+
+  `).join("");
+
+}
+
+
+/* =========================================================
+   ALARM CHECK
+   ========================================================= */
+
+function checkAlarms(){
+
+  const now = new Date();
+
+  const currentTime =
+    String(now.getHours()).padStart(2,"0")
+    + ":" +
+    String(now.getMinutes()).padStart(2,"0");
+
+  const currentDay =
+    now.getDay();
+
+  const todayKey =
+    dateKey(now);
+
+  data.alarms.forEach(alarm => {
+
+    if(!alarm.enabled){
+      return;
+    }
+
+    if(
+      alarm.time === currentTime &&
+      alarm.days.includes(currentDay) &&
+      alarm.lastTriggered !== todayKey
+    ){
+
+      alarm.lastTriggered = todayKey;
+
+      saveData();
+
+      showToast("Будильник: " + alarm.label);
+
+      if(
+        "Notification" in window &&
+        Notification.permission === "granted"
+      ){
+
+        try{
+
+          new Notification(
+            "LifeOS • " + alarm.label,
+            {
+              body:"Время по плану.",
+              tag:"lifeos-alarm-" + alarm.id
+            }
+          );
+
+        }catch(error){
+
+          console.log(error);
+
+        }
+
+      }
+
+    }
 
   });
 
 }
 
+setInterval(checkAlarms,15000);
 
-/* START */
 
-document.addEventListener("DOMContentLoaded",()=>{
+/* =========================================================
+   QUESTS
+   ========================================================= */
 
-  applyTheme();
+function completeQuest(id){
+
+  const quest =
+    data.quests.find(
+      item => item.id === id
+    );
+
+  if(!quest || quest.completed){
+    return;
+  }
+
+  quest.completed = true;
+
+  saveData();
+
+  addXP(quest.reward);
 
   renderAll();
 
+}
+
+
+function selectQuest(index){
+
+  const quest =
+    data.quests[index];
+
+  if(!quest){
+    return;
+  }
+
+  const button =
+    document.querySelectorAll(".map-marker")[index];
+
+  if(button){
+
+    button.animate(
+      [
+        {transform:"scale(1)"},
+        {transform:"scale(1.2)"},
+        {transform:"scale(1)"}
+      ],
+      {
+        duration:350
+      }
+    );
+
+  }
+
+  showToast(
+    quest.title + " • +" + quest.reward + " XP"
+  );
+
+}
+
+
+function locateUser(){
+
+  if(!navigator.geolocation){
+
+    showToast("Геолокация недоступна");
+
+    return;
+
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+
+      showToast("Позиция определена");
+
+      console.log(
+        position.coords.latitude,
+        position.coords.longitude
+      );
+
+    },
+    () => {
+
+      showToast("Не удалось получить позицию");
+
+    }
+  );
+
+}
+
+
+function renderQuests(){
+
+  const list =
+    document.getElementById("questList");
+
+  if(!list){
+    return;
+  }
+
+  document.getElementById("mapQuestCount")
+    .textContent =
+      data.quests.filter(q=>!q.completed).length
+      + " квестов";
+
+  const icons = {
+
+    walk:`
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="13" cy="5" r="2"/>
+        <path d="m9 22 2-7 3 2 2 5M11 11l3 2 3-3"/>
+      </svg>
+    `,
+
+    focus:`
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="8"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    `,
+
+    fire:`
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-2 1-4 3-6"/>
+      </svg>
+    `,
+
+    mountain:`
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m3 19 7-14 4 8 2-3 5 9H3Z"/>
+      </svg>
+    `,
+
+    target:`
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="8"/>
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+      </svg>
+    `
+
+  };
+
+  list.innerHTML =
+    data.quests.map(quest => `
+
+      <div class="quest ${quest.completed ? "completed" : ""}">
+
+        <div class="quest-icon">
+          ${icons[quest.type] || icons.target}
+        </div>
+
+        <div class="quest-title">
+          ${escapeHTML(quest.title)}
+        </div>
+
+        <div class="quest-desc">
+          ${escapeHTML(quest.description)}
+        </div>
+
+        <div class="between">
+
+          <div>
+            <div class="quest-reward">
+              +${quest.reward} XP
+            </div>
+
+            <div style="color:var(--muted);font-size:10px;margin-top:3px">
+              ${escapeHTML(quest.distance)}
+            </div>
+          </div>
+
+          ${
+            quest.completed
+            ?
+            `<button class="secondary">Выполнено</button>`
+            :
+            `<button class="primary" onclick="completeQuest('${quest.id}')">Начать</button>`
+          }
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+function changeMonth(amount){
+
+  calendarDate.setMonth(
+    calendarDate.getMonth()+amount
+  );
+
+  renderCalendar();
+
+}
+
+
+function renderCalendar(){
+
+  const grid =
+    document.getElementById("calendarGrid");
+
+  const title =
+    document.getElementById("calendarMonth");
+
+  if(!grid || !title){
+    return;
+  }
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+  title.textContent =
+    new Intl.DateTimeFormat(
+      "ru-RU",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    ).format(calendarDate);
+
+  const first =
+    new Date(year,month,1);
+
+  let start =
+    first.getDay();
+
+  start =
+    start === 0 ? 6 : start-1;
+
+  const days =
+    new Date(
+      year,
+      month+1,
+      0
+    ).getDate();
+
+  const names =
+    ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
+
+  let html =
+    names.map(
+      name => `<div class="day-name">${name}</div>`
+    ).join("");
+
+  for(let i=0;i<start;i++){
+    html += "<div></div>";
+  }
+
+  for(let day=1;day<=days;day++){
+
+    const date =
+      new Date(year,month,day);
+
+    const today =
+      isSameDate(date,new Date());
+
+    const selected =
+      isSameDate(date,selectedDate);
+
+    const hasTask =
+      data.tasks.some(task =>
+        task.createdAt &&
+        isSameDate(
+          new Date(task.createdAt),
+          date
+        )
+      );
+
+    html += `
+
+      <button
+        class="day
+          ${today ? "today" : ""}
+          ${selected ? "selected" : ""}
+          ${hasTask ? "has-task" : ""}
+        "
+        onclick="selectDate(${year},${month},${day})"
+      >
+        ${day}
+      </button>
+
+    `;
+
+  }
+
+  grid.innerHTML = html;
+
+  renderSelectedDate();
+
+}
+
+
+function selectDate(year,month,day){
+
+  selectedDate =
+    new Date(year,month,day);
+
+  renderCalendar();
+
+}
+
+
+function renderSelectedDate(){
+
+  const title =
+    document.getElementById("selectedDate");
+
+  const list =
+    document.getElementById("calendarTasks");
+
+  if(!title || !list){
+    return;
+  }
+
+  title.textContent =
+    new Intl.DateTimeFormat(
+      "ru-RU",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long"
+      }
+    ).format(selectedDate);
+
+  const tasks =
+    data.tasks.filter(task =>
+      task.createdAt &&
+      isSameDate(
+        new Date(task.createdAt),
+        selectedDate
+      )
+    );
+
+  if(!tasks.length){
+
+    list.innerHTML = `
+      <div style="color:var(--muted);padding:14px 0;font-size:12px">
+        Нет задач на этот день.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  list.innerHTML =
+    tasks.map(task => `
+
+      <div style="
+        padding:12px 0;
+        border-bottom:1px solid var(--line);
+        font-weight:850;
+      ">
+        ${task.completed ? "✓" : "○"}
+        ${escapeHTML(task.name)}
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+function renderStats(){
+
+  const completedTasks =
+    data.tasks.filter(
+      task => task.completed
+    ).length;
+
+  const completedQuests =
+    data.quests.filter(
+      quest => quest.completed
+    ).length;
+
+  document.getElementById("statXP")
+    .textContent = data.xp;
+
+  document.getElementById("statTasks")
+    .textContent = completedTasks;
+
+  document.getElementById("statQuests")
+    .textContent = completedQuests;
+
+  document.getElementById("statHabits")
+    .textContent = data.habits.length;
+
+  const level =
+    getLevel();
+
+  const levelXP =
+    getLevelXP();
+
+  document.getElementById("statsLevel")
+    .textContent =
+      "LEVEL " + level;
+
+  document.getElementById("statsLevelXP")
+    .textContent =
+      levelXP + " / 100 XP";
+
+  document.getElementById("statsBar")
+    .style.width =
+      levelXP + "%";
+
+  const bars =
+    document.getElementById("activityBars");
+
+  if(!bars){
+    return;
+  }
+
+  const values = [];
+
+  for(let i=6;i>=0;i--){
+
+    const d = new Date();
+
+    d.setDate(
+      d.getDate()-i
+    );
+
+    const value =
+      data.tasks.filter(task =>
+        task.completed &&
+        task.completedAt &&
+        isSameDate(
+          new Date(task.completedAt),
+          d
+        )
+      ).length;
+
+    values.push({
+      value,
+      date:d
+    });
+
+  }
+
+  const max =
+    Math.max(1,...values.map(v=>v.value));
+
+  bars.innerHTML =
+    values.map(item => {
+
+      const height =
+        Math.max(
+          8,
+          (item.value/max)*125
+        );
+
+      return `
+
+        <div style="
+          flex:1;
+          height:150px;
+          display:flex;
+          flex-direction:column;
+          justify-content:end;
+          align-items:center;
+          gap:6px;
+        ">
+
+          <div style="
+            width:100%;
+            max-width:34px;
+            height:${height}px;
+            border-radius:9px 9px 4px 4px;
+            background:linear-gradient(
+              to top,
+              var(--accent),
+              var(--accent2)
+            );
+          "></div>
+
+          <div style="
+            font-size:9px;
+            color:var(--muted);
+            font-weight:900;
+          ">
+            ${item.date.toLocaleDateString("ru-RU",{weekday:"short"}).slice(0,2)}
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+function renderDashboard(){
+
+  const todayTasks =
+    data.tasks.filter(task =>
+      !task.createdAt ||
+      isSameDate(
+        new Date(task.createdAt),
+        new Date()
+      )
+    );
+
+  const completed =
+    todayTasks.filter(
+      task => task.completed
+    ).length;
+
+  const percent =
+    todayTasks.length
+      ? Math.round(
+          completed /
+          todayTasks.length *
+          100
+        )
+      : 0;
+
+  document.getElementById("dayPercent")
+    .textContent =
+      percent + "%";
+
+  document.getElementById("todayCompleted")
+    .textContent =
+      completed;
+
+  document.getElementById("todayTotal")
+    .textContent =
+      todayTasks.length;
+
+  document.getElementById("dayRing")
+    .style.setProperty(
+      "--day-progress",
+      percent + "%"
+    );
+
+
+  const upcoming =
+    document.getElementById("dashboardUpcoming");
+
+  if(upcoming){
+
+    const activeAlarms =
+      data.alarms
+        .filter(a=>a.enabled)
+        .sort((a,b)=>a.time.localeCompare(b.time))
+        .slice(0,2);
+
+    const upcomingTasks =
+      todayTasks
+        .filter(t=>!t.completed)
+        .slice(0,2);
+
+    const items = [];
+
+    activeAlarms.forEach(alarm => {
+
+      items.push(`
+
+        <div class="mini-item">
+
+          <div class="mini-icon">
+
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+              <path d="M10 21h4"/>
+            </svg>
+
+          </div>
+
+          <div class="mini-main">
+            <div class="mini-name">${escapeHTML(alarm.label)}</div>
+            <div class="mini-meta">Сегодня • ${escapeHTML(alarm.time)}</div>
+          </div>
+
+        </div>
+
+      `);
+
+    });
+
+    upcomingTasks.forEach(task => {
+
+      items.push(`
+
+        <div class="mini-item">
+
+          <div class="mini-icon">
+
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <rect x="4" y="3" width="16" height="18" rx="2"/>
+              <path d="M8 9h8M8 14h5"/>
+            </svg>
+
+          </div>
+
+          <div class="mini-main">
+            <div class="mini-name">${escapeHTML(task.name)}</div>
+            <div class="mini-meta">Задача • +${task.xp} XP</div>
+          </div>
+
+        </div>
+
+      `);
+
+    });
+
+    upcoming.innerHTML =
+      items.length
+      ? items.join("")
+      : `
+        <div style="padding:12px 0;color:var(--muted);font-size:12px">
+          На ближайшее время ничего нет.
+        </div>
+      `;
+
+  }
+
+
+  const dashboardQuests =
+    document.getElementById("dashboardQuests");
+
+  if(dashboardQuests){
+
+    const quests =
+      data.quests
+        .filter(q=>!q.completed)
+        .slice(0,2);
+
+    dashboardQuests.innerHTML =
+      quests.map(q=>`
+
+        <div class="mini-item">
+
+          <div class="mini-icon">
+
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="10" r="3"/>
+              <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/>
+            </svg>
+
+          </div>
+
+          <div class="mini-main">
+            <div class="mini-name">${escapeHTML(q.title)}</div>
+            <div class="mini-meta">${q.distance} • +${q.reward} XP</div>
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }
+
+}
+
+
+/* =========================================================
+   XP UI
+   ========================================================= */
+
+function renderXP(){
+
+  const level =
+    getLevel();
+
+  const levelXP =
+    getLevelXP();
+
+  document.getElementById("xpNumber")
+    .textContent =
+      data.xp + " XP";
+
+  document.getElementById("xpLevel")
+    .textContent =
+      "LEVEL " + level;
+
+  document.getElementById("headerLevel")
+    .textContent =
+      "LEVEL " + level;
+
+  document.getElementById("xpCurrent")
+    .textContent =
+      levelXP + " / 100 XP";
+
+  document.getElementById("xpBar")
+    .style.width =
+      levelXP + "%";
+
+}
+
+
+/* =========================================================
+   THEME
+   ========================================================= */
+
+function applyTheme(){
+
+  document.body.classList.toggle(
+    "light",
+    data.theme === "light"
+  );
+
+  const meta =
+    document.querySelector('meta[name="theme-color"]');
+
+  if(meta){
+
+    meta.setAttribute(
+      "content",
+      data.theme === "light"
+        ? "#f4f5f7"
+        : "#ff3b30"
+    );
+
+  }
+
+}
+
+
+function toggleTheme(){
+
+  data.theme =
+    data.theme === "dark"
+      ? "light"
+      : "dark";
+
+  saveData();
+
+  applyTheme();
+
+  showToast(
+    data.theme === "light"
+      ? "Светлая тема"
+      : "Тёмная тема"
+  );
+
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+   ========================================================= */
+
+async function requestNotifications(){
+
+  if(!("Notification" in window)){
+
+    showToast("Уведомления не поддерживаются");
+
+    return;
+
+  }
+
+  try{
+
+    const permission =
+      await Notification.requestPermission();
+
+    if(permission === "granted"){
+
+      data.settings.notifications = true;
+
+      saveData();
+
+      try{
+
+        new Notification(
+          "LifeOS",
+          {
+            body:"Уведомления включены"
+          }
+        );
+
+      }catch(error){}
+
+      showToast("Уведомления включены");
+
+    }else{
+
+      showToast("Разрешение не получено");
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast("Не удалось включить уведомления");
+
+  }
+
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
+}
+
+
+function closeModalOutside(event){
+
+  if(
+    event.target ===
+    event.currentTarget
+  ){
+
+    event.currentTarget
+      .classList.remove("show");
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+function resetData(){
+
+  if(
+    !confirm(
+      "Удалить все задачи, будильники и XP?"
+    )
+  ){
+    return;
+  }
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  data =
+    structuredClone(defaultData);
+
+  saveData();
+
+  renderAll();
+
+  showToast("LifeOS сброшен");
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(()=>{
+      toast.classList.remove("show");
+    },2200);
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function dateKey(date){
+
+  const y =
+    date.getFullYear();
+
+  const m =
+    String(date.getMonth()+1)
+      .padStart(2,"0");
+
+  const d =
+    String(date.getDate())
+      .padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
+
+function isSameDate(a,b){
+
+  return dateKey(a) === dateKey(b);
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   RENDER ALL
+   ========================================================= */
+
+function renderAll(){
+
+  applyTheme();
+
   updateClock();
 
-});
+  renderXP();
+
+  renderDashboard();
+
+  renderTasks();
+
+  renderAlarms();
+
+  renderQuests();
+
+  renderHabits();
+
+  renderCalendar();
+
+  renderStats();
+
+}
+
+
+/* =========================================================
+   PWA
+   ========================================================= */
+
+if("serviceWorker" in navigator){
+
+  window.addEventListener(
+    "load",
+    ()=>{
+
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then(()=>{
+          console.log(
+            "LifeOS v0.9.8 Service Worker ready"
+          );
+        })
+        .catch(error=>{
+          console.log(
+            "Service Worker:",
+            error
+          );
+        });
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    renderAll();
+
+  }
+);
 
 </script>
 
