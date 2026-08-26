@@ -77,8 +77,8 @@ export default function Premium({ isPremium = false, onActivate }) {
       </button>
 
       <div className="premium-note">
-        Premium сейчас работает как тестовая активация.
-        Подключение реальной оплаты добавим следующим этапом.
+        Premium активируется локально и сохраняется после
+        перезагрузки страницы.
       </div>
     </div>
   );
