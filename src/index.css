@@ -1,0 +1,216 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", Inter, system-ui, sans-serif;
+
+  color: #f5f5f7;
+  background: #090b10;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #090b10;
+  color: #f5f5f7;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* LifeOS Premium */
+
+.premium-card {
+  width: 100%;
+  margin: 20px 0;
+  padding: 24px;
+  border: 1px solid rgba(126, 105, 255, 0.35);
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(112, 88, 255, 0.22),
+      transparent 45%
+    ),
+    #141720;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.premium-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.premium-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  background: linear-gradient(
+    135deg,
+    #7c5cff,
+    #a78bfa
+  );
+
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.3);
+}
+
+.premium-badge {
+  display: inline-block;
+  margin-bottom: 5px;
+
+  color: #8b70ff;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.premium-card h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.premium-description {
+  margin: 20px 0;
+
+  color: #a8adbd;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.premium-features {
+  display: grid;
+  gap: 12px;
+
+  margin: 20px 0;
+}
+
+.premium-features div {
+  padding: 13px 15px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  color: #dfe2ec;
+
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.premium-button {
+  width: 100%;
+  min-height: 54px;
+
+  border: 0;
+  border-radius: 17px;
+
+  background: linear-gradient(
+    135deg,
+    #7457ff,
+    #967cff
+  );
+
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 800;
+
+  box-shadow: 0 10px 25px rgba(116, 87, 255, 0.25);
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.premium-button:active {
+  transform: scale(0.98);
+}
+
+.premium-button:disabled {
+  opacity: 0.6;
+}
+
+.premium-note {
+  margin-top: 14px;
+
+  color: #73798b;
+
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.premium-active {
+  border-color: rgba(90, 220, 150, 0.35);
+}
+
+.premium-active .premium-icon {
+  background: linear-gradient(
+    135deg,
+    #4ade80,
+    #22c55e
+  );
+}
+
+/* iPhone */
+
+@media (max-width: 600px) {
+  .premium-card {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .premium-card h2 {
+    font-size: 22px;
+  }
+
+  .premium-description {
+    font-size: 15px;
+  }
+
+  .premium-features div {
+    font-size: 14px;
+  }
+}
