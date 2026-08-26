@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import Premium from "./Premium.jsx";
+
 const initialTasks = [
   {
     id: 1,
@@ -29,7 +30,13 @@ function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [started, setStarted] = useState(false);
 
-  const completedTasks = tasks.filter((task) => task.completed).length;
+  const [isPremium, setIsPremium] = useState(
+    () => localStorage.getItem("lifeos_premium") === "true"
+  );
+
+  const completedTasks = tasks.filter(
+    (task) => task.completed
+  ).length;
 
   const earnedXP = tasks
     .filter((task) => task.completed)
@@ -37,13 +44,19 @@ function App() {
 
   const totalXP = 1000;
   const currentXP = 720 + earnedXP;
-  const progress = Math.min((currentXP / totalXP) * 100, 100);
+  const progress = Math.min(
+    (currentXP / totalXP) * 100,
+    100
+  );
 
   const toggleTask = (id) => {
     setTasks((currentTasks) =>
       currentTasks.map((task) =>
         task.id === id
-          ? { ...task, completed: !task.completed }
+          ? {
+              ...task,
+              completed: !task.completed,
+            }
           : task
       )
     );
@@ -57,13 +70,17 @@ function App() {
       <header className="navbar">
         <div className="logo">
           <div className="logo-mark">L</div>
-          <span>LIFE<span>OS</span></span>
+
+          <span>
+            LIFE<span>OS</span>
+          </span>
         </div>
 
         <nav>
           <a href="#home">Главная</a>
           <a href="#quests">Квесты</a>
           <a href="#stats">Статистика</a>
+          <a href="#premium">Premium</a>
         </nav>
 
         <button className="profile-button">
@@ -72,7 +89,12 @@ function App() {
       </header>
 
       <main>
-        <section className="hero" id="home">
+        {/* HERO */}
+
+        <section
+          className="hero"
+          id="home"
+        >
           <div className="hero-content">
             <div className="badge">
               <span className="red-dot"></span>
@@ -95,11 +117,17 @@ function App() {
                 className="primary-button"
                 onClick={() => setStarted(true)}
               >
-                {started ? "LIFEOS АКТИВЕН" : "НАЧАТЬ ПРОКАЧКУ"}
+                {started
+                  ? "LIFEOS АКТИВЕН"
+                  : "НАЧАТЬ ПРОКАЧКУ"}
+
                 <span>→</span>
               </button>
 
-              <a className="secondary-button" href="#quests">
+              <a
+                className="secondary-button"
+                href="#quests"
+              >
                 Посмотреть квесты
               </a>
             </div>
@@ -126,30 +154,45 @@ function App() {
             </div>
           </div>
 
+          {/* PLAYER CARD */}
+
           <div className="hero-card-wrapper">
             <div className="hero-card">
               <div className="card-top">
                 <span>PLAYER PROFILE</span>
-                <span className="online">● ONLINE</span>
+
+                <span className="online">
+                  ● ONLINE
+                </span>
               </div>
 
               <div className="avatar">
-                <div className="avatar-inner">L</div>
+                <div className="avatar-inner">
+                  L
+                </div>
               </div>
 
               <h2>PLAYER</h2>
-              <p className="player-title">LEVEL 07 • BUILDER</p>
+
+              <p className="player-title">
+                LEVEL 07 • BUILDER
+              </p>
 
               <div className="xp-section">
                 <div className="xp-label">
                   <span>EXPERIENCE</span>
-                  <span>{currentXP} / 1000 XP</span>
+
+                  <span>
+                    {currentXP} / 1000 XP
+                  </span>
                 </div>
 
                 <div className="xp-bar">
                   <div
                     className="xp-progress"
-                    style={{ width: `${progress}%` }}
+                    style={{
+                      width: `${progress}%`,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -157,23 +200,39 @@ function App() {
               <div className="card-bottom">
                 <div>
                   <span>STREAK</span>
-                  <strong>🔥 5 DAYS</strong>
+
+                  <strong>
+                    🔥 5 DAYS
+                  </strong>
                 </div>
 
                 <div>
                   <span>RANK</span>
-                  <strong>#042</strong>
+
+                  <strong>
+                    #042
+                  </strong>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section" id="quests">
+        {/* QUESTS */}
+
+        <section
+          className="section"
+          id="quests"
+        >
           <div className="section-heading">
             <div>
-              <div className="section-label">01 / DAILY SYSTEM</div>
-              <h2>Квесты на сегодня</h2>
+              <div className="section-label">
+                01 / DAILY SYSTEM
+              </div>
+
+              <h2>
+                Квесты на сегодня
+              </h2>
             </div>
 
             <div className="quest-counter">
@@ -186,15 +245,24 @@ function App() {
               <button
                 key={task.id}
                 className={`task ${
-                  task.completed ? "completed" : ""
+                  task.completed
+                    ? "completed"
+                    : ""
                 }`}
-                onClick={() => toggleTask(task.id)}
+                onClick={() =>
+                  toggleTask(task.id)
+                }
               >
                 <div className="task-left">
-                  <div className="task-icon">{task.icon}</div>
+                  <div className="task-icon">
+                    {task.icon}
+                  </div>
 
                   <div className="task-info">
-                    <strong>{task.title}</strong>
+                    <strong>
+                      {task.title}
+                    </strong>
+
                     <span>
                       {task.completed
                         ? "QUEST COMPLETED"
@@ -204,10 +272,14 @@ function App() {
                 </div>
 
                 <div className="task-right">
-                  <span className="task-xp">+{task.xp} XP</span>
+                  <span className="task-xp">
+                    +{task.xp} XP
+                  </span>
 
                   <div className="check">
-                    {task.completed ? "✓" : ""}
+                    {task.completed
+                      ? "✓"
+                      : ""}
                   </div>
                 </div>
               </button>
@@ -215,45 +287,97 @@ function App() {
           </div>
         </section>
 
-        <section className="section stats-section" id="stats">
-          <div className="section-label">02 / PROGRESS</div>
+        {/* STATS */}
+
+        <section
+          className="section stats-section"
+          id="stats"
+        >
+          <div className="section-label">
+            02 / PROGRESS
+          </div>
 
           <div className="stats-grid">
             <div className="stat-card">
               <span>LEVEL</span>
+
               <strong>07</strong>
-              <small>KEEP GOING</small>
+
+              <small>
+                KEEP GOING
+              </small>
             </div>
 
             <div className="stat-card">
               <span>TOTAL XP</span>
-              <strong>{currentXP}</strong>
-              <small>EXPERIENCE</small>
+
+              <strong>
+                {currentXP}
+              </strong>
+
+              <small>
+                EXPERIENCE
+              </small>
             </div>
 
             <div className="stat-card">
               <span>STREAK</span>
+
               <strong>5</strong>
-              <small>DAYS ACTIVE</small>
+
+              <small>
+                DAYS ACTIVE
+              </small>
             </div>
 
             <div className="stat-card red-card">
               <span>NEXT LEVEL</span>
-              <strong>{Math.max(1000 - currentXP, 0)}</strong>
-              <small>XP REMAINING</small>
+
+              <strong>
+                {Math.max(
+                  1000 - currentXP,
+                  0
+                )}
+              </strong>
+
+              <small>
+                XP REMAINING
+              </small>
             </div>
           </div>
         </section>
 
+        {/* PREMIUM */}
+
+        <section
+          className="section"
+          id="premium"
+        >
+          <div className="section-label">
+            03 / PREMIUM
+          </div>
+
+          <Premium
+            isPremium={isPremium}
+            onActivate={setIsPremium}
+          />
+        </section>
+
+        {/* CTA */}
+
         <section className="cta">
           <div className="cta-glow"></div>
 
-          <div className="section-label">03 / LIFEOS</div>
+          <div className="section-label">
+            04 / LIFEOS
+          </div>
 
           <h2>
             Твоя жизнь.
             <br />
-            <span>Твои правила.</span>
+            <span>
+              Твои правила.
+            </span>
           </h2>
 
           <p>
@@ -269,23 +393,34 @@ function App() {
                 top: 0,
                 behavior: "smooth",
               });
+
               setStarted(true);
             }}
           >
-            НАЧАТЬ СЕЙЧАС <span>→</span>
+            НАЧАТЬ СЕЙЧАС
+            <span>→</span>
           </button>
         </section>
       </main>
-<Premium />
+
+      {/* FOOTER */}
+
       <footer>
         <div className="footer-logo">
-          <div className="logo-mark small">L</div>
+          <div className="logo-mark small">
+            L
+          </div>
+
           LIFEOS
         </div>
 
-        <span>BUILD YOURSELF.</span>
+        <span>
+          BUILD YOURSELF.
+        </span>
 
-        <span>© 2026 LIFEOS</span>
+        <span>
+          © 2026 LIFEOS
+        </span>
       </footer>
     </div>
   );
