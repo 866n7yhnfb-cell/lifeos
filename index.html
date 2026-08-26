@@ -3,30 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d1d">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>LifeOS v0.9</title>
+<meta name="theme-color" content="#080d1b">
+<title>LifeOS v0.9.2</title>
 
 <style>
 :root{
-  --bg:#070c19;
-  --bg2:#0b1122;
-  --panel:rgba(18,25,48,.82);
-  --panel2:rgba(13,20,39,.92);
-  --border:rgba(145,157,205,.17);
-  --text:#f5f7ff;
-  --muted:#929bb9;
-  --muted2:#68728f;
-  --purple:#6652ff;
-  --purple2:#8a72ff;
-  --blue:#5d9cff;
-  --cyan:#5ce0d0;
-  --green:#4ed4b0;
-  --orange:#ffad5c;
-  --red:#ff7184;
-  --shadow:0 18px 50px rgba(0,0,0,.32);
-  --radius:20px;
+  --bg:#080d1b;
+  --bg2:#0d1426;
+  --panel:rgba(17,25,46,.82);
+  --panel2:rgba(24,34,60,.78);
+  --border:rgba(148,163,255,.16);
+  --text:#f7f8ff;
+  --muted:#8e98b5;
+  --muted2:#66708e;
+  --primary:#635bff;
+  --primary2:#8b5cf6;
+  --blue:#5ea7ff;
+  --green:#55d6b0;
+  --orange:#ffad66;
+  --red:#ff6b81;
+  --shadow:0 20px 60px rgba(0,0,0,.28);
 }
 
 *{
@@ -40,19 +36,12 @@ html{
 body{
   margin:0;
   min-height:100vh;
-  color:var(--text);
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
-    radial-gradient(circle at 75% 10%, rgba(87,74,255,.13), transparent 28%),
-    radial-gradient(circle at 15% 75%, rgba(51,110,255,.08), transparent 30%),
-    linear-gradient(135deg,#060a15,#0a1020 50%,#070c18);
+    radial-gradient(circle at 70% 10%,rgba(92,80,255,.13),transparent 28%),
+    radial-gradient(circle at 20% 80%,rgba(72,116,255,.08),transparent 25%),
+    var(--bg);
+  color:var(--text);
 }
 
 button,
@@ -64,6 +53,7 @@ select{
 
 button{
   border:0;
+  cursor:pointer;
 }
 
 .app{
@@ -72,190 +62,134 @@ button{
 }
 
 /* =========================
-   SVG ICON SYSTEM
-========================= */
-
-.icon{
-  width:22px;
-  height:22px;
-  display:inline-block;
-  flex:none;
-  stroke:currentColor;
-  fill:none;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-.icon.sm{
-  width:18px;
-  height:18px;
-}
-
-.icon.lg{
-  width:28px;
-  height:28px;
-}
-
-.icon.xl{
-  width:34px;
-  height:34px;
-}
-
-.icon-fill{
-  fill:currentColor;
-  stroke:none;
-}
-
-/* =========================
    SIDEBAR
 ========================= */
 
 .sidebar{
-  width:205px;
-  min-width:205px;
-  min-height:100vh;
-  padding:18px 10px 20px;
-  border-right:1px solid rgba(148,160,208,.14);
-  background:
-    linear-gradient(180deg,rgba(7,12,26,.96),rgba(8,13,26,.82));
-  position:sticky;
+  width:220px;
+  position:fixed;
+  left:0;
   top:0;
-  height:100vh;
-  z-index:20;
+  bottom:0;
+  z-index:50;
+  padding:22px 14px;
+  border-right:1px solid rgba(255,255,255,.08);
+  background:
+    linear-gradient(180deg,rgba(10,15,29,.98),rgba(8,13,25,.98));
 }
 
-.logo{
-  padding:4px 10px 22px;
+.brand{
+  padding:0 8px 25px;
 }
 
-.logo-mark{
+.brand-logo{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:10px;
 }
 
-.logo-symbol{
-  width:35px;
-  height:35px;
-  position:relative;
+.brand-mark{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#6b5cff,#57a6ff);
+  box-shadow:0 10px 30px rgba(99,91,255,.35);
 }
 
-.logo-symbol span{
-  position:absolute;
-  display:block;
-  height:10px;
-  border-radius:999px;
-  transform:skewX(-25deg) rotate(-18deg);
-}
-
-.logo-symbol span:nth-child(1){
-  width:30px;
-  left:1px;
-  top:5px;
-  background:linear-gradient(90deg,#637bff,#80b5ff);
-}
-
-.logo-symbol span:nth-child(2){
+.brand-mark svg{
   width:25px;
-  left:5px;
-  top:16px;
-  background:linear-gradient(90deg,#7d60ff,#72aaff);
+  height:25px;
+  fill:white;
 }
 
-.logo-symbol span:nth-child(3){
-  width:20px;
-  left:0;
-  top:25px;
-  background:linear-gradient(90deg,#5263d9,#a073ff);
-}
-
-.logo-name{
+.brand-name{
   font-size:25px;
   font-weight:800;
-  letter-spacing:-1.1px;
+  letter-spacing:-1px;
 }
 
-.logo-sub{
-  margin-top:7px;
-  color:#d6daeb;
+.brand-sub{
+  margin-top:8px;
   font-size:12px;
+  color:#d1d5e4;
 }
 
 .nav{
   display:flex;
   flex-direction:column;
-  gap:5px;
+  gap:6px;
 }
 
-.nav-item{
+.nav-btn{
+  position:relative;
   width:100%;
-  height:58px;
+  height:54px;
+  padding:0 14px;
+  border-radius:13px;
   display:flex;
   align-items:center;
-  gap:15px;
-  padding:0 14px;
-  color:#b8c0db;
-  border-radius:14px;
+  gap:14px;
+  color:#b8c0d8;
   background:transparent;
-  cursor:pointer;
-  transition:.2s ease;
   text-align:left;
+  transition:.2s ease;
 }
 
-.nav-item:hover{
-  color:#fff;
-  background:rgba(103,82,255,.09);
+.nav-btn svg{
+  width:23px;
+  height:23px;
+  stroke:currentColor;
 }
 
-.nav-item.active{
-  color:#fff;
-  background:linear-gradient(135deg,#5c45e9,#7458ff);
-  box-shadow:
-    0 10px 28px rgba(101,76,255,.33),
-    inset 0 1px 0 rgba(255,255,255,.16);
-}
-
-.nav-icon{
-  width:26px;
-  display:flex;
-  justify-content:center;
-  color:#c2c9ed;
-}
-
-.nav-item.active .nav-icon{
+.nav-btn:hover{
+  background:rgba(99,91,255,.10);
   color:#fff;
 }
 
-.nav-label{
-  font-size:14px;
-  font-weight:500;
+.nav-btn.active{
+  color:white;
+  background:linear-gradient(135deg,#685cf5,#5c4ce9);
+  box-shadow:0 10px 30px rgba(88,72,230,.32);
 }
 
-.sidebar-bottom{
+.sidebar-card{
   position:absolute;
-  left:17px;
-  right:17px;
-  bottom:18px;
+  left:14px;
+  right:14px;
+  bottom:20px;
+  min-height:220px;
+  border-radius:16px;
   border:1px solid var(--border);
-  border-radius:15px;
-  padding:14px;
-  overflow:hidden;
   background:
-    radial-gradient(circle at 70% 120%,rgba(83,72,255,.32),transparent 40%),
-    rgba(19,26,49,.7);
+    linear-gradient(180deg,rgba(27,37,66,.8),rgba(15,22,42,.8));
+  padding:18px;
+  overflow:hidden;
 }
 
-.sidebar-version{
-  font-weight:700;
-  font-size:14px;
-  margin-bottom:9px;
+.sidebar-card h3{
+  margin:0 0 12px;
+  font-size:16px;
 }
 
-.sidebar-lines{
-  color:#919ab9;
-  line-height:1.65;
-  font-size:11px;
+.sidebar-card p{
+  margin:7px 0;
+  color:#aab3cc;
+  font-size:13px;
+}
+
+.sidebar-card:after{
+  content:"";
+  position:absolute;
+  left:-20px;
+  right:-20px;
+  bottom:-35px;
+  height:100px;
+  background:
+    linear-gradient(145deg,transparent 30%,rgba(99,91,255,.25)),
+    linear-gradient(35deg,transparent 50%,rgba(73,123,255,.15));
+  transform:skewY(-8deg);
 }
 
 /* =========================
@@ -263,105 +197,107 @@ button{
 ========================= */
 
 .main{
-  flex:1;
-  min-width:0;
-  padding:0 18px 30px;
+  width:calc(100% - 220px);
+  margin-left:220px;
+  min-height:100vh;
 }
 
 .topbar{
   height:68px;
+  border-bottom:1px solid rgba(255,255,255,.07);
   display:flex;
   align-items:center;
   justify-content:flex-end;
   gap:12px;
-  border-bottom:1px solid rgba(148,160,208,.12);
+  padding:0 28px;
 }
 
-.circle-btn{
-  width:44px;
-  height:44px;
-  border-radius:50%;
+.icon-btn{
+  width:46px;
+  height:46px;
+  border-radius:15px;
   display:grid;
   place-items:center;
-  color:#cbd2eb;
-  border:1px solid rgba(145,157,205,.16);
-  background:rgba(17,25,47,.72);
-  cursor:pointer;
+  color:#cbd2e8;
+  background:rgba(20,29,51,.7);
+  border:1px solid var(--border);
   transition:.2s;
 }
 
-.circle-btn:hover{
+.icon-btn:hover{
   color:#fff;
+  border-color:rgba(130,117,255,.45);
   transform:translateY(-1px);
-  background:rgba(34,43,76,.85);
 }
 
-.page{
-  width:100%;
-  max-width:1120px;
+.icon-btn svg{
+  width:21px;
+  height:21px;
+  stroke:currentColor;
+}
+
+.content{
+  max-width:1320px;
   margin:0 auto;
+  padding:24px 20px 40px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.page-header{
+.hero-header{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
+  align-items:flex-start;
   gap:20px;
-  padding:21px 18px 18px;
+  margin-bottom:28px;
 }
 
 .greeting h1{
   margin:0;
-  font-size:37px;
-  letter-spacing:-1.7px;
+  font-size:39px;
+  letter-spacing:-1.5px;
 }
 
 .greeting p{
-  margin:5px 0 0;
-  color:#a4aecb;
+  margin:7px 0 0;
+  color:#9ca6c1;
   font-size:18px;
 }
 
 .date-box{
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:14px;
 }
 
-.date-text{
+.date-info{
   text-align:right;
 }
 
-.date-label{
-  color:#a5aec3;
+.date-info span{
+  display:block;
+  color:#9da6bf;
   font-size:13px;
 }
 
-.date-main{
+.date-info strong{
+  display:block;
   margin-top:3px;
-  font-weight:700;
-  font-size:18px;
+  font-size:20px;
 }
 
-.date-week{
-  margin-top:3px;
-  color:#858faa;
-  font-size:12px;
-}
-
-.weather-btn{
+.date-icon{
   width:64px;
   height:64px;
-  border-radius:15px;
+  border-radius:16px;
   display:grid;
   place-items:center;
-  color:#ffc453;
   border:1px solid var(--border);
-  background:rgba(19,27,49,.72);
+  background:rgba(24,34,59,.8);
+  color:#ffbf57;
+}
+
+.date-icon svg{
+  width:31px;
+  height:31px;
 }
 
 /* =========================
@@ -369,152 +305,98 @@ button{
 ========================= */
 
 .hero{
-  min-height:225px;
   position:relative;
+  min-height:225px;
   overflow:hidden;
-  border:1px solid rgba(149,163,217,.2);
-  border-radius:20px;
-  margin:0 0 18px;
+  border-radius:22px;
+  border:1px solid rgba(151,163,255,.18);
   background:
-    linear-gradient(90deg,
-      rgba(18,23,51,.34),
-      rgba(20,20,47,.12)),
-    radial-gradient(circle at 70% 35%,rgba(255,142,97,.7),transparent 27%),
-    linear-gradient(135deg,#273462,#8a4963 45%,#2d3d6b);
+    linear-gradient(90deg,rgba(8,13,26,.30),rgba(8,13,26,.72)),
+    radial-gradient(circle at 25% 30%,#8a4c6c,transparent 28%),
+    linear-gradient(120deg,#1d294b,#51365c 50%,#111a32);
   box-shadow:var(--shadow);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(ellipse at 50% 80%,rgba(251,129,74,.6),transparent 24%),
-    linear-gradient(180deg,transparent 45%,rgba(4,9,22,.76));
-}
-
-.mountains{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:58%;
-  opacity:.85;
-  overflow:hidden;
-}
-
-.mountain{
-  position:absolute;
-  bottom:-35px;
-  width:70%;
-  height:160px;
-  background:linear-gradient(150deg,#202b53,#10172f);
-  clip-path:polygon(
-    0 100%,
-    12% 67%,
-    22% 76%,
-    35% 37%,
-    46% 64%,
-    56% 20%,
-    67% 65%,
-    80% 47%,
-    100% 100%
-  );
-}
-
-.mountain.two{
-  right:-10%;
-  width:65%;
-  height:125px;
-  opacity:.7;
-  transform:scaleX(-1);
-  background:linear-gradient(150deg,#171e3d,#0b1228);
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  height:100%;
-  min-height:225px;
+  padding:38px 42px;
   display:flex;
   justify-content:space-between;
-  padding:34px 34px 24px 42px;
+  align-items:center;
 }
 
-.hero-message{
-  max-width:390px;
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:auto -10% -50px;
+  height:150px;
+  background:
+    linear-gradient(150deg,transparent 25%,rgba(15,25,53,.75) 26%,rgba(15,25,53,.75) 42%,transparent 43%),
+    linear-gradient(30deg,transparent 35%,rgba(8,15,34,.8) 36%,rgba(8,15,34,.8) 54%,transparent 55%);
+  opacity:.85;
 }
 
-.hero-message h2{
+.hero-copy{
+  position:relative;
+  z-index:1;
+  max-width:430px;
+}
+
+.hero-copy h2{
   margin:0;
-  white-space:pre-line;
-  font-size:22px;
-  line-height:1.42;
+  font-size:23px;
+  line-height:1.4;
   font-weight:500;
 }
 
-.hero-brand{
-  margin-top:36px;
-  color:#b2b9d0;
-  font-size:12px;
+.hero-copy p{
+  color:#cbd1e0;
+  font-size:13px;
+  margin-top:28px;
 }
 
 .progress-box{
-  width:295px;
-  align-self:flex-start;
-  padding:18px 18px 18px;
-  border:1px solid rgba(162,172,216,.16);
-  border-radius:17px;
-  background:rgba(13,19,39,.52);
-  backdrop-filter:blur(10px);
+  position:relative;
+  z-index:1;
+  width:300px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(10,16,33,.45);
+  backdrop-filter:blur(14px);
+  border-radius:18px;
 }
 
 .progress-title{
-  color:#b9c0d6;
-  font-size:12px;
+  color:#adb5cd;
+  font-size:13px;
+  margin-bottom:12px;
 }
 
-.progress-row{
-  margin-top:10px;
+.progress-content{
   display:flex;
   align-items:center;
-  gap:17px;
+  gap:18px;
 }
 
-.progress-ring{
-  width:91px;
-  height:91px;
-  position:relative;
+.ring{
+  width:94px;
+  height:94px;
+  border-radius:50%;
   display:grid;
   place-items:center;
+  position:relative;
+  background:conic-gradient(#5d9cff 0 68%,rgba(100,112,180,.25) 68% 100%);
 }
 
-.progress-ring svg{
+.ring:before{
+  content:"";
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  transform:rotate(-90deg);
+  inset:9px;
+  background:#17203a;
+  border-radius:50%;
 }
 
-.progress-ring .track{
-  stroke:rgba(86,102,168,.3);
-  stroke-width:8;
-  fill:none;
-}
-
-.progress-ring .value{
-  stroke:url(#progressGradient);
-  stroke-width:8;
-  fill:none;
-  stroke-linecap:round;
-  stroke-dasharray:220;
-  stroke-dashoffset:70;
-}
-
-.progress-number{
-  font-size:18px;
+.ring span{
+  position:relative;
+  z-index:1;
   font-weight:700;
+  font-size:18px;
 }
 
 .progress-list{
@@ -526,16 +408,16 @@ button{
 
 .progress-list div{
   display:flex;
-  align-items:center;
   gap:7px;
+  align-items:center;
 }
 
-.dot{
-  width:9px;
-  height:9px;
+.progress-list i{
+  width:8px;
+  height:8px;
   border-radius:50%;
-  background:#7662ff;
-  box-shadow:0 0 10px rgba(118,98,255,.6);
+  background:#6d78ff;
+  box-shadow:0 0 8px #6d78ff;
 }
 
 /* =========================
@@ -546,96 +428,69 @@ button{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:14px;
-  margin-bottom:18px;
+  margin:18px 0;
 }
 
 .quick-card{
   min-height:150px;
-  position:relative;
-  padding:20px 18px 17px;
-  overflow:hidden;
-  border:1px solid var(--border);
+  padding:20px;
   border-radius:18px;
-  background:
-    linear-gradient(145deg,rgba(22,31,56,.9),rgba(14,21,40,.9));
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,rgba(22,31,54,.9),rgba(13,20,38,.9));
+  transition:.22s;
   cursor:pointer;
-  transition:.22s ease;
 }
 
 .quick-card:hover{
   transform:translateY(-3px);
-  border-color:rgba(120,104,255,.35);
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  border-color:rgba(119,105,255,.42);
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
 }
 
 .quick-icon{
-  width:41px;
-  height:41px;
+  width:40px;
+  height:40px;
+  border-radius:11px;
   display:grid;
   place-items:center;
-  border-radius:11px;
-  margin-bottom:18px;
+  margin-bottom:17px;
 }
 
-.quick-card:nth-child(1) .quick-icon{
-  color:#8d79ff;
-  background:rgba(104,81,255,.18);
+.quick-icon svg{
+  width:23px;
+  height:23px;
+  stroke:white;
 }
 
-.quick-card:nth-child(2) .quick-icon{
-  color:#5edbc2;
-  background:rgba(66,208,177,.17);
+.purple{background:linear-gradient(135deg,#685cff,#8d62ff)}
+.green{background:linear-gradient(135deg,#3fd0ac,#61e0b8)}
+.orange{background:linear-gradient(135deg,#ff9f50,#ffc05c)}
+.blue{background:linear-gradient(135deg,#5b88ff,#715cff)}
+.red{background:linear-gradient(135deg,#ff6c82,#ff8595)}
+
+.quick-card h3{
+  margin:0;
+  font-size:16px;
 }
 
-.quick-card:nth-child(3) .quick-icon{
-  color:#ffb15e;
-  background:rgba(255,166,72,.16);
-}
-
-.quick-card:nth-child(4) .quick-icon{
-  color:#846eff;
-  background:rgba(114,90,255,.17);
-}
-
-.quick-card:nth-child(5) .quick-icon{
-  color:#ff7183;
-  background:rgba(255,90,110,.14);
-}
-
-.quick-card:nth-child(6) .quick-icon{
-  color:#5da9ff;
-  background:rgba(65,139,255,.14);
-}
-
-.quick-card:nth-child(7) .quick-icon{
-  color:#5de0d0;
-  background:rgba(63,212,196,.14);
-}
-
-.quick-title{
-  font-weight:700;
-  font-size:15px;
-}
-
-.quick-sub{
-  margin-top:5px;
-  color:#8d96b1;
-  font-size:11px;
-  line-height:1.45;
+.quick-card p{
+  margin:6px 0 0;
+  color:#929cb8;
+  font-size:12px;
 }
 
 .quick-arrow{
-  position:absolute;
-  right:16px;
-  bottom:14px;
-  color:#8791b2;
+  float:right;
+  color:#9aa4c3;
+  font-size:20px;
+  margin-top:-3px;
 }
 
 /* =========================
    GRID
 ========================= */
 
-.content-grid{
+.dashboard-grid{
   display:grid;
   grid-template-columns:1.05fr .95fr;
   gap:14px;
@@ -644,158 +499,115 @@ button{
 .card{
   border:1px solid var(--border);
   border-radius:18px;
-  background:
-    linear-gradient(145deg,rgba(19,28,51,.9),rgba(12,19,37,.92));
-  box-shadow:0 12px 35px rgba(0,0,0,.14);
-  overflow:hidden;
+  background:linear-gradient(145deg,rgba(20,29,51,.88),rgba(12,19,37,.92));
+  box-shadow:0 12px 40px rgba(0,0,0,.12);
 }
 
 .card-header{
-  height:56px;
-  padding:0 19px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid rgba(147,158,201,.1);
+  align-items:center;
+  padding:18px 20px 12px;
 }
 
-.card-title{
-  font-size:16px;
-  font-weight:700;
+.card-header h2{
+  margin:0;
+  font-size:17px;
 }
 
-.card-link{
-  color:#927fff;
-  font-size:11px;
+.card-header a{
+  color:#9589ff;
+  font-size:12px;
   cursor:pointer;
 }
 
-.card-link:hover{
-  color:#b2a4ff;
+.card-body{
+  padding:0 20px 20px;
 }
 
 /* =========================
    CALENDAR
 ========================= */
 
-.calendar-card{
-  min-height:327px;
+.calendar{
+  padding-bottom:18px;
 }
 
 .calendar-top{
   display:flex;
   align-items:center;
-  gap:7px;
+  justify-content:space-between;
+  padding:18px 20px 12px;
 }
 
-.month{
-  font-size:16px;
-  font-weight:700;
-  margin-right:auto;
+.calendar-top strong{
+  font-size:17px;
 }
 
-.cal-btn{
-  width:31px;
-  height:31px;
-  display:grid;
-  place-items:center;
-  color:#aeb7d0;
-  border-radius:9px;
-  background:transparent;
+.calendar-actions{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+
+.small-btn{
+  border:1px solid var(--border);
+  color:#aeb6cf;
+  background:rgba(28,38,66,.65);
+  border-radius:10px;
+  padding:7px 11px;
   cursor:pointer;
 }
 
-.cal-btn:hover{
-  background:rgba(120,105,255,.1);
-  color:#fff;
-}
-
-.today-btn{
-  height:31px;
-  padding:0 12px;
-  color:#cbd1e7;
-  border:1px solid rgba(144,155,199,.15);
-  border-radius:12px;
-  background:rgba(39,48,76,.45);
-  cursor:pointer;
-  font-size:11px;
-}
-
-.calendar{
-  padding:15px 18px 18px;
-}
-
-.weekdays,
-.days{
+.week{
   display:grid;
   grid-template-columns:repeat(7,1fr);
+  padding:0 15px;
+  color:#737d9c;
+  font-size:11px;
   text-align:center;
 }
 
-.weekdays{
-  margin-bottom:7px;
-}
-
-.weekdays span{
-  color:#7f89a6;
-  font-size:10px;
-}
-
 .days{
-  row-gap:4px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  padding:8px 15px 0;
 }
 
 .day{
-  height:35px;
+  height:38px;
   display:grid;
   place-items:center;
   border-radius:50%;
-  color:#eef1fb;
+  color:#e2e5f0;
   font-size:12px;
   cursor:pointer;
-  position:relative;
 }
 
 .day:hover{
-  background:rgba(111,94,255,.14);
+  background:rgba(100,91,255,.18);
 }
 
 .day.muted{
-  color:#46506d;
+  color:#4d5673;
 }
 
 .day.today{
-  width:35px;
-  justify-self:center;
-  color:#fff;
-  background:linear-gradient(145deg,#6650ff,#7b5cff);
-  box-shadow:0 7px 20px rgba(96,76,255,.35);
-}
-
-.day.event::after{
-  content:"";
-  position:absolute;
-  bottom:2px;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:#6e9fff;
+  background:linear-gradient(135deg,#6256ff,#784cff);
+  box-shadow:0 8px 20px rgba(95,78,255,.35);
 }
 
 /* =========================
    TASKS
 ========================= */
 
-.tasks{
-  padding:5px 19px 8px;
-}
-
 .task{
-  min-height:53px;
   display:flex;
   align-items:center;
-  gap:10px;
-  border-bottom:1px solid rgba(142,154,197,.09);
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .task:last-child{
@@ -805,24 +617,23 @@ button{
 .check{
   width:21px;
   height:21px;
+  flex:none;
   border-radius:7px;
-  border:2px solid #8b96bc;
+  border:2px solid #7884b7;
   display:grid;
   place-items:center;
   cursor:pointer;
-  color:#fff;
-  flex:none;
-  background:transparent;
 }
 
 .check.done{
-  border-color:#705aff;
-  background:#705aff;
+  border-color:#695bff;
+  background:#695bff;
 }
 
 .check svg{
-  width:13px;
-  height:13px;
+  width:14px;
+  height:14px;
+  stroke:white;
   display:none;
 }
 
@@ -830,33 +641,28 @@ button{
   display:block;
 }
 
-.task-info{
+.task-main{
   flex:1;
-  min-width:0;
 }
 
-.task-name{
-  font-size:12px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.task-title{
+  font-size:13px;
 }
 
-.task-name.done{
-  color:#6f7895;
+.task.done .task-title{
   text-decoration:line-through;
+  color:#69728d;
 }
 
 .task-time{
   margin-top:3px;
-  color:#79839f;
-  font-size:10px;
+  color:#818ba7;
+  font-size:11px;
 }
 
 .task-more{
-  color:#737d9e;
+  color:#707b9a;
   cursor:pointer;
-  font-size:18px;
 }
 
 /* =========================
@@ -865,132 +671,96 @@ button{
 
 .lower-grid{
   display:grid;
-  grid-template-columns:1fr 1.08fr .92fr;
+  grid-template-columns:1fr 1fr 1fr;
   gap:14px;
   margin-top:14px;
 }
 
-.timer-card,
-.alarm-card,
-.note-card{
-  min-height:300px;
-}
-
-.card-body{
-  padding:16px 19px;
-}
-
 /* TIMER */
 
+.timer-card{
+  min-height:315px;
+}
+
 .timer-select{
-  height:34px;
-  width:100%;
-  padding:0 10px;
-  color:#a99dff;
-  border:1px solid rgba(108,91,255,.16);
+  margin:0 20px;
+  width:calc(100% - 40px);
+  padding:9px 12px;
+  color:#aaa4e7;
+  background:#202947;
+  border:0;
   border-radius:10px;
-  outline:0;
-  background:rgba(65,55,128,.18);
-  font-size:11px;
+  outline:none;
 }
 
 .timer-circle{
-  width:153px;
-  height:153px;
-  margin:13px auto 9px;
-  position:relative;
+  width:150px;
+  height:150px;
+  margin:18px auto;
+  border-radius:50%;
   display:grid;
   place-items:center;
+  background:conic-gradient(#705eff 0 82%,#283254 82% 100%);
+  position:relative;
 }
 
-.timer-circle svg{
+.timer-circle:before{
+  content:"";
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  transform:rotate(-90deg);
+  inset:11px;
+  background:#151e38;
+  border-radius:50%;
 }
 
-.timer-track{
-  fill:none;
-  stroke:rgba(70,81,136,.4);
-  stroke-width:9;
-}
-
-.timer-progress{
-  fill:none;
-  stroke:#715cff;
-  stroke-width:9;
-  stroke-linecap:round;
-  stroke-dasharray:420;
-  stroke-dashoffset:95;
-  filter:drop-shadow(0 0 7px rgba(108,86,255,.4));
-}
-
-.timer-value{
-  font-size:27px;
-  font-weight:500;
-  letter-spacing:-1px;
+.timer-time{
+  position:relative;
+  z-index:1;
+  font-size:28px;
 }
 
 .primary-btn{
-  height:43px;
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-  color:#fff;
-  border-radius:12px;
-  background:linear-gradient(135deg,#6449ed,#795aff);
-  box-shadow:0 8px 20px rgba(102,77,255,.28);
-  cursor:pointer;
-  transition:.2s;
+  height:45px;
+  border-radius:13px;
+  width:calc(100% - 40px);
+  margin:0 20px;
+  color:white;
+  background:linear-gradient(135deg,#6253ff,#7449ef);
+  box-shadow:0 10px 25px rgba(94,73,240,.28);
 }
 
-.primary-btn:hover{
-  filter:brightness(1.08);
-}
-
-.timer-actions{
+.timer-controls{
   display:flex;
   justify-content:center;
-  gap:13px;
+  gap:12px;
   margin-top:10px;
 }
 
-.small-round{
-  width:38px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  color:#aeb7d1;
-  border-radius:10px;
-  border:1px solid rgba(145,156,201,.1);
-  background:rgba(31,40,67,.55);
-  cursor:pointer;
+.round-btn{
+  width:42px;
+  height:36px;
+  border-radius:12px;
+  color:#b5bee0;
+  background:#202947;
 }
 
-/* ALARM */
+/* ALARMS */
 
 .alarm-list{
-  padding:4px 18px 0;
+  padding:0 20px;
 }
 
 .alarm{
-  min-height:52px;
   display:flex;
   align-items:center;
-  gap:10px;
-  border-bottom:1px solid rgba(142,154,197,.09);
+  gap:11px;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.alarm:last-child{
-  border-bottom:0;
-}
-
-.alarm-icon{
-  color:#a9b6df;
+.alarm svg{
+  width:22px;
+  height:22px;
+  stroke:#aeb9e5;
 }
 
 .alarm-info{
@@ -998,345 +768,322 @@ button{
 }
 
 .alarm-time{
-  font-size:13px;
+  font-size:14px;
 }
 
-.alarm-label{
-  margin-top:2px;
-  color:#7f89a7;
+.alarm-repeat{
   font-size:10px;
+  color:#7f89a7;
+  margin-top:2px;
 }
 
-.toggle{
-  width:37px;
+.switch{
+  width:38px;
   height:21px;
-  border-radius:999px;
   padding:3px;
-  background:#252f4c;
+  border-radius:20px;
+  background:#283354;
   cursor:pointer;
 }
 
-.toggle span{
-  display:block;
+.switch span{
   width:15px;
   height:15px;
+  display:block;
   border-radius:50%;
-  background:#9ba8cf;
+  background:#8f9bc0;
   transition:.2s;
 }
 
-.toggle.on{
-  background:#684ff4;
+.switch.on{
+  background:#675aff;
 }
 
-.toggle.on span{
-  transform:translateX(16px);
-  background:#fff;
-}
-
-.add-alarm{
-  width:100%;
-  height:37px;
-  margin-top:11px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  color:#a898ff;
-  border-radius:11px;
-  background:rgba(89,70,221,.19);
-  cursor:pointer;
-  font-size:11px;
+.switch.on span{
+  transform:translateX(17px);
+  background:white;
 }
 
 /* NOTE */
 
-.note-card .card-body{
-  height:calc(100% - 56px);
-  display:flex;
-  flex-direction:column;
+.note-area{
+  margin:0 20px;
 }
 
-.note-input{
-  flex:1;
+.note-area textarea{
   width:100%;
-  min-height:155px;
+  min-height:170px;
   resize:none;
-  outline:none;
+  color:#e9ecf7;
+  background:#19223d;
+  border:1px solid rgba(133,146,205,.12);
+  border-radius:13px;
   padding:14px;
-  color:#e8ebf7;
-  border:1px solid rgba(145,157,205,.12);
+  outline:none;
+}
+
+.note-area textarea:focus{
+  border-color:#6257ff;
+}
+
+.save-note{
+  margin:10px 0 0;
+  width:100%;
+  height:43px;
   border-radius:12px;
-  background:rgba(20,28,51,.65);
-  font-size:11px;
-}
-
-.note-input::placeholder{
-  color:#65708f;
-}
-
-.note-save{
-  margin-top:11px;
+  color:white;
+  background:linear-gradient(135deg,#6255ff,#704be8);
 }
 
 /* =========================
-   QUEST + MAP
+   QUESTS
 ========================= */
 
-.extra-grid{
-  display:grid;
-  grid-template-columns:1fr 1.25fr;
-  gap:14px;
+.quests{
   margin-top:14px;
 }
 
 .quest-list{
-  padding:5px 19px 12px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  padding:0 20px 20px;
 }
 
 .quest{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-height:58px;
-  border-bottom:1px solid rgba(142,154,197,.09);
+  position:relative;
+  padding:16px;
+  border-radius:15px;
+  background:rgba(28,38,67,.55);
+  border:1px solid rgba(137,146,213,.12);
+  overflow:hidden;
 }
 
-.quest:last-child{
-  border-bottom:0;
-}
-
-.quest-badge{
+.quest-icon{
   width:38px;
   height:38px;
   display:grid;
   place-items:center;
   border-radius:11px;
-  color:#9e8cff;
-  background:rgba(108,85,255,.15);
+  margin-bottom:10px;
+  background:linear-gradient(135deg,#6d5dff,#4f9cff);
 }
 
-.quest-info{
-  flex:1;
+.quest-icon svg{
+  width:20px;
+  height:20px;
+  stroke:white;
 }
 
-.quest-name{
-  font-size:12px;
-  font-weight:600;
+.quest h3{
+  margin:0;
+  font-size:14px;
 }
 
-.quest-meta{
-  margin-top:3px;
-  color:#737e9d;
-  font-size:10px;
+.quest p{
+  margin:5px 0 12px;
+  color:#8993b0;
+  font-size:11px;
 }
 
-.quest-xp{
-  color:#a999ff;
-  font-size:10px;
-  font-weight:700;
-}
-
-.world-map{
-  min-height:235px;
-  position:relative;
+.quest-progress{
+  height:6px;
+  border-radius:10px;
+  background:#252f50;
   overflow:hidden;
+}
+
+.quest-progress span{
+  display:block;
+  height:100%;
+  border-radius:10px;
+  background:linear-gradient(90deg,#695cff,#5fa7ff);
+}
+
+.quest-footer{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  color:#9da7c2;
+  font-size:10px;
+}
+
+/* =========================
+   WORLD MAP
+========================= */
+
+.map-card{
+  margin-top:14px;
+  overflow:hidden;
+}
+
+.map{
+  position:relative;
+  height:320px;
+  margin:0 20px 20px;
+  border-radius:15px;
+  overflow:hidden;
+  border:1px solid rgba(136,151,220,.15);
   background:
-    radial-gradient(circle at 50% 48%,rgba(95,78,255,.17),transparent 25%),
-    linear-gradient(145deg,#101b32,#0a1225);
+    radial-gradient(circle at 22% 28%,rgba(102,95,255,.45),transparent 4%),
+    radial-gradient(circle at 72% 32%,rgba(76,153,255,.25),transparent 7%),
+    radial-gradient(circle at 50% 73%,rgba(63,214,175,.20),transparent 8%),
+    linear-gradient(135deg,#101a32,#172747 55%,#0f1830);
 }
 
-.world-map::before{
+.map:before,
+.map:after{
   content:"";
   position:absolute;
-  inset:0;
-  opacity:.25;
-  background-image:
-    linear-gradient(rgba(116,135,188,.16) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(116,135,188,.16) 1px,transparent 1px);
-  background-size:30px 30px;
+  border-radius:48% 52% 43% 57%;
+  background:
+    linear-gradient(145deg,#24365a,#18294a);
+  opacity:.9;
 }
 
-.map-land{
-  position:absolute;
-  border:1px solid rgba(116,144,199,.28);
-  background:rgba(52,69,112,.32);
-  filter:drop-shadow(0 10px 15px rgba(0,0,0,.2));
+.map:before{
+  width:310px;
+  height:180px;
+  left:60px;
+  top:42px;
+  transform:rotate(-9deg);
 }
 
-.land-a{
+.map:after{
   width:280px;
-  height:105px;
-  left:50px;
-  top:60px;
-  border-radius:45% 35% 55% 40%;
-  transform:rotate(-12deg);
-}
-
-.land-b{
-  width:160px;
-  height:80px;
-  right:40px;
+  height:150px;
+  right:35px;
   bottom:35px;
-  border-radius:50% 35% 45% 55%;
-  transform:rotate(16deg);
+  transform:rotate(12deg);
 }
 
-.land-c{
-  width:120px;
-  height:52px;
-  left:225px;
-  bottom:24px;
+.route{
+  position:absolute;
+  left:20%;
+  top:50%;
+  width:61%;
+  height:2px;
+  background:linear-gradient(90deg,#635cff,#5daaff,#57d5b2);
+  transform:rotate(-13deg);
+  z-index:3;
+  box-shadow:0 0 10px rgba(91,123,255,.65);
+}
+
+.location{
+  position:absolute;
+  z-index:5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+}
+
+.location-dot{
+  width:20px;
+  height:20px;
   border-radius:50%;
-  transform:rotate(-20deg);
+  background:#685bff;
+  border:4px solid #bdc5ff;
+  box-shadow:0 0 20px rgba(100,91,255,.8);
 }
 
-.map-path{
-  position:absolute;
-  left:90px;
-  top:118px;
-  width:430px;
-  height:80px;
-  border-top:2px dashed rgba(126,108,255,.45);
-  border-radius:50%;
-  transform:rotate(-7deg);
+.location.locked .location-dot{
+  background:#303a59;
+  border-color:#68728e;
+  box-shadow:none;
 }
 
-.map-point{
-  position:absolute;
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  background:#7660ff;
-  border:3px solid rgba(182,170,255,.3);
-  box-shadow:0 0 20px rgba(119,96,255,.75);
-}
-
-.map-point::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:100%;
-  width:1px;
-  height:17px;
-  background:rgba(144,130,255,.5);
-}
-
-.map-point.one{
-  left:90px;
-  top:115px;
-}
-
-.map-point.two{
-  left:270px;
-  top:91px;
-  background:#5fdac7;
-  box-shadow:0 0 20px rgba(95,218,199,.65);
-}
-
-.map-point.three{
-  right:105px;
-  bottom:62px;
-  background:#ffaf61;
-  box-shadow:0 0 20px rgba(255,175,97,.65);
-}
-
-.map-label{
-  position:absolute;
-  padding:5px 8px;
-  border:1px solid rgba(150,160,206,.14);
+.location-name{
+  padding:4px 8px;
   border-radius:7px;
-  color:#c9cee1;
-  background:rgba(12,19,38,.82);
-  font-size:9px;
+  background:rgba(8,13,27,.78);
+  color:#cbd2e6;
+  font-size:10px;
+  white-space:nowrap;
 }
 
-.map-label.a{
-  left:65px;
-  top:145px;
-}
+.loc1{left:18%;top:40%}
+.loc2{left:41%;top:56%}
+.loc3{left:64%;top:34%}
+.loc4{left:77%;top:67%}
+.loc5{left:52%;top:80%}
 
-.map-label.b{
-  left:242px;
-  top:121px;
-}
-
-.map-label.c{
-  right:62px;
-  bottom:43px;
+.map-badge{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  z-index:6;
+  padding:8px 12px;
+  border-radius:10px;
+  background:rgba(8,13,27,.75);
+  border:1px solid rgba(145,157,222,.16);
+  color:#aeb8d3;
+  font-size:11px;
 }
 
 /* =========================
    STATS
 ========================= */
 
-.stats-card{
+.stats{
   margin-top:14px;
+  padding-bottom:20px;
 }
 
-.stats-body{
-  padding:17px 19px 18px;
+.stats-content{
   display:grid;
-  grid-template-columns:1.45fr 1fr;
-  gap:30px;
-}
-
-.stats-title{
-  color:#a4acc4;
-  font-size:11px;
+  grid-template-columns:1.3fr 1fr;
+  gap:25px;
+  padding:0 20px;
 }
 
 .chart{
-  height:95px;
+  height:150px;
   display:flex;
   align-items:flex-end;
-  gap:18px;
-  padding:14px 4px 0;
+  justify-content:space-around;
+  gap:8px;
+  padding-top:20px;
 }
 
 .bar-wrap{
-  flex:1;
-  height:100%;
+  height:125px;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:flex-end;
+  align-items:center;
   gap:6px;
+  flex:1;
 }
 
 .bar{
-  width:100%;
-  max-width:30px;
-  border-radius:5px 5px 3px 3px;
-  background:linear-gradient(180deg,#8871ff,#5c49e8);
-  box-shadow:0 6px 18px rgba(100,79,255,.23);
-  min-height:12px;
+  width:27px;
+  border-radius:7px 7px 3px 3px;
+  background:linear-gradient(180deg,#765fff,#4d7fff);
+  box-shadow:0 6px 20px rgba(91,82,255,.18);
 }
 
-.bar-label{
-  color:#727d9b;
+.bar-wrap small{
+  color:#717b99;
   font-size:9px;
 }
 
 .stat-list{
   display:flex;
   flex-direction:column;
-  justify-content:center;
-  gap:10px;
+  gap:13px;
+  padding-top:20px;
 }
 
 .stat-row{
   display:flex;
-  align-items:center;
-  gap:8px;
-  color:#9ba4bf;
-  font-size:11px;
+  justify-content:space-between;
+  color:#9ba5c0;
+  font-size:12px;
 }
 
 .stat-row strong{
-  margin-left:auto;
-  color:#f1f3fa;
-  font-size:12px;
+  color:#fff;
 }
 
 /* =========================
@@ -1344,195 +1091,170 @@ button{
 ========================= */
 
 .footer{
-  height:58px;
-  display:flex;
+  text-align:center;
+  padding:20px;
+  color:#69728d;
+  font-size:11px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
   align-items:center;
   justify-content:center;
-  color:#69738e;
-  font-size:11px;
-  position:relative;
+  padding:20px;
+  background:rgba(2,5,12,.72);
+  backdrop-filter:blur(10px);
 }
 
-.footer-version{
-  position:absolute;
-  right:3px;
+.modal.show{
+  display:flex;
 }
 
-/* =========================
-   MODALS / TOAST
-========================= */
+.modal-box{
+  width:min(520px,100%);
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:#111a30;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  padding:24px;
+}
 
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:100;
-  padding:12px 16px;
-  color:#fff;
-  border:1px solid rgba(148,160,205,.18);
-  border-radius:12px;
-  background:rgba(20,27,50,.94);
-  box-shadow:var(--shadow);
-  transform:translateY(20px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.modal-head h2{
+  margin:0;
+  font-size:20px;
+}
+
+.close{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  color:#aeb7d0;
+  background:#202a47;
+}
+
+.form-row{
+  display:grid;
+  gap:7px;
+  margin-bottom:14px;
+}
+
+.form-row label{
   font-size:12px;
+  color:#8d97b3;
 }
 
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
+.form-row input,
+.form-row select{
+  width:100%;
+  padding:11px 12px;
+  color:white;
+  background:#19233f;
+  border:1px solid rgba(140,150,210,.14);
+  border-radius:10px;
+  outline:none;
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
+
+.mobile-menu{
+  display:none;
+}
 
 @media(max-width:1100px){
-  .sidebar{
-    width:82px;
-    min-width:82px;
-  }
-
-  .logo-name,
-  .logo-sub,
-  .nav-label,
-  .sidebar-bottom{
-    display:none;
-  }
-
-  .logo{
-    display:flex;
-    justify-content:center;
-    padding:5px 0 22px;
-  }
-
-  .nav-item{
-    justify-content:center;
-    padding:0;
-  }
-
-  .nav-icon{
-    width:auto;
-  }
-
   .quick-grid{
     grid-template-columns:repeat(3,1fr);
   }
 
-  .lower-grid{
+  .quest-list{
     grid-template-columns:1fr 1fr;
-  }
-
-  .note-card{
-    grid-column:span 2;
-  }
-
-  .extra-grid{
-    grid-template-columns:1fr;
   }
 }
 
-@media(max-width:820px){
+@media(max-width:850px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
   .main{
-    padding:0 10px 25px;
+    width:100%;
+    margin-left:0;
   }
 
-  .page-header{
-    padding-left:8px;
-    padding-right:8px;
+  .mobile-menu{
+    display:grid;
+    position:fixed;
+    left:15px;
+    bottom:15px;
+    z-index:70;
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    place-items:center;
+    background:linear-gradient(135deg,#6256ff,#734ee9);
+    color:white;
+    box-shadow:0 10px 30px rgba(84,69,230,.4);
   }
 
-  .hero-content{
-    padding:28px;
+  .mobile-menu svg{
+    width:22px;
+    height:22px;
+  }
+
+  .hero-header{
+    flex-direction:column;
+  }
+
+  .date-box{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .date-info{
+    text-align:left;
   }
 
   .progress-box{
-    width:260px;
+    width:100%;
   }
 
-  .content-grid{
-    grid-template-columns:1fr;
-  }
-
+  .dashboard-grid,
   .lower-grid{
     grid-template-columns:1fr;
   }
 
-  .note-card{
-    grid-column:auto;
-  }
-
-  .stats-body{
+  .stats-content{
     grid-template-columns:1fr;
   }
 }
 
-@media(max-width:620px){
-  .sidebar{
-    position:fixed;
-    bottom:0;
-    top:auto;
-    left:0;
-    right:0;
-    width:100%;
-    min-width:0;
-    height:68px;
-    min-height:68px;
-    padding:5px 8px;
-    border-right:0;
-    border-top:1px solid rgba(148,160,208,.15);
-    background:rgba(7,12,26,.95);
-    backdrop-filter:blur(18px);
-  }
-
-  .logo{
-    display:none;
-  }
-
-  .nav{
-    height:100%;
-    flex-direction:row;
-    justify-content:space-around;
-    gap:2px;
-  }
-
-  .nav-item{
-    width:auto;
-    min-width:48px;
-    height:58px;
-    padding:4px 7px;
-    flex-direction:column;
-    justify-content:center;
-    gap:2px;
-    border-radius:11px;
-  }
-
-  .nav-icon{
-    width:auto;
-  }
-
-  .nav-label{
-    display:block;
-    font-size:8px;
-  }
-
-  .nav-item:nth-child(n+6){
-    display:none;
-  }
-
-  .main{
-    padding-bottom:82px;
+@media(max-width:600px){
+  .content{
+    padding:18px 12px 70px;
   }
 
   .topbar{
-    height:58px;
-  }
-
-  .page-header{
-    padding-top:18px;
-    flex-direction:column;
+    padding:0 12px;
   }
 
   .greeting h1{
@@ -1543,63 +1265,51 @@ button{
     font-size:15px;
   }
 
-  .date-box{
-    width:100%;
-    justify-content:flex-end;
-  }
-
   .hero{
-    min-height:350px;
-  }
-
-  .hero-content{
-    min-height:350px;
+    padding:25px 20px;
+    min-height:330px;
     flex-direction:column;
+    align-items:flex-start;
     justify-content:space-between;
-    padding:25px;
-  }
-
-  .hero-message h2{
-    font-size:20px;
-  }
-
-  .progress-box{
-    width:100%;
   }
 
   .quick-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
   }
 
   .quick-card{
     min-height:135px;
   }
 
-  .quick-grid .quick-card:nth-child(7){
-    grid-column:span 2;
+  .quest-list{
+    grid-template-columns:1fr;
   }
 
-  .footer{
-    display:none;
+  .map{
+    height:270px;
+    margin-left:12px;
+    margin-right:12px;
+  }
+
+  .card-header{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .card-body{
+    padding-left:15px;
+    padding-right:15px;
   }
 }
 
-@media(max-width:390px){
+@media(max-width:400px){
   .quick-grid{
-    grid-template-columns:1fr 1fr;
-    gap:9px;
+    grid-template-columns:1fr;
   }
 
-  .quick-card{
-    padding:15px;
-  }
-
-  .quick-title{
-    font-size:13px;
-  }
-
-  .date-text{
-    display:none;
+  .date-icon{
+    width:55px;
+    height:55px;
   }
 }
 </style>
@@ -1609,867 +1319,719 @@ button{
 
 <div class="app">
 
-  <!-- ================= SIDEBAR ================= -->
-  <aside class="sidebar">
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
 
-    <div class="logo">
-      <div>
-        <div class="logo-mark">
-          <div class="logo-symbol">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="logo-name">LifeOS</div>
-        </div>
-        <div class="logo-sub">Твоя жизнь. Твоя система.</div>
+  <div class="brand">
+    <div class="brand-logo">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 15c3-5 7-7 11-7 2 0 4 1 5 2-2-4-6-6-10-6-3 0-6 2-8 5l2 6Zm16-1c-3 4-7 6-11 6-2 0-4-1-5-2 2 3 6 4 9 4 4 0 7-2 9-5l-2-3Z"/>
+        </svg>
+      </div>
+      <div class="brand-name">LifeOS</div>
+    </div>
+    <div class="brand-sub">Твоя жизнь. Твоя система.</div>
+  </div>
+
+  <nav class="nav">
+
+    <button class="nav-btn active" data-section="home">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" stroke-width="2"/>
+      </svg>
+      Главная
+    </button>
+
+    <button class="nav-btn" data-section="calendar">
+      <svg fill="none" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="17" rx="3" stroke-width="2"/>
+        <path d="M8 2v4M16 2v4M3 9h18" stroke-width="2"/>
+      </svg>
+      Календарь
+    </button>
+
+    <button class="nav-btn" data-section="tasks">
+      <svg fill="none" viewBox="0 0 24 24">
+        <rect x="4" y="3" width="16" height="18" rx="3" stroke-width="2"/>
+        <path d="m8 12 2.5 2.5L16 9" stroke-width="2"/>
+      </svg>
+      Задачи
+    </button>
+
+    <button class="nav-btn" data-section="notes">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="M5 3h14v18H5z" stroke-width="2"/>
+        <path d="M8 8h8M8 12h8M8 16h5" stroke-width="2"/>
+      </svg>
+      Заметки
+    </button>
+
+    <button class="nav-btn" data-section="timer">
+      <svg fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="13" r="8" stroke-width="2"/>
+        <path d="M12 13V8M9 3h6M12 5V3" stroke-width="2"/>
+      </svg>
+      Таймер
+    </button>
+
+    <button class="nav-btn" data-section="alarms">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="M6 10a6 6 0 0 1 12 0v5l2 3H4l2-3v-5Z" stroke-width="2"/>
+        <path d="M9 21h6M4 5l2-2M20 5l-2-2" stroke-width="2"/>
+      </svg>
+      Будильник
+    </button>
+
+    <button class="nav-btn" data-section="quests">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="m12 3 2.2 5.3L20 10l-4.5 3.8L17 20l-5-3-5 3 1.5-6.2L4 10l5.8-1.7L12 3Z" stroke-width="2"/>
+      </svg>
+      Квесты
+    </button>
+
+    <button class="nav-btn" data-section="map">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" stroke-width="2"/>
+        <path d="M9 3v15M15 6v15" stroke-width="2"/>
+      </svg>
+      Карта мира
+    </button>
+
+    <button class="nav-btn" data-section="stats">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="M5 20V10M12 20V4M19 20v-7" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      Статистика
+    </button>
+
+    <button class="nav-btn" data-section="settings">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke-width="2"/>
+        <path d="m19.4 15 .1.1a2 2 0 1 1-2.8 2.8l-.1-.1a2 2 0 0 0-3.4 1.4v.2a2 2 0 1 1-4 0v-.2a2 2 0 0 0-3.4-1.4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A2 2 0 0 0 3.7 12a2 2 0 0 0-1.7-2 2 2 0 1 1 0-4h.2a2 2 0 0 0 1.4-3.4l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A2 2 0 0 0 9.7 1.3V1a2 2 0 1 1 4 0v.2a2 2 0 0 0 3.4 1.4l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A2 2 0 0 0 21.3 9h.2a2 2 0 1 1 0 4h-.2a2 2 0 0 0-1.9 2Z" stroke-width="1.3"/>
+      </svg>
+      Настройки
+    </button>
+
+  </nav>
+
+  <div class="sidebar-card">
+    <h3>LifeOS v0.9.2</h3>
+    <p>Развивайся</p>
+    <p>Планируй</p>
+    <p>Действуй</p>
+    <p>Живи осознанно</p>
+  </div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<header class="topbar">
+  <button class="icon-btn" id="searchBtn" title="Поиск">
+    <svg fill="none" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6" stroke-width="2"/>
+      <path d="m16 16 5 5" stroke-width="2"/>
+    </svg>
+  </button>
+
+  <button class="icon-btn" id="themeBtn" title="Тема">
+    <svg fill="none" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" stroke-width="2"/>
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-width="2"/>
+    </svg>
+  </button>
+</header>
+
+<div class="content">
+
+<!-- HEADER -->
+<section class="hero-header">
+
+  <div class="greeting">
+    <h1>Привет! 👋</h1>
+    <p>Хороший день для больших дел.</p>
+  </div>
+
+  <div class="date-box">
+    <div class="date-info">
+      <span>Сегодня</span>
+      <strong id="currentDate">26 августа 2026</strong>
+      <span id="currentWeekday">Среда</span>
+    </div>
+
+    <div class="date-icon">
+      <svg fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+</section>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-copy">
+    <h2>
+      Маленькие шаги<br>
+      каждый день —<br>
+      большие результаты<br>
+      в будущем.
+    </h2>
+    <p>LifeOS • Твоя система развития</p>
+  </div>
+
+  <div class="progress-box">
+    <div class="progress-title">Твой прогресс сегодня</div>
+
+    <div class="progress-content">
+
+      <div class="ring">
+        <span>68%</span>
+      </div>
+
+      <div class="progress-list">
+        <div><i></i> 3 из 5 задач</div>
+        <div><i></i> 1 заметка</div>
+        <div><i></i> Работа над целью</div>
+        <div><i></i> Хорошее настроение</div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- QUICK -->
+<section class="quick-grid">
+
+  <div class="quick-card" data-target="calendar">
+    <div class="quick-icon purple">
+      <svg fill="none" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="17" rx="3" stroke-width="2"/>
+        <path d="M8 2v4M16 2v4M3 9h18" stroke-width="2"/>
+      </svg>
+    </div>
+    <h3>Календарь</h3>
+    <p>Планируй время</p>
+    <span class="quick-arrow">→</span>
+  </div>
+
+  <div class="quick-card" data-target="tasks">
+    <div class="quick-icon green">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6" stroke="white" stroke-width="3"/>
+      </svg>
+    </div>
+    <h3>Задачи</h3>
+    <p>Достигай целей</p>
+    <span class="quick-arrow">→</span>
+  </div>
+
+  <div class="quick-card" data-target="notes">
+    <div class="quick-icon orange">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="M6 3h12v18H6z" stroke="white" stroke-width="2"/>
+        <path d="M9 8h6M9 12h6M9 16h4" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <h3>Заметки</h3>
+    <p>Сохраняй мысли</p>
+    <span class="quick-arrow">→</span>
+  </div>
+
+  <div class="quick-card" data-target="timer">
+    <div class="quick-icon blue">
+      <svg fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="13" r="7" stroke="white" stroke-width="2"/>
+        <path d="M12 13V9M9 3h6M12 5V3" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <h3>Таймер</h3>
+    <p>Будь в фокусе</p>
+    <span class="quick-arrow">→</span>
+  </div>
+
+  <div class="quick-card" data-target="alarms">
+    <div class="quick-icon red">
+      <svg fill="none" viewBox="0 0 24 24">
+        <path d="M6 10a6 6 0 0 1 12 0v5l2 3H4l2-3v-5Z" stroke="white" stroke-width="2"/>
+        <path d="M9 21h6" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <h3>Будильник</h3>
+    <p>Не пропускай важное</p>
+    <span class="quick-arrow">→</span>
+  </div>
+
+</section>
+
+<!-- MAIN GRID -->
+<section class="dashboard-grid">
+
+  <!-- CALENDAR -->
+  <div class="card calendar" id="calendar">
+
+    <div class="calendar-top">
+      <strong>Август 2026</strong>
+
+      <div class="calendar-actions">
+        <button class="small-btn">‹</button>
+        <button class="small-btn" id="todayBtn">Сегодня</button>
+        <button class="small-btn">›</button>
       </div>
     </div>
 
-    <nav class="nav">
+    <div class="week">
+      <div>Пн</div>
+      <div>Вт</div>
+      <div>Ср</div>
+      <div>Чт</div>
+      <div>Пт</div>
+      <div>Сб</div>
+      <div>Вс</div>
+    </div>
 
-      <button class="nav-item active" data-section="home">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="M3 10.5 12 3l9 7.5"/>
-            <path d="M5 9.5V21h14V9.5"/>
-            <path d="M9 21v-6h6v6"/>
+    <div class="days" id="calendarDays"></div>
+
+  </div>
+
+  <!-- TASKS -->
+  <div class="card" id="tasks">
+
+    <div class="card-header">
+      <h2>Мои задачи</h2>
+      <a id="addTask">Добавить +</a>
+    </div>
+
+    <div class="card-body">
+
+      <div class="task done">
+        <div class="check done">
+          <svg fill="none" viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6" stroke-width="3"/>
           </svg>
-        </span>
-        <span class="nav-label">Главная</span>
-      </button>
+        </div>
+        <div class="task-main">
+          <div class="task-title">Сделать проект</div>
+          <div class="task-time">Сегодня, 10:00</div>
+        </div>
+        <div class="task-more">•••</div>
+      </div>
 
-      <button class="nav-item" data-section="calendar">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <rect x="3" y="4.5" width="18" height="17" rx="2"/>
-            <path d="M7 2.5v4M17 2.5v4M3 9h18"/>
-            <path d="M7 13h3M14 13h3M7 17h3M14 17h3"/>
+      <div class="task">
+        <div class="check">
+          <svg fill="none" viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6" stroke-width="3"/>
           </svg>
-        </span>
-        <span class="nav-label">Календарь</span>
-      </button>
+        </div>
+        <div class="task-main">
+          <div class="task-title">Прочитать книгу</div>
+          <div class="task-time">Сегодня, 14:00</div>
+        </div>
+        <div class="task-more">•••</div>
+      </div>
 
-      <button class="nav-item" data-section="tasks">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="18" rx="3"/>
-            <path d="m7 12 3 3 7-7"/>
+      <div class="task">
+        <div class="check">
+          <svg fill="none" viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6" stroke-width="3"/>
           </svg>
-        </span>
-        <span class="nav-label">Задачи</span>
-      </button>
+        </div>
+        <div class="task-main">
+          <div class="task-title">Тренировка</div>
+          <div class="task-time">Сегодня, 18:00</div>
+        </div>
+        <div class="task-more">•••</div>
+      </div>
 
-      <button class="nav-item" data-section="notes">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <rect x="4" y="3" width="16" height="18" rx="2"/>
-            <path d="M8 8h8M8 12h8M8 16h5"/>
+      <div class="task">
+        <div class="check">
+          <svg fill="none" viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6" stroke-width="3"/>
           </svg>
-        </span>
-        <span class="nav-label">Заметки</span>
-      </button>
+        </div>
+        <div class="task-main">
+          <div class="task-title">Изучить новую тему</div>
+          <div class="task-time">Завтра, 12:00</div>
+        </div>
+        <div class="task-more">•••</div>
+      </div>
 
-      <button class="nav-item" data-section="timer">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <circle cx="12" cy="13" r="7.5"/>
-            <path d="M12 13V9M9 3h6M12 3v2.5M18 7l1.5-1.5"/>
+      <div class="task">
+        <div class="check">
+          <svg fill="none" viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6" stroke-width="3"/>
           </svg>
-        </span>
-        <span class="nav-label">Таймер</span>
-      </button>
+        </div>
+        <div class="task-main">
+          <div class="task-title">Разобрать заметки</div>
+          <div class="task-time">Завтра, 16:00</div>
+        </div>
+        <div class="task-more">•••</div>
+      </div>
 
-      <button class="nav-item" data-section="alarm">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="M6 17h12"/>
-            <path d="M7 17v-5a5 5 0 0 1 10 0v5"/>
-            <path d="M5 9a7 7 0 0 1 2-4M19 9a7 7 0 0 0-2-4"/>
-            <path d="M10 20h4"/>
-          </svg>
-        </span>
-        <span class="nav-label">Будильник</span>
-      </button>
+    </div>
+  </div>
 
-      <button class="nav-item" data-section="quests">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="m12 3 2.2 5 5.3.5-4 3.5 1.2 5.2-4.7-2.8-4.7 2.8 1.2-5.2-4-3.5 5.3-.5z"/>
-          </svg>
-        </span>
-        <span class="nav-label">Квесты</span>
-      </button>
+</section>
 
-      <button class="nav-item" data-section="map">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="M4 5.5 9 3l6 3 5-2.5v15L15 21l-6-3-5 2.5z"/>
-            <path d="M9 3v15M15 6v15"/>
-          </svg>
-        </span>
-        <span class="nav-label">Карта</span>
-      </button>
+<!-- LOWER -->
+<section class="lower-grid">
 
-      <button class="nav-item" data-section="stats">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="M5 20V10M12 20V4M19 20v-7"/>
-            <path d="M3 20h18"/>
-          </svg>
-        </span>
-        <span class="nav-label">Статистика</span>
-      </button>
+  <!-- TIMER -->
+  <div class="card timer-card" id="timer">
 
-      <button class="nav-item" data-section="settings">
-        <span class="nav-icon">
-          <svg class="icon" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V20h-2.6v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H6v-2.6h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V5h2.6v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.1v2.6h-.1a1.7 1.7 0 0 0-1.6 1z"/>
-          </svg>
-        </span>
-        <span class="nav-label">Настройки</span>
-      </button>
+    <div class="card-header">
+      <h2>Таймер</h2>
+    </div>
 
-    </nav>
+    <select class="timer-select" id="timerPreset">
+      <option value="25">Помодоро • 25 минут</option>
+      <option value="15">Фокус • 15 минут</option>
+      <option value="45">Глубокая работа • 45 минут</option>
+      <option value="60">Фокус • 60 минут</option>
+    </select>
 
-    <div class="sidebar-bottom">
-      <div class="sidebar-version">LifeOS v0.9</div>
-      <div class="sidebar-lines">
-        Развивайся<br>
-        Планируй<br>
-        Действуй<br>
-        Живи осознанно
+    <div class="timer-circle">
+      <div class="timer-time" id="timerDisplay">25:00</div>
+    </div>
+
+    <button class="primary-btn" id="timerStart">▶ Старт</button>
+
+    <div class="timer-controls">
+      <button class="round-btn" id="timerReset">↻</button>
+      <button class="round-btn">⚙</button>
+    </div>
+
+  </div>
+
+  <!-- ALARMS -->
+  <div class="card" id="alarms">
+
+    <div class="card-header">
+      <h2>Будильник</h2>
+      <a id="addAlarm">Добавить +</a>
+    </div>
+
+    <div class="alarm-list">
+
+      <div class="alarm">
+        <svg fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="7" stroke-width="2"/>
+          <path d="M12 13V9" stroke-width="2"/>
+        </svg>
+
+        <div class="alarm-info">
+          <div class="alarm-time">07:00</div>
+          <div class="alarm-repeat">Каждый день</div>
+        </div>
+
+        <div class="switch on"><span></span></div>
+      </div>
+
+      <div class="alarm">
+        <svg fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="7" stroke-width="2"/>
+          <path d="M12 13V9" stroke-width="2"/>
+        </svg>
+
+        <div class="alarm-info">
+          <div class="alarm-time">08:30</div>
+          <div class="alarm-repeat">Будни</div>
+        </div>
+
+        <div class="switch"><span></span></div>
+      </div>
+
+      <div class="alarm">
+        <svg fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="7" stroke-width="2"/>
+          <path d="M12 13V9" stroke-width="2"/>
+        </svg>
+
+        <div class="alarm-info">
+          <div class="alarm-time">14:00</div>
+          <div class="alarm-repeat">Учёба</div>
+        </div>
+
+        <div class="switch on"><span></span></div>
+      </div>
+
+      <div class="alarm">
+        <svg fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="7" stroke-width="2"/>
+          <path d="M12 13V9" stroke-width="2"/>
+        </svg>
+
+        <div class="alarm-info">
+          <div class="alarm-time">21:00</div>
+          <div class="alarm-repeat">Чтение</div>
+        </div>
+
+        <div class="switch"><span></span></div>
+      </div>
+
+    </div>
+
+    <button class="primary-btn" style="margin-top:10px" id="addAlarmBtn">
+      ＋ Добавить будильник
+    </button>
+
+  </div>
+
+  <!-- NOTE -->
+  <div class="card" id="notes">
+
+    <div class="card-header">
+      <h2>Быстрая заметка</h2>
+    </div>
+
+    <div class="note-area">
+      <textarea id="noteInput" placeholder="Запиши мысль..."></textarea>
+      <button class="save-note" id="saveNote">Сохранить</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- QUESTS -->
+<section class="card quests" id="quests">
+
+  <div class="card-header">
+    <h2>Квесты дня</h2>
+    <a>Все квесты →</a>
+  </div>
+
+  <div class="quest-list">
+
+    <div class="quest">
+      <div class="quest-icon">
+        <svg fill="none" viewBox="0 0 24 24">
+          <path d="m12 3 2.2 5.3L20 10l-4.5 3.8L17 20l-5-3-5 3 1.5-6.2L4 10l5.8-1.7L12 3Z" stroke="white" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <h3>Утренний старт</h3>
+      <p>Выполнить утреннюю рутину</p>
+
+      <div class="quest-progress">
+        <span style="width:100%"></span>
+      </div>
+
+      <div class="quest-footer">
+        <span>Завершено</span>
+        <strong>+50 XP</strong>
       </div>
     </div>
 
-  </aside>
-
-  <!-- ================= MAIN ================= -->
-  <main class="main">
-
-    <header class="topbar">
-      <button class="circle-btn" id="searchBtn" title="Поиск">
-        <svg class="icon" viewBox="0 0 24 24">
-          <circle cx="10.8" cy="10.8" r="6.3"/>
-          <path d="m16 16 5 5"/>
+    <div class="quest">
+      <div class="quest-icon">
+        <svg fill="none" viewBox="0 0 24 24">
+          <path d="M5 4h14v16H5z" stroke="white" stroke-width="2"/>
+          <path d="M8 8h8M8 12h6" stroke="white" stroke-width="2"/>
         </svg>
-      </button>
+      </div>
 
-      <button class="circle-btn" id="themeBtn" title="Тема">
-        <svg class="icon" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      <h3>Знания</h3>
+      <p>Изучить новую тему 30 минут</p>
+
+      <div class="quest-progress">
+        <span style="width:65%"></span>
+      </div>
+
+      <div class="quest-footer">
+        <span>65%</span>
+        <strong>+100 XP</strong>
+      </div>
+    </div>
+
+    <div class="quest">
+      <div class="quest-icon">
+        <svg fill="none" viewBox="0 0 24 24">
+          <path d="M6 18V9M12 18V5M18 18v-6" stroke="white" stroke-width="3" stroke-linecap="round"/>
         </svg>
-      </button>
-    </header>
+      </div>
 
-    <div class="page">
+      <h3>Сила дня</h3>
+      <p>Тренировка или прогулка</p>
 
-      <!-- HEADER -->
-      <section class="page-header">
+      <div class="quest-progress">
+        <span style="width:30%"></span>
+      </div>
 
-        <div class="greeting">
-          <h1>Привет!</h1>
-          <p>Хороший день для больших дел.</p>
-        </div>
+      <div class="quest-footer">
+        <span>30%</span>
+        <strong>+120 XP</strong>
+      </div>
+    </div>
 
-        <div class="date-box">
-          <div class="date-text">
-            <div class="date-label">Сегодня</div>
-            <div class="date-main" id="currentDate">23 апреля 2025</div>
-            <div class="date-week" id="currentWeekday">Среда</div>
-          </div>
+  </div>
 
-          <button class="weather-btn" id="weatherBtn">
-            <svg class="icon xl" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="4"/>
-              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
-            </svg>
-          </button>
-        </div>
+</section>
 
-      </section>
+<!-- MAP -->
+<section class="card map-card" id="map">
 
-      <!-- HERO -->
-      <section class="hero">
+  <div class="card-header">
+    <h2>Карта мира</h2>
+    <a>Открыть карту →</a>
+  </div>
 
-        <div class="mountains">
-          <div class="mountain"></div>
-          <div class="mountain two"></div>
-        </div>
+  <div class="map">
 
-        <div class="hero-content">
+    <div class="route"></div>
 
-          <div class="hero-message">
-            <h2>Маленькие шаги
-каждый день —
-большие результаты
-в будущем.</h2>
-            <div class="hero-brand">LifeOS</div>
-          </div>
+    <div class="location loc1">
+      <div class="location-dot"></div>
+      <div class="location-name">Старт</div>
+    </div>
 
-          <div class="progress-box">
-            <div class="progress-title">Твой прогресс сегодня</div>
+    <div class="location loc2">
+      <div class="location-dot"></div>
+      <div class="location-name">Зона знаний</div>
+    </div>
 
-            <div class="progress-row">
+    <div class="location loc3">
+      <div class="location-dot"></div>
+      <div class="location-name">Гора целей</div>
+    </div>
 
-              <div class="progress-ring">
-                <svg viewBox="0 0 100 100">
-                  <defs>
-                    <linearGradient id="progressGradient">
-                      <stop offset="0%" stop-color="#6475ff"/>
-                      <stop offset="100%" stop-color="#6bc4ff"/>
-                    </linearGradient>
-                  </defs>
-                  <circle class="track" cx="50" cy="50" r="35"/>
-                  <circle class="value" cx="50" cy="50" r="35"/>
-                </svg>
-                <span class="progress-number">68%</span>
-              </div>
+    <div class="location loc4 locked">
+      <div class="location-dot"></div>
+      <div class="location-name">Город будущего</div>
+    </div>
 
-              <div class="progress-list">
-                <div><span class="dot"></span>3 из 5 задач</div>
-                <div><span class="dot"></span>1 заметка</div>
-                <div><span class="dot"></span>Работа над целью</div>
-                <div><span class="dot"></span>Хорошее настроение</div>
-              </div>
+    <div class="location loc5 locked">
+      <div class="location-dot"></div>
+      <div class="location-name">Вершина</div>
+    </div>
 
-            </div>
-          </div>
+    <div class="map-badge">
+      Уровень 7 • 680 / 1000 XP
+    </div>
 
-        </div>
-      </section>
+  </div>
 
-      <!-- QUICK CARDS -->
-      <section class="quick-grid">
+</section>
 
-        <div class="quick-card" data-scroll="calendar">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <rect x="3" y="4" width="18" height="17" rx="2"/>
-              <path d="M7 2v4M17 2v4M3 9h18"/>
-              <path d="M7 13h3M14 13h3M7 17h3"/>
-            </svg>
-          </div>
-          <div class="quick-title">Календарь</div>
-          <div class="quick-sub">Планируй время</div>
-          <div class="quick-arrow">→</div>
-        </div>
+<!-- STATS -->
+<section class="card stats" id="stats">
 
-        <div class="quick-card" data-scroll="tasks">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="3"/>
-              <path d="m7 12 3 3 7-7"/>
-            </svg>
-          </div>
-          <div class="quick-title">Задачи</div>
-          <div class="quick-sub">Достигай целей</div>
-          <div class="quick-arrow">→</div>
-        </div>
+  <div class="card-header">
+    <h2>Статистика</h2>
+    <a>Подробнее →</a>
+  </div>
 
-        <div class="quick-card" data-scroll="notes">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <path d="M6 3h12a2 2 0 0 1 2 2v14l-4 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
-              <path d="M8 8h8M8 12h8M8 16h5"/>
-            </svg>
-          </div>
-          <div class="quick-title">Заметки</div>
-          <div class="quick-sub">Сохраняй мысли</div>
-          <div class="quick-arrow">→</div>
-        </div>
+  <div class="stats-content">
 
-        <div class="quick-card" data-scroll="timer">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <circle cx="12" cy="13" r="7"/>
-              <path d="M12 13V9M9 3h6M12 3v3M18 7l2-2"/>
-            </svg>
-          </div>
-          <div class="quick-title">Таймер</div>
-          <div class="quick-sub">Будь в фокусе</div>
-          <div class="quick-arrow">→</div>
-        </div>
+    <div class="chart">
 
-        <div class="quick-card" data-scroll="alarm">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <path d="M6 17h12"/>
-              <path d="M7 17v-5a5 5 0 0 1 10 0v5"/>
-              <path d="M5 9a7 7 0 0 1 2-4M19 9a7 7 0 0 0-2-4"/>
-              <path d="M10 20h4"/>
-            </svg>
-          </div>
-          <div class="quick-title">Будильник</div>
-          <div class="quick-sub">Не пропускай важное</div>
-          <div class="quick-arrow">→</div>
-        </div>
+      <div class="bar-wrap">
+        <div class="bar" style="height:55px"></div>
+        <small>Чт</small>
+      </div>
 
-        <div class="quick-card" data-scroll="quests">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <path d="m12 3 2.2 5 5.3.5-4 3.5 1.2 5.2-4.7-2.8-4.7 2.8 1.2-5.2-4-3.5 5.3-.5z"/>
-            </svg>
-          </div>
-          <div class="quick-title">Квесты</div>
-          <div class="quick-sub">Развивай персонажа</div>
-          <div class="quick-arrow">→</div>
-        </div>
+      <div class="bar-wrap">
+        <div class="bar" style="height:85px"></div>
+        <small>Пт</small>
+      </div>
 
-        <div class="quick-card" data-scroll="map">
-          <div class="quick-icon">
-            <svg class="icon lg" viewBox="0 0 24 24">
-              <path d="M4 5.5 9 3l6 3 5-2.5v15L15 21l-6-3-5 2.5z"/>
-              <path d="M9 3v15M15 6v15"/>
-            </svg>
-          </div>
-          <div class="quick-title">Карта мира</div>
-          <div class="quick-sub">Открывай новые зоны</div>
-          <div class="quick-arrow">→</div>
-        </div>
+      <div class="bar-wrap">
+        <div class="bar" style="height:48px"></div>
+        <small>Сб</small>
+      </div>
 
-      </section>
+      <div class="bar-wrap">
+        <div class="bar" style="height:78px"></div>
+        <small>Вс</small>
+      </div>
 
-      <!-- CALENDAR + TASKS -->
-      <section class="content-grid">
+      <div class="bar-wrap">
+        <div class="bar" style="height:60px"></div>
+        <small>Пн</small>
+      </div>
 
-        <!-- CALENDAR -->
-        <div class="card calendar-card" id="calendar">
-
-          <div class="card-header">
-            <div class="month">Апрель 2025</div>
-
-            <div class="calendar-top">
-              <button class="cal-btn" id="prevMonth">
-                <svg class="icon sm" viewBox="0 0 24 24">
-                  <path d="m15 18-6-6 6-6"/>
-                </svg>
-              </button>
-
-              <button class="cal-btn" id="nextMonth">
-                <svg class="icon sm" viewBox="0 0 24 24">
-                  <path d="m9 18 6-6-6-6"/>
-                </svg>
-              </button>
-
-              <button class="today-btn" id="todayBtn">Сегодня</button>
-            </div>
-          </div>
-
-          <div class="calendar">
-            <div class="weekdays">
-              <span>Пн</span>
-              <span>Вт</span>
-              <span>Ср</span>
-              <span>Чт</span>
-              <span>Пт</span>
-              <span>Сб</span>
-              <span>Вс</span>
-            </div>
-
-            <div class="days" id="calendarDays"></div>
-          </div>
-
-        </div>
-
-        <!-- TASKS -->
-        <div class="card" id="tasks">
-
-          <div class="card-header">
-            <div class="card-title">Мои задачи</div>
-            <div class="card-link" id="allTasks">Смотреть все →</div>
-          </div>
-
-          <div class="tasks">
-
-            <div class="task">
-              <button class="check done task-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="m5 12 4 4L19 6"/>
-                </svg>
-              </button>
-
-              <div class="task-info">
-                <div class="task-name done">Сделать проект</div>
-                <div class="task-time">Сегодня, 10:00</div>
-              </div>
-
-              <div class="task-more">•••</div>
-            </div>
-
-            <div class="task">
-              <button class="check task-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="m5 12 4 4L19 6"/>
-                </svg>
-              </button>
-
-              <div class="task-info">
-                <div class="task-name">Прочитать книгу</div>
-                <div class="task-time">Сегодня, 14:00</div>
-              </div>
-
-              <div class="task-more">•••</div>
-            </div>
-
-            <div class="task">
-              <button class="check task-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="m5 12 4 4L19 6"/>
-                </svg>
-              </button>
-
-              <div class="task-info">
-                <div class="task-name">Тренировка</div>
-                <div class="task-time">Сегодня, 18:00</div>
-              </div>
-
-              <div class="task-more">•••</div>
-            </div>
-
-            <div class="task">
-              <button class="check task-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="m5 12 4 4L19 6"/>
-                </svg>
-              </button>
-
-              <div class="task-info">
-                <div class="task-name">Изучить новую тему</div>
-                <div class="task-time">Завтра, 12:00</div>
-              </div>
-
-              <div class="task-more">•••</div>
-            </div>
-
-            <div class="task">
-              <button class="check task-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="m5 12 4 4L19 6"/>
-                </svg>
-              </button>
-
-              <div class="task-info">
-                <div class="task-name">Разобрать заметки</div>
-                <div class="task-time">Завтра, 16:00</div>
-              </div>
-
-              <div class="task-more">•••</div>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
-
-      <!-- TIMER / ALARM / NOTE -->
-      <section class="lower-grid">
-
-        <!-- TIMER -->
-        <div class="card timer-card" id="timer">
-
-          <div class="card-header">
-            <div class="card-title">Таймер</div>
-          </div>
-
-          <div class="card-body">
-
-            <select class="timer-select" id="timerPreset">
-              <option value="25">Помодоро • 25 минут</option>
-              <option value="5">Короткий перерыв • 5 минут</option>
-              <option value="15">Фокус • 15 минут</option>
-              <option value="45">Глубокая работа • 45 минут</option>
-            </select>
-
-            <div class="timer-circle">
-              <svg viewBox="0 0 160 160">
-                <circle class="timer-track" cx="80" cy="80" r="67"/>
-                <circle class="timer-progress" id="timerProgress" cx="80" cy="80" r="67"/>
-              </svg>
-
-              <div class="timer-value" id="timerValue">25:00</div>
-            </div>
-
-            <button class="primary-btn" id="timerStart">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <path d="m8 5 11 7-11 7z" fill="currentColor" stroke="none"/>
-              </svg>
-              <span>Старт</span>
-            </button>
-
-            <div class="timer-actions">
-              <button class="small-round" id="timerReset">
-                <svg class="icon sm" viewBox="0 0 24 24">
-                  <path d="M4 12a8 8 0 1 0 2.3-5.6"/>
-                  <path d="M4 5v5h5"/>
-                </svg>
-              </button>
-
-              <button class="small-round" id="timerSound">
-                <svg class="icon sm" viewBox="0 0 24 24">
-                  <path d="M4 10v4h4l5 4V6l-5 4z"/>
-                  <path d="M17 9a4 4 0 0 1 0 6"/>
-                </svg>
-              </button>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ALARM -->
-        <div class="card alarm-card" id="alarm">
-
-          <div class="card-header">
-            <div class="card-title">Будильник</div>
-            <div class="card-link">Смотреть все →</div>
-          </div>
-
-          <div class="alarm-list">
-
-            <div class="alarm">
-              <div class="alarm-icon">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <circle cx="12" cy="13" r="7"/>
-                  <path d="M12 13V9"/>
-                  <path d="M9 3h6M12 3v3"/>
-                </svg>
-              </div>
-
-              <div class="alarm-info">
-                <div class="alarm-time">07:00</div>
-                <div class="alarm-label">Каждый день</div>
-              </div>
-
-              <button class="toggle on">
-                <span></span>
-              </button>
-            </div>
-
-            <div class="alarm">
-              <div class="alarm-icon">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <circle cx="12" cy="13" r="7"/>
-                  <path d="M12 13V9"/>
-                  <path d="M9 3h6M12 3v3"/>
-                </svg>
-              </div>
-
-              <div class="alarm-info">
-                <div class="alarm-time">08:30</div>
-                <div class="alarm-label">Будни</div>
-              </div>
-
-              <button class="toggle">
-                <span></span>
-              </button>
-            </div>
-
-            <div class="alarm">
-              <div class="alarm-icon">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <circle cx="12" cy="13" r="7"/>
-                  <path d="M12 13V9"/>
-                  <path d="M9 3h6M12 3v3"/>
-                </svg>
-              </div>
-
-              <div class="alarm-info">
-                <div class="alarm-time">14:00</div>
-                <div class="alarm-label">Учёба</div>
-              </div>
-
-              <button class="toggle on">
-                <span></span>
-              </button>
-            </div>
-
-            <div class="alarm">
-              <div class="alarm-icon">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <circle cx="12" cy="13" r="7"/>
-                  <path d="M12 13V9"/>
-                  <path d="M9 3h6M12 3v3"/>
-                </svg>
-              </div>
-
-              <div class="alarm-info">
-                <div class="alarm-time">21:00</div>
-                <div class="alarm-label">Чтение</div>
-              </div>
-
-              <button class="toggle">
-                <span></span>
-              </button>
-            </div>
-
-            <button class="add-alarm" id="addAlarm">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <path d="M12 5v14M5 12h14"/>
-              </svg>
-              Добавить будильник
-            </button>
-
-          </div>
-        </div>
-
-        <!-- NOTE -->
-        <div class="card note-card" id="notes">
-
-          <div class="card-header">
-            <div class="card-title">Быстрая заметка</div>
-          </div>
-
-          <div class="card-body">
-            <textarea
-              id="noteInput"
-              class="note-input"
-              placeholder="Запиши мысль..."
-            ></textarea>
-
-            <button class="primary-btn note-save" id="saveNote">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <path d="m4 4 17 8-17 8 3-8z"/>
-                <path d="M7 12h14"/>
-              </svg>
-              Сохранить
-            </button>
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- QUESTS + MAP -->
-      <section class="extra-grid">
-
-        <!-- QUESTS -->
-        <div class="card" id="quests">
-
-          <div class="card-header">
-            <div class="card-title">Активные квесты</div>
-            <div class="card-link">Все квесты →</div>
-          </div>
-
-          <div class="quest-list">
-
-            <div class="quest">
-              <div class="quest-badge">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <path d="m12 3 2.2 5 5.3.5-4 3.5 1.2 5.2-4.7-2.8-4.7 2.8 1.2-5.2-4-3.5 5.3-.5z"/>
-                </svg>
-              </div>
-
-              <div class="quest-info">
-                <div class="quest-name">Утренний старт</div>
-                <div class="quest-meta">Выполнить 3 утренние задачи</div>
-              </div>
-
-              <div class="quest-xp">+50 XP</div>
-            </div>
-
-            <div class="quest">
-              <div class="quest-badge">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <path d="M4 19V8l8-4 8 4v11"/>
-                  <path d="M8 19v-6h8v6"/>
-                  <path d="M9 8h6"/>
-                </svg>
-              </div>
-
-              <div class="quest-info">
-                <div class="quest-name">Зона концентрации</div>
-                <div class="quest-meta">45 минут работы без отвлечений</div>
-              </div>
-
-              <div class="quest-xp">+80 XP</div>
-            </div>
-
-            <div class="quest">
-              <div class="quest-badge">
-                <svg class="icon" viewBox="0 0 24 24">
-                  <path d="M5 4h14v16H5z"/>
-                  <path d="M8 8h8M8 12h8M8 16h5"/>
-                </svg>
-              </div>
-
-              <div class="quest-info">
-                <div class="quest-name">Мысль дня</div>
-                <div class="quest-meta">Создать одну полезную заметку</div>
-              </div>
-
-              <div class="quest-xp">+30 XP</div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- MAP -->
-        <div class="card" id="map">
-
-          <div class="card-header">
-            <div class="card-title">Карта мира</div>
-            <div class="card-link">Открыть карту →</div>
-          </div>
-
-          <div class="world-map">
-
-            <div class="map-land land-a"></div>
-            <div class="map-land land-b"></div>
-            <div class="map-land land-c"></div>
-
-            <div class="map-path"></div>
-
-            <div class="map-point one"></div>
-            <div class="map-point two"></div>
-            <div class="map-point three"></div>
-
-            <div class="map-label a">Старт</div>
-            <div class="map-label b">Долина фокуса</div>
-            <div class="map-label c">Новая зона</div>
-
-          </div>
-        </div>
-
-      </section>
-
-      <!-- STATS -->
-      <section class="card stats-card" id="stats">
-
-        <div class="card-header">
-          <div>
-            <div class="card-title">Статистика</div>
-            <div class="stats-title">Твоя активность за последние 7 дней</div>
-          </div>
-
-          <div class="card-link">Подробнее →</div>
-        </div>
-
-        <div class="stats-body">
-
-          <div>
-
-            <div class="chart">
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:38%"></div>
-                <div class="bar-label">Чт</div>
-              </div>
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:62%"></div>
-                <div class="bar-label">Пт</div>
-              </div>
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:41%"></div>
-                <div class="bar-label">Сб</div>
-              </div>
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:57%"></div>
-                <div class="bar-label">Вс</div>
-              </div>
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:44%"></div>
-                <div class="bar-label">Пн</div>
-              </div>
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:77%"></div>
-                <div class="bar-label">Вт</div>
-              </div>
-
-              <div class="bar-wrap">
-                <div class="bar" style="height:39%"></div>
-                <div class="bar-label">Ср</div>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="stat-list">
-
-            <div class="stat-row">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5v14"/>
-              </svg>
-              Выполнено задач
-              <strong>18</strong>
-            </div>
-
-            <div class="stat-row">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <rect x="4" y="3" width="16" height="18" rx="2"/>
-                <path d="M8 8h8M8 12h8"/>
-              </svg>
-              Создано заметок
-              <strong>7</strong>
-            </div>
-
-            <div class="stat-row">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="8"/>
-                <path d="M12 8v5l3 2"/>
-              </svg>
-              Время в фокусе
-              <strong>5ч 20м</strong>
-            </div>
-
-            <div class="stat-row">
-              <svg class="icon sm" viewBox="0 0 24 24">
-                <rect x="4" y="5" width="16" height="15" rx="2"/>
-                <path d="M8 3v4M16 3v4M4 10h16"/>
-              </svg>
-              Дней активности
-              <strong>6 из 7</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      <footer class="footer">
-        <span>«Лучшая версия себя — уже здесь.»</span>
-        <span class="footer-version">LifeOS v0.9</span>
-      </footer>
+      <div class="bar-wrap">
+        <div class="bar" style="height:100px"></div>
+        <small>Вт</small>
+      </div>
+
+      <div class="bar-wrap">
+        <div class="bar" style="height:55px"></div>
+        <small>Ср</small>
+      </div>
 
     </div>
-  </main>
 
+    <div class="stat-list">
+
+      <div class="stat-row">
+        <span>✓ Выполнено задач</span>
+        <strong>18</strong>
+      </div>
+
+      <div class="stat-row">
+        <span>▤ Создано заметок</span>
+        <strong>7</strong>
+      </div>
+
+      <div class="stat-row">
+        <span>◷ Время в фокусе</span>
+        <strong>5ч 20м</strong>
+      </div>
+
+      <div class="stat-row">
+        <span>◉ Дней активности</span>
+        <strong>6 из 7</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<div class="footer">
+  "Лучшая версия себя — уже здесь." • LifeOS v0.9.2
 </div>
 
-<div class="toast" id="toast"></div>
+</div>
+</main>
+</div>
+
+<button class="mobile-menu" id="mobileMenu">
+  <svg fill="none" viewBox="0 0 24 24">
+    <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2"/>
+  </svg>
+</button>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2 id="modalTitle">Новая запись</h2>
+      <button class="close" id="closeModal">×</button>
+    </div>
+
+    <div id="modalContent"></div>
+
+  </div>
+</div>
 
 <script>
-/* =========================================================
-   LifeOS v0.9
-   Основная логика интерфейса
-========================================================= */
-
-const toast = document.getElementById("toast");
-
-function showToast(message){
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(window.__toastTimer);
-
-  window.__toastTimer = setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
-}
 
 /* =========================
    DATE
 ========================= */
 
 function updateDate(){
+
   const now = new Date();
 
   const months = [
@@ -2500,33 +2062,16 @@ updateDate();
    CALENDAR
 ========================= */
 
-let calendarDate = new Date(2025,3,23);
+function buildCalendar(){
 
-const monthNames = [
-  "Январь","Февраль","Март","Апрель","Май","Июнь",
-  "Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"
-];
+  const container = document.getElementById("calendarDays");
 
-const weekdaysShort = [
-  "Пн","Вт","Ср","Чт","Пт","Сб","Вс"
-];
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth();
 
-const monthTitle = document.querySelector(".month");
-const calendarDays = document.getElementById("calendarDays");
+  const first = new Date(year,month,1);
+  let start = first.getDay();
 
-function renderCalendar(){
-
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-
-  monthTitle.textContent =
-    `${monthNames[month]} ${year}`;
-
-  const firstDay = new Date(year,month,1);
-
-  let start = firstDay.getDay();
-
-  // Переводим воскресенье с 0 на 6
   start = start === 0 ? 6 : start - 1;
 
   const daysInMonth =
@@ -2535,520 +2080,756 @@ function renderCalendar(){
   const prevDays =
     new Date(year,month,0).getDate();
 
-  calendarDays.innerHTML = "";
+  container.innerHTML="";
 
-  for(let i = start - 1; i >= 0; i--){
-    const day = document.createElement("div");
-    day.className = "day muted";
-    day.textContent = prevDays - i;
-    calendarDays.appendChild(day);
+  for(let i=start-1;i>=0;i--){
+
+    const d=document.createElement("div");
+
+    d.className="day muted";
+    d.textContent=prevDays-i;
+
+    container.appendChild(d);
   }
 
-  for(let dayNumber = 1; dayNumber <= daysInMonth; dayNumber++){
+  for(let d=1;d<=daysInMonth;d++){
 
-    const day = document.createElement("div");
-    day.className = "day";
-    day.textContent = dayNumber;
+    const el=document.createElement("div");
+
+    el.className="day";
+
+    const now=new Date();
 
     if(
-      year === 2025 &&
-      month === 3 &&
-      dayNumber === 23
+      d===now.getDate() &&
+      month===now.getMonth() &&
+      year===now.getFullYear()
     ){
-      day.classList.add("today");
+      el.classList.add("today");
     }
 
-    if([3,8,14,18,23,27].includes(dayNumber)){
-      day.classList.add("event");
-    }
+    el.textContent=d;
 
-    day.addEventListener("click",()=>{
-      showToast(`Выбрано число: ${dayNumber} ${monthNames[month]}`);
+    el.addEventListener("click",()=>{
+      document.querySelectorAll(".day").forEach(x=>{
+        if(!x.classList.contains("muted"))
+          x.classList.remove("today");
+      });
+
+      el.classList.add("today");
     });
 
-    calendarDays.appendChild(day);
+    container.appendChild(el);
   }
 
-  const totalCells = calendarDays.children.length;
-  const remaining = (7 - totalCells % 7) % 7;
+  const total=container.children.length;
+
+  const remaining=(7-(total%7))%7;
 
   for(let i=1;i<=remaining;i++){
-    const day = document.createElement("div");
-    day.className = "day muted";
-    day.textContent = i;
-    calendarDays.appendChild(day);
+
+    const el=document.createElement("div");
+
+    el.className="day muted";
+    el.textContent=i;
+
+    container.appendChild(el);
   }
 }
 
-document.getElementById("prevMonth").addEventListener("click",()=>{
-  calendarDate.setMonth(calendarDate.getMonth()-1);
-  renderCalendar();
-});
-
-document.getElementById("nextMonth").addEventListener("click",()=>{
-  calendarDate.setMonth(calendarDate.getMonth()+1);
-  renderCalendar();
-});
-
-document.getElementById("todayBtn").addEventListener("click",()=>{
-  calendarDate = new Date();
-  renderCalendar();
-});
-
-renderCalendar();
+buildCalendar();
 
 /* =========================
-   TASKS
+   NAVIGATION
 ========================= */
 
-document.querySelectorAll(".task-check").forEach(check=>{
+function goTo(id){
+
+  const el=document.getElementById(id);
+
+  if(el){
+    el.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
+}
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+
+  btn.addEventListener("click",()=>{
+
+    document.querySelectorAll(".nav-btn")
+      .forEach(x=>x.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    const section=btn.dataset.section;
+
+    if(section!=="home"){
+      goTo(section);
+    }else{
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+    }
+
+    document.getElementById("sidebar")
+      .classList.remove("open");
+  });
+
+});
+
+document.querySelectorAll(".quick-card").forEach(card=>{
+
+  card.addEventListener("click",()=>{
+    goTo(card.dataset.target);
+  });
+
+});
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+document.getElementById("mobileMenu")
+  .addEventListener("click",()=>{
+
+    document.getElementById("sidebar")
+      .classList.toggle("open");
+
+  });
+
+/* =========================
+   TASK CHECKBOXES
+========================= */
+
+document.querySelectorAll(".check").forEach(check=>{
 
   check.addEventListener("click",()=>{
 
     check.classList.toggle("done");
 
-    const taskName =
-      check.parentElement.querySelector(".task-name");
+    const task=check.closest(".task");
 
-    taskName.classList.toggle("done");
+    if(task){
+      task.classList.toggle("done");
+    }
 
-    updateProgress();
-
-    showToast(
-      check.classList.contains("done")
-        ? "Задача выполнена"
-        : "Задача возвращена"
-    );
   });
 
 });
-
-function updateProgress(){
-
-  const checks =
-    document.querySelectorAll(".task-check");
-
-  const completed =
-    document.querySelectorAll(".task-check.done").length;
-
-  const percent =
-    Math.round((completed / checks.length) * 100);
-
-  document.querySelector(".progress-number")
-    .textContent = percent + "%";
-
-  const ring =
-    document.querySelector(".progress-ring .value");
-
-  const circumference = 220;
-
-  ring.style.strokeDashoffset =
-    circumference - (circumference * percent / 100);
-}
 
 /* =========================
-   ALARMS
+   ALARM SWITCH
 ========================= */
 
-document.querySelectorAll(".toggle").forEach(toggle=>{
+document.querySelectorAll(".switch").forEach(sw=>{
 
-  toggle.addEventListener("click",()=>{
+  sw.addEventListener("click",()=>{
 
-    toggle.classList.toggle("on");
+    sw.classList.toggle("on");
 
-    showToast(
-      toggle.classList.contains("on")
-        ? "Будильник включён"
-        : "Будильник выключен"
-    );
   });
 
-});
-
-document.getElementById("addAlarm").addEventListener("click",()=>{
-
-  const time =
-    prompt("Введите время будильника, например 07:30");
-
-  if(!time) return;
-
-  if(!/^\d{1,2}:\d{2}$/.test(time)){
-    showToast("Введите время в формате 07:30");
-    return;
-  }
-
-  showToast(`Будильник ${time} добавлен`);
 });
 
 /* =========================
    TIMER
 ========================= */
 
-let timerSeconds = 25 * 60;
-let timerInitialSeconds = timerSeconds;
-let timerInterval = null;
-let timerRunning = false;
+let timerSeconds=25*60;
+let timerInterval=null;
+let timerRunning=false;
 
-const timerValue =
-  document.getElementById("timerValue");
+const timerDisplay=
+  document.getElementById("timerDisplay");
 
-const timerStart =
+const timerStart=
   document.getElementById("timerStart");
-
-const timerProgress =
-  document.getElementById("timerProgress");
-
-const timerPreset =
-  document.getElementById("timerPreset");
-
-function formatTime(seconds){
-
-  const min =
-    Math.floor(seconds / 60)
-      .toString()
-      .padStart(2,"0");
-
-  const sec =
-    (seconds % 60)
-      .toString()
-      .padStart(2,"0");
-
-  return `${min}:${sec}`;
-}
 
 function renderTimer(){
 
-  timerValue.textContent =
-    formatTime(timerSeconds);
+  const minutes=
+    Math.floor(timerSeconds/60)
+      .toString()
+      .padStart(2,"0");
 
-  const circumference = 420;
+  const seconds=
+    (timerSeconds%60)
+      .toString()
+      .padStart(2,"0");
 
-  const progress =
-    timerInitialSeconds > 0
-      ? timerSeconds / timerInitialSeconds
-      : 0;
-
-  timerProgress.style.strokeDashoffset =
-    circumference * (1 - progress);
+  timerDisplay.textContent=
+    `${minutes}:${seconds}`;
 }
 
-function setTimer(minutes){
-
-  clearInterval(timerInterval);
-
-  timerRunning = false;
-
-  timerSeconds = minutes * 60;
-  timerInitialSeconds = timerSeconds;
-
-  timerStart.querySelector("span").textContent =
-    "Старт";
-
-  renderTimer();
-}
-
-timerPreset.addEventListener("change",()=>{
-
-  setTimer(Number(timerPreset.value));
-
-});
-
-timerStart.addEventListener("click",()=>{
+function startTimer(){
 
   if(timerRunning){
 
     clearInterval(timerInterval);
-    timerRunning = false;
 
-    timerStart.querySelector("span").textContent =
-      "Продолжить";
+    timerRunning=false;
+
+    timerStart.textContent="▶ Продолжить";
 
     return;
   }
 
-  timerRunning = true;
+  timerRunning=true;
+  timerStart.textContent="Ⅱ Пауза";
 
-  timerStart.querySelector("span").textContent =
-    "Пауза";
+  timerInterval=setInterval(()=>{
 
-  timerInterval = setInterval(()=>{
-
-    if(timerSeconds <= 0){
+    if(timerSeconds<=0){
 
       clearInterval(timerInterval);
-      timerRunning = false;
 
-      timerStart.querySelector("span").textContent =
-        "Старт";
+      timerRunning=false;
 
-      showToast("Таймер завершён!");
+      timerStart.textContent="▶ Старт";
 
-      try{
-        if("Notification" in window &&
-           Notification.permission === "granted"){
-          new Notification("LifeOS",{
-            body:"Таймер завершён."
-          });
-        }
-      }catch(e){}
+      if("Notification" in window &&
+         Notification.permission==="granted"){
+
+        new Notification(
+          "LifeOS",
+          {
+            body:"Таймер завершён. Отличная работа!"
+          }
+        );
+
+      }else{
+        alert("Таймер завершён!");
+      }
 
       return;
     }
 
     timerSeconds--;
+
     renderTimer();
 
   },1000);
+}
 
-});
+timerStart.addEventListener(
+  "click",
+  startTimer
+);
 
-document.getElementById("timerReset").addEventListener("click",()=>{
-  setTimer(Number(timerPreset.value));
-  showToast("Таймер сброшен");
-});
+document.getElementById("timerReset")
+  .addEventListener("click",()=>{
 
-document.getElementById("timerSound").addEventListener("click",()=>{
-  showToast("Звук таймера переключён");
-});
+    clearInterval(timerInterval);
+
+    timerRunning=false;
+
+    const minutes=
+      Number(
+        document.getElementById("timerPreset").value
+      );
+
+    timerSeconds=minutes*60;
+
+    timerStart.textContent="▶ Старт";
+
+    renderTimer();
+
+  });
+
+document.getElementById("timerPreset")
+  .addEventListener("change",()=>{
+
+    clearInterval(timerInterval);
+
+    timerRunning=false;
+
+    timerSeconds=
+      Number(
+        document.getElementById("timerPreset").value
+      )*60;
+
+    timerStart.textContent="▶ Старт";
+
+    renderTimer();
+
+  });
 
 renderTimer();
 
 /* =========================
-   NOTE
+   NOTES
 ========================= */
 
-const noteInput =
+const noteInput=
   document.getElementById("noteInput");
 
-const savedNote =
+const savedNote=
   localStorage.getItem("lifeos_note");
 
 if(savedNote){
-  noteInput.value = savedNote;
+  noteInput.value=savedNote;
 }
 
-document.getElementById("saveNote").addEventListener("click",()=>{
+document.getElementById("saveNote")
+  .addEventListener("click",()=>{
 
-  const value = noteInput.value.trim();
-
-  if(!value){
-    showToast("Введите текст заметки");
-    return;
-  }
-
-  localStorage.setItem("lifeos_note",value);
-
-  showToast("Заметка сохранена");
-});
-
-/* =========================
-   THEME BUTTON
-========================= */
-
-let brighter = false;
-
-document.getElementById("themeBtn").addEventListener("click",()=>{
-
-  brighter = !brighter;
-
-  if(brighter){
-
-    document.documentElement.style.setProperty(
-      "--bg",
-      "#0b1020"
+    localStorage.setItem(
+      "lifeos_note",
+      noteInput.value
     );
 
-    document.body.style.background =
-      "radial-gradient(circle at 70% 10%,rgba(113,91,255,.19),transparent 30%),linear-gradient(135deg,#0a0f20,#10172b)";
+    const btn=
+      document.getElementById("saveNote");
 
-    showToast("Мягкая светлая тема включена");
+    const old=btn.textContent;
 
-  }else{
+    btn.textContent="✓ Сохранено";
 
-    document.body.style.background =
-      "radial-gradient(circle at 75% 10%,rgba(87,74,255,.13),transparent 28%),radial-gradient(circle at 15% 75%,rgba(51,110,255,.08),transparent 30%),linear-gradient(135deg,#060a15,#0a1020 50%,#070c18)";
+    setTimeout(()=>{
+      btn.textContent=old;
+    },1500);
 
-    showToast("Тёмная тема включена");
-  }
+  });
 
-});
+/* =========================
+   THEME
+========================= */
+
+document.getElementById("themeBtn")
+  .addEventListener("click",()=>{
+
+    document.body.classList.toggle("light");
+
+  });
+
+/* =========================
+   NOTIFICATION PERMISSION
+========================= */
+
+if("Notification" in window &&
+   Notification.permission==="default"){
+
+  setTimeout(()=>{
+
+    Notification.requestPermission()
+      .catch(()=>{});
+
+  },3000);
+
+}
 
 /* =========================
    SEARCH
 ========================= */
 
-document.getElementById("searchBtn").addEventListener("click",()=>{
+document.getElementById("searchBtn")
+  .addEventListener("click",()=>{
 
-  const query =
-    prompt("Что найти в LifeOS?");
+    openModal(
+      "Поиск",
+      `
+      <div class="form-row">
+        <label>Что найти?</label>
+        <input id="searchInput" placeholder="Задачи, квесты, заметки...">
+      </div>
 
-  if(!query) return;
+      <button class="primary-btn" id="searchAction">
+        Найти
+      </button>
+      `
+    );
 
-  showToast(`Поиск: ${query}`);
-});
+    setTimeout(()=>{
 
-/* =========================
-   WEATHER
-========================= */
+      const input=
+        document.getElementById("searchInput");
 
-document.getElementById("weatherBtn").addEventListener("click",()=>{
-  showToast("Погода: солнечно • +18°");
-});
+      if(input) input.focus();
 
-/* =========================
-   NAVIGATION
-========================= */
+      const action=
+        document.getElementById("searchAction");
 
-document.querySelectorAll(".nav-item").forEach(item=>{
+      if(action){
 
-  item.addEventListener("click",()=>{
+        action.onclick=()=>{
 
-    document.querySelectorAll(".nav-item")
-      .forEach(nav=>nav.classList.remove("active"));
+          const value=
+            input.value.trim();
 
-    item.classList.add("active");
+          if(!value){
 
-    const section =
-      item.dataset.section;
+            alert("Введите запрос.");
 
-    if(section === "home"){
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
-      return;
-    }
+            return;
+          }
 
-    const target =
-      document.getElementById(section);
+          closeModal();
 
-    if(target){
-      target.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-    }else{
-      showToast(`Раздел «${item.querySelector(".nav-label").textContent}»`);
-    }
+          alert(
+            "Поиск LifeOS: " + value
+          );
+        };
+
+      }
+
+    },0);
 
   });
 
+/* =========================
+   MODAL
+========================= */
+
+const modal=
+  document.getElementById("modal");
+
+function openModal(title,content){
+
+  document.getElementById("modalTitle")
+    .textContent=title;
+
+  document.getElementById("modalContent")
+    .innerHTML=content;
+
+  modal.classList.add("show");
+}
+
+function closeModal(){
+
+  modal.classList.remove("show");
+
+}
+
+document.getElementById("closeModal")
+  .addEventListener(
+    "click",
+    closeModal
+  );
+
+modal.addEventListener("click",(e)=>{
+
+  if(e.target===modal){
+    closeModal();
+  }
+
 });
 
 /* =========================
-   QUICK CARDS
+   ADD TASK
 ========================= */
 
-document.querySelectorAll("[data-scroll]").forEach(card=>{
+document.getElementById("addTask")
+  .addEventListener("click",()=>{
 
-  card.addEventListener("click",()=>{
+    openModal(
+      "Новая задача",
+      `
+      <div class="form-row">
+        <label>Название</label>
+        <input id="taskName" placeholder="Например: изучить английский">
+      </div>
 
-    const id = card.dataset.scroll;
+      <div class="form-row">
+        <label>Время</label>
+        <input id="taskTime" type="time">
+      </div>
 
-    const target =
-      document.getElementById(id);
+      <button class="primary-btn" id="createTask">
+        Создать задачу
+      </button>
+      `
+    );
 
-    if(target){
-      target.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-    }
+    setTimeout(()=>{
+
+      document.getElementById("createTask")
+        .onclick=()=>{
+
+          const name=
+            document.getElementById("taskName")
+              .value.trim();
+
+          const time=
+            document.getElementById("taskTime")
+              .value;
+
+          if(!name){
+            alert("Введите название задачи.");
+            return;
+          }
+
+          const body=
+            document.querySelector("#tasks .card-body");
+
+          const task=
+            document.createElement("div");
+
+          task.className="task";
+
+          task.innerHTML=`
+            <div class="check">
+              <svg fill="none" viewBox="0 0 24 24">
+                <path d="m5 12 4 4L19 6" stroke-width="3"/>
+              </svg>
+            </div>
+
+            <div class="task-main">
+              <div class="task-title">${escapeHTML(name)}</div>
+              <div class="task-time">
+                ${time ? "Сегодня, " + time : "Сегодня"}
+              </div>
+            </div>
+
+            <div class="task-more">•••</div>
+          `;
+
+          body.appendChild(task);
+
+          const check=
+            task.querySelector(".check");
+
+          check.addEventListener("click",()=>{
+
+            check.classList.toggle("done");
+            task.classList.toggle("done");
+
+          });
+
+          closeModal();
+
+        };
+
+    },0);
 
   });
 
-});
-
 /* =========================
-   REQUEST NOTIFICATION
+   ADD ALARM
 ========================= */
 
-document.addEventListener("click",async()=>{
+function addAlarm(){
 
-  if(
-    "Notification" in window &&
-    Notification.permission === "default"
-  ){
+  openModal(
+    "Новый будильник",
+    `
+    <div class="form-row">
+      <label>Время</label>
+      <input id="alarmTime" type="time" value="07:30">
+    </div>
 
-    try{
-      await Notification.requestPermission();
-    }catch(e){}
+    <div class="form-row">
+      <label>Название</label>
+      <input id="alarmName" placeholder="Например: Утренняя тренировка">
+    </div>
 
-  }
+    <button class="primary-btn" id="createAlarm">
+      Добавить будильник
+    </button>
+    `
+  );
 
-},{once:true});
+  setTimeout(()=>{
+
+    document.getElementById("createAlarm")
+      .onclick=()=>{
+
+        const time=
+          document.getElementById("alarmTime").value;
+
+        const name=
+          document.getElementById("alarmName").value ||
+          "Будильник";
+
+        if(!time){
+          alert("Выберите время.");
+          return;
+        }
+
+        const list=
+          document.querySelector(".alarm-list");
+
+        const alarm=
+          document.createElement("div");
+
+        alarm.className="alarm";
+
+        alarm.innerHTML=`
+          <svg fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="13" r="7" stroke-width="2"/>
+            <path d="M12 13V9" stroke-width="2"/>
+          </svg>
+
+          <div class="alarm-info">
+            <div class="alarm-time">${time}</div>
+            <div class="alarm-repeat">${escapeHTML(name)}</div>
+          </div>
+
+          <div class="switch on">
+            <span></span>
+          </div>
+        `;
+
+        list.appendChild(alarm);
+
+        alarm.querySelector(".switch")
+          .addEventListener("click",function(){
+            this.classList.toggle("on");
+          });
+
+        closeModal();
+
+      };
+
+  },0);
+
+}
+
+document.getElementById("addAlarm")
+  .addEventListener("click",addAlarm);
+
+document.getElementById("addAlarmBtn")
+  .addEventListener("click",addAlarm);
 
 /* =========================
-   KEYBOARD SHORTCUTS
+   TODAY
 ========================= */
 
-document.addEventListener("keydown",(event)=>{
+document.getElementById("todayBtn")
+  .addEventListener("click",()=>{
 
-  if(event.key === "Escape"){
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-  }
+    buildCalendar();
 
-  if(
-    (event.ctrlKey || event.metaKey) &&
-    event.key.toLowerCase() === "k"
-  ){
-
-    event.preventDefault();
-
-    document.getElementById("searchBtn").click();
-  }
-
-});
+  });
 
 /* =========================
-   SAVE UI STATE
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+  return value
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+/* =========================
+   SAVE ALARM STATE
 ========================= */
 
 window.addEventListener("beforeunload",()=>{
 
-  const active =
-    document.querySelector(".nav-item.active");
+  const alarms=
+    [...document.querySelectorAll(".alarm")]
+      .map(alarm=>({
 
-  if(active){
-    localStorage.setItem(
-      "lifeos_active_section",
-      active.dataset.section
-    );
-  }
+        time:
+          alarm.querySelector(".alarm-time")
+            ?.textContent || "",
+
+        enabled:
+          alarm.querySelector(".switch")
+            ?.classList.contains("on") || false
+
+      }));
+
+  localStorage.setItem(
+    "lifeos_alarms",
+    JSON.stringify(alarms)
+  );
 
 });
 
 /* =========================
-   INIT
+   LOAD ALARM STATE
 ========================= */
 
-(function init(){
+try{
 
-  const savedSection =
-    localStorage.getItem("lifeos_active_section");
+  const alarms=
+    JSON.parse(
+      localStorage.getItem("lifeos_alarms")
+    );
 
-  if(savedSection){
+  if(Array.isArray(alarms)){
 
-    const item =
-      document.querySelector(
-        `.nav-item[data-section="${savedSection}"]`
-      );
+    const current=
+      [...document.querySelectorAll(".alarm")];
 
-    if(item){
+    alarms.forEach((saved,i)=>{
 
-      document.querySelectorAll(".nav-item")
-        .forEach(nav=>nav.classList.remove("active"));
+      if(current[i]){
 
-      item.classList.add("active");
-    }
+        const sw=
+          current[i].querySelector(".switch");
+
+        if(sw){
+          sw.classList.toggle(
+            "on",
+            saved.enabled
+          );
+        }
+
+      }
+
+    });
+
   }
 
-  updateProgress();
+}catch(e){}
 
-})();
+/* =========================
+   QUEST CLICK
+========================= */
+
+document.querySelectorAll(".quest")
+  .forEach(quest=>{
+
+    quest.addEventListener("click",()=>{
+
+      const title=
+        quest.querySelector("h3")
+          ?.textContent || "Квест";
+
+      const progress=
+        quest.querySelector(".quest-progress span");
+
+      const current=
+        parseInt(
+          progress?.style.width || "0"
+        );
+
+      if(progress){
+
+        const next=
+          Math.min(100,current+10);
+
+        progress.style.width=
+          next+"%";
+
+        const footer=
+          quest.querySelector(".quest-footer span");
+
+        if(footer){
+          footer.textContent=
+            next>=100
+              ? "Завершено"
+              : next+"%";
+        }
+
+      }
+
+    });
+
+  });
+
 </script>
 
 </body>
