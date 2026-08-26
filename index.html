@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#ff302b">
 <meta name="description" content="LifeOS — твоя личная система управления жизнью">
+
 <link rel="manifest" href="manifest.json">
-<title>LifeOS v0.9.3</title>
+
+<title>LifeOS v0.9.4</title>
 
 <style>
 :root{
-  --bg:#080808;
-  --card:#111;
+  --bg:#070707;
+  --card:#111111;
   --card2:#171717;
-  --line:#252525;
+  --line:#292929;
   --text:#f5f5f5;
   --muted:#858585;
   --red:#ff302b;
-  --green:#36d66b;
-  --yellow:#ffbd32;
-  --blue:#4d9cff;
-  --purple:#9b6cff;
+  --green:#35d65b;
+  --yellow:#ffc857;
+  --blue:#4da3ff;
+  --purple:#a56cff;
+  --nav:rgba(7,7,7,.94);
   --radius:24px;
 }
 
@@ -35,13 +38,13 @@ html{
 
 body{
   margin:0;
+  min-height:100vh;
   background:
-    radial-gradient(circle at 50% -10%,rgba(255,48,43,.10),transparent 35%),
+    radial-gradient(circle at 50% -10%,rgba(255,48,43,.08),transparent 35%),
     var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
   "SF Pro Text",Arial,sans-serif;
-  min-height:100vh;
 }
 
 button,input,select{
@@ -69,7 +72,7 @@ button{
   align-items:center;
   justify-content:space-between;
   padding:0 20px;
-  background:rgba(8,8,8,.90);
+  background:rgba(7,7,7,.88);
   backdrop-filter:blur(22px);
   border-bottom:1px solid var(--line);
 }
@@ -81,8 +84,8 @@ button{
 }
 
 .logo{
-  width:44px;
-  height:44px;
+  width:45px;
+  height:45px;
   border-radius:14px;
   background:var(--red);
   display:flex;
@@ -90,11 +93,11 @@ button{
   justify-content:center;
   font-size:25px;
   font-weight:950;
-  box-shadow:0 8px 30px rgba(255,48,43,.20);
+  box-shadow:0 8px 28px rgba(255,48,43,.22);
 }
 
 .brand-name{
-  font-size:24px;
+  font-size:23px;
   font-weight:950;
   letter-spacing:-1px;
 }
@@ -103,16 +106,15 @@ button{
   color:var(--muted);
   font-size:12px;
   font-weight:900;
-  letter-spacing:1.5px;
+  letter-spacing:1px;
 }
 
 /* MAIN */
 
 main{
-  width:100%;
-  max-width:920px;
+  width:min(900px,100%);
   margin:auto;
-  padding:28px 20px 35px;
+  padding:26px 20px 35px;
 }
 
 .screen{
@@ -125,22 +127,28 @@ main{
 }
 
 @keyframes fade{
-  from{opacity:0;transform:translateY(6px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .eyebrow{
   color:var(--muted);
   font-size:12px;
   font-weight:900;
-  letter-spacing:1.7px;
+  letter-spacing:.12em;
   text-transform:uppercase;
   margin-bottom:12px;
 }
 
 h1{
   margin:0;
-  font-size:47px;
+  font-size:48px;
   line-height:.98;
   letter-spacing:-2.5px;
 }
@@ -150,8 +158,9 @@ h1 span{
 }
 
 h2{
-  font-size:34px;
-  margin:30px 0 8px;
+  font-size:32px;
+  line-height:1;
+  margin:30px 0 10px;
   letter-spacing:-1.5px;
 }
 
@@ -168,74 +177,87 @@ h2{
   background:linear-gradient(145deg,#151515,#101010);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:21px;
+  padding:20px;
   margin:15px 0;
-  box-shadow:0 18px 55px rgba(0,0,0,.18);
+  box-shadow:0 15px 50px rgba(0,0,0,.18);
 }
 
 .card-title{
   color:var(--muted);
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
-  letter-spacing:2px;
+  letter-spacing:.14em;
   text-transform:uppercase;
 }
 
+.between{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* XP */
+
 .xp-row{
   display:flex;
-  align-items:end;
   justify-content:space-between;
-  margin:10px 0 15px;
+  align-items:end;
+  margin:12px 0 15px;
 }
 
 .xp-number{
-  font-size:43px;
+  font-size:44px;
   font-weight:950;
   letter-spacing:-2px;
 }
 
 .xp-level{
   color:var(--red);
-  font-size:16px;
   font-weight:900;
 }
 
 .progress{
   height:10px;
+  background:#242424;
   border-radius:20px;
-  background:#262626;
   overflow:hidden;
 }
 
 .progress-bar{
+  width:0;
   height:100%;
-  width:0%;
   background:linear-gradient(90deg,#ff302b,#ff625d);
   border-radius:20px;
-  transition:width .4s ease;
+  transition:width .35s ease;
 }
 
 .progress-info{
   display:flex;
   justify-content:space-between;
+  margin-top:9px;
   color:var(--muted);
   font-size:12px;
   font-weight:800;
-  margin-top:9px;
 }
 
-/* DASHBOARD */
+/* QUICK */
 
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:11px;
-  margin-top:17px;
+  gap:10px;
 }
 
 .quick{
-  min-height:125px;
-  padding:17px 14px;
+  min-height:112px;
+  padding:16px;
   text-align:left;
   color:white;
   background:#121212;
@@ -249,35 +271,26 @@ h2{
 }
 
 .quick-icon{
-  width:42px;
-  height:42px;
-  border-radius:13px;
+  width:36px;
+  height:36px;
+  border-radius:12px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#1c1c1c;
-  margin-bottom:12px;
-}
-
-.icon{
-  width:21px;
-  height:21px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.9;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+  background:#202020;
+  margin-bottom:13px;
+  font-size:19px;
 }
 
 .quick-title{
-  font-size:15px;
   font-weight:900;
+  font-size:14px;
 }
 
 .quick-text{
-  color:var(--muted);
-  font-size:12px;
   margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
 }
 
 /* BUTTONS */
@@ -291,34 +304,125 @@ h2{
 }
 
 .secondary{
-  background:#202020;
+  background:#222;
   color:white;
-  border:1px solid #303030;
+  border:1px solid #333;
   border-radius:14px;
   padding:12px 17px;
   font-weight:850;
 }
 
+.small-btn{
+  padding:9px 12px;
+  border-radius:11px;
+  font-size:12px;
+}
+
 .danger{
-  background:#281010;
-  color:#ff6862;
-  border:1px solid #482020;
+  background:#291111;
+  color:#ff6660;
+  border:1px solid #4a2020;
   border-radius:11px;
   padding:8px 11px;
   font-weight:900;
 }
 
-.row{
-  display:flex;
-  align-items:center;
-  gap:10px;
+/* CLOCK */
+
+.clock-card{
+  text-align:center;
+  padding:28px 20px;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(255,48,43,.11),transparent 55%),
+    linear-gradient(145deg,#171717,#0e0e0e);
 }
 
-.between{
+.clock-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.clock{
+  margin-top:8px;
+  font-size:56px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-3px;
+}
+
+.clock-date{
+  color:var(--muted);
+  margin-top:10px;
+  font-weight:700;
+}
+
+/* ALARM */
+
+.alarm-time{
+  font-size:38px;
+  font-weight:950;
+  letter-spacing:-2px;
+}
+
+.alarm-status{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:5px;
+}
+
+.switch{
+  position:relative;
+  width:52px;
+  height:31px;
+  border-radius:20px;
+  background:#333;
+  flex-shrink:0;
+  transition:.2s;
+}
+
+.switch::after{
+  content:"";
+  position:absolute;
+  top:4px;
+  left:4px;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  background:white;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--green);
+}
+
+.switch.on::after{
+  transform:translateX(21px);
+}
+
+/* TIMER */
+
+.timer{
+  text-align:center;
+  padding:24px 10px;
+}
+
+.timer-display{
+  font-size:62px;
+  font-weight:950;
+  letter-spacing:-3px;
+  font-variant-numeric:tabular-nums;
+}
+
+.timer-controls{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+  justify-content:center;
+  gap:9px;
+  margin-top:18px;
+  flex-wrap:wrap;
 }
 
 /* TASKS */
@@ -338,14 +442,15 @@ h2{
 .check{
   width:28px;
   height:28px;
-  flex-shrink:0;
+  border-radius:9px;
+  border:2px solid #555;
+  background:transparent;
+  color:#000;
   display:flex;
   align-items:center;
   justify-content:center;
-  border:2px solid #505050;
-  border-radius:9px;
-  background:transparent;
-  color:#000;
+  flex-shrink:0;
+  font-weight:950;
 }
 
 .check.done{
@@ -360,7 +465,7 @@ h2{
 
 .task-name{
   font-size:15px;
-  font-weight:850;
+  font-weight:900;
 }
 
 .task.done .task-name{
@@ -377,23 +482,23 @@ h2{
 .priority{
   padding:5px 7px;
   border-radius:7px;
-  font-size:10px;
-  font-weight:900;
+  font-size:9px;
+  font-weight:950;
 }
 
 .high{
-  background:#391414;
-  color:#ff6660;
+  color:#ff706a;
+  background:#391515;
 }
 
 .medium{
+  color:#ffd16b;
   background:#392f13;
-  color:#ffc857;
 }
 
 .low{
-  background:#12331a;
-  color:#63df79;
+  color:#68e580;
+  background:#14331b;
 }
 
 /* HABITS */
@@ -402,7 +507,7 @@ h2{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:14px 0;
+  padding:15px 0;
   border-bottom:1px solid var(--line);
 }
 
@@ -411,80 +516,21 @@ h2{
 }
 
 .habit-icon{
-  width:44px;
-  height:44px;
-  border-radius:13px;
-  background:#1b1b1b;
+  width:43px;
+  height:43px;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-shrink:0;
+  border-radius:14px;
+  background:#1d1d1d;
+  font-size:20px;
 }
 
 .streak{
-  color:#ff8a00;
-  font-size:12px;
-  font-weight:900;
-  margin-top:4px;
-}
-
-/* ALARM */
-
-.alarm{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:15px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.alarm:last-child{
-  border-bottom:0;
-}
-
-.alarm-time{
-  font-size:31px;
-  line-height:1;
-  font-weight:950;
-  letter-spacing:-1px;
-  min-width:86px;
-}
-
-.alarm-name{
-  font-weight:900;
-}
-
-.alarm-days{
-  color:var(--muted);
+  color:#ff9500;
   font-size:11px;
+  font-weight:900;
   margin-top:4px;
-}
-
-.toggle{
-  width:48px;
-  height:28px;
-  border-radius:20px;
-  background:#333;
-  padding:3px;
-  margin-left:auto;
-  transition:.2s;
-}
-
-.toggle span{
-  display:block;
-  width:22px;
-  height:22px;
-  background:#fff;
-  border-radius:50%;
-  transition:.2s;
-}
-
-.toggle.on{
-  background:var(--red);
-}
-
-.toggle.on span{
-  transform:translateX(20px);
 }
 
 /* CALENDAR */
@@ -497,7 +543,7 @@ h2{
 }
 
 .calendar-month{
-  font-size:21px;
+  font-size:20px;
   font-weight:950;
 }
 
@@ -508,23 +554,22 @@ h2{
 }
 
 .day-name{
-  text-align:center;
   color:#666;
+  text-align:center;
+  padding:5px 0;
   font-size:10px;
   font-weight:900;
-  padding:5px 0;
 }
 
 .day{
-  position:relative;
   aspect-ratio:1;
+  border-radius:11px;
+  border:1px solid #222;
+  background:#161616;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:12px;
-  background:#151515;
-  border:1px solid #222;
-  color:white;
   font-weight:850;
 }
 
@@ -535,170 +580,78 @@ h2{
 
 .day.selected{
   outline:2px solid white;
-  outline-offset:2px;
+  outline-offset:1px;
 }
 
-.day-dot{
-  position:absolute;
-  bottom:5px;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:var(--blue);
+.day.has-task{
+  box-shadow:inset 0 -3px 0 var(--blue);
 }
 
-/* QUESTS */
+/* GOALS */
 
-.quest{
+.goal{
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.goal:last-child{
+  border-bottom:0;
+}
+
+.goal-progress{
+  height:7px;
+  margin-top:10px;
+  background:#292929;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.goal-progress div{
+  height:100%;
+  background:var(--purple);
+  border-radius:10px;
+}
+
+/* QUEST */
+
+.quest-card{
   position:relative;
   overflow:hidden;
-  border:1px solid #2e2525;
   background:
-    radial-gradient(circle at 100% 0,rgba(255,48,43,.14),transparent 38%),
-    linear-gradient(145deg,#1a1111,#111);
-  border-radius:21px;
-  padding:19px;
-  margin:12px 0;
+    radial-gradient(circle at 100% 0,rgba(165,108,255,.18),transparent 40%),
+    linear-gradient(145deg,#17131d,#101010);
 }
 
-.quest.completed{
-  opacity:.62;
-}
-
-.quest-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.quest-icon-box{
-  width:47px;
-  height:47px;
-  border-radius:14px;
-  background:#241717;
+.quest-icon{
+  width:48px;
+  height:48px;
+  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:var(--red);
-}
-
-.quest-xp{
-  color:var(--yellow);
-  font-size:13px;
-  font-weight:950;
+  background:#241c30;
+  font-size:23px;
 }
 
 .quest-title{
-  margin-top:13px;
-  font-size:18px;
+  margin-top:14px;
+  font-size:20px;
   font-weight:950;
 }
 
 .quest-text{
   color:var(--muted);
-  font-size:13px;
-  line-height:1.45;
-  margin-top:6px;
+  line-height:1.5;
+  margin-top:7px;
 }
 
-.quest-progress{
-  height:7px;
-  background:#292929;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:14px;
-}
-
-.quest-progress-bar{
-  height:100%;
-  width:0;
-  background:var(--red);
-  border-radius:20px;
-}
-
-.quest-actions{
-  display:flex;
-  gap:8px;
-  margin-top:14px;
-}
-
-/* WORLD MAP PREVIEW */
-
-.map{
-  position:relative;
-  min-height:300px;
-  overflow:hidden;
-  border:1px solid #282828;
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 25% 30%,rgba(77,156,255,.15),transparent 25%),
-    radial-gradient(circle at 75% 70%,rgba(155,108,255,.12),transparent 25%),
-    linear-gradient(135deg,#101418,#0c0d0e);
-}
-
-.map-grid{
+.quest-lock{
   position:absolute;
-  inset:0;
-  opacity:.22;
-  background-image:
-    linear-gradient(#40505a 1px,transparent 1px),
-    linear-gradient(90deg,#40505a 1px,transparent 1px);
-  background-size:35px 35px;
+  right:20px;
+  top:20px;
+  color:#777;
+  font-size:20px;
 }
-
-.map-title{
-  position:absolute;
-  left:18px;
-  top:18px;
-  z-index:2;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:#aaa;
-}
-
-.map-center{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:68px;
-  height:68px;
-  border-radius:50%;
-  background:rgba(255,48,43,.14);
-  border:1px solid rgba(255,48,43,.5);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.map-center::after{
-  content:"";
-  width:17px;
-  height:17px;
-  border-radius:50%;
-  background:var(--red);
-  box-shadow:0 0 0 7px rgba(255,48,43,.16);
-}
-
-.map-point{
-  position:absolute;
-  width:36px;
-  height:36px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#181818;
-  border:1px solid #343434;
-  color:white;
-}
-
-.point1{left:20%;top:28%}
-.point2{right:19%;top:23%}
-.point3{left:25%;bottom:20%}
-.point4{right:23%;bottom:27%}
 
 /* PROFILE */
 
@@ -707,47 +660,48 @@ h2{
 }
 
 .avatar{
-  width:88px;
-  height:88px;
+  width:82px;
+  height:82px;
   margin:auto;
+  border-radius:27px;
+  background:var(--red);
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:28px;
-  background:var(--red);
-  font-size:45px;
+  font-size:43px;
   font-weight:950;
 }
 
 .profile-name{
-  font-size:27px;
+  margin-top:13px;
+  font-size:26px;
   font-weight:950;
-  margin-top:14px;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:9px;
 }
 
 .stat{
+  padding:17px 7px;
   text-align:center;
-  background:#151515;
+  background:#141414;
   border:1px solid var(--line);
   border-radius:18px;
-  padding:17px 8px;
 }
 
 .stat-number{
-  font-size:24px;
+  font-size:23px;
   font-weight:950;
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
+  font-size:9px;
+  font-weight:850;
+  margin-top:4px;
 }
 
 /* FORMS */
@@ -762,10 +716,10 @@ h2{
 .select{
   width:100%;
   padding:14px;
-  border-radius:14px;
-  border:1px solid #333;
-  background:#0d0d0d;
   color:white;
+  background:#0d0d0d;
+  border:1px solid #333;
+  border-radius:13px;
   outline:none;
 }
 
@@ -779,7 +733,7 @@ h2{
   gap:9px;
 }
 
-/* BOTTOM NAV */
+/* NAV */
 
 .bottom-nav{
   position:fixed;
@@ -787,9 +741,9 @@ h2{
   left:0;
   right:0;
   bottom:0;
-  height:88px;
+  height:86px;
   padding:7px 9px max(7px,env(safe-area-inset-bottom));
-  background:rgba(8,8,8,.94);
+  background:var(--nav);
   backdrop-filter:blur(25px);
   border-top:1px solid var(--line);
   display:grid;
@@ -798,23 +752,32 @@ h2{
 
 .nav-btn{
   background:transparent;
-  color:#606060;
+  color:#626262;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:5px;
+  gap:4px;
   font-size:10px;
   font-weight:900;
 }
 
-.nav-btn .icon{
-  width:22px;
-  height:22px;
+.nav-icon{
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  font-size:18px;
 }
 
 .nav-btn.active{
   color:var(--red);
+}
+
+.nav-btn.active .nav-icon{
+  background:rgba(255,48,43,.11);
 }
 
 /* MODAL */
@@ -836,21 +799,27 @@ h2{
 
 .sheet{
   width:min(700px,100%);
-  padding:24px 21px calc(24px + env(safe-area-inset-bottom));
+  max-height:90vh;
+  overflow:auto;
+  padding:24px 20px calc(25px + env(safe-area-inset-bottom));
   background:#151515;
   border:1px solid #333;
   border-bottom:0;
-  border-radius:28px 28px 0 0;
-  animation:sheet .24s ease;
+  border-radius:27px 27px 0 0;
+  animation:sheet .25s ease;
 }
 
 @keyframes sheet{
-  from{transform:translateY(100%)}
-  to{transform:translateY(0)}
+  from{
+    transform:translateY(100%);
+  }
+  to{
+    transform:translateY(0);
+  }
 }
 
 .sheet h3{
-  margin:0 0 18px;
+  margin:0 0 20px;
   font-size:24px;
 }
 
@@ -858,20 +827,19 @@ h2{
 
 .toast{
   position:fixed;
-  z-index:300;
+  z-index:400;
   left:50%;
-  bottom:102px;
+  bottom:100px;
   transform:translateX(-50%) translateY(20px);
   padding:12px 17px;
   border-radius:14px;
   background:#f5f5f5;
   color:#080808;
-  font-size:13px;
-  font-weight:950;
+  font-weight:900;
   opacity:0;
   pointer-events:none;
-  transition:.23s;
   white-space:nowrap;
+  transition:.25s;
 }
 
 .toast.show{
@@ -882,8 +850,10 @@ h2{
 /* DESKTOP */
 
 @media(min-width:700px){
+
   main{
-    padding-top:35px;
+    padding-left:25px;
+    padding-right:25px;
   }
 
   h1{
@@ -896,36 +866,37 @@ h2{
     transform:translateX(-50%);
     width:680px;
     border:1px solid var(--line);
-    border-radius:25px 25px 0 0;
+    border-radius:24px 24px 0 0;
   }
 }
 
 /* SMALL */
 
 @media(max-width:390px){
+
   main{
     padding-left:15px;
     padding-right:15px;
   }
 
   h1{
-    font-size:42px;
-  }
-
-  .quick-grid{
-    gap:7px;
+    font-size:41px;
   }
 
   .quick{
-    padding:14px 10px;
+    padding:13px 10px;
   }
 
   .quick-title{
     font-size:13px;
   }
 
-  .priority{
-    display:none;
+  .clock{
+    font-size:48px;
+  }
+
+  .timer-display{
+    font-size:54px;
   }
 }
 </style>
@@ -933,74 +904,21 @@ h2{
 
 <body>
 
-<!-- SVG ICONS -->
-
-<svg style="display:none">
-  <symbol id="i-home" viewBox="0 0 24 24">
-    <path d="m3 10 9-7 9 7"/>
-    <path d="M5 9v11h14V9"/>
-    <path d="M9 20v-6h6v6"/>
-  </symbol>
-
-  <symbol id="i-check" viewBox="0 0 24 24">
-    <path d="m5 12 4 4L19 6"/>
-  </symbol>
-
-  <symbol id="i-calendar" viewBox="0 0 24 24">
-    <rect x="3" y="5" width="18" height="16" rx="3"/>
-    <path d="M16 3v4M8 3v4M3 10h18"/>
-  </symbol>
-
-  <symbol id="i-fire" viewBox="0 0 24 24">
-    <path d="M12 22c4 0 7-3 7-7 0-4-3-7-5-10-1 3-3 4-4 5-1-2-1-4 0-6-5 3-7 7-7 11 0 4 3 7 7 7Z"/>
-  </symbol>
-
-  <symbol id="i-user" viewBox="0 0 24 24">
-    <circle cx="12" cy="8" r="4"/>
-    <path d="M4 21c0-4 3-7 8-7s8 3 8 7"/>
-  </symbol>
-
-  <symbol id="i-plus" viewBox="0 0 24 24">
-    <path d="M12 5v14M5 12h14"/>
-  </symbol>
-
-  <symbol id="i-bell" viewBox="0 0 24 24">
-    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-    <path d="M10 21h4"/>
-  </symbol>
-
-  <symbol id="i-map" viewBox="0 0 24 24">
-    <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/>
-    <path d="M9 3v15M15 6v15"/>
-  </symbol>
-
-  <symbol id="i-target" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="8"/>
-    <circle cx="12" cy="12" r="3"/>
-    <path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>
-  </symbol>
-
-  <symbol id="i-clock" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="9"/>
-    <path d="M12 7v5l3 2"/>
-  </symbol>
-
-  <symbol id="i-trophy" viewBox="0 0 24 24">
-    <path d="M8 4h8v5a4 4 0 0 1-8 0Z"/>
-    <path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4"/>
-    <path d="M12 13v4M8 21h8M9 17h6"/>
-  </symbol>
-</svg>
-
 <div class="app">
 
 <header class="header">
+
   <div class="brand">
     <div class="logo">L</div>
     <div class="brand-name">LifeOS</div>
   </div>
-  <div class="level" id="headerLevel">LEVEL 1</div>
+
+  <div class="level" id="headerLevel">
+    LEVEL 1
+  </div>
+
 </header>
+
 
 <main>
 
@@ -1008,7 +926,9 @@ h2{
 
 <section id="home" class="screen active">
 
-  <div class="eyebrow">LifeOS / Dashboard</div>
+  <div class="eyebrow">
+    LifeOS / Today
+  </div>
 
   <h1>
     Твоя жизнь.<br>
@@ -1016,17 +936,48 @@ h2{
   </h1>
 
   <p class="subtitle">
-    Планируй. Действуй. Получай XP.<br>
-    Каждый день становись сильнее.
+    Планируй день, выполняй задачи, развивай привычки
+    и двигайся к своим целям.
   </p>
+
+
+  <!-- CLOCK -->
+
+  <div class="card clock-card">
+
+    <div class="clock-label">
+      Сейчас
+    </div>
+
+    <div class="clock" id="mainClock">
+      00:00
+    </div>
+
+    <div class="clock-date" id="mainDate">
+      —
+    </div>
+
+  </div>
+
+
+  <!-- XP -->
 
   <div class="card">
 
-    <div class="card-title">Твой прогресс</div>
+    <div class="card-title">
+      Твой прогресс
+    </div>
 
     <div class="xp-row">
-      <div class="xp-number" id="xpNumber">0 XP</div>
-      <div class="xp-level" id="xpLevel">LEVEL 1</div>
+
+      <div class="xp-number" id="xpNumber">
+        0 XP
+      </div>
+
+      <div class="xp-level" id="xpLevel">
+        LEVEL 1
+      </div>
+
     </div>
 
     <div class="progress">
@@ -1034,84 +985,144 @@ h2{
     </div>
 
     <div class="progress-info">
-      <span id="xpCurrent">0 / 100 XP</span>
-      <span>До следующего уровня</span>
+
+      <span id="xpCurrent">
+        0 / 100 XP
+      </span>
+
+      <span>
+        До следующего уровня
+      </span>
+
     </div>
 
   </div>
+
+
+  <!-- QUICK -->
+
+  <h2>
+    Быстрый доступ
+  </h2>
 
   <div class="quick-grid">
 
-    <button class="quick" onclick="openTaskModal()">
+    <button class="quick"
+      onclick="openTaskModal()">
+
       <div class="quick-icon">
-        <svg class="icon"><use href="#i-plus"/></svg>
+        +
       </div>
-      <div class="quick-title">Новая задача</div>
-      <div class="quick-text">Получить XP</div>
+
+      <div class="quick-title">
+        Новая задача
+      </div>
+
+      <div class="quick-text">
+        Получить XP
+      </div>
+
     </button>
 
-    <button class="quick" onclick="showScreen('alarm')">
+
+    <button class="quick"
+      onclick="showScreen('alarm')">
+
       <div class="quick-icon">
-        <svg class="icon"><use href="#i-bell"/></svg>
+        ◷
       </div>
-      <div class="quick-title">Будильник</div>
-      <div class="quick-text">Настроить время</div>
+
+      <div class="quick-title">
+        Будильник
+      </div>
+
+      <div class="quick-text">
+        Напоминание
+      </div>
+
     </button>
 
-    <button class="quick" onclick="showScreen('quests')">
+
+    <button class="quick"
+      onclick="showScreen('timer')">
+
       <div class="quick-icon">
-        <svg class="icon"><use href="#i-target"/></svg>
+        ◴
       </div>
-      <div class="quick-title">Квесты</div>
-      <div class="quick-text">Новые цели</div>
+
+      <div class="quick-title">
+        Таймер
+      </div>
+
+      <div class="quick-text">
+        Фокус
+      </div>
+
     </button>
 
   </div>
 
+
+  <!-- TODAY -->
+
   <div class="card">
 
     <div class="between">
+
       <div>
-        <div class="card-title">Сегодня</div>
-        <div id="todayDate"
-             style="font-size:22px;font-weight:950;margin-top:7px">
+
+        <div class="card-title">
+          Сегодня
         </div>
+
+        <div
+          id="homeTaskCount"
+          style="font-size:23px;font-weight:950;margin-top:6px"
+        >
+          0 задач
+        </div>
+
       </div>
 
-      <svg class="icon"
-           style="width:28px;height:28px;color:var(--red)">
-        <use href="#i-calendar"/>
-      </svg>
-    </div>
+      <button
+        class="secondary small-btn"
+        onclick="showScreen('tasks')"
+      >
+        Все
+      </button>
 
-    <div id="todaySummary"
-         style="color:var(--muted);margin-top:12px">
     </div>
 
   </div>
 
-  <div class="card">
 
-    <div class="between">
-      <div>
-        <div class="card-title">Мир LifeOS</div>
-        <div style="font-size:22px;font-weight:950;margin-top:7px">
-          Исследуй. Выполняй. Расти.
-        </div>
-      </div>
+  <!-- QUEST -->
 
-      <svg class="icon"
-           style="width:29px;height:29px;color:var(--blue)">
-        <use href="#i-map"/>
-      </svg>
+  <div class="card quest-card">
+
+    <div class="quest-lock">
+      ◇
     </div>
 
-    <p class="subtitle" style="margin-bottom:14px">
-      Карта мира подготовлена для будущих реальных квестов.
-    </p>
+    <div class="quest-icon">
+      ◈
+    </div>
 
-    <button class="secondary" onclick="showScreen('quests')">
-      Открыть квесты
+    <div class="quest-title">
+      Мир LifeOS
+    </div>
+
+    <div class="quest-text">
+      Карта мира, реальные точки и система
+      квестов готовятся к следующему этапу.
+    </div>
+
+    <button
+      class="secondary"
+      style="margin-top:15px"
+      onclick="futureFeature()"
+    >
+      Скоро
     </button>
 
   </div>
@@ -1123,35 +1134,48 @@ h2{
 
 <section id="tasks" class="screen">
 
-  <div class="eyebrow">LifeOS / Actions</div>
+  <div class="eyebrow">
+    LifeOS / Actions
+  </div>
 
   <div class="between">
-    <h2 style="margin-top:0">Задачи</h2>
 
-    <button class="primary"
-            onclick="openTaskModal()">
-      <svg class="icon"
-           style="width:19px;height:19px">
-        <use href="#i-plus"/>
-      </svg>
+    <h2 style="margin-top:0">
+      Задачи
+    </h2>
+
+    <button
+      class="primary"
+      onclick="openTaskModal()"
+    >
+      +
     </button>
+
   </div>
 
   <div class="card">
 
     <div class="between">
+
       <div>
-        <div class="card-title">Сегодня</div>
-        <div id="taskCount"
-             style="font-size:24px;font-weight:950;margin-top:6px">
+
+        <div class="card-title">
+          Сегодня
+        </div>
+
+        <div
+          id="taskCount"
+          style="font-size:24px;font-weight:950;margin-top:6px"
+        >
           0 задач
         </div>
+
       </div>
 
-      <svg class="icon"
-           style="width:29px;height:29px;color:var(--green)">
-        <use href="#i-check"/>
-      </svg>
+      <div style="font-size:24px">
+        ✓
+      </div>
+
     </div>
 
     <div id="taskList"></div>
@@ -1165,47 +1189,63 @@ h2{
 
 <section id="calendar" class="screen">
 
-  <div class="eyebrow">LifeOS / Planning</div>
+  <div class="eyebrow">
+    LifeOS / Planning
+  </div>
 
-  <h2 style="margin-top:0">Календарь</h2>
+  <h2 style="margin-top:0">
+    Календарь
+  </h2>
 
   <div class="card">
 
     <div class="calendar-head">
 
-      <button class="secondary"
-              onclick="changeMonth(-1)">
+      <button
+        class="secondary"
+        onclick="changeMonth(-1)"
+      >
         ‹
       </button>
 
-      <div class="calendar-month"
-           id="calendarMonth">
-      </div>
+      <div
+        class="calendar-month"
+        id="calendarMonth"
+      ></div>
 
-      <button class="secondary"
-              onclick="changeMonth(1)">
+      <button
+        class="secondary"
+        onclick="changeMonth(1)"
+      >
         ›
       </button>
 
     </div>
 
-    <div class="calendar-grid"
-         id="calendarGrid">
-    </div>
+    <div
+      class="calendar-grid"
+      id="calendarGrid"
+    ></div>
 
   </div>
 
   <div class="card">
 
-    <div class="card-title">Выбранный день</div>
-
-    <div id="selectedDate"
-         style="font-size:23px;font-weight:950;margin-top:8px">
+    <div class="card-title">
+      Выбранный день
     </div>
 
-    <div id="calendarTasks"
-         style="margin-top:12px">
+    <div
+      id="selectedDate"
+      style="font-size:22px;font-weight:950;margin-top:8px"
+    >
+      Сегодня
     </div>
+
+    <div
+      id="calendarTasks"
+      style="margin-top:12px"
+    ></div>
 
   </div>
 
@@ -1216,7 +1256,9 @@ h2{
 
 <section id="habits" class="screen">
 
-  <div class="eyebrow">LifeOS / Habits</div>
+  <div class="eyebrow">
+    LifeOS / Habits
+  </div>
 
   <div class="between">
 
@@ -1224,15 +1266,18 @@ h2{
       Привычки
     </h2>
 
-    <button class="primary"
-            onclick="openHabitModal()">
+    <button
+      class="primary"
+      onclick="openHabitModal()"
+    >
       +
     </button>
 
   </div>
 
   <p class="subtitle">
-    Серия действий превращается в образ жизни.
+    Маленькие действия каждый день превращаются
+    в большие изменения.
   </p>
 
   <div class="card">
@@ -1248,109 +1293,173 @@ h2{
 
 <section id="alarm" class="screen">
 
-  <div class="eyebrow">LifeOS / Time</div>
+  <div class="eyebrow">
+    LifeOS / Alarm
+  </div>
 
-  <div class="between">
+  <h2 style="margin-top:0">
+    Будильник
+  </h2>
 
-    <h2 style="margin-top:0">
-      Будильники
-    </h2>
+  <p class="subtitle">
+    Настрой время и LifeOS напомнит тебе о важном.
+  </p>
 
-    <button class="primary"
-            onclick="openAlarmModal()">
-      +
+
+  <div class="card">
+
+    <div class="between">
+
+      <div>
+
+        <div class="card-title">
+          Следующий будильник
+        </div>
+
+        <div
+          class="alarm-time"
+          id="alarmDisplay"
+          style="margin-top:7px"
+        >
+          Не установлен
+        </div>
+
+        <div
+          class="alarm-status"
+          id="alarmStatus"
+        >
+          Будильник выключен
+        </div>
+
+      </div>
+
+      <button
+        id="alarmSwitch"
+        class="switch"
+        onclick="toggleAlarm()"
+        aria-label="Включить будильник"
+      ></button>
+
+    </div>
+
+    <button
+      class="primary"
+      style="margin-top:18px;width:100%"
+      onclick="openAlarmModal()"
+    >
+      Настроить будильник
     </button>
 
   </div>
 
+
   <div class="card">
 
     <div class="card-title">
-      Текущее время
+      Уведомления
     </div>
 
-    <div id="currentTime"
-         style="
-           font-size:50px;
-           font-weight:950;
-           letter-spacing:-2px;
-           margin-top:8px;
-         ">
-      00:00
+    <div
+      style="color:var(--muted);line-height:1.5;margin-top:10px"
+    >
+      Разреши уведомления, чтобы LifeOS мог
+      показывать напоминания на поддерживаемых устройствах.
     </div>
 
-    <div id="currentDate"
-         style="color:var(--muted);margin-top:4px">
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div id="alarmList"></div>
+    <button
+      class="secondary"
+      style="margin-top:15px;width:100%"
+      onclick="requestNotifications()"
+    >
+      Разрешить уведомления
+    </button>
 
   </div>
 
 </section>
 
 
-<!-- QUESTS -->
+<!-- TIMER -->
 
-<section id="quests" class="screen">
+<section id="timer" class="screen">
 
-  <div class="eyebrow">LifeOS / World</div>
-
-  <div class="between">
-
-    <h2 style="margin-top:0">
-      Квесты
-    </h2>
-
-    <svg class="icon"
-         style="width:28px;height:28px;color:var(--red)">
-      <use href="#i-target"/>
-    </svg>
-
+  <div class="eyebrow">
+    LifeOS / Focus
   </div>
+
+  <h2 style="margin-top:0">
+    Таймер
+  </h2>
 
   <p class="subtitle">
-    Превращай реальные цели в игровые миссии.
+    Используй таймер для тренировок, учёбы,
+    работы и глубокого фокуса.
   </p>
 
-  <div class="map">
+  <div class="card timer">
 
-    <div class="map-grid"></div>
-
-    <div class="map-title">
-      LIFEOS WORLD
+    <div
+      class="timer-display"
+      id="timerDisplay"
+    >
+      25:00
     </div>
 
-    <div class="map-center"></div>
+    <div class="timer-controls">
 
-    <div class="map-point point1">
-      <svg class="icon"><use href="#i-target"/></svg>
+      <button
+        class="secondary"
+        onclick="setTimer(5)"
+      >
+        5 мин
+      </button>
+
+      <button
+        class="secondary"
+        onclick="setTimer(15)"
+      >
+        15 мин
+      </button>
+
+      <button
+        class="secondary"
+        onclick="setTimer(25)"
+      >
+        25 мин
+      </button>
+
+      <button
+        class="secondary"
+        onclick="setTimer(45)"
+      >
+        45 мин
+      </button>
+
     </div>
 
-    <div class="map-point point2">
-      <svg class="icon"><use href="#i-trophy"/></svg>
-    </div>
+    <div
+      class="timer-controls"
+      style="margin-top:12px"
+    >
 
-    <div class="map-point point3">
-      <svg class="icon"><use href="#i-fire"/></svg>
-    </div>
+      <button
+        class="primary"
+        id="timerStart"
+        onclick="toggleTimer()"
+      >
+        Старт
+      </button>
 
-    <div class="map-point point4">
-      <svg class="icon"><use href="#i-map"/></svg>
+      <button
+        class="secondary"
+        onclick="resetTimer()"
+      >
+        Сброс
+      </button>
+
     </div>
 
   </div>
-
-  <div style="margin-top:22px"
-       class="card-title">
-    Активные квесты
-  </div>
-
-  <div id="questList"></div>
 
 </section>
 
@@ -1359,40 +1468,133 @@ h2{
 
 <section id="profile" class="screen">
 
-  <div class="eyebrow">LifeOS / Profile</div>
+  <div class="eyebrow">
+    LifeOS / Profile
+  </div>
 
   <div class="card profile">
 
-    <div class="avatar">L</div>
+    <div class="avatar">
+      L
+    </div>
 
     <div class="profile-name">
       LifeOS User
     </div>
 
-    <div style="color:var(--muted);margin-top:5px">
-      LEVEL <span id="profileLevel">1</span>
+    <div
+      style="color:var(--muted);margin-top:5px"
+    >
+      LEVEL
+      <span id="profileLevel">
+        1
+      </span>
     </div>
 
   </div>
+
 
   <div class="stats">
 
     <div class="stat">
-      <div class="stat-number" id="statXP">0</div>
-      <div class="stat-label">XP</div>
+      <div
+        class="stat-number"
+        id="statXP"
+      >
+        0
+      </div>
+      <div class="stat-label">
+        XP
+      </div>
     </div>
 
     <div class="stat">
-      <div class="stat-number" id="statTasks">0</div>
-      <div class="stat-label">ЗАДАЧ</div>
+      <div
+        class="stat-number"
+        id="statTasks"
+      >
+        0
+      </div>
+      <div class="stat-label">
+        ЗАДАЧ
+      </div>
     </div>
 
     <div class="stat">
-      <div class="stat-number" id="statHabits">0</div>
-      <div class="stat-label">ПРИВЫЧЕК</div>
+      <div
+        class="stat-number"
+        id="statHabits"
+      >
+        0
+      </div>
+      <div class="stat-label">
+        ПРИВЫЧЕК
+      </div>
     </div>
 
   </div>
+
+
+  <!-- GOALS -->
+
+  <div class="card">
+
+    <div class="card-title">
+      Текущие цели
+    </div>
+
+    <div class="goal">
+
+      <div class="between">
+
+        <span style="font-weight:900">
+          Следующий уровень
+        </span>
+
+        <span
+          id="goalXP"
+          style="color:var(--muted);font-size:12px"
+        >
+          0%
+        </span>
+
+      </div>
+
+      <div class="goal-progress">
+        <div
+          id="goalXPBar"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </div>
+
+    <div class="goal">
+
+      <div class="between">
+
+        <span style="font-weight:900">
+          Первый квест
+        </span>
+
+        <span style="color:var(--purple)">
+          v0.10
+        </span>
+
+      </div>
+
+      <div
+        style="color:var(--muted);font-size:12px;margin-top:6px"
+      >
+        Открытие мира LifeOS
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ACHIEVEMENTS -->
 
   <div class="card">
 
@@ -1400,59 +1602,68 @@ h2{
       Достижения
     </div>
 
-    <div style="margin-top:16px">
+    <div
+      class="between"
+      style="padding:13px 0;border-bottom:1px solid var(--line)"
+    >
+      <span>
+        Первый шаг
+      </span>
 
-      <div class="between"
-           style="padding:12px 0;border-bottom:1px solid var(--line)">
-        <span>Первый шаг</span>
-        <span id="achievement1">🔒</span>
-      </div>
+      <span id="achievement1">
+        🔒
+      </span>
+    </div>
 
-      <div class="between"
-           style="padding:12px 0;border-bottom:1px solid var(--line)">
-        <span>100 XP</span>
-        <span id="achievement2">🔒</span>
-      </div>
+    <div
+      class="between"
+      style="padding:13px 0;border-bottom:1px solid var(--line)"
+    >
+      <span>
+        100 XP
+      </span>
 
-      <div class="between"
-           style="padding:12px 0">
-        <span>7 дней streak</span>
-        <span id="achievement3">🔒</span>
-      </div>
+      <span id="achievement2">
+        🔒
+      </span>
+    </div>
 
+    <div
+      class="between"
+      style="padding:13px 0"
+    >
+      <span>
+        7 дней streak
+      </span>
+
+      <span id="achievement3">
+        🔒
+      </span>
     </div>
 
   </div>
 
+
   <div class="card">
 
     <div class="card-title">
-      Уведомления
+      Настройки
     </div>
 
-    <p class="subtitle"
-       style="margin-bottom:13px">
-      Разреши уведомления, чтобы LifeOS мог сообщать о важных событиях.
-    </p>
-
-    <button class="secondary"
-            style="width:100%"
-            onclick="requestNotifications()">
-      Включить уведомления
+    <button
+      class="secondary"
+      style="width:100%;margin-top:16px"
+      onclick="requestNotifications()"
+    >
+      Разрешить уведомления
     </button>
 
-  </div>
-
-  <div class="card">
-
-    <div class="card-title">
-      Данные
-    </div>
-
-    <button class="danger"
-            style="width:100%;margin-top:15px"
-            onclick="resetData()">
-      Сбросить данные LifeOS
+    <button
+      class="danger"
+      style="width:100%;margin-top:10px"
+      onclick="resetData()"
+    >
+      Сбросить данные
     </button>
 
   </div>
@@ -1466,38 +1677,48 @@ h2{
 
 <nav class="bottom-nav">
 
-  <button class="nav-btn active"
-          data-screen="home"
-          onclick="showScreen('home')">
-    <svg class="icon"><use href="#i-home"/></svg>
-    <div>Главная</div>
+  <button
+    class="nav-btn active"
+    data-screen="home"
+    onclick="showScreen('home')"
+  >
+    <div class="nav-icon">⌂</div>
+    <div>Домой</div>
   </button>
 
-  <button class="nav-btn"
-          data-screen="tasks"
-          onclick="showScreen('tasks')">
-    <svg class="icon"><use href="#i-check"/></svg>
+  <button
+    class="nav-btn"
+    data-screen="tasks"
+    onclick="showScreen('tasks')"
+  >
+    <div class="nav-icon">✓</div>
     <div>Задачи</div>
   </button>
 
-  <button class="nav-btn"
-          data-screen="calendar"
-          onclick="showScreen('calendar')">
-    <svg class="icon"><use href="#i-calendar"/></svg>
+  <button
+    class="nav-btn"
+    data-screen="calendar"
+    onclick="showScreen('calendar')"
+  >
+    <div class="nav-icon">▦</div>
     <div>Календарь</div>
   </button>
 
-  <button class="nav-btn"
-          data-screen="quests"
-          onclick="showScreen('quests')">
-    <svg class="icon"><use href="#i-target"/></svg>
-    <div>Квесты</div>
+  <button
+    class="nav-btn"
+    data-screen="timer"
+    onclick="showScreen('timer')"
+  >
+    <div class="nav-icon">◴</div>
+    <div>Фокус</div>
   </button>
 
-  <button class="nav-btn"
-          data-screen="profile"
-          onclick="showScreen('profile')">
-    <svg class="icon"><use href="#i-user"/></svg>
+  <button
+    class="nav-btn"
+    data-screen="profile"
+    onclick="showScreen('profile')"
+  >
+    <div class="nav-icon">●</div>
     <div>Профиль</div>
   </button>
 
@@ -1508,60 +1729,86 @@ h2{
 
 <!-- TASK MODAL -->
 
-<div class="modal"
-     id="taskModal"
-     onclick="closeModalOutside(event)">
+<div
+  class="modal"
+  id="taskModal"
+  onclick="closeModalOutside(event)"
+>
 
   <div class="sheet">
 
-    <h3>Новая задача</h3>
+    <h3>
+      Новая задача
+    </h3>
 
-    <form class="form"
-          onsubmit="addTask(event)">
+    <form
+      class="form"
+      onsubmit="addTask(event)"
+    >
 
-      <input class="input"
-             id="taskInput"
-             placeholder="Например: Тренировка"
-             maxlength="80"
-             required>
+      <input
+        class="input"
+        id="taskInput"
+        placeholder="Например: Тренировка"
+        maxlength="80"
+        required
+      >
 
-      <select class="select"
-              id="taskPriority">
-
+      <select
+        class="select"
+        id="taskPriority"
+      >
         <option value="high">
-          🔴 Высокий приоритет
+          Высокий приоритет
         </option>
 
-        <option value="medium" selected>
-          🟡 Средний приоритет
+        <option
+          value="medium"
+          selected
+        >
+          Средний приоритет
         </option>
 
         <option value="low">
-          🟢 Низкий приоритет
+          Низкий приоритет
         </option>
-
       </select>
 
-      <select class="select"
-              id="taskXP">
+      <select
+        class="select"
+        id="taskXP"
+      >
+        <option value="10">
+          +10 XP
+        </option>
 
-        <option value="10">+10 XP</option>
-        <option value="20">+20 XP</option>
-        <option value="30">+30 XP</option>
-        <option value="50">+50 XP</option>
+        <option value="20">
+          +20 XP
+        </option>
 
+        <option value="30">
+          +30 XP
+        </option>
+
+        <option value="50">
+          +50 XP
+        </option>
       </select>
 
       <div class="form-actions">
 
-        <button type="button"
-                class="secondary"
-                onclick="closeModal('taskModal')">
+        <button
+          type="button"
+          class="secondary"
+          onclick="closeModal('taskModal')"
+        >
           Отмена
         </button>
 
-        <button class="primary"
-                type="submit">
+        <button
+          class="primary"
+          type="submit"
+        >
           Создать
         </button>
 
@@ -1576,39 +1823,53 @@ h2{
 
 <!-- HABIT MODAL -->
 
-<div class="modal"
-     id="habitModal"
-     onclick="closeModalOutside(event)">
+<div
+  class="modal"
+  id="habitModal"
+  onclick="closeModalOutside(event)"
+>
 
   <div class="sheet">
 
-    <h3>Новая привычка</h3>
+    <h3>
+      Новая привычка
+    </h3>
 
-    <form class="form"
-          onsubmit="addHabit(event)">
+    <form
+      class="form"
+      onsubmit="addHabit(event)"
+    >
 
-      <input class="input"
-             id="habitInput"
-             placeholder="Например: Читать 20 минут"
-             maxlength="80"
-             required>
+      <input
+        class="input"
+        id="habitInput"
+        placeholder="Например: Читать 20 минут"
+        maxlength="80"
+        required
+      >
 
-      <input class="input"
-             id="habitIcon"
-             placeholder="Название иконки"
-             value="H"
-             maxlength="3">
+      <input
+        class="input"
+        id="habitIcon"
+        value="●"
+        maxlength="3"
+        placeholder="Иконка"
+      >
 
       <div class="form-actions">
 
-        <button type="button"
-                class="secondary"
-                onclick="closeModal('habitModal')">
+        <button
+          type="button"
+          class="secondary"
+          onclick="closeModal('habitModal')"
+        >
           Отмена
         </button>
 
-        <button class="primary"
-                type="submit">
+        <button
+          class="primary"
+          type="submit"
+        >
           Создать
         </button>
 
@@ -1623,59 +1884,53 @@ h2{
 
 <!-- ALARM MODAL -->
 
-<div class="modal"
-     id="alarmModal"
-     onclick="closeModalOutside(event)">
+<div
+  class="modal"
+  id="alarmModal"
+  onclick="closeModalOutside(event)"
+>
 
   <div class="sheet">
 
-    <h3>Новый будильник</h3>
+    <h3>
+      Настроить будильник
+    </h3>
 
-    <form class="form"
-          onsubmit="addAlarm(event)">
+    <form
+      class="form"
+      onsubmit="saveAlarm(event)"
+    >
 
-      <input class="input"
-             id="alarmTime"
-             type="time"
-             required>
+      <input
+        class="input"
+        id="alarmTimeInput"
+        type="time"
+        required
+      >
 
-      <input class="input"
-             id="alarmName"
-             placeholder="Название, например: Подъём"
-             maxlength="50">
-
-      <select class="select"
-              id="alarmRepeat">
-
-        <option value="daily">
-          Каждый день
-        </option>
-
-        <option value="weekdays">
-          Пн — Пт
-        </option>
-
-        <option value="weekend">
-          Сб — Вс
-        </option>
-
-        <option value="once">
-          Один раз
-        </option>
-
-      </select>
+      <input
+        class="input"
+        id="alarmLabelInput"
+        placeholder="Название напоминания"
+        maxlength="60"
+        value="Напоминание LifeOS"
+      >
 
       <div class="form-actions">
 
-        <button type="button"
-                class="secondary"
-                onclick="closeModal('alarmModal')">
+        <button
+          type="button"
+          class="secondary"
+          onclick="closeModal('alarmModal')"
+        >
           Отмена
         </button>
 
-        <button class="primary"
-                type="submit">
-          Создать
+        <button
+          class="primary"
+          type="submit"
+        >
+          Сохранить
         </button>
 
       </div>
@@ -1687,83 +1942,79 @@ h2{
 </div>
 
 
-<div class="toast"
-     id="toast">
-</div>
+<div
+  class="toast"
+  id="toast"
+></div>
 
 
 <script>
+
 /* =========================================================
-   LifeOS v0.9.3
+   LifeOS v0.9.4
    ========================================================= */
 
-const STORAGE_KEY = "lifeos_v093";
+const STORAGE_KEY = "lifeos_v094";
+
 
 const defaultData = {
+
   xp:0,
 
   tasks:[],
 
   habits:[
     {
-      id:crypto.randomUUID(),
+      id:makeId(),
       name:"Пить воду",
-      icon:"W",
+      icon:"●",
       streak:0,
       lastDone:null
     },
     {
-      id:crypto.randomUUID(),
+      id:makeId(),
       name:"Тренировка",
-      icon:"T",
+      icon:"◆",
       streak:0,
       lastDone:null
     }
   ],
 
-  alarms:[],
-
-  quests:[
-    {
-      id:crypto.randomUUID(),
-      title:"Первый квест",
-      description:"Выполни одну важную задачу сегодня.",
-      xp:30,
-      progress:0,
-      goal:1,
-      completed:false
-    },
-    {
-      id:crypto.randomUUID(),
-      title:"Дисциплина",
-      description:"Выполни 3 задачи за один день.",
-      xp:70,
-      progress:0,
-      goal:3,
-      completed:false
-    },
-    {
-      id:crypto.randomUUID(),
-      title:"Серия силы",
-      description:"Поддерживай привычки несколько дней подряд.",
-      xp:100,
-      progress:0,
-      goal:7,
-      completed:false
-    }
-  ],
+  alarm:{
+    time:"",
+    label:"Напоминание LifeOS",
+    enabled:false,
+    lastTriggered:""
+  },
 
   settings:{
     notifications:false
   }
+
 };
+
 
 let data = loadData();
 
 let calendarDate = new Date();
+
 let selectedDate = new Date();
 
-let toastTimer;
+
+/* =========================================================
+   ID
+   ========================================================= */
+
+function makeId(){
+
+  if(window.crypto && crypto.randomUUID){
+    return crypto.randomUUID();
+  }
+
+  return Date.now().toString(36)+
+    Math.random().toString(36).slice(2);
+
+}
 
 
 /* =========================================================
@@ -1778,39 +2029,46 @@ function loadData(){
       localStorage.getItem(STORAGE_KEY);
 
     if(!saved){
-      return defaultData;
+      return structuredClone(defaultData);
     }
 
     const parsed =
       JSON.parse(saved);
 
     return {
-      ...defaultData,
+
+      ...structuredClone(defaultData),
+
       ...parsed,
+
       tasks:Array.isArray(parsed.tasks)
         ? parsed.tasks
         : [],
+
       habits:Array.isArray(parsed.habits)
         ? parsed.habits
         : [],
-      alarms:Array.isArray(parsed.alarms)
-        ? parsed.alarms
-        : [],
-      quests:Array.isArray(parsed.quests)
-        ? parsed.quests
-        : defaultData.quests,
+
+      alarm:{
+        ...defaultData.alarm,
+        ...(parsed.alarm || {})
+      },
+
       settings:{
         ...defaultData.settings,
         ...(parsed.settings || {})
       }
+
     };
 
   }catch(error){
 
     console.error(error);
 
-    return defaultData;
+    return structuredClone(defaultData);
+
   }
+
 }
 
 
@@ -1830,7 +2088,7 @@ function saveData(){
 
 function getLevel(){
 
-  return Math.floor(data.xp / 100) + 1;
+  return Math.floor(data.xp / 100)+1;
 
 }
 
@@ -1859,13 +2117,13 @@ function addXP(amount){
   if(newLevel > oldLevel){
 
     showToast(
-      "Новый уровень — LEVEL " + newLevel
+      "Новый уровень — LEVEL "+newLevel
     );
 
   }else{
 
     showToast(
-      "+" + amount + " XP"
+      "+"+amount+" XP"
     );
 
   }
@@ -1879,10 +2137,12 @@ function addXP(amount){
 
 function showScreen(id){
 
-  document.querySelectorAll(".screen")
+  document
+    .querySelectorAll(".screen")
     .forEach(screen =>
       screen.classList.remove("active")
     );
+
 
   const target =
     document.getElementById(id);
@@ -1891,7 +2151,9 @@ function showScreen(id){
     target.classList.add("active");
   }
 
-  document.querySelectorAll(".nav-btn")
+
+  document
+    .querySelectorAll(".nav-btn")
     .forEach(button => {
 
       button.classList.toggle(
@@ -1901,794 +2163,289 @@ function showScreen(id){
 
     });
 
+
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
 
+
   if(id === "calendar"){
     renderCalendar();
   }
 
+  if(id === "tasks"){
+    renderTasks();
+  }
+
+  if(id === "habits"){
+    renderHabits();
+  }
+
   if(id === "alarm"){
-    renderAlarms();
-  }
-
-  if(id === "quests"){
-    renderQuests();
+    renderAlarm();
   }
 
 }
 
 
 /* =========================================================
-   TASKS
+   CLOCK
    ========================================================= */
-
-function openTaskModal(){
-
-  document.getElementById("taskModal")
-    .classList.add("show");
-
-  setTimeout(() => {
-
-    document
-      .getElementById("taskInput")
-      .focus();
-
-  },100);
-
-}
-
-
-function addTask(event){
-
-  event.preventDefault();
-
-  const name =
-    document
-      .getElementById("taskInput")
-      .value
-      .trim();
-
-  const priority =
-    document
-      .getElementById("taskPriority")
-      .value;
-
-  const xp =
-    Number(
-      document
-        .getElementById("taskXP")
-        .value
-    );
-
-  if(!name){
-    return;
-  }
-
-  data.tasks.push({
-
-    id:crypto.randomUUID(),
-
-    name,
-
-    priority,
-
-    xp,
-
-    completed:false,
-
-    createdAt:new Date().toISOString(),
-
-    completedAt:null
-
-  });
-
-  saveData();
-
-  event.target.reset();
-
-  closeModal("taskModal");
-
-  renderAll();
-
-  showToast("Задача создана");
-
-}
-
-
-function toggleTask(id){
-
-  const task =
-    data.tasks.find(
-      item => item.id === id
-    );
-
-  if(!task){
-    return;
-  }
-
-  if(task.completed){
-
-    task.completed = false;
-
-    task.completedAt = null;
-
-    data.xp =
-      Math.max(
-        0,
-        data.xp - Number(task.xp)
-      );
-
-    saveData();
-
-    renderAll();
-
-    showToast("Задача возвращена");
-
-    return;
-  }
-
-  task.completed = true;
-
-  task.completedAt =
-    new Date().toISOString();
-
-  addXP(task.xp);
-
-  updateQuestProgress();
-
-}
-
-
-function deleteTask(id){
-
-  data.tasks =
-    data.tasks.filter(
-      task => task.id !== id
-    );
-
-  saveData();
-
-  renderAll();
-
-  showToast("Задача удалена");
-
-}
-
-
-function renderTasks(){
-
-  const list =
-    document.getElementById("taskList");
-
-  const count =
-    document.getElementById("taskCount");
-
-  if(!list || !count){
-    return;
-  }
-
-  const todayTasks =
-    data.tasks.filter(task => {
-
-      if(!task.createdAt){
-        return true;
-      }
-
-      return isSameDate(
-        new Date(task.createdAt),
-        new Date()
-      );
-
-    });
-
-  count.textContent =
-    todayTasks.length +
-    (
-      todayTasks.length === 1
-        ? " задача"
-        : " задач"
-    );
-
-
-  if(todayTasks.length === 0){
-
-    list.innerHTML = `
-      <div style="
-        text-align:center;
-        padding:35px 10px;
-        color:#666;
-      ">
-        <div style="font-size:35px">—</div>
-        <div style="
-          margin-top:8px;
-          font-weight:800;
-        ">
-          На сегодня задач нет
-        </div>
-      </div>
-    `;
-
-    return;
-  }
-
-
-  list.innerHTML =
-    todayTasks.map(task => {
-
-      const priorityName =
-        task.priority === "high"
-          ? "Высокий"
-          : task.priority === "medium"
-            ? "Средний"
-            : "Низкий";
-
-      return `
-        <div class="task ${task.completed ? "done" : ""}">
-
-          <button
-            class="check ${task.completed ? "done" : ""}"
-            onclick="toggleTask('${task.id}')">
-            ${task.completed ? "✓" : ""}
-          </button>
-
-          <div class="task-main">
-
-            <div class="task-name">
-              ${escapeHTML(task.name)}
-            </div>
-
-            <div class="task-meta">
-              +${task.xp} XP
-            </div>
-
-          </div>
-
-          <span class="priority ${task.priority}">
-            ${priorityName}
-          </span>
-
-          <button
-            class="danger"
-            onclick="deleteTask('${task.id}')">
-            ×
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================================================
-   HABITS
-   ========================================================= */
-
-function openHabitModal(){
-
-  document.getElementById("habitModal")
-    .classList.add("show");
-
-  setTimeout(() => {
-
-    document
-      .getElementById("habitInput")
-      .focus();
-
-  },100);
-
-}
-
-
-function addHabit(event){
-
-  event.preventDefault();
-
-  const name =
-    document
-      .getElementById("habitInput")
-      .value
-      .trim();
-
-  const icon =
-    document
-      .getElementById("habitIcon")
-      .value
-      .trim() || "H";
-
-  if(!name){
-    return;
-  }
-
-  data.habits.push({
-
-    id:crypto.randomUUID(),
-
-    name,
-
-    icon,
-
-    streak:0,
-
-    lastDone:null
-
-  });
-
-  saveData();
-
-  event.target.reset();
-
-  closeModal("habitModal");
-
-  renderAll();
-
-  showToast("Привычка создана");
-
-}
-
-
-function completeHabit(id){
-
-  const habit =
-    data.habits.find(
-      item => item.id === id
-    );
-
-  if(!habit){
-    return;
-  }
-
-  const today =
-    dateKey(new Date());
-
-  if(habit.lastDone === today){
-
-    showToast(
-      "Сегодня уже выполнено"
-    );
-
-    return;
-  }
-
-  const yesterday =
-    new Date();
-
-  yesterday.setDate(
-    yesterday.getDate() - 1
-  );
-
-  if(
-    habit.lastDone ===
-    dateKey(yesterday)
-  ){
-
-    habit.streak += 1;
-
-  }else{
-
-    habit.streak = 1;
-
-  }
-
-  habit.lastDone = today;
-
-  saveData();
-
-  addXP(10);
-
-  renderAll();
-
-  updateQuestProgress();
-
-}
-
-
-function deleteHabit(id){
-
-  data.habits =
-    data.habits.filter(
-      habit => habit.id !== id
-    );
-
-  saveData();
-
-  renderAll();
-
-  showToast("Привычка удалена");
-
-}
-
-
-function renderHabits(){
-
-  const list =
-    document.getElementById("habitList");
-
-  if(!list){
-    return;
-  }
-
-  if(data.habits.length === 0){
-
-    list.innerHTML = `
-      <div style="
-        text-align:center;
-        padding:30px;
-        color:#666;
-      ">
-        Пока нет привычек
-      </div>
-    `;
-
-    return;
-  }
-
-  const today =
-    dateKey(new Date());
-
-  list.innerHTML =
-    data.habits.map(habit => {
-
-      const done =
-        habit.lastDone === today;
-
-      return `
-        <div class="habit">
-
-          <div class="habit-icon">
-            ${escapeHTML(habit.icon)}
-          </div>
-
-          <div style="flex:1">
-
-            <div style="
-              font-weight:900;
-              font-size:15px;
-            ">
-              ${escapeHTML(habit.name)}
-            </div>
-
-            <div class="streak">
-              ${habit.streak} дней
-            </div>
-
-          </div>
-
-          <button
-            class="${done ? "secondary" : "primary"}"
-            onclick="completeHabit('${habit.id}')">
-            ${done ? "Готово" : "Выполнить"}
-          </button>
-
-          <button
-            class="danger"
-            onclick="deleteHabit('${habit.id}')">
-            ×
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================================================
-   ALARMS
-   ========================================================= */
-
-function openAlarmModal(){
-
-  document.getElementById("alarmModal")
-    .classList.add("show");
-
-  setTimeout(() => {
-
-    document
-      .getElementById("alarmTime")
-      .focus();
-
-  },100);
-
-}
-
-
-function addAlarm(event){
-
-  event.preventDefault();
-
-  const time =
-    document
-      .getElementById("alarmTime")
-      .value;
-
-  const name =
-    document
-      .getElementById("alarmName")
-      .value
-      .trim() || "Будильник";
-
-  const repeat =
-    document
-      .getElementById("alarmRepeat")
-      .value;
-
-  if(!time){
-    return;
-  }
-
-  data.alarms.push({
-
-    id:crypto.randomUUID(),
-
-    time,
-
-    name,
-
-    repeat,
-
-    enabled:true,
-
-    lastTriggered:null
-
-  });
-
-  data.alarms.sort(
-    (a,b) =>
-      a.time.localeCompare(b.time)
-  );
-
-  saveData();
-
-  event.target.reset();
-
-  closeModal("alarmModal");
-
-  renderAll();
-
-  showToast("Будильник создан");
-
-}
-
-
-function toggleAlarm(id){
-
-  const alarm =
-    data.alarms.find(
-      item => item.id === id
-    );
-
-  if(!alarm){
-    return;
-  }
-
-  alarm.enabled =
-    !alarm.enabled;
-
-  saveData();
-
-  renderAlarms();
-
-}
-
-
-function deleteAlarm(id){
-
-  data.alarms =
-    data.alarms.filter(
-      alarm => alarm.id !== id
-    );
-
-  saveData();
-
-  renderAll();
-
-  showToast("Будильник удалён");
-
-}
-
-
-function repeatText(value){
-
-  if(value === "daily"){
-    return "Каждый день";
-  }
-
-  if(value === "weekdays"){
-    return "Пн — Пт";
-  }
-
-  if(value === "weekend"){
-    return "Сб — Вс";
-  }
-
-  return "Один раз";
-}
-
-
-function renderAlarms(){
-
-  const list =
-    document.getElementById("alarmList");
-
-  if(!list){
-    return;
-  }
-
-  if(data.alarms.length === 0){
-
-    list.innerHTML = `
-      <div style="
-        text-align:center;
-        padding:35px 10px;
-        color:#666;
-      ">
-        <svg class="icon"
-             style="width:40px;height:40px">
-          <use href="#i-bell"/>
-        </svg>
-
-        <div style="margin-top:10px;font-weight:800">
-          Будильников пока нет
-        </div>
-
-        <button class="primary"
-                style="margin-top:15px"
-                onclick="openAlarmModal()">
-          Добавить будильник
-        </button>
-      </div>
-    `;
-
-    return;
-  }
-
-  list.innerHTML =
-    data.alarms.map(alarm => `
-
-      <div class="alarm">
-
-        <div class="alarm-time">
-          ${escapeHTML(alarm.time)}
-        </div>
-
-        <div style="flex:1">
-
-          <div class="alarm-name">
-            ${escapeHTML(alarm.name)}
-          </div>
-
-          <div class="alarm-days">
-            ${repeatText(alarm.repeat)}
-          </div>
-
-        </div>
-
-        <button
-          class="toggle ${alarm.enabled ? "on" : ""}"
-          onclick="toggleAlarm('${alarm.id}')">
-          <span></span>
-        </button>
-
-        <button
-          class="danger"
-          onclick="deleteAlarm('${alarm.id}')">
-          ×
-        </button>
-
-      </div>
-
-    `).join("");
-
-}
-
 
 function updateClock(){
-
-  const timeElement =
-    document.getElementById("currentTime");
-
-  const dateElement =
-    document.getElementById("currentDate");
-
-  if(!timeElement){
-    return;
-  }
 
   const now =
     new Date();
 
-  timeElement.textContent =
+
+  const time =
     now.toLocaleTimeString(
       "ru-RU",
       {
         hour:"2-digit",
-        minute:"2-digit"
+        minute:"2-digit",
+        second:"2-digit"
       }
     );
 
-  if(dateElement){
 
-    dateElement.textContent =
-      new Intl.DateTimeFormat(
-        "ru-RU",
-        {
-          weekday:"long",
-          day:"numeric",
-          month:"long"
-        }
-      ).format(now);
+  const date =
+    new Intl.DateTimeFormat(
+      "ru-RU",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }
+    ).format(now);
 
+
+  const clock =
+    document.getElementById("mainClock");
+
+  const dateEl =
+    document.getElementById("mainDate");
+
+
+  if(clock){
+    clock.textContent = time;
   }
 
-  checkAlarms(now);
+  if(dateEl){
+    dateEl.textContent =
+      capitalize(date);
+  }
+
+
+  checkAlarm(now);
 
 }
 
 
-function checkAlarms(now){
+/* =========================================================
+   ALARM
+   ========================================================= */
+
+function openAlarmModal(){
+
+  const input =
+    document.getElementById("alarmTimeInput");
+
+  const label =
+    document.getElementById("alarmLabelInput");
+
+
+  input.value =
+    data.alarm.time || "";
+
+  label.value =
+    data.alarm.label ||
+    "Напоминание LifeOS";
+
+
+  document
+    .getElementById("alarmModal")
+    .classList.add("show");
+
+}
+
+
+function saveAlarm(event){
+
+  event.preventDefault();
+
+
+  const time =
+    document
+      .getElementById("alarmTimeInput")
+      .value;
+
+  const label =
+    document
+      .getElementById("alarmLabelInput")
+      .value
+      .trim() ||
+      "Напоминание LifeOS";
+
+
+  data.alarm.time = time;
+
+  data.alarm.label = label;
+
+  data.alarm.enabled = true;
+
+  data.alarm.lastTriggered = "";
+
+
+  saveData();
+
+  closeModal("alarmModal");
+
+  renderAlarm();
+
+  showToast(
+    "Будильник установлен на "+time
+  );
+
+}
+
+
+function toggleAlarm(){
+
+  if(!data.alarm.time){
+
+    openAlarmModal();
+
+    return;
+  }
+
+
+  data.alarm.enabled =
+    !data.alarm.enabled;
+
+
+  if(data.alarm.enabled){
+
+    data.alarm.lastTriggered = "";
+
+  }
+
+
+  saveData();
+
+  renderAlarm();
+
+
+  showToast(
+    data.alarm.enabled
+      ? "Будильник включён"
+      : "Будильник выключен"
+  );
+
+}
+
+
+function renderAlarm(){
+
+  const display =
+    document.getElementById("alarmDisplay");
+
+  const status =
+    document.getElementById("alarmStatus");
+
+  const toggle =
+    document.getElementById("alarmSwitch");
+
+
+  if(!display){
+    return;
+  }
+
+
+  if(data.alarm.time){
+
+    display.textContent =
+      data.alarm.time;
+
+  }else{
+
+    display.textContent =
+      "Не установлен";
+
+  }
+
+
+  if(data.alarm.enabled){
+
+    status.textContent =
+      data.alarm.label ||
+      "Будильник включён";
+
+    toggle.classList.add("on");
+
+  }else{
+
+    status.textContent =
+      data.alarm.time
+        ? "Будильник выключен"
+        : "Будильник не установлен";
+
+    toggle.classList.remove("on");
+
+  }
+
+}
+
+
+function checkAlarm(now){
+
+  if(!data.alarm.enabled){
+    return;
+  }
+
+  if(!data.alarm.time){
+    return;
+  }
+
 
   const current =
-    now.toTimeString()
-      .slice(0,5);
+    String(now.getHours()).padStart(2,"0")+
+    ":"+
+    String(now.getMinutes()).padStart(2,"0");
+
 
   const today =
     dateKey(now);
 
-  const day =
-    now.getDay();
 
-  data.alarms.forEach(alarm => {
+  if(
+    current === data.alarm.time &&
+    data.alarm.lastTriggered !== today
+  ){
 
-    if(!alarm.enabled){
-      return;
-    }
-
-    if(alarm.time !== current){
-      return;
-    }
-
-    if(alarm.lastTriggered === today){
-      return;
-    }
-
-    let shouldTrigger = true;
-
-    if(alarm.repeat === "weekdays"){
-      shouldTrigger =
-        day >= 1 && day <= 5;
-    }
-
-    if(alarm.repeat === "weekend"){
-      shouldTrigger =
-        day === 0 || day === 6;
-    }
-
-    if(!shouldTrigger){
-      return;
-    }
-
-    alarm.lastTriggered = today;
+    data.alarm.lastTriggered =
+      today;
 
     saveData();
 
-    triggerAlarm(alarm);
+    triggerAlarmNotification();
 
-  });
+  }
 
 }
 
 
-function triggerAlarm(alarm){
+async function triggerAlarmNotification(){
 
-  showToast(
-    "Будильник: " + alarm.name
-  );
+  const title =
+    "LifeOS";
+
+  const body =
+    data.alarm.label ||
+    "Напоминание LifeOS";
+
 
   if(
     "Notification" in window &&
@@ -2698,10 +2455,10 @@ function triggerAlarm(alarm){
     try{
 
       new Notification(
-        "LifeOS — " + alarm.name,
+        title,
         {
-          body:"Время пришло.",
-          tag:"lifeos-alarm-" + alarm.id
+          body:body,
+          tag:"lifeos-alarm"
         }
       );
 
@@ -2713,598 +2470,23 @@ function triggerAlarm(alarm){
 
   }
 
-  if(
-    navigator.vibrate
-  ){
-
-    navigator.vibrate(
-      [500,250,500,250,800]
-    );
-
-  }
-
-  if(alarm.repeat === "once"){
-
-    alarm.enabled = false;
-
-    saveData();
-
-    renderAlarms();
-
-  }
-
-}
-
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
-
-function changeMonth(amount){
-
-  calendarDate.setMonth(
-    calendarDate.getMonth() + amount
-  );
-
-  renderCalendar();
-
-}
-
-
-function renderCalendar(){
-
-  const grid =
-    document.getElementById("calendarGrid");
-
-  const title =
-    document.getElementById("calendarMonth");
-
-  if(!grid || !title){
-    return;
-  }
-
-  const year =
-    calendarDate.getFullYear();
-
-  const month =
-    calendarDate.getMonth();
-
-  title.textContent =
-    capitalize(
-      new Intl.DateTimeFormat(
-        "ru-RU",
-        {
-          month:"long",
-          year:"numeric"
-        }
-      ).format(calendarDate)
-    );
-
-  const first =
-    new Date(year,month,1);
-
-  let start =
-    first.getDay();
-
-  start =
-    start === 0 ? 6 : start - 1;
-
-  const days =
-    new Date(
-      year,
-      month + 1,
-      0
-    ).getDate();
-
-  const names =
-    ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
-
-  let html =
-    names.map(name =>
-      `<div class="day-name">${name}</div>`
-    ).join("");
-
-  for(let i=0;i<start;i++){
-    html += `<div></div>`;
-  }
-
-  for(let day=1;day<=days;day++){
-
-    const date =
-      new Date(year,month,day);
-
-    const today =
-      isSameDate(
-        date,
-        new Date()
-      );
-
-    const selected =
-      isSameDate(
-        date,
-        selectedDate
-      );
-
-    const hasTask =
-      data.tasks.some(task =>
-        task.createdAt &&
-        isSameDate(
-          new Date(task.createdAt),
-          date
-        )
-      );
-
-    html += `
-      <button
-        class="day
-          ${today ? "today" : ""}
-          ${selected ? "selected" : ""}
-        "
-        onclick="selectDate(${year},${month},${day})">
-
-        ${day}
-
-        ${
-          hasTask
-            ? `<span class="day-dot"></span>`
-            : ""
-        }
-
-      </button>
-    `;
-
-  }
-
-  grid.innerHTML = html;
-
-  renderSelectedDate();
-
-}
-
-
-function selectDate(year,month,day){
-
-  selectedDate =
-    new Date(
-      year,
-      month,
-      day
-    );
-
-  renderCalendar();
-
-}
-
-
-function renderSelectedDate(){
-
-  const title =
-    document.getElementById("selectedDate");
-
-  const list =
-    document.getElementById("calendarTasks");
-
-  if(!title || !list){
-    return;
-  }
-
-  title.textContent =
-    capitalize(
-      new Intl.DateTimeFormat(
-        "ru-RU",
-        {
-          weekday:"long",
-          day:"numeric",
-          month:"long"
-        }
-      ).format(selectedDate)
-    );
-
-  const tasks =
-    data.tasks.filter(task =>
-      task.createdAt &&
-      isSameDate(
-        new Date(task.createdAt),
-        selectedDate
-      )
-    );
-
-  if(tasks.length === 0){
-
-    list.innerHTML = `
-      <div style="
-        color:#666;
-        padding:12px 0;
-      ">
-        Нет задач на этот день.
-      </div>
-    `;
-
-    return;
-  }
-
-  list.innerHTML =
-    tasks.map(task => `
-      <div style="
-        padding:11px 0;
-        border-bottom:1px solid var(--line);
-        font-weight:800;
-      ">
-        ${task.completed ? "✓" : "○"}
-        ${escapeHTML(task.name)}
-      </div>
-    `).join("");
-
-}
-
-
-/* =========================================================
-   QUESTS
-   ========================================================= */
-
-function updateQuestProgress(){
-
-  const completedToday =
-    data.tasks.filter(task =>
-      task.completed &&
-      task.completedAt &&
-      isSameDate(
-        new Date(task.completedAt),
-        new Date()
-      )
-    ).length;
-
-  const maxStreak =
-    Math.max(
-      0,
-      ...data.habits.map(
-        habit => habit.streak
-      )
-    );
-
-  data.quests.forEach(quest => {
-
-    if(
-      quest.title === "Первый квест"
-    ){
-
-      quest.progress =
-        completedToday >= 1 ? 1 : 0;
-
-    }
-
-    if(
-      quest.title === "Дисциплина"
-    ){
-
-      quest.progress =
-        Math.min(
-          completedToday,
-          quest.goal
-        );
-
-    }
-
-    if(
-      quest.title === "Серия силы"
-    ){
-
-      quest.progress =
-        Math.min(
-          maxStreak,
-          quest.goal
-        );
-
-    }
-
-  });
-
-  saveData();
-
-  renderQuests();
-
-}
-
-
-function completeQuest(id){
-
-  const quest =
-    data.quests.find(
-      item => item.id === id
-    );
-
-  if(!quest || quest.completed){
-    return;
-  }
-
-  if(
-    quest.progress <
-    quest.goal
-  ){
-
-    showToast(
-      "Сначала выполни цель квеста"
-    );
-
-    return;
-  }
-
-  quest.completed = true;
-
-  saveData();
-
-  addXP(quest.xp);
-
-  renderQuests();
 
   showToast(
-    "Квест завершён: +" +
-    quest.xp +
-    " XP"
+    "Будильник: "+body
   );
 
-}
 
+  if("vibrate" in navigator){
 
-function renderQuests(){
+    try{
 
-  const list =
-    document.getElementById("questList");
+      navigator.vibrate(
+        [300,150,300,150,500]
+      );
 
-  if(!list){
-    return;
+    }catch(error){}
+
   }
-
-  list.innerHTML =
-    data.quests.map(quest => {
-
-      const percent =
-        Math.min(
-          100,
-          Math.round(
-            (quest.progress /
-             quest.goal) * 100
-          )
-        );
-
-      return `
-
-        <div class="quest
-          ${quest.completed ? "completed" : ""}">
-
-          <div class="quest-top">
-
-            <div class="quest-icon-box">
-              <svg class="icon">
-                <use href="#i-target"/>
-              </svg>
-            </div>
-
-            <div class="quest-xp">
-              +${quest.xp} XP
-            </div>
-
-          </div>
-
-          <div class="quest-title">
-            ${escapeHTML(quest.title)}
-          </div>
-
-          <div class="quest-text">
-            ${escapeHTML(quest.description)}
-          </div>
-
-          <div class="quest-progress">
-            <div class="quest-progress-bar"
-                 style="width:${percent}%">
-            </div>
-          </div>
-
-          <div class="between"
-               style="
-                 margin-top:8px;
-                 color:var(--muted);
-                 font-size:11px;
-                 font-weight:800;
-               ">
-
-            <span>
-              ${quest.progress} / ${quest.goal}
-            </span>
-
-            <span>
-              ${percent}%
-            </span>
-
-          </div>
-
-          <div class="quest-actions">
-
-            ${
-              quest.completed
-                ? `
-                  <button
-                    class="secondary"
-                    style="width:100%">
-                    Завершён
-                  </button>
-                `
-                : `
-                  <button
-                    class="primary"
-                    style="width:100%"
-                    onclick="completeQuest('${quest.id}')">
-                    ${
-                      quest.progress >= quest.goal
-                        ? "Забрать награду"
-                        : "Выполняется"
-                    }
-                  </button>
-                `
-            }
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================================================
-   PROFILE
-   ========================================================= */
-
-function renderProfile(){
-
-  const level =
-    getLevel();
-
-  const completedTasks =
-    data.tasks.filter(
-      task => task.completed
-    ).length;
-
-  const profileLevel =
-    document.getElementById(
-      "profileLevel"
-    );
-
-  if(!profileLevel){
-    return;
-  }
-
-  profileLevel.textContent =
-    level;
-
-  document.getElementById("statXP")
-    .textContent =
-      data.xp;
-
-  document.getElementById("statTasks")
-    .textContent =
-      completedTasks;
-
-  document.getElementById("statHabits")
-    .textContent =
-      data.habits.length;
-
-  document.getElementById("achievement1")
-    .textContent =
-      completedTasks >= 1
-        ? "🏆"
-        : "🔒";
-
-  document.getElementById("achievement2")
-    .textContent =
-      data.xp >= 100
-        ? "🏆"
-        : "🔒";
-
-  const maxStreak =
-    Math.max(
-      0,
-      ...data.habits.map(
-        habit => habit.streak
-      )
-    );
-
-  document.getElementById("achievement3")
-    .textContent =
-      maxStreak >= 7
-        ? "🏆"
-        : "🔒";
-
-}
-
-
-/* =========================================================
-   HOME
-   ========================================================= */
-
-function renderHome(){
-
-  const today =
-    new Date();
-
-  const dateElement =
-    document.getElementById("todayDate");
-
-  const summary =
-    document.getElementById("todaySummary");
-
-  if(!dateElement || !summary){
-    return;
-  }
-
-  dateElement.textContent =
-    capitalize(
-      new Intl.DateTimeFormat(
-        "ru-RU",
-        {
-          weekday:"long",
-          day:"numeric",
-          month:"long"
-        }
-      ).format(today)
-    );
-
-  const tasks =
-    data.tasks.filter(task =>
-      task.createdAt &&
-      isSameDate(
-        new Date(task.createdAt),
-        today
-      )
-    );
-
-  const completed =
-    tasks.filter(
-      task => task.completed
-    ).length;
-
-  summary.textContent =
-    tasks.length === 0
-      ? "Сегодня задач пока нет."
-      : `Выполнено ${completed} из ${tasks.length} задач.`;
-
-}
-
-
-/* =========================================================
-   XP UI
-   ========================================================= */
-
-function renderXP(){
-
-  const level =
-    getLevel();
-
-  const levelXP =
-    getLevelXP();
-
-  document.getElementById("xpNumber")
-    .textContent =
-      data.xp + " XP";
-
-  document.getElementById("xpLevel")
-    .textContent =
-      "LEVEL " + level;
-
-  document.getElementById("headerLevel")
-    .textContent =
-      "LEVEL " + level;
-
-  document.getElementById("xpCurrent")
-    .textContent =
-      levelXP + " / 100 XP";
-
-  document.getElementById("xpBar")
-    .style.width =
-      levelXP + "%";
 
 }
 
@@ -3322,12 +2504,15 @@ async function requestNotifications(){
     );
 
     return;
+
   }
+
 
   try{
 
     const permission =
       await Notification.requestPermission();
+
 
     if(permission === "granted"){
 
@@ -3340,15 +2525,12 @@ async function requestNotifications(){
         new Notification(
           "LifeOS",
           {
-            body:"Уведомления включены."
+            body:"Уведомления включены"
           }
         );
 
-      }catch(error){
+      }catch(error){}
 
-        console.log(error);
-
-      }
 
       showToast(
         "Уведомления включены"
@@ -3371,6 +2553,1126 @@ async function requestNotifications(){
     );
 
   }
+
+}
+
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+let timerSeconds = 25*60;
+
+let timerRunning = false;
+
+let timerInterval = null;
+
+
+function setTimer(minutes){
+
+  stopTimer();
+
+  timerSeconds =
+    Number(minutes)*60;
+
+  renderTimer();
+
+}
+
+
+function renderTimer(){
+
+  const display =
+    document.getElementById("timerDisplay");
+
+  const button =
+    document.getElementById("timerStart");
+
+
+  if(!display){
+    return;
+  }
+
+
+  const minutes =
+    Math.floor(timerSeconds/60);
+
+  const seconds =
+    timerSeconds%60;
+
+
+  display.textContent =
+    String(minutes).padStart(2,"0")+
+    ":"+
+    String(seconds).padStart(2,"0");
+
+
+  if(button){
+
+    button.textContent =
+      timerRunning
+        ? "Пауза"
+        : "Старт";
+
+  }
+
+}
+
+
+function toggleTimer(){
+
+  if(timerRunning){
+
+    stopTimer();
+
+    return;
+
+  }
+
+
+  if(timerSeconds <= 0){
+
+    timerSeconds = 25*60;
+
+  }
+
+
+  timerRunning = true;
+
+
+  timerInterval =
+    setInterval(() => {
+
+      timerSeconds--;
+
+      renderTimer();
+
+
+      if(timerSeconds <= 0){
+
+        stopTimer();
+
+        timerFinished();
+
+      }
+
+    },1000);
+
+
+  renderTimer();
+
+}
+
+
+function stopTimer(){
+
+  timerRunning = false;
+
+  if(timerInterval){
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+  }
+
+  renderTimer();
+
+}
+
+
+function resetTimer(){
+
+  stopTimer();
+
+  timerSeconds = 25*60;
+
+  renderTimer();
+
+}
+
+
+function timerFinished(){
+
+  showToast(
+    "Таймер завершён"
+  );
+
+
+  if(
+    "Notification" in window &&
+    Notification.permission === "granted"
+  ){
+
+    try{
+
+      new Notification(
+        "LifeOS",
+        {
+          body:"Фокус-сессия завершена"
+        }
+      );
+
+    }catch(error){}
+
+  }
+
+
+  if("vibrate" in navigator){
+
+    try{
+      navigator.vibrate(
+        [300,150,300,150,500]
+      );
+    }catch(error){}
+
+  }
+
+}
+
+
+/* =========================================================
+   TASKS
+   ========================================================= */
+
+function openTaskModal(){
+
+  document
+    .getElementById("taskModal")
+    .classList.add("show");
+
+
+  setTimeout(() => {
+
+    document
+      .getElementById("taskInput")
+      .focus();
+
+  },100);
+
+}
+
+
+function addTask(event){
+
+  event.preventDefault();
+
+
+  const name =
+    document
+      .getElementById("taskInput")
+      .value
+      .trim();
+
+  const priority =
+    document
+      .getElementById("taskPriority")
+      .value;
+
+  const xp =
+    Number(
+      document
+        .getElementById("taskXP")
+        .value
+    );
+
+
+  if(!name){
+    return;
+  }
+
+
+  data.tasks.push({
+
+    id:makeId(),
+
+    name:name,
+
+    priority:priority,
+
+    xp:xp,
+
+    completed:false,
+
+    createdAt:new Date().toISOString(),
+
+    completedAt:null
+
+  });
+
+
+  saveData();
+
+  event.target.reset();
+
+  closeModal("taskModal");
+
+  renderAll();
+
+  showToast(
+    "Задача создана"
+  );
+
+}
+
+
+function toggleTask(id){
+
+  const task =
+    data.tasks.find(
+      item => item.id === id
+    );
+
+
+  if(!task){
+    return;
+  }
+
+
+  if(task.completed){
+
+    task.completed = false;
+
+    task.completedAt = null;
+
+    data.xp =
+      Math.max(
+        0,
+        data.xp - Number(task.xp)
+      );
+
+    saveData();
+
+    renderAll();
+
+    showToast(
+      "Задача возвращена"
+    );
+
+    return;
+
+  }
+
+
+  task.completed = true;
+
+  task.completedAt =
+    new Date().toISOString();
+
+
+  addXP(task.xp);
+
+}
+
+
+function deleteTask(id){
+
+  data.tasks =
+    data.tasks.filter(
+      task => task.id !== id
+    );
+
+
+  saveData();
+
+  renderAll();
+
+  showToast(
+    "Задача удалена"
+  );
+
+}
+
+
+function renderTasks(){
+
+  const list =
+    document.getElementById("taskList");
+
+  const count =
+    document.getElementById("taskCount");
+
+  const homeCount =
+    document.getElementById("homeTaskCount");
+
+
+  if(!list){
+    return;
+  }
+
+
+  const todayTasks =
+    data.tasks.filter(task => {
+
+      if(!task.createdAt){
+        return true;
+      }
+
+      return isSameDate(
+        new Date(task.createdAt),
+        new Date()
+      );
+
+    });
+
+
+  const text =
+    todayTasks.length +
+    (
+      todayTasks.length === 1
+        ? " задача"
+        : " задач"
+    );
+
+
+  if(count){
+    count.textContent = text;
+  }
+
+  if(homeCount){
+    homeCount.textContent = text;
+  }
+
+
+  if(todayTasks.length === 0){
+
+    list.innerHTML = `
+
+      <div style="
+        text-align:center;
+        padding:35px 10px;
+        color:#666;
+      ">
+
+        <div style="
+          font-size:35px;
+          color:#444;
+        ">
+          +
+        </div>
+
+        <div style="
+          margin-top:10px;
+          font-weight:800;
+        ">
+          На сегодня задач нет
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    todayTasks
+      .map(task => {
+
+        const priorityName =
+          task.priority === "high"
+            ? "Высокий"
+            : task.priority === "medium"
+              ? "Средний"
+              : "Низкий";
+
+
+        return `
+
+          <div
+            class="task
+            ${task.completed ? "done" : ""}"
+          >
+
+            <button
+              class="check
+              ${task.completed ? "done" : ""}"
+              onclick="toggleTask('${task.id}')"
+            >
+              ${task.completed ? "✓" : ""}
+            </button>
+
+            <div class="task-main">
+
+              <div class="task-name">
+                ${escapeHTML(task.name)}
+              </div>
+
+              <div class="task-meta">
+                +${task.xp} XP
+              </div>
+
+            </div>
+
+            <span
+              class="priority ${task.priority}"
+            >
+              ${priorityName}
+            </span>
+
+            <button
+              class="danger"
+              onclick="deleteTask('${task.id}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================================================
+   HABITS
+   ========================================================= */
+
+function openHabitModal(){
+
+  document
+    .getElementById("habitModal")
+    .classList.add("show");
+
+
+  setTimeout(() => {
+
+    document
+      .getElementById("habitInput")
+      .focus();
+
+  },100);
+
+}
+
+
+function addHabit(event){
+
+  event.preventDefault();
+
+
+  const name =
+    document
+      .getElementById("habitInput")
+      .value
+      .trim();
+
+  const icon =
+    document
+      .getElementById("habitIcon")
+      .value
+      .trim() ||
+      "●";
+
+
+  if(!name){
+    return;
+  }
+
+
+  data.habits.push({
+
+    id:makeId(),
+
+    name:name,
+
+    icon:icon,
+
+    streak:0,
+
+    lastDone:null
+
+  });
+
+
+  saveData();
+
+  event.target.reset();
+
+  closeModal("habitModal");
+
+  renderAll();
+
+  showToast(
+    "Привычка создана"
+  );
+
+}
+
+
+function completeHabit(id){
+
+  const habit =
+    data.habits.find(
+      item => item.id === id
+    );
+
+
+  if(!habit){
+    return;
+  }
+
+
+  const today =
+    dateKey(new Date());
+
+
+  if(habit.lastDone === today){
+
+    showToast(
+      "Сегодня уже выполнено"
+    );
+
+    return;
+
+  }
+
+
+  const yesterday =
+    new Date();
+
+  yesterday.setDate(
+    yesterday.getDate()-1
+  );
+
+
+  if(
+    habit.lastDone ===
+    dateKey(yesterday)
+  ){
+
+    habit.streak += 1;
+
+  }else{
+
+    habit.streak = 1;
+
+  }
+
+
+  habit.lastDone = today;
+
+
+  saveData();
+
+  addXP(10);
+
+  renderAll();
+
+  showToast(
+    "Streak: "+habit.streak+" дней"
+  );
+
+}
+
+
+function deleteHabit(id){
+
+  data.habits =
+    data.habits.filter(
+      habit => habit.id !== id
+    );
+
+
+  saveData();
+
+  renderAll();
+
+  showToast(
+    "Привычка удалена"
+  );
+
+}
+
+
+function renderHabits(){
+
+  const list =
+    document.getElementById("habitList");
+
+
+  if(!list){
+    return;
+  }
+
+
+  if(data.habits.length === 0){
+
+    list.innerHTML = `
+
+      <div style="
+        text-align:center;
+        padding:30px;
+        color:#666;
+      ">
+        Пока нет привычек
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const today =
+    dateKey(new Date());
+
+
+  list.innerHTML =
+    data.habits
+      .map(habit => {
+
+        const done =
+          habit.lastDone === today;
+
+
+        return `
+
+          <div class="habit">
+
+            <div class="habit-icon">
+              ${escapeHTML(habit.icon)}
+            </div>
+
+            <div style="flex:1">
+
+              <div style="
+                font-weight:900;
+                font-size:15px;
+              ">
+                ${escapeHTML(habit.name)}
+              </div>
+
+              <div class="streak">
+                ${habit.streak} дней
+              </div>
+
+            </div>
+
+            <button
+              class="${done ? "secondary" : "primary"}"
+              onclick="completeHabit('${habit.id}')"
+            >
+              ${done ? "✓" : "Выполнить"}
+            </button>
+
+            <button
+              class="danger"
+              onclick="deleteHabit('${habit.id}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+function changeMonth(amount){
+
+  calendarDate.setMonth(
+    calendarDate.getMonth()+amount
+  );
+
+  renderCalendar();
+
+}
+
+
+function renderCalendar(){
+
+  const grid =
+    document.getElementById("calendarGrid");
+
+  const title =
+    document.getElementById("calendarMonth");
+
+
+  if(!grid || !title){
+    return;
+  }
+
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+
+  title.textContent =
+    capitalize(
+      new Intl.DateTimeFormat(
+        "ru-RU",
+        {
+          month:"long",
+          year:"numeric"
+        }
+      ).format(calendarDate)
+    );
+
+
+  const first =
+    new Date(year,month,1);
+
+
+  let start =
+    first.getDay();
+
+
+  start =
+    start === 0
+      ? 6
+      : start-1;
+
+
+  const days =
+    new Date(
+      year,
+      month+1,
+      0
+    ).getDate();
+
+
+  const names =
+    [
+      "Пн",
+      "Вт",
+      "Ср",
+      "Чт",
+      "Пт",
+      "Сб",
+      "Вс"
+    ];
+
+
+  let html =
+    names
+      .map(
+        name =>
+          `<div class="day-name">${name}</div>`
+      )
+      .join("");
+
+
+  for(let i=0;i<start;i++){
+    html += "<div></div>";
+  }
+
+
+  for(
+    let day=1;
+    day<=days;
+    day++
+  ){
+
+    const date =
+      new Date(
+        year,
+        month,
+        day
+      );
+
+
+    const today =
+      isSameDate(
+        date,
+        new Date()
+      );
+
+
+    const selected =
+      isSameDate(
+        date,
+        selectedDate
+      );
+
+
+    const hasTask =
+      data.tasks.some(task =>
+        task.createdAt &&
+        isSameDate(
+          new Date(task.createdAt),
+          date
+        )
+      );
+
+
+    html += `
+
+      <button
+        class="
+          day
+          ${today ? "today" : ""}
+          ${selected ? "selected" : ""}
+          ${hasTask ? "has-task" : ""}
+        "
+        onclick="
+          selectDate(
+            ${year},
+            ${month},
+            ${day}
+          )
+        "
+      >
+        ${day}
+      </button>
+
+    `;
+
+  }
+
+
+  grid.innerHTML = html;
+
+  renderSelectedDate();
+
+}
+
+
+function selectDate(
+  year,
+  month,
+  day
+){
+
+  selectedDate =
+    new Date(
+      year,
+      month,
+      day
+    );
+
+  renderCalendar();
+
+}
+
+
+function renderSelectedDate(){
+
+  const title =
+    document.getElementById(
+      "selectedDate"
+    );
+
+  const list =
+    document.getElementById(
+      "calendarTasks"
+    );
+
+
+  if(!title || !list){
+    return;
+  }
+
+
+  title.textContent =
+    capitalize(
+      new Intl.DateTimeFormat(
+        "ru-RU",
+        {
+          weekday:"long",
+          day:"numeric",
+          month:"long"
+        }
+      ).format(selectedDate)
+    );
+
+
+  const tasks =
+    data.tasks.filter(task =>
+      task.createdAt &&
+      isSameDate(
+        new Date(task.createdAt),
+        selectedDate
+      )
+    );
+
+
+  if(tasks.length === 0){
+
+    list.innerHTML = `
+
+      <div style="
+        color:#666;
+        padding:12px 0;
+      ">
+        Нет задач на этот день.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    tasks
+      .map(task => `
+
+        <div style="
+          padding:10px 0;
+          border-bottom:1px solid var(--line);
+          font-weight:800;
+        ">
+
+          ${task.completed ? "✓" : "○"}
+
+          ${escapeHTML(task.name)}
+
+        </div>
+
+      `)
+      .join("");
+
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+function renderProfile(){
+
+  const level =
+    getLevel();
+
+
+  const completedTasks =
+    data.tasks.filter(
+      task => task.completed
+    ).length;
+
+
+  document
+    .getElementById("profileLevel")
+    .textContent = level;
+
+
+  document
+    .getElementById("statXP")
+    .textContent = data.xp;
+
+
+  document
+    .getElementById("statTasks")
+    .textContent = completedTasks;
+
+
+  document
+    .getElementById("statHabits")
+    .textContent =
+      data.habits.length;
+
+
+  document
+    .getElementById("achievement1")
+    .textContent =
+      completedTasks >= 1
+        ? "✓"
+        : "—";
+
+
+  document
+    .getElementById("achievement2")
+    .textContent =
+      data.xp >= 100
+        ? "✓"
+        : "—";
+
+
+  const maxStreak =
+    Math.max(
+      0,
+      ...data.habits.map(
+        habit => habit.streak
+      )
+    );
+
+
+  document
+    .getElementById("achievement3")
+    .textContent =
+      maxStreak >= 7
+        ? "✓"
+        : "—";
+
+
+  const percent =
+    getLevelXP();
+
+
+  document
+    .getElementById("goalXP")
+    .textContent =
+      percent+"%";
+
+
+  document
+    .getElementById("goalXPBar")
+    .style.width =
+      percent+"%";
+
+}
+
+
+/* =========================================================
+   XP UI
+   ========================================================= */
+
+function renderXP(){
+
+  const level =
+    getLevel();
+
+  const levelXP =
+    getLevelXP();
+
+
+  document
+    .getElementById("xpNumber")
+    .textContent =
+      data.xp+" XP";
+
+
+  document
+    .getElementById("xpLevel")
+    .textContent =
+      "LEVEL "+level;
+
+
+  document
+    .getElementById("headerLevel")
+    .textContent =
+      "LEVEL "+level;
+
+
+  document
+    .getElementById("xpCurrent")
+    .textContent =
+      levelXP+" / 100 XP";
+
+
+  document
+    .getElementById("xpBar")
+    .style.width =
+      levelXP+"%";
 
 }
 
@@ -3407,25 +3709,43 @@ function closeModalOutside(event){
 
 
 /* =========================================================
+   FUTURE
+   ========================================================= */
+
+function futureFeature(){
+
+  showToast(
+    "Мир LifeOS готовится к v0.10"
+  );
+
+}
+
+
+/* =========================================================
    RESET
    ========================================================= */
 
 function resetData(){
 
-  if(
-    !confirm(
-      "Удалить все задачи, привычки, будильники и XP?"
-    )
-  ){
+  const ok =
+    confirm(
+      "Удалить все задачи, привычки и XP?"
+    );
+
+
+  if(!ok){
     return;
   }
+
 
   localStorage.removeItem(
     STORAGE_KEY
   );
 
+
   data =
     loadData();
+
 
   renderAll();
 
@@ -3440,26 +3760,37 @@ function resetData(){
    TOAST
    ========================================================= */
 
+let toastTimer;
+
+
 function showToast(message){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
-  if(!toast){
-    return;
-  }
 
   toast.textContent =
     message;
 
-  toast.classList.add("show");
 
-  clearTimeout(toastTimer);
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
 
   toastTimer =
     setTimeout(() => {
 
-      toast.classList.remove("show");
+      toast.classList.remove(
+        "show"
+      );
 
     },2300);
 
@@ -3477,13 +3808,14 @@ function dateKey(date){
 
   const m =
     String(
-      date.getMonth() + 1
+      date.getMonth()+1
     ).padStart(2,"0");
 
   const d =
     String(
       date.getDate()
     ).padStart(2,"0");
+
 
   return `${y}-${m}-${d}`;
 
@@ -3492,15 +3824,16 @@ function dateKey(date){
 
 function isSameDate(a,b){
 
-  return dateKey(a) === dateKey(b);
+  return dateKey(a) ===
+    dateKey(b);
 
 }
 
 
 function capitalize(text){
 
-  return text.charAt(0).toUpperCase()
-       + text.slice(1);
+  return text.charAt(0).toUpperCase()+
+    text.slice(1);
 
 }
 
@@ -3518,14 +3851,12 @@ function escapeHTML(value){
 
 
 /* =========================================================
-   RENDER ALL
+   RENDER
    ========================================================= */
 
 function renderAll(){
 
   renderXP();
-
-  renderHome();
 
   renderTasks();
 
@@ -3533,32 +3864,20 @@ function renderAll(){
 
   renderCalendar();
 
-  renderAlarms();
-
-  updateQuestProgress();
-
   renderProfile();
 
+  renderAlarm();
+
+  renderTimer();
+
 }
-
-
-/* =========================================================
-   CLOCK
-   ========================================================= */
-
-setInterval(
-  updateClock,
-  1000
-);
 
 
 /* =========================================================
    SERVICE WORKER
    ========================================================= */
 
-if(
-  "serviceWorker" in navigator
-){
+if("serviceWorker" in navigator){
 
   window.addEventListener(
     "load",
@@ -3569,7 +3888,7 @@ if(
         .then(() => {
 
           console.log(
-            "LifeOS v0.9.3 Service Worker ready"
+            "LifeOS v0.9.4 Service Worker ready"
           );
 
         })
@@ -3599,6 +3918,11 @@ document.addEventListener(
     renderAll();
 
     updateClock();
+
+    setInterval(
+      updateClock,
+      1000
+    );
 
   }
 );
