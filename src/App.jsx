@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./index.css";
-
+import Premium from "./Premium.jsx";
 const initialTasks = [
   {
     id: 1,
@@ -276,7 +276,7 @@ function App() {
           </button>
         </section>
       </main>
-
+<Premium />
       <footer>
         <div className="footer-logo">
           <div className="logo-mark small">L</div>
