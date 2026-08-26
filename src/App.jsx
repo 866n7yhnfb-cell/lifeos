@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
-import Premium from "./Premium.jsx";
 
 const initialTasks = [
   {
@@ -26,25 +25,104 @@ const initialTasks = [
   },
 ];
 
-function App() {
-  const [tasks, setTasks] = useState(initialTasks);
-  const [started, setStarted] = useState(false);
+const STORAGE_KEY = "lifeos-progress-v2";
 
-  // Сохраняем Premium после перезагрузки страницы
-  const [isPremium, setIsPremium] = useState(() => {
-    return localStorage.getItem("lifeos_premium") === "true";
-  });
+const getToday = () => {
+  const date = new Date();
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
+const getInitialState = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (!saved) {
+      return {
+        tasks: initialTasks,
+        started: false,
+        bossDefeated: false,
+        bossDate: getToday(),
+      };
+    }
+
+    const parsed = JSON.parse(saved);
+
+    const savedDate = parsed.bossDate;
+    const today = getToday();
+
+    // Новый день — новый Босс.
+    const bossDefeated =
+      savedDate === today ? Boolean(parsed.bossDefeated) : false;
+
+    return {
+      tasks: Array.isArray(parsed.tasks) ? parsed.tasks : initialTasks,
+      started: Boolean(parsed.started),
+      bossDefeated,
+      bossDate: today,
+    };
+  } catch {
+    return {
+      tasks: initialTasks,
+      started: false,
+      bossDefeated: false,
+      bossDate: getToday(),
+    };
+  }
+};
+
+function App() {
+  const initialState = getInitialState();
+
+  const [tasks, setTasks] = useState(initialState.tasks);
+  const [started, setStarted] = useState(initialState.started);
+  const [bossDefeated, setBossDefeated] = useState(
+    initialState.bossDefeated
+  );
+
+  /*
+   * Сохраняем всё состояние приложения.
+   *
+   * После reload:
+   * - выполненные квесты останутся;
+   * - XP останется;
+   * - статус LIFEOS останется;
+   * - победа над Боссом останется до следующего дня.
+   */
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          tasks,
+          started,
+          bossDefeated,
+          bossDate: getToday(),
+        })
+      );
+    } catch {
+      // Если localStorage недоступен — приложение всё равно продолжает работать.
+    }
+  }, [tasks, started, bossDefeated]);
 
   const completedTasks = tasks.filter(
     (task) => task.completed
   ).length;
 
-  const earnedXP = tasks
+  const earnedTaskXP = tasks
     .filter((task) => task.completed)
     .reduce((total, task) => total + task.xp, 0);
 
+  const bossXP = bossDefeated ? 100 : 0;
+
   const totalXP = 1000;
-  const currentXP = 720 + earnedXP;
+
+  const currentXP = 720 + earnedTaskXP + bossXP;
+
   const progress = Math.min(
     (currentXP / totalXP) * 100,
     100
@@ -63,6 +141,21 @@ function App() {
     );
   };
 
+  const defeatBoss = () => {
+    if (bossDefeated) return;
+
+    setBossDefeated(true);
+  };
+
+  const startLifeOS = () => {
+    setStarted(true);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="app">
       <div className="background-glow glow-one"></div>
@@ -71,6 +164,7 @@ function App() {
       <header className="navbar">
         <div className="logo">
           <div className="logo-mark">L</div>
+
           <span>
             LIFE<span>OS</span>
           </span>
@@ -79,6 +173,7 @@ function App() {
         <nav>
           <a href="#home">Главная</a>
           <a href="#quests">Квесты</a>
+          <a href="#boss">Босс дня</a>
           <a href="#stats">Статистика</a>
         </nav>
 
@@ -88,6 +183,10 @@ function App() {
       </header>
 
       <main>
+        {/* =========================
+            HERO
+        ========================== */}
+
         <section className="hero" id="home">
           <div className="hero-content">
             <div className="badge">
@@ -114,6 +213,7 @@ function App() {
                 {started
                   ? "LIFEOS АКТИВЕН"
                   : "НАЧАТЬ ПРОКАЧКУ"}
+
                 <span>→</span>
               </button>
 
@@ -151,7 +251,10 @@ function App() {
             <div className="hero-card">
               <div className="card-top">
                 <span>PLAYER PROFILE</span>
-                <span className="online">● ONLINE</span>
+
+                <span className="online">
+                  ● ONLINE
+                </span>
               </div>
 
               <div className="avatar">
@@ -159,6 +262,7 @@ function App() {
               </div>
 
               <h2>PLAYER</h2>
+
               <p className="player-title">
                 LEVEL 07 • BUILDER
               </p>
@@ -166,7 +270,10 @@ function App() {
               <div className="xp-section">
                 <div className="xp-label">
                   <span>EXPERIENCE</span>
-                  <span>{currentXP} / 1000 XP</span>
+
+                  <span>
+                    {currentXP} / 1000 XP
+                  </span>
                 </div>
 
                 <div className="xp-bar">
@@ -182,11 +289,15 @@ function App() {
               <div className="card-bottom">
                 <div>
                   <span>STREAK</span>
-                  <strong>🔥 5 DAYS</strong>
+
+                  <strong>
+                    🔥 5 DAYS
+                  </strong>
                 </div>
 
                 <div>
                   <span>RANK</span>
+
                   <strong>#042</strong>
                 </div>
               </div>
@@ -194,7 +305,14 @@ function App() {
           </div>
         </section>
 
-        <section className="section" id="quests">
+        {/* =========================
+            QUESTS
+        ========================== */}
+
+        <section
+          className="section"
+          id="quests"
+        >
           <div className="section-heading">
             <div>
               <div className="section-label">
@@ -216,7 +334,9 @@ function App() {
                 className={`task ${
                   task.completed ? "completed" : ""
                 }`}
-                onClick={() => toggleTask(task.id)}
+                onClick={() =>
+                  toggleTask(task.id)
+                }
               >
                 <div className="task-left">
                   <div className="task-icon">
@@ -224,7 +344,9 @@ function App() {
                   </div>
 
                   <div className="task-info">
-                    <strong>{task.title}</strong>
+                    <strong>
+                      {task.title}
+                    </strong>
 
                     <span>
                       {task.completed
@@ -240,7 +362,9 @@ function App() {
                   </span>
 
                   <div className="check">
-                    {task.completed ? "✓" : ""}
+                    {task.completed
+                      ? "✓"
+                      : ""}
                   </div>
                 </div>
               </button>
@@ -248,30 +372,202 @@ function App() {
           </div>
         </section>
 
+        {/* =========================
+            BOSS OF THE DAY
+        ========================== */}
+
+        <section
+          className="section"
+          id="boss"
+        >
+          <div className="section-heading">
+            <div>
+              <div className="section-label">
+                02 / DAILY BOSS
+              </div>
+
+              <h2>Босс дня</h2>
+            </div>
+
+            <div
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                color: bossDefeated
+                  ? "#4ade80"
+                  : "#ff5b5b",
+              }}
+            >
+              {bossDefeated
+                ? "DEFEATED"
+                : "ACTIVE"}
+            </div>
+          </div>
+
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              padding: "32px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: "24px",
+              background:
+                "linear-gradient(135deg, rgba(255,70,70,0.10), rgba(20,22,28,0.95))",
+              boxShadow:
+                "0 20px 60px rgba(0,0,0,0.25)",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                width: "180px",
+                height: "180px",
+                borderRadius: "50%",
+                background:
+                  "rgba(255,70,70,0.12)",
+                filter: "blur(50px)",
+                top: "-70px",
+                right: "-50px",
+                pointerEvents: "none",
+              }}
+            />
+
+            <div
+              style={{
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "48px",
+                  marginBottom: "16px",
+                }}
+              >
+                ⚔️
+              </div>
+
+              <h3
+                style={{
+                  margin: "0 0 10px",
+                  fontSize: "28px",
+                  fontWeight: 800,
+                }}
+              >
+                {bossDefeated
+                  ? "BOSS DEFEATED"
+                  : "BOSS OF THE DAY"}
+              </h3>
+
+              <p
+                style={{
+                  margin: "0 0 24px",
+                  maxWidth: "600px",
+                  fontSize: "17px",
+                  lineHeight: 1.6,
+                  color: "rgba(255,255,255,0.68)",
+                }}
+              >
+                {bossDefeated
+                  ? "Ты сделал главное дело дня. Завтра появится новый Босс."
+                  : "Заверши самое важное дело, которое ты откладываешь сегодня."}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "20px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <div>
+                  <span
+                    style={{
+                      display: "block",
+                      fontSize: "12px",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      color: "rgba(255,255,255,0.45)",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    REWARD
+                  </span>
+
+                  <strong
+                    style={{
+                      fontSize: "26px",
+                    }}
+                  >
+                    +100 XP
+                  </strong>
+                </div>
+
+                <button
+                  className="primary-button"
+                  onClick={defeatBoss}
+                  disabled={bossDefeated}
+                  style={{
+                    opacity: bossDefeated
+                      ? 0.55
+                      : 1,
+                    cursor: bossDefeated
+                      ? "default"
+                      : "pointer",
+                  }}
+                >
+                  {bossDefeated
+                    ? "БОСС ПОБЕЖДЁН ✓"
+                    : "ПОБЕДИТЬ БОССА"}
+
+                  <span>
+                    {bossDefeated
+                      ? "✓"
+                      : "→"}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================
+            STATS
+        ========================== */}
+
         <section
           className="section stats-section"
           id="stats"
         >
           <div className="section-label">
-            02 / PROGRESS
+            03 / PROGRESS
           </div>
 
           <div className="stats-grid">
             <div className="stat-card">
               <span>LEVEL</span>
+
               <strong>07</strong>
+
               <small>KEEP GOING</small>
             </div>
 
             <div className="stat-card">
               <span>TOTAL XP</span>
+
               <strong>{currentXP}</strong>
+
               <small>EXPERIENCE</small>
             </div>
 
             <div className="stat-card">
               <span>STREAK</span>
+
               <strong>5</strong>
+
               <small>DAYS ACTIVE</small>
             </div>
 
@@ -290,22 +586,10 @@ function App() {
           </div>
         </section>
 
-        {/* PREMIUM */}
-        <section
-          className="section"
-          id="premium"
-        >
-          <div className="section-label">
-            03 / PREMIUM
-          </div>
+        {/* =========================
+            CTA
+        ========================== */}
 
-          <Premium
-            isPremium={isPremium}
-            onActivate={setIsPremium}
-          />
-        </section>
-
-        {/* CTA */}
         <section className="cta">
           <div className="cta-glow"></div>
 
@@ -327,14 +611,7 @@ function App() {
 
           <button
             className="primary-button"
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              });
-
-              setStarted(true);
-            }}
+            onClick={startLifeOS}
           >
             НАЧАТЬ СЕЙЧАС <span>→</span>
           </button>
@@ -343,7 +620,10 @@ function App() {
 
       <footer>
         <div className="footer-logo">
-          <div className="logo-mark small">L</div>
+          <div className="logo-mark small">
+            L
+          </div>
+
           LIFEOS
         </div>
 
