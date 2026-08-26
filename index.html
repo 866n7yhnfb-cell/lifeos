@@ -1,2135 +1,2227 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-  <meta name="theme-color" content="#ff302b">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="LifeOS">
-
-  <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./icon-192.png">
-
-  <title>LifeOS v0.6</title>
-
-  <style>
-    :root {
-      --bg: #07080b;
-      --surface: #101319;
-      --surface2: #181c23;
-      --text: #f7f8fa;
-      --muted: #858e9d;
-      --line: #292f39;
-      --red: #ff302b;
-      --green: #39d98a;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-      border: 0;
-    }
-
-    button:active {
-      transform: scale(0.97);
-    }
-
-    .app {
-      width: 100%;
-      max-width: 760px;
-      margin: auto;
-      padding: 17px 14px 110px;
-    }
-
-    /* HEADER */
-
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo {
-      width: 43px;
-      height: 43px;
-      border-radius: 14px;
-      object-fit: cover;
-    }
-
-    .brand b {
-      display: block;
-      font-size: 20px;
-      letter-spacing: -0.4px;
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 2px;
-    }
-
-    .icon-button {
-      width: 43px;
-      height: 43px;
-      border-radius: 14px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-size: 19px;
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 23px;
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      background: linear-gradient(145deg, #181b22, #0d1015);
-      box-shadow: 0 20px 50px #0006;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      right: -90px;
-      top: -100px;
-      background: #ff302b20;
-      border-radius: 50%;
-      filter: blur(15px);
-    }
-
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      color: #ff615c;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      margin: 7px 0 5px;
-      font-size: 30px;
-      line-height: 1.08;
-      letter-spacing: -1px;
-    }
-
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .progress {
-      margin-top: 20px;
-    }
-
-    .progress-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 7px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .progress-bar {
-      height: 9px;
-      overflow: hidden;
-      border-radius: 99px;
-      background: #292e37;
-    }
-
-    .progress-bar i {
-      display: block;
-      width: 0;
-      height: 100%;
-      border-radius: 99px;
-      background: linear-gradient(90deg, var(--red), #ff7772);
-      transition: width 0.4s ease;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .stat {
-      padding: 12px;
-      border-radius: 16px;
-      background: #ffffff09;
-      border: 1px solid #ffffff10;
-    }
-
-    .stat b {
-      display: block;
-      font-size: 20px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* QUICK ACTIONS */
-
-    .quick {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin: 12px 0;
-    }
-
-    .quick button {
-      padding: 11px 3px;
-      border-radius: 17px;
-      color: #fff;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-
-    .quick b {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 19px;
-    }
-
-    .quick span {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* SCREENS */
-
-    .screen {
-      display: none;
-    }
-
-    .screen.active {
-      display: block;
-      animation: fade 0.18s ease;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 20px 2px 10px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: 19px;
-    }
-
-    .section-head button {
-      color: #ff5a55;
-      background: none;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* LISTS */
-
-    .list {
-      display: grid;
-      gap: 9px;
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px;
-      border-radius: 18px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-
-    .check {
-      flex: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      color: #fff;
-      background: none;
-      border: 2px solid #5c6572;
-    }
-
-    .done .check {
-      background: var(--green);
-      border-color: var(--green);
-    }
-
-    .done .main {
-      color: var(--muted);
-      text-decoration: line-through;
-    }
-
-    .main {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .main b {
-      display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .meta {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .delete {
-      color: #6d7683;
-      background: none;
-      font-size: 19px;
-    }
-
-    .empty {
-      padding: 24px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 13px;
-      border: 1px dashed var(--line);
-      border-radius: 18px;
-    }
-
-    /* GOALS */
-
-    .goal {
-      padding: 16px;
-      border-radius: 19px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-
-    .goal-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .goal-name {
-      font-weight: 800;
-    }
-
-    .percent {
-      color: #ff5a55;
-      font-weight: 900;
-    }
-
-    .goal .progress-bar {
-      height: 8px;
-      margin: 12px 0 7px;
-    }
-
-    /* GRID */
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 9px;
-    }
-
-    .card {
-      padding: 16px;
-      border-radius: 19px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-
-    .card h3 {
-      margin: 0 0 5px;
-      font-size: 14px;
-    }
-
-    .value {
-      font-size: 27px;
-      font-weight: 900;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    /* FORMS */
-
-    .form {
-      display: grid;
-      gap: 9px;
-    }
-
-    .form input,
-    .form textarea {
-      width: 100%;
-      padding: 13px;
-      outline: none;
-      color: #fff;
-      background: #0b0e12;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-    }
-
-    .form textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .primary {
-      padding: 11px 15px;
-      border-radius: 14px;
-      color: #fff;
-      background: var(--red);
-      font-weight: 800;
-    }
-
-    .secondary {
-      padding: 10px 14px;
-      border-radius: 14px;
-      color: #fff;
-      background: var(--surface2);
-      border: 1px solid var(--line);
-    }
-
-    /* BOTTOM NAV */
-
-    .bottom-nav {
-      position: fixed;
-      z-index: 10;
-      left: 50%;
-      bottom: calc(9px + env(safe-area-inset-bottom));
-      width: min(calc(100% - 22px), 720px);
-      padding: 6px;
-      transform: translateX(-50%);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      border-radius: 23px;
-      background: #0d1015ed;
-      border: 1px solid var(--line);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 12px 35px #0009;
-    }
-
-    .bottom-nav button {
-      padding: 7px 2px;
-      border-radius: 16px;
-      color: #707988;
-      background: none;
-      font-size: 9px;
-    }
-
-    .bottom-nav button b {
-      display: block;
-      margin-bottom: 2px;
-      font-size: 19px;
-    }
-
-    .bottom-nav button.active {
-      color: #fff;
-      background: #ffffff09;
-    }
-
-    /* MODAL */
-
-    .modal {
-      position: fixed;
-      z-index: 20;
-      inset: 0;
-      display: none;
-      align-items: flex-end;
-      background: #000b;
-    }
-
-    .modal.open {
-      display: flex;
-    }
-
-    .sheet {
-      width: min(100%, 760px);
-      margin: auto;
-      padding: 20px;
-      border-radius: 25px 25px 0 0;
-      background: #11151b;
-      border: 1px solid var(--line);
-    }
-
-    .sheet h2 {
-      margin: 0 0 15px;
-      font-size: 20px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 11px;
-    }
-
-    .actions > * {
-      flex: 1;
-    }
-
-    /* TIMER */
-
-    .timer {
-      padding: 25px;
-      text-align: center;
-    }
-
-    .clock {
-      font-size: 68px;
-      font-weight: 900;
-      letter-spacing: -2px;
-    }
-
-    /* CHART */
-
-    .chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 7px;
-      height: 145px;
-      padding-top: 15px;
-    }
-
-    .chart i {
-      flex: 1;
-      min-height: 6px;
-      border-radius: 6px 6px 2px 2px;
-      background: linear-gradient(#ff625d, var(--red));
-    }
-
-    /* TOAST */
-
-    .toast {
-      position: fixed;
-      z-index: 30;
-      left: 50%;
-      bottom: 92px;
-      padding: 10px 15px;
-      color: #111;
-      background: #fff;
-      border-radius: 14px;
-      font-size: 12px;
-      font-weight: 800;
-      opacity: 0;
-      transform: translate(-50%, 15px);
-      transition: 0.2s;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    footer {
-      margin-top: 28px;
-      color: #4e5662;
-      text-align: center;
-      font-size: 10px;
-    }
-
-    @keyframes fade {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .hero {
-        padding: 21px;
-      }
-
-      .hero h1 {
-        font-size: 27px;
-      }
-
-      .clock {
-        font-size: 58px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff302b">
+<meta name="description" content="LifeOS — твоя личная система управления жизнью">
+<link rel="manifest" href="manifest.json">
+
+<title>LifeOS v0.7</title>
+
+<style>
+:root{
+  --bg:#070707;
+  --card:#121212;
+  --card2:#171717;
+  --line:#292929;
+  --text:#f5f5f5;
+  --muted:#8d8d8d;
+  --red:#ff302b;
+  --green:#39d353;
+  --yellow:#ffc107;
+  --blue:#4da3ff;
+  --nav:rgba(7,7,7,.94);
+  --radius:24px;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+  "SF Pro Text",Arial,sans-serif;
+  min-height:100vh;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+  padding-bottom:100px;
+}
+
+/* HEADER */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  background:rgba(7,7,7,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  background:var(--red);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  font-weight:900;
+  box-shadow:0 8px 30px rgba(255,48,43,.2);
+}
+
+.brand-name{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.level{
+  color:var(--muted);
+  font-weight:800;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+/* CONTENT */
+
+main{
+  max-width:900px;
+  margin:auto;
+  padding:28px 22px 30px;
+}
+
+.screen{
+  display:none;
+  animation:fade .25s ease;
+}
+
+.screen.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.eyebrow{
+  color:var(--muted);
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+h1{
+  margin:0;
+  font-size:50px;
+  line-height:.98;
+  letter-spacing:-2px;
+}
+
+h1 span{
+  color:var(--red);
+}
+
+h2{
+  font-size:34px;
+  margin:30px 0 8px;
+  letter-spacing:-1.5px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.6;
+  margin:16px 0 26px;
+}
+
+/* CARDS */
+
+.card{
+  background:linear-gradient(145deg,#151515,#101010);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  margin:16px 0;
+  box-shadow:0 15px 50px rgba(0,0,0,.18);
+}
+
+.card-title{
+  font-weight:900;
+  font-size:15px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:3px;
+}
+
+.xp-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin:12px 0 16px;
+}
+
+.xp-number{
+  font-size:46px;
+  font-weight:950;
+  letter-spacing:-2px;
+}
+
+.xp-level{
+  color:var(--red);
+  font-weight:900;
+  font-size:18px;
+}
+
+.progress{
+  height:12px;
+  border-radius:20px;
+  background:#252525;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff302b,#ff5a55);
+  border-radius:20px;
+  transition:width .4s ease;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  margin-top:10px;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* QUICK ACTIONS */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.quick{
+  background:#121212;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px 14px;
+  color:white;
+  text-align:left;
+  min-height:125px;
+  transition:.2s;
+}
+
+.quick:active{
+  transform:scale(.97);
+}
+
+.quick-icon{
+  font-size:31px;
+  margin-bottom:12px;
+}
+
+.quick-title{
+  font-weight:900;
+  font-size:16px;
+}
+
+.quick-text{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:5px;
+}
+
+/* BUTTONS */
+
+.primary{
+  background:var(--red);
+  color:white;
+  border-radius:15px;
+  padding:13px 18px;
+  font-weight:900;
+}
+
+.secondary{
+  background:#222;
+  color:white;
+  border:1px solid #333;
+  border-radius:15px;
+  padding:13px 18px;
+  font-weight:800;
+}
+
+.danger{
+  background:#2a1111;
+  color:#ff6560;
+  border:1px solid #4b2020;
+  border-radius:12px;
+  padding:9px 12px;
+  font-weight:800;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.between{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+/* TASKS */
+
+.task{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.task:last-child{
+  border-bottom:0;
+}
+
+.check{
+  width:28px;
+  height:28px;
+  border-radius:9px;
+  border:2px solid #555;
+  background:transparent;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.check.done{
+  background:var(--green);
+  border-color:var(--green);
+  color:#000;
+}
+
+.task-main{
+  flex:1;
+  min-width:0;
+}
+
+.task-name{
+  font-weight:850;
+  font-size:16px;
+}
+
+.task.done .task-name{
+  text-decoration:line-through;
+  color:#666;
+}
+
+.task-meta{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.priority{
+  font-size:11px;
+  font-weight:900;
+  padding:5px 8px;
+  border-radius:8px;
+}
+
+.high{background:#381515;color:#ff6660}
+.medium{background:#392f13;color:#ffc857}
+.low{background:#13331b;color:#63df79}
+
+/* HABITS */
+
+.habit{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.habit-icon{
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  background:#1c1c1c;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.streak{
+  color:#ff8a00;
+  font-weight:900;
+  font-size:13px;
+}
+
+/* CALENDAR */
+
+.calendar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.calendar-month{
+  font-weight:900;
+  font-size:22px;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.day-name{
+  text-align:center;
+  color:#666;
+  font-size:11px;
+  font-weight:900;
+  padding:5px 0;
+}
+
+.day{
+  aspect-ratio:1;
+  background:#161616;
+  border:1px solid #222;
+  border-radius:12px;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.day.today{
+  background:var(--red);
+  border-color:var(--red);
+}
+
+.day.selected{
+  outline:2px solid white;
+  outline-offset:2px;
+}
+
+/* PROFILE */
+
+.profile{
+  text-align:center;
+  padding:15px 0;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  margin:auto;
+  border-radius:30px;
+  background:var(--red);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+  font-weight:950;
+}
+
+.profile-name{
+  font-size:28px;
+  font-weight:950;
+  margin-top:15px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.stat{
+  text-align:center;
+  background:#151515;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px 8px;
+}
+
+.stat-number{
+  font-size:25px;
+  font-weight:950;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+/* FORMS */
+
+.form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.input,
+.select{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #333;
+  background:#0d0d0d;
+  color:white;
+  outline:none;
+}
+
+.input:focus,
+.select:focus{
+  border-color:var(--red);
+}
+
+.form-actions{
+  display:flex;
+  gap:10px;
+}
+
+/* QUEST PREVIEW */
+
+.quest{
+  border:1px solid #302323;
+  background:linear-gradient(145deg,#1a1010,#111);
+  border-radius:20px;
+  padding:18px;
+}
+
+.quest-icon{
+  font-size:30px;
+}
+
+.quest-title{
+  font-weight:900;
+  font-size:18px;
+  margin:8px 0;
+}
+
+.quest-text{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.locked{
+  opacity:.55;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  z-index:100;
+  left:0;
+  right:0;
+  bottom:0;
+  height:86px;
+  padding:8px 10px max(8px,env(safe-area-inset-bottom));
+  background:var(--nav);
+  backdrop-filter:blur(25px);
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+
+.nav-btn{
+  background:transparent;
+  color:#666;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.nav-icon{
+  font-size:23px;
+}
+
+.nav-btn.active{
+  color:var(--red);
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.sheet{
+  width:min(700px,100%);
+  background:#151515;
+  border:1px solid #333;
+  border-bottom:0;
+  border-radius:28px 28px 0 0;
+  padding:25px 22px calc(25px + env(safe-area-inset-bottom));
+  animation:sheet .25s ease;
+}
+
+@keyframes sheet{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+
+.sheet h3{
+  font-size:25px;
+  margin:0 0 20px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  z-index:300;
+  left:50%;
+  bottom:100px;
+  transform:translateX(-50%) translateY(20px);
+  background:#f5f5f5;
+  color:#080808;
+  padding:13px 18px;
+  border-radius:15px;
+  font-weight:900;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+  .bottom-nav{
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
+    width:680px;
+    border:1px solid var(--line);
+    border-radius:25px 25px 0 0;
+  }
+
+  h1{
+    font-size:68px;
+  }
+}
+
+/* SMALL PHONE */
+
+@media(max-width:390px){
+  main{
+    padding-left:16px;
+    padding-right:16px;
+  }
+
+  h1{
+    font-size:42px;
+  }
+
+  .quick-grid{
+    gap:7px;
+  }
+
+  .quick{
+    padding:14px 10px;
+  }
+
+  .quick-title{
+    font-size:14px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- HEADER -->
+<header class="header">
+  <div class="brand">
+    <div class="logo">L</div>
+    <div class="brand-name">LifeOS</div>
+  </div>
 
-  <header class="top">
+  <div class="level" id="headerLevel">LEVEL 1</div>
+</header>
 
-    <div class="brand">
-      <img
-        class="logo"
-        src="./icon-192.png"
-        alt="LifeOS"
-      >
+<main>
 
-      <div>
-        <b>LifeOS</b>
-        <small>v0.6 • personal OS</small>
-      </div>
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+  <div class="eyebrow">Добро пожаловать, LifeOS User 👋</div>
+
+  <h1>
+    Твоя жизнь.<br>
+    Твоя <span>система.</span>
+  </h1>
+
+  <p class="subtitle">
+    Планируй, действуй, отслеживай прогресс
+    и становись лучшей версией себя каждый день.
+  </p>
+
+  <div class="card">
+
+    <div class="card-title">Твой прогресс</div>
+
+    <div class="xp-row">
+      <div class="xp-number" id="xpNumber">0 XP</div>
+      <div class="xp-level" id="xpLevel">LEVEL 1</div>
     </div>
-
-    <button
-      class="icon-button"
-      onclick="toggleTheme()"
-      aria-label="Сменить тему"
-    >
-      ☼
-    </button>
-
-  </header>
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="eyebrow">
-      Твой день
-    </div>
-
-    <h1 id="greeting">
-      Добрый день 👋
-    </h1>
-
-    <p id="date">
-      Сегодня
-    </p>
 
     <div class="progress">
-
-      <div class="progress-row">
-        <span>Прогресс дня</span>
-        <b id="dayPct">0%</b>
-      </div>
-
-      <div class="progress-bar">
-        <i id="dayBar"></i>
-      </div>
-
+      <div class="progress-bar" id="xpBar"></div>
     </div>
 
-    <div class="stats">
-
-      <div class="stat">
-        <b id="taskStat">0/0</b>
-        <span>задачи</span>
-      </div>
-
-      <div class="stat">
-        <b id="habitStat">0</b>
-        <span>привычки</span>
-      </div>
-
-      <div class="stat">
-        <b id="goalStat">0%</b>
-        <span>цели</span>
-      </div>
-
+    <div class="progress-info">
+      <span id="xpCurrent">0 / 100 XP</span>
+      <span id="xpNext">До следующего уровня</span>
     </div>
 
-  </section>
+  </div>
 
-  <!-- QUICK ACTIONS -->
+  <h2>Сегодня</h2>
 
-  <div class="quick">
+  <p class="subtitle">
+    Используй маленькие действия для большого результата.
+  </p>
 
-    <button onclick="openModal('task')">
-      <b>＋</b>
-      <span>Задача</span>
+  <div class="quick-grid">
+
+    <button class="quick" onclick="openTaskModal()">
+      <div class="quick-icon">➕</div>
+      <div class="quick-title">Новая задача</div>
+      <div class="quick-text">Получить XP</div>
     </button>
 
-    <button onclick="openModal('goal')">
-      <b>🎯</b>
-      <span>Цель</span>
+    <button class="quick" onclick="showScreen('calendar')">
+      <div class="quick-icon">📅</div>
+      <div class="quick-title">Календарь</div>
+      <div class="quick-text">План на день</div>
     </button>
 
-    <button onclick="showScreen('timer')">
-      <b>⏱️</b>
-      <span>Фокус</span>
-    </button>
-
-    <button onclick="showScreen('notes')">
-      <b>✎</b>
-      <span>Заметка</span>
+    <button class="quick" onclick="showScreen('habits')">
+      <div class="quick-icon">🔥</div>
+      <div class="quick-title">Привычки</div>
+      <div class="quick-text">Поддержать streak</div>
     </button>
 
   </div>
 
-  <main>
+  <div class="card">
 
-    <!-- HOME -->
-
-    <section id="home" class="screen active">
-
-      <div class="section-head">
-        <h2>Сегодня</h2>
-        <button onclick="showScreen('tasks')">
-          Все задачи →
-        </button>
-      </div>
-
-      <div id="homeTasks" class="list"></div>
-
-      <div class="section-head">
-        <h2>Твой фокус</h2>
-        <button onclick="showScreen('goals')">
-          Цели →
-        </button>
-      </div>
-
-      <div id="homeGoals" class="list"></div>
-
-    </section>
-
-    <!-- TASKS -->
-
-    <section id="tasks" class="screen">
-
-      <div class="section-head">
-        <h2>Задачи</h2>
-
-        <button
-          class="primary"
-          onclick="openModal('task')"
-        >
-          + Добавить
-        </button>
-      </div>
-
-      <div id="taskList" class="list"></div>
-
-    </section>
-
-    <!-- GOALS -->
-
-    <section id="goals" class="screen">
-
-      <div class="section-head">
-        <h2>Цели</h2>
-
-        <button
-          class="primary"
-          onclick="openModal('goal')"
-        >
-          + Цель
-        </button>
-      </div>
-
-      <div id="goalList" class="list"></div>
-
-    </section>
-
-    <!-- HABITS -->
-
-    <section id="habits" class="screen">
-
-      <div class="section-head">
-        <h2>Привычки</h2>
-
-        <button
-          class="primary"
-          onclick="openModal('habit')"
-        >
-          + Добавить
-        </button>
-      </div>
-
-      <div id="habitList" class="list"></div>
-
-    </section>
-
-    <!-- MORE -->
-
-    <section id="more" class="screen">
-
-      <div class="section-head">
-        <h2>Инструменты</h2>
-      </div>
-
-      <div class="grid">
-
-        <button
-          class="card"
-          onclick="showScreen('timer')"
-          style="color:#fff;text-align:left"
-        >
-          <h3>⏱️ Pomodoro</h3>
-          <span class="muted">
-            25 минут фокуса
-          </span>
-        </button>
-
-        <button
-          class="card"
-          onclick="showScreen('notes')"
-          style="color:#fff;text-align:left"
-        >
-          <h3>📝 Заметки</h3>
-          <span class="muted">
-            Идеи и планы
-          </span>
-        </button>
-
-        <button
-          class="card"
-          onclick="showScreen('finance')"
-          style="color:#fff;text-align:left"
-        >
-          <h3>💰 Финансы</h3>
-          <span class="muted">
-            Доходы и расходы
-          </span>
-        </button>
-
-        <button
-          class="card"
-          onclick="showScreen('stats')"
-          style="color:#fff;text-align:left"
-        >
-          <h3>📊 Статистика</h3>
-          <span class="muted">
-            Твой прогресс
-          </span>
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- TIMER -->
-
-    <section id="timer" class="screen">
-
-      <div class="section-head">
-        <h2>⏱️ Фокус</h2>
-
-        <button onclick="showScreen('more')">
-          Назад
-        </button>
-      </div>
-
-      <div class="card timer">
-
-        <div
-          class="clock"
-          id="clock"
-        >
-          25:00
+    <div class="between">
+      <div>
+        <div class="card-title">Квесты</div>
+        <div style="font-size:22px;font-weight:900;margin-top:7px">
+          🗺️ Мир LifeOS
         </div>
-
-        <p class="muted">
-          Одна задача. Никаких отвлечений.
-        </p>
-
-        <button
-          class="primary"
-          id="timerBtn"
-          onclick="toggleTimer()"
-        >
-          Старт
-        </button>
-
-        <button
-          class="secondary"
-          onclick="resetTimer()"
-        >
-          Сброс
-        </button>
-
       </div>
 
-    </section>
+      <div style="font-size:28px">🔒</div>
+    </div>
 
-    <!-- NOTES -->
+    <p class="subtitle" style="margin-bottom:15px">
+      Карта мира и реальные квесты появятся в следующих версиях.
+    </p>
 
-    <section id="notes" class="screen">
+    <button class="secondary" onclick="futureFeature()">
+      Скоро доступно
+    </button>
 
-      <div class="section-head">
+  </div>
 
-        <h2>📝 Заметки</h2>
+</section>
 
-        <button onclick="showScreen('more')">
-          Назад
-        </button>
 
-      </div>
+<!-- TASKS -->
 
-      <div class="form">
+<section id="tasks" class="screen">
 
-        <textarea
-          id="notes"
-          placeholder="Запиши идею, мысль или план..."
-        ></textarea>
+  <div class="eyebrow">LifeOS / Actions</div>
 
-      </div>
+  <div class="between">
+    <h2 style="margin-top:0">Задачи</h2>
+    <button class="primary" onclick="openTaskModal()">＋</button>
+  </div>
 
-    </section>
+  <div class="card">
 
-    <!-- FINANCE -->
-
-    <section id="finance" class="screen">
-
-      <div class="section-head">
-
-        <h2>💰 Финансы</h2>
-
-        <button onclick="showScreen('more')">
-          Назад
-        </button>
-
-      </div>
-
-      <div class="grid">
-
-        <div class="card">
-          <span class="muted">
-            Доходы
-          </span>
-
-          <div
-            class="value"
-            id="income"
-          >
-            0 ₽
-          </div>
+    <div class="between">
+      <div>
+        <div class="card-title">Сегодня</div>
+        <div style="font-size:25px;font-weight:900;margin-top:5px" id="taskCount">
+          0 задач
         </div>
-
-        <div class="card">
-          <span class="muted">
-            Расходы
-          </span>
-
-          <div
-            class="value"
-            id="expense"
-          >
-            0 ₽
-          </div>
-        </div>
-
       </div>
 
-      <div
-        class="form"
-        style="margin-top:10px"
-      >
+      <div style="font-size:30px">✅</div>
+    </div>
 
-        <input
-          id="amount"
-          type="number"
-          placeholder="Сумма ₽"
-        >
+    <div id="taskList"></div>
 
-        <input
-          id="moneyName"
-          placeholder="Название"
-        >
+  </div>
 
-        <div>
+</section>
 
-          <button
-            class="primary"
-            onclick="money(1)"
-          >
-            + Доход
-          </button>
 
-          <button
-            class="secondary"
-            onclick="money(-1)"
-          >
-            − Расход
-          </button>
+<!-- CALENDAR -->
 
-        </div>
+<section id="calendar" class="screen">
 
+  <div class="eyebrow">LifeOS / Planning</div>
+
+  <h2 style="margin-top:0">Календарь</h2>
+
+  <div class="card">
+
+    <div class="calendar-head">
+      <button class="secondary" onclick="changeMonth(-1)">‹</button>
+
+      <div class="calendar-month" id="calendarMonth"></div>
+
+      <button class="secondary" onclick="changeMonth(1)">›</button>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">Выбранный день</div>
+
+    <div id="selectedDate" style="font-size:24px;font-weight:900;margin-top:8px">
+      Сегодня
+    </div>
+
+    <div id="calendarTasks" style="margin-top:12px"></div>
+
+  </div>
+
+</section>
+
+
+<!-- HABITS -->
+
+<section id="habits" class="screen">
+
+  <div class="eyebrow">LifeOS / Habits</div>
+
+  <div class="between">
+    <h2 style="margin-top:0">Привычки</h2>
+    <button class="primary" onclick="openHabitModal()">＋</button>
+  </div>
+
+  <p class="subtitle">
+    Каждый день — маленький шаг. Серия не должна прерываться.
+  </p>
+
+  <div class="card">
+    <div id="habitList"></div>
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="screen">
+
+  <div class="eyebrow">LifeOS / Profile</div>
+
+  <div class="card profile">
+
+    <div class="avatar">L</div>
+
+    <div class="profile-name">LifeOS User</div>
+
+    <div style="color:var(--muted);margin-top:5px">
+      LEVEL <span id="profileLevel">1</span>
+    </div>
+
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-number" id="statXP">0</div>
+      <div class="stat-label">XP</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="statTasks">0</div>
+      <div class="stat-label">ЗАДАЧ</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" id="statHabits">0</div>
+      <div class="stat-label">ПРИВЫЧЕК</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">Достижения</div>
+
+    <div style="margin-top:18px">
+
+      <div class="between" style="padding:12px 0;border-bottom:1px solid var(--line)">
+        <span>🌱 Первый шаг</span>
+        <span id="achievement1">🔒</span>
       </div>
 
-      <div
-        id="moneyList"
-        class="list"
-        style="margin-top:10px"
-      ></div>
-
-    </section>
-
-    <!-- STATS -->
-
-    <section id="stats" class="screen">
-
-      <div class="section-head">
-
-        <h2>📊 Статистика</h2>
-
-        <button onclick="showScreen('more')">
-          Назад
-        </button>
-
+      <div class="between" style="padding:12px 0;border-bottom:1px solid var(--line)">
+        <span>⚡ 100 XP</span>
+        <span id="achievement2">🔒</span>
       </div>
 
-      <div class="grid">
-
-        <div class="card">
-
-          <span class="muted">
-            Выполнено задач
-          </span>
-
-          <div
-            class="value"
-            id="doneStat"
-          >
-            0
-          </div>
-
-        </div>
-
-        <div class="card">
-
-          <span class="muted">
-            Средняя цель
-          </span>
-
-          <div
-            class="value"
-            id="avgStat"
-          >
-            0%
-          </div>
-
-        </div>
-
+      <div class="between" style="padding:12px 0">
+        <span>🔥 7 дней streak</span>
+        <span id="achievement3">🔒</span>
       </div>
 
-      <div
-        class="card"
-        style="margin-top:10px"
-      >
+    </div>
 
-        <h3>
-          Активность за неделю
-        </h3>
+  </div>
 
-        <div
-          class="chart"
-          id="chart"
-        ></div>
+  <div class="card">
 
-      </div>
+    <div class="card-title">Настройки</div>
 
-    </section>
+    <div style="margin-top:18px">
 
-  </main>
+      <button class="secondary" style="width:100%;margin-bottom:10px"
+              onclick="requestNotifications()">
+        🔔 Разрешить уведомления
+      </button>
 
-  <footer>
-    LifeOS v0.6 • данные хранятся в этом браузере
-  </footer>
+      <button class="danger" style="width:100%"
+              onclick="resetData()">
+        Сбросить данные LifeOS
+      </button>
 
-</div>
+    </div>
 
-<!-- BOTTOM NAVIGATION -->
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
-  <button
-    class="active"
-    data-screen="home"
-  >
-    <b>⌂</b>
-    Главная
+  <button class="nav-btn active" data-screen="home"
+          onclick="showScreen('home')">
+    <div class="nav-icon">🏠</div>
+    <div>Домой</div>
   </button>
 
-  <button data-screen="tasks">
-    <b>✓</b>
-    Задачи
+  <button class="nav-btn" data-screen="tasks"
+          onclick="showScreen('tasks')">
+    <div class="nav-icon">✅</div>
+    <div>Задачи</div>
   </button>
 
-  <button data-screen="goals">
-    <b>◎</b>
-    Цели
+  <button class="nav-btn" data-screen="calendar"
+          onclick="showScreen('calendar')">
+    <div class="nav-icon">📅</div>
+    <div>Календарь</div>
   </button>
 
-  <button data-screen="habits">
-    <b>♨</b>
-    Привычки
+  <button class="nav-btn" data-screen="habits"
+          onclick="showScreen('habits')">
+    <div class="nav-icon">🔥</div>
+    <div>Привычки</div>
   </button>
 
-  <button data-screen="more">
-    <b>☰</b>
-    Ещё
+  <button class="nav-btn" data-screen="profile"
+          onclick="showScreen('profile')">
+    <div class="nav-icon">👤</div>
+    <div>Профиль</div>
   </button>
 
 </nav>
 
-<!-- MODAL -->
+</div>
 
-<div
-  class="modal"
-  id="modal"
->
+
+<!-- TASK MODAL -->
+
+<div class="modal" id="taskModal" onclick="closeModalOutside(event)">
 
   <div class="sheet">
 
-    <h2 id="modalTitle">
-      Новая задача
-    </h2>
+    <h3>Новая задача</h3>
 
-    <div class="form">
+    <form class="form" onsubmit="addTask(event)">
 
-      <input id="modalName">
-
-      <input id="modalExtra">
-
-    </div>
-
-    <div class="actions">
-
-      <button
-        class="secondary"
-        onclick="closeModal()"
+      <input
+        class="input"
+        id="taskInput"
+        placeholder="Например: Тренировка"
+        maxlength="80"
+        required
       >
-        Отмена
-      </button>
 
-      <button
-        class="primary"
-        onclick="saveModal()"
-      >
-        Сохранить
-      </button>
+      <select class="select" id="taskPriority">
+        <option value="high">🔴 Высокий приоритет</option>
+        <option value="medium" selected>🟡 Средний приоритет</option>
+        <option value="low">🟢 Низкий приоритет</option>
+      </select>
 
-    </div>
+      <select class="select" id="taskXP">
+        <option value="10">+10 XP</option>
+        <option value="20">+20 XP</option>
+        <option value="30">+30 XP</option>
+        <option value="50">+50 XP</option>
+      </select>
+
+      <div class="form-actions">
+        <button type="button" class="secondary"
+                onclick="closeModal('taskModal')">
+          Отмена
+        </button>
+
+        <button class="primary" type="submit">
+          Создать
+        </button>
+      </div>
+
+    </form>
 
   </div>
 
 </div>
 
-<div
-  class="toast"
-  id="toast"
->
-  Готово
-</div>
 
-<script>
+<!-- HABIT MODAL -->
 
-const STORAGE_KEY = "lifeos-v06";
+<div class="modal" id="habitModal" onclick="closeModalOutside(event)">
 
-const $ = (id) => document.getElementById(id);
+  <div class="sheet">
 
-let db =
-  JSON.parse(
-    localStorage.getItem(STORAGE_KEY) || "null"
-  ) || {
-    tasks: [],
-    goals: [],
-    habits: [],
-    money: [],
-    notes: "",
-    theme: "dark",
-    activity: [2, 4, 3, 5, 6, 3, 4]
-  };
+    <h3>Новая привычка</h3>
 
-let currentType = null;
+    <form class="form" onsubmit="addHabit(event)">
 
-let timer = null;
-
-let seconds = 1500;
-
-/* SAVE */
-
-function save() {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(db)
-  );
-}
-
-/* ESCAPE HTML */
-
-function escapeHTML(value) {
-
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    (char) =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      })[char]
-  );
-
-}
-
-/* TOAST */
-
-function toast(message) {
-
-  $("toast").textContent = message;
-
-  $("toast").classList.add("show");
-
-  setTimeout(
-    () => $("toast").classList.remove("show"),
-    1300
-  );
-
-}
-
-/* SCREEN */
-
-function showScreen(id) {
-
-  document
-    .querySelectorAll(".screen")
-    .forEach(
-      (screen) =>
-        screen.classList.remove("active")
-    );
-
-  $(id).classList.add("active");
-
-  document
-    .querySelectorAll(".bottom-nav button")
-    .forEach(
-      (button) =>
-        button.classList.toggle(
-          "active",
-          button.dataset.screen === id
-        )
-    );
-
-  render();
-
-  window.scrollTo(0, 0);
-
-}
-
-document
-  .querySelectorAll(".bottom-nav button")
-  .forEach(
-    (button) =>
-      button.onclick = () =>
-        showScreen(button.dataset.screen)
-  );
-
-/* MODAL */
-
-function openModal(type) {
-
-  currentType = type;
-
-  $("modalName").value = "";
-  $("modalExtra").value = "";
-
-  const config = {
-
-    task: [
-      "Новая задача",
-      "Название задачи",
-      "Описание или время"
-    ],
-
-    goal: [
-      "Новая цель",
-      "Название цели",
-      "Прогресс 0–100"
-    ],
-
-    habit: [
-      "Новая привычка",
-      "Название привычки",
-      "Описание"
-    ]
-
-  }[type];
-
-  $("modalTitle").textContent = config[0];
-
-  $("modalName").placeholder = config[1];
-
-  $("modalExtra").placeholder = config[2];
-
-  $("modal").classList.add("open");
-
-  $("modalName").focus();
-
-}
-
-function closeModal() {
-
-  $("modal").classList.remove("open");
-
-}
-
-function saveModal() {
-
-  const name =
-    $("modalName").value.trim();
-
-  if (!name) {
-    toast("Введите название");
-    return;
-  }
-
-  if (currentType === "task") {
-
-    db.tasks.push({
-      id: Date.now(),
-      name,
-      extra:
-        $("modalExtra").value.trim(),
-      done: false
-    });
-
-  }
-
-  if (currentType === "goal") {
-
-    db.goals.push({
-      id: Date.now(),
-      name,
-      progress: Math.max(
-        0,
-        Math.min(
-          100,
-          Number(
-            $("modalExtra").value
-          ) || 0
-        )
-      )
-    });
-
-  }
-
-  if (currentType === "habit") {
-
-    db.habits.push({
-      id: Date.now(),
-      name,
-      extra:
-        $("modalExtra").value.trim(),
-      done: false,
-      streak: 0
-    });
-
-  }
-
-  save();
-
-  closeModal();
-
-  render();
-
-  toast("Добавлено ✓");
-
-}
-
-/* DELETE */
-
-function removeItem(type, id) {
-
-  db[type] =
-    db[type].filter(
-      (item) => item.id !== id
-    );
-
-  save();
-
-  render();
-
-}
-
-/* TASK HTML */
-
-function taskHTML(task) {
-
-  return `
-    <div class="item ${task.done ? "done" : ""}">
-
-      <button
-        class="check"
-        onclick="toggleTask(${task.id})"
+      <input
+        class="input"
+        id="habitInput"
+        placeholder="Например: Читать 20 минут"
+        maxlength="80"
+        required
       >
-        ${task.done ? "✓" : ""}
-      </button>
 
-      <div class="main">
+      <input
+        class="input"
+        id="habitIcon"
+        placeholder="Эмодзи, например 📚"
+        value="🔥"
+        maxlength="3"
+      >
 
-        <b>
-          ${escapeHTML(task.name)}
-        </b>
+      <div class="form-actions">
 
-        <small class="meta">
-          ${escapeHTML(
-            task.extra || "Без описания"
-          )}
-        </small>
+        <button type="button" class="secondary"
+                onclick="closeModal('habitModal')">
+          Отмена
+        </button>
+
+        <button class="primary" type="submit">
+          Создать
+        </button>
 
       </div>
 
-      <button
-        class="delete"
-        onclick="removeItem('tasks', ${task.id})"
-      >
-        ×
-      </button>
+    </form>
 
-    </div>
-  `;
+  </div>
 
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+/* =========================================================
+   LifeOS v0.7
+   ========================================================= */
+
+const STORAGE_KEY = "lifeos_v07";
+
+const defaultData = {
+  xp: 0,
+
+  tasks: [],
+
+  habits: [
+    {
+      id: crypto.randomUUID(),
+      name: "Пить воду",
+      icon: "💧",
+      streak: 0,
+      lastDone: null
+    },
+    {
+      id: crypto.randomUUID(),
+      name: "Тренировка",
+      icon: "🏋️",
+      streak: 0,
+      lastDone: null
+    }
+  ],
+
+  settings: {
+    notifications: false
+  }
+};
+
+let data = loadData();
+
+let calendarDate = new Date();
+let selectedDate = new Date();
+
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+
+function loadData(){
+
+  try{
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(!saved){
+      return defaultData;
+    }
+
+    const parsed = JSON.parse(saved);
+
+    return {
+      ...defaultData,
+      ...parsed,
+      tasks: parsed.tasks || [],
+      habits: parsed.habits || [],
+      settings: {
+        ...defaultData.settings,
+        ...(parsed.settings || {})
+      }
+    };
+
+  }catch(error){
+
+    console.error(error);
+
+    return defaultData;
+  }
 }
 
-/* TASK TOGGLE */
 
-function toggleTask(id) {
+function saveData(){
 
-  const task =
-    db.tasks.find(
-      (item) => item.id === id
-    );
-
-  if (!task) return;
-
-  task.done = !task.done;
-
-  if (task.done) {
-
-    const day =
-      (new Date().getDay() + 6) % 7;
-
-    db.activity[day]++;
-
-  }
-
-  save();
-
-  render();
-
-  toast(
-    task.done
-      ? "Задача выполнена ✓"
-      : "Задача возвращена"
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
   );
-
 }
 
-/* HABIT */
 
-function toggleHabit(id) {
+/* =========================================================
+   XP SYSTEM
+   ========================================================= */
 
-  const habit =
-    db.habits.find(
-      (item) => item.id === id
-    );
+function getLevel(){
 
-  if (!habit) return;
-
-  habit.done = !habit.done;
-
-  habit.streak = habit.done
-    ? habit.streak + 1
-    : Math.max(0, habit.streak - 1);
-
-  save();
-
-  render();
-
-  toast(
-    habit.done
-      ? "Привычка выполнена 🔥"
-      : "Привычка отменена"
-  );
-
+  return Math.floor(data.xp / 100) + 1;
 }
 
-/* RENDER */
 
-function render() {
+function getLevelXP(){
 
-  const completedTasks =
-    db.tasks.filter(
-      (task) => task.done
-    ).length;
+  return data.xp % 100;
+}
 
-  const goalProgress =
-    db.goals.length
-      ? Math.round(
-          db.goals.reduce(
-            (total, goal) =>
-              total + goal.progress,
-            0
-          ) / db.goals.length
-        )
-      : 0;
 
-  $("taskStat").textContent =
-    `${completedTasks}/${db.tasks.length}`;
+function addXP(amount){
 
-  $("habitStat").textContent =
-    db.habits.filter(
-      (habit) => habit.done
-    ).length;
+  const oldLevel = getLevel();
 
-  $("goalStat").textContent =
-    goalProgress + "%";
+  data.xp += Number(amount);
 
-  /* HOME TASKS */
+  const newLevel = getLevel();
 
-  if (db.tasks.length) {
+  saveData();
+  renderAll();
 
-    $("homeTasks").innerHTML =
-      db.tasks
-        .slice()
-        .sort(
-          (a, b) =>
-            Number(a.done) -
-            Number(b.done)
-        )
-        .slice(0, 4)
-        .map(taskHTML)
-        .join("");
+  if(newLevel > oldLevel){
 
-  } else {
+    showToast("🎉 Новый уровень! LEVEL " + newLevel);
 
-    $("homeTasks").innerHTML =
-      `
-        <div class="empty">
-          Сегодня всё чисто ✨
-          <br>
-          Добавь первую задачу.
-        </div>
-      `;
+  }else{
+
+    showToast("+" + amount + " XP");
 
   }
+}
 
-  /* ALL TASKS */
 
-  if (db.tasks.length) {
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
-    $("taskList").innerHTML =
-      db.tasks
-        .slice()
-        .sort(
-          (a, b) =>
-            Number(a.done) -
-            Number(b.done)
-        )
-        .map(taskHTML)
-        .join("");
+function showScreen(id){
 
-  } else {
+  document.querySelectorAll(".screen")
+    .forEach(screen => {
+      screen.classList.remove("active");
+    });
 
-    $("taskList").innerHTML =
-      `
-        <div class="empty">
-          Здесь пока нет задач.
-        </div>
-      `;
+  const target = document.getElementById(id);
 
+  if(target){
+    target.classList.add("active");
   }
 
-  /* GOALS */
+  document.querySelectorAll(".nav-btn")
+    .forEach(button => {
 
-  if (db.goals.length) {
-
-    $("goalList").innerHTML =
-      db.goals
-        .map(
-          (goal) => `
-            <div class="goal">
-
-              <div class="goal-top">
-
-                <span class="goal-name">
-                  ${escapeHTML(goal.name)}
-                </span>
-
-                <span class="percent">
-                  ${goal.progress}%
-                </span>
-
-              </div>
-
-              <div class="progress-bar">
-
-                <i
-                  style="width:${goal.progress}%"
-                ></i>
-
-              </div>
-
-              <small class="muted">
-                Прогресс
-              </small>
-
-              <button
-                class="delete"
-                onclick="removeItem('goals', ${goal.id})"
-              >
-                ×
-              </button>
-
-            </div>
-          `
-        )
-        .join("");
-
-  } else {
-
-    $("goalList").innerHTML =
-      `
-        <div class="empty">
-          Поставь первую цель 🎯
-        </div>
-      `;
-
-  }
-
-  /* HOME GOALS */
-
-  if (db.goals.length) {
-
-    $("homeGoals").innerHTML =
-      db.goals
-        .slice(0, 2)
-        .map(
-          (goal) => `
-            <div class="goal">
-
-              <div class="goal-top">
-
-                <span class="goal-name">
-                  ${escapeHTML(goal.name)}
-                </span>
-
-                <span class="percent">
-                  ${goal.progress}%
-                </span>
-
-              </div>
-
-              <div class="progress-bar">
-
-                <i
-                  style="width:${goal.progress}%"
-                ></i>
-
-              </div>
-
-            </div>
-          `
-        )
-        .join("");
-
-  } else {
-
-    $("homeGoals").innerHTML =
-      `
-        <div class="empty">
-          Твои цели появятся здесь.
-        </div>
-      `;
-
-  }
-
-  /* HABITS */
-
-  if (db.habits.length) {
-
-    $("habitList").innerHTML =
-      db.habits
-        .map(
-          (habit) => `
-            <div class="item ${habit.done ? "done" : ""}">
-
-              <button
-                class="check"
-                onclick="toggleHabit(${habit.id})"
-              >
-                ${habit.done ? "✓" : ""}
-              </button>
-
-              <div class="main">
-
-                <b>
-                  ${escapeHTML(habit.name)}
-                </b>
-
-                <small class="meta">
-                  ${escapeHTML(habit.extra || "")}
-                  • серия ${habit.streak} 🔥
-                </small>
-
-              </div>
-
-              <button
-                class="delete"
-                onclick="removeItem('habits', ${habit.id})"
-              >
-                ×
-              </button>
-
-            </div>
-          `
-        )
-        .join("");
-
-  } else {
-
-    $("habitList").innerHTML =
-      `
-        <div class="empty">
-          Добавь привычку и начни серию 🔥
-        </div>
-      `;
-
-  }
-
-  /* FINANCE */
-
-  const income =
-    db.money
-      .filter(
-        (item) => item.type > 0
-      )
-      .reduce(
-        (total, item) =>
-          total + item.amount,
-        0
+      button.classList.toggle(
+        "active",
+        button.dataset.screen === id
       );
 
-  const expenses =
-    db.money
-      .filter(
-        (item) => item.type < 0
-      )
-      .reduce(
-        (total, item) =>
-          total + item.amount,
-        0
-      );
+    });
 
-  $("income").textContent =
-    income.toLocaleString("ru-RU") +
-    " ₽";
-
-  $("expense").textContent =
-    expenses.toLocaleString("ru-RU") +
-    " ₽";
-
-  $("moneyList").innerHTML =
-    db.money
-      .slice()
-      .reverse()
-      .map(
-        (item) => `
-          <div class="item">
-
-            <div class="main">
-
-              <b>
-                ${escapeHTML(
-                  item.name || "Операция"
-                )}
-              </b>
-
-              <small class="meta">
-
-                ${item.type > 0 ? "+" : "−"}
-                ${item.amount.toLocaleString(
-                  "ru-RU"
-                )} ₽
-
-              </small>
-
-            </div>
-
-            <button
-              class="delete"
-              onclick="removeItem('money', ${item.id})"
-            >
-              ×
-            </button>
-
-          </div>
-        `
-      )
-      .join("");
-
-  /* STATS */
-
-  $("doneStat").textContent =
-    completedTasks;
-
-  $("avgStat").textContent =
-    goalProgress + "%";
-
-  $("chart").innerHTML =
-    db.activity
-      .map(
-        (value) => `
-          <i
-            style="
-              height:${Math.max(
-                7,
-                Math.min(100, value * 12)
-              )}%;
-            "
-          ></i>
-        `
-      )
-      .join("");
-
-  /* NOTES */
-
-  $("notes").value =
-    db.notes || "";
-
-}
-
-/* NOTES SAVE */
-
-$("notes").addEventListener(
-  "input",
-  () => {
-
-    db.notes =
-      $("notes").value;
-
-    save();
-
-  }
-);
-
-/* MONEY */
-
-function money(type) {
-
-  const amount =
-    Number(
-      $("amount").value
-    );
-
-  if (!amount) {
-
-    toast("Введите сумму");
-
-    return;
-
-  }
-
-  db.money.push({
-    id: Date.now(),
-    amount,
-    name:
-      $("moneyName").value.trim(),
-    type
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
-  $("amount").value = "";
-
-  $("moneyName").value = "";
-
-  save();
-
-  render();
-
-  toast("Записано ✓");
-
-}
-
-/* DATE */
-
-function updateDate() {
-
-  const now = new Date();
-
-  const hour =
-    now.getHours();
-
-  const minutes =
-    now.getMinutes();
-
-  const percent =
-    Math.round(
-      ((hour * 60) + minutes) /
-      1440 *
-      100
-    );
-
-  let greeting;
-
-  if (hour < 6) {
-
-    greeting = "Доброй ночи";
-
-  } else if (hour < 12) {
-
-    greeting = "Доброе утро";
-
-  } else if (hour < 18) {
-
-    greeting = "Добрый день";
-
-  } else {
-
-    greeting = "Добрый вечер";
-
+  if(id === "calendar"){
+    renderCalendar();
   }
 
-  $("greeting").textContent =
-    greeting + " 👋";
+  if(id === "tasks"){
+    renderTasks();
+  }
 
-  $("date").textContent =
-    now.toLocaleDateString(
-      "ru-RU",
-      {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-      }
+  if(id === "habits"){
+    renderHabits();
+  }
+
+}
+
+
+/* =========================================================
+   TASKS
+   ========================================================= */
+
+function openTaskModal(){
+
+  document.getElementById("taskModal")
+    .classList.add("show");
+
+  setTimeout(() => {
+    document.getElementById("taskInput").focus();
+  },100);
+}
+
+
+function addTask(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("taskInput").value.trim();
+
+  const priority =
+    document.getElementById("taskPriority").value;
+
+  const xp =
+    Number(document.getElementById("taskXP").value);
+
+  if(!name){
+    return;
+  }
+
+  data.tasks.push({
+
+    id: crypto.randomUUID(),
+
+    name,
+
+    priority,
+
+    xp,
+
+    completed:false,
+
+    createdAt:new Date().toISOString(),
+
+    completedAt:null
+
+  });
+
+  saveData();
+
+  event.target.reset();
+
+  closeModal("taskModal");
+
+  renderAll();
+
+  showToast("✅ Задача создана");
+
+}
+
+
+function toggleTask(id){
+
+  const task =
+    data.tasks.find(item => item.id === id);
+
+  if(!task){
+    return;
+  }
+
+  if(task.completed){
+
+    task.completed = false;
+
+    task.completedAt = null;
+
+    data.xp = Math.max(
+      0,
+      data.xp - Number(task.xp)
     );
 
-  $("dayPct").textContent =
-    percent + "%";
+    showToast("Задача возвращена");
 
-  $("dayBar").style.width =
-    percent + "%";
+  }else{
 
-}
+    task.completed = true;
 
-/* POMODORO */
+    task.completedAt =
+      new Date().toISOString();
 
-function updateClock() {
-
-  const minutes =
-    Math.floor(seconds / 60);
-
-  const secs =
-    seconds % 60;
-
-  $("clock").textContent =
-    String(minutes).padStart(2, "0") +
-    ":" +
-    String(secs).padStart(2, "0");
-
-}
-
-function toggleTimer() {
-
-  if (timer) {
-
-    clearInterval(timer);
-
-    timer = null;
-
-    $("timerBtn").textContent =
-      "Старт";
+    addXP(task.xp);
 
     return;
+  }
+
+  saveData();
+  renderAll();
+}
+
+
+function deleteTask(id){
+
+  data.tasks =
+    data.tasks.filter(task => task.id !== id);
+
+  saveData();
+
+  renderAll();
+
+  showToast("Задача удалена");
+}
+
+
+function renderTasks(){
+
+  const list =
+    document.getElementById("taskList");
+
+  const count =
+    document.getElementById("taskCount");
+
+  if(!list){
+    return;
+  }
+
+  const todayTasks =
+    data.tasks.filter(task => {
+
+      if(!task.createdAt){
+        return true;
+      }
+
+      return isSameDate(
+        new Date(task.createdAt),
+        new Date()
+      );
+
+    });
+
+  count.textContent =
+    todayTasks.length +
+    (todayTasks.length === 1 ? " задача" : " задач");
+
+
+  if(todayTasks.length === 0){
+
+    list.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:35px 10px;
+        color:#666;
+      ">
+        <div style="font-size:42px">🎯</div>
+        <div style="
+          margin-top:10px;
+          font-weight:800;
+        ">
+          На сегодня задач нет
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  list.innerHTML =
+    todayTasks.map(task => {
+
+      const priorityName =
+        task.priority === "high"
+          ? "Высокий"
+          : task.priority === "medium"
+            ? "Средний"
+            : "Низкий";
+
+      return `
+
+        <div class="task ${task.completed ? "done" : ""}">
+
+          <button
+            class="check ${task.completed ? "done" : ""}"
+            onclick="toggleTask('${task.id}')"
+          >
+            ${task.completed ? "✓" : ""}
+          </button>
+
+          <div class="task-main">
+
+            <div class="task-name">
+              ${escapeHTML(task.name)}
+            </div>
+
+            <div class="task-meta">
+              +${task.xp} XP
+            </div>
+
+          </div>
+
+          <span class="priority ${task.priority}">
+            ${priorityName}
+          </span>
+
+          <button
+            class="danger"
+            onclick="deleteTask('${task.id}')"
+          >
+            ×
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   HABITS
+   ========================================================= */
+
+function openHabitModal(){
+
+  document.getElementById("habitModal")
+    .classList.add("show");
+
+  setTimeout(() => {
+    document.getElementById("habitInput").focus();
+  },100);
+}
+
+
+function addHabit(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("habitInput").value.trim();
+
+  const icon =
+    document.getElementById("habitIcon").value.trim() || "🔥";
+
+  if(!name){
+    return;
+  }
+
+  data.habits.push({
+
+    id:crypto.randomUUID(),
+
+    name,
+
+    icon,
+
+    streak:0,
+
+    lastDone:null
+
+  });
+
+  saveData();
+
+  event.target.reset();
+
+  closeModal("habitModal");
+
+  renderAll();
+
+  showToast("🔥 Привычка создана");
+}
+
+
+function completeHabit(id){
+
+  const habit =
+    data.habits.find(item => item.id === id);
+
+  if(!habit){
+    return;
+  }
+
+  const today =
+    dateKey(new Date());
+
+  if(habit.lastDone === today){
+
+    showToast("Сегодня уже выполнено");
+
+    return;
+  }
+
+
+  const yesterday =
+    new Date();
+
+  yesterday.setDate(
+    yesterday.getDate() - 1
+  );
+
+
+  if(habit.lastDone === dateKey(yesterday)){
+
+    habit.streak += 1;
+
+  }else{
+
+    habit.streak = 1;
 
   }
 
-  timer =
-    setInterval(
-      () => {
 
-        seconds--;
+  habit.lastDone = today;
 
-        updateClock();
+  saveData();
 
-        if (seconds <= 0) {
+  addXP(10);
 
-          clearInterval(timer);
+  renderAll();
 
-          timer = null;
+  showToast(
+    "🔥 Streak: " + habit.streak
+  );
 
-          $("timerBtn").textContent =
-            "Готово";
+}
 
-          if (
-            "vibrate" in navigator
-          ) {
 
-            navigator.vibrate(
-              [200, 100, 200]
-            );
+function deleteHabit(id){
 
-          }
-
-          toast(
-            "Фокус завершён 🎉"
-          );
-
-        }
-
-      },
-      1000
+  data.habits =
+    data.habits.filter(
+      habit => habit.id !== id
     );
 
-  $("timerBtn").textContent =
-    "Пауза";
+  saveData();
+
+  renderAll();
+
+  showToast("Привычка удалена");
+}
+
+
+function renderHabits(){
+
+  const list =
+    document.getElementById("habitList");
+
+  if(!list){
+    return;
+  }
+
+  if(data.habits.length === 0){
+
+    list.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:30px;
+        color:#666;
+      ">
+        Пока нет привычек
+      </div>
+    `;
+
+    return;
+  }
+
+
+  const today =
+    dateKey(new Date());
+
+
+  list.innerHTML =
+    data.habits.map(habit => {
+
+      const done =
+        habit.lastDone === today;
+
+      return `
+
+        <div class="habit">
+
+          <div class="habit-icon">
+            ${escapeHTML(habit.icon)}
+          </div>
+
+          <div style="flex:1">
+
+            <div style="
+              font-weight:900;
+              font-size:16px;
+            ">
+              ${escapeHTML(habit.name)}
+            </div>
+
+            <div class="streak">
+              🔥 ${habit.streak} дней
+            </div>
+
+          </div>
+
+          <button
+            class="${done ? "secondary" : "primary"}"
+            onclick="completeHabit('${habit.id}')"
+          >
+            ${done ? "✓" : "Выполнить"}
+          </button>
+
+          <button
+            class="danger"
+            onclick="deleteHabit('${habit.id}')"
+          >
+            ×
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
 
 }
 
-function resetTimer() {
 
-  clearInterval(timer);
+/* =========================================================
+   CALENDAR
+   ========================================================= */
 
-  timer = null;
+function changeMonth(amount){
 
-  seconds = 1500;
+  calendarDate.setMonth(
+    calendarDate.getMonth() + amount
+  );
 
-  updateClock();
+  renderCalendar();
+}
 
-  $("timerBtn").textContent =
-    "Старт";
+
+function renderCalendar(){
+
+  const grid =
+    document.getElementById("calendarGrid");
+
+  const title =
+    document.getElementById("calendarMonth");
+
+  if(!grid || !title){
+    return;
+  }
+
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+
+  const monthName =
+    new Intl.DateTimeFormat(
+      "ru-RU",
+      {
+        month:"long",
+        year:"numeric"
+      }
+    ).format(calendarDate);
+
+
+  title.textContent =
+    capitalize(monthName);
+
+
+  const first =
+    new Date(year,month,1);
+
+  let start =
+    first.getDay();
+
+  start =
+    start === 0 ? 6 : start - 1;
+
+
+  const days =
+    new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
+
+
+  const names =
+    ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
+
+
+  let html =
+    names.map(name =>
+      `<div class="day-name">${name}</div>`
+    ).join("");
+
+
+  for(let i=0;i<start;i++){
+
+    html += `<div></div>`;
+
+  }
+
+
+  for(let day=1;day<=days;day++){
+
+    const date =
+      new Date(year,month,day);
+
+    const today =
+      isSameDate(date,new Date());
+
+    const selected =
+      isSameDate(date,selectedDate);
+
+
+    const hasTask =
+      data.tasks.some(task =>
+        task.createdAt &&
+        isSameDate(
+          new Date(task.createdAt),
+          date
+        )
+      );
+
+
+    html += `
+
+      <button
+        class="day
+          ${today ? "today" : ""}
+          ${selected ? "selected" : ""}
+        "
+        onclick="selectDate(${year},${month},${day})"
+      >
+
+        ${day}
+
+      </button>
+    `;
+
+  }
+
+
+  grid.innerHTML = html;
+
+  renderSelectedDate();
 
 }
 
-/* THEME */
 
-function setLightTheme() {
+function selectDate(year,month,day){
 
-  const root =
-    document.documentElement;
+  selectedDate =
+    new Date(year,month,day);
 
-  root.style.setProperty(
-    "--bg",
-    "#f4f5f7"
-  );
-
-  root.style.setProperty(
-    "--surface",
-    "#ffffff"
-  );
-
-  root.style.setProperty(
-    "--surface2",
-    "#eef0f3"
-  );
-
-  root.style.setProperty(
-    "--text",
-    "#11151b"
-  );
-
-  root.style.setProperty(
-    "--muted",
-    "#68717e"
-  );
-
-  root.style.setProperty(
-    "--line",
-    "#dfe3e8"
-  );
+  renderCalendar();
 
 }
 
-function toggleTheme() {
 
-  if (db.theme === "light") {
+function renderSelectedDate(){
 
-    db.theme = "dark";
+  const title =
+    document.getElementById("selectedDate");
 
-    save();
+  const list =
+    document.getElementById("calendarTasks");
 
-    location.reload();
+  if(!title || !list){
+    return;
+  }
 
-  } else {
 
-    db.theme = "light";
+  title.textContent =
+    new Intl.DateTimeFormat(
+      "ru-RU",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long"
+      }
+    ).format(selectedDate);
 
-    save();
 
-    setLightTheme();
+  const tasks =
+    data.tasks.filter(task =>
+      task.createdAt &&
+      isSameDate(
+        new Date(task.createdAt),
+        selectedDate
+      )
+    );
+
+
+  if(tasks.length === 0){
+
+    list.innerHTML = `
+      <div style="
+        color:#666;
+        padding:12px 0;
+      ">
+        Нет задач на этот день.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  list.innerHTML =
+    tasks.map(task => `
+      <div style="
+        padding:10px 0;
+        border-bottom:1px solid var(--line);
+        font-weight:800;
+      ">
+        ${task.completed ? "✅" : "⭕"}
+        ${escapeHTML(task.name)}
+      </div>
+    `).join("");
+
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+function renderProfile(){
+
+  const level =
+    getLevel();
+
+  const completedTasks =
+    data.tasks.filter(
+      task => task.completed
+    ).length;
+
+
+  document.getElementById("profileLevel")
+    .textContent = level;
+
+  document.getElementById("statXP")
+    .textContent = data.xp;
+
+  document.getElementById("statTasks")
+    .textContent = completedTasks;
+
+  document.getElementById("statHabits")
+    .textContent = data.habits.length;
+
+
+  document.getElementById("achievement1")
+    .textContent =
+      completedTasks >= 1 ? "🏆" : "🔒";
+
+  document.getElementById("achievement2")
+    .textContent =
+      data.xp >= 100 ? "🏆" : "🔒";
+
+  const maxStreak =
+    Math.max(
+      0,
+      ...data.habits.map(h => h.streak)
+    );
+
+  document.getElementById("achievement3")
+    .textContent =
+      maxStreak >= 7 ? "🏆" : "🔒";
+
+}
+
+
+/* =========================================================
+   MAIN XP UI
+   ========================================================= */
+
+function renderXP(){
+
+  const level =
+    getLevel();
+
+  const levelXP =
+    getLevelXP();
+
+
+  document.getElementById("xpNumber")
+    .textContent =
+      data.xp + " XP";
+
+
+  document.getElementById("xpLevel")
+    .textContent =
+      "LEVEL " + level;
+
+
+  document.getElementById("headerLevel")
+    .textContent =
+      "LEVEL " + level;
+
+
+  document.getElementById("xpCurrent")
+    .textContent =
+      levelXP + " / 100 XP";
+
+
+  document.getElementById("xpBar")
+    .style.width =
+      levelXP + "%";
+
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
+}
+
+
+function closeModalOutside(event){
+
+  if(event.target === event.currentTarget){
+
+    event.currentTarget
+      .classList.remove("show");
 
   }
 
 }
 
-/* START */
 
-if (db.theme === "light") {
-  setLightTheme();
+/* =========================================================
+   NOTIFICATIONS
+   ========================================================= */
+
+async function requestNotifications(){
+
+  if(!("Notification" in window)){
+
+    showToast("Браузер не поддерживает уведомления");
+
+    return;
+  }
+
+
+  try{
+
+    const permission =
+      await Notification.requestPermission();
+
+    if(permission === "granted"){
+
+      data.settings.notifications = true;
+
+      saveData();
+
+      new Notification(
+        "LifeOS",
+        {
+          body:"Уведомления включены 🔔"
+        }
+      );
+
+      showToast("🔔 Уведомления включены");
+
+    }else{
+
+      showToast("Уведомления не разрешены");
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast("Не удалось включить уведомления");
+
+  }
+
 }
 
-updateDate();
 
-updateClock();
+/* =========================================================
+   FUTURE FEATURES
+   ========================================================= */
 
-render();
+function futureFeature(){
 
-setInterval(
-  updateDate,
-  30000
-);
+  showToast(
+    "🗺️ Карта и квесты появятся в следующих версиях"
+  );
 
-/* PWA */
+}
 
-if ("serviceWorker" in navigator) {
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+function resetData(){
+
+  const ok =
+    confirm(
+      "Удалить все задачи, привычки и XP?"
+    );
+
+  if(!ok){
+    return;
+  }
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  data = loadData();
+
+  renderAll();
+
+  showToast("Данные сброшены");
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },2200);
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function dateKey(date){
+
+  const y =
+    date.getFullYear();
+
+  const m =
+    String(date.getMonth()+1)
+      .padStart(2,"0");
+
+  const d =
+    String(date.getDate())
+      .padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+}
+
+
+function isSameDate(a,b){
+
+  return dateKey(a) === dateKey(b);
+
+}
+
+
+function capitalize(text){
+
+  return text.charAt(0).toUpperCase()
+       + text.slice(1);
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   RENDER ALL
+   ========================================================= */
+
+function renderAll(){
+
+  renderXP();
+
+  renderTasks();
+
+  renderHabits();
+
+  renderCalendar();
+
+  renderProfile();
+
+}
+
+
+/* =========================================================
+   SERVICE WORKER / PWA
+   ========================================================= */
+
+if("serviceWorker" in navigator){
 
   window.addEventListener(
     "load",
@@ -2137,14 +2229,40 @@ if ("serviceWorker" in navigator) {
 
       navigator.serviceWorker
         .register("./sw.js")
-        .catch(
-          () => {}
-        );
+        .then(() => {
+
+          console.log(
+            "LifeOS PWA: Service Worker ready"
+          );
+
+        })
+        .catch(error => {
+
+          console.log(
+            "LifeOS PWA error:",
+            error
+          );
+
+        });
 
     }
   );
 
 }
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    renderAll();
+
+  }
+);
 
 </script>
 
